@@ -603,6 +603,7 @@ RNN::train(vector<vector<string> > &sents,
 
   for (epoch=0; epoch<MAXEPOCH; epoch++) {
     shuffle(perm);
+	//Q: Why shuffle here? What's 'update' for?
     for (int i=0; i<sents.size(); i++) {
       forward(sents[perm[i]], perm[i]);
       backward(labels[perm[i]]);
@@ -825,10 +826,12 @@ int main(int argc, char **argv) {
   readSentences(X, T, "ese.txt"); // dse.txt or ese.txt
 
   unordered_map<string, set<uint> > sentenceIds;
-  set<string> allDocs;
+  set<string> allDocs; //Store the name of all docs
   ifstream in("sentenceid.txt");
   string line;
   uint numericId = 0;
+
+  //map the numeric Id to the file locations
   while(getline(in, line)) {
     vector<string> s = split(line, ' ');
     assert(s.size() == 3);
@@ -852,6 +855,7 @@ int main(int argc, char **argv) {
     allDocs.insert(line);
 
   ifstream in2("datasplit/filelist_train"+to_string(fold));
+  //10 fold
   while(getline(in2, line)) {
     for (const auto &id : sentenceIds[line]) {
       trainX.push_back(X[id]);

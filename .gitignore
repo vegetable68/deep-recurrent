@@ -1,0 +1,5 @@
+embeddings*
+datasplit/*
+Eigen/*
+*.tar.gz
+*.txt
