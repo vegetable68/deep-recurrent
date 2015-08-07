@@ -823,7 +823,7 @@ int main(int argc, char **argv) {
   LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
   vector<vector<string> > X;
   vector<vector<string> > T;
-  readSentences(X, T, "ese.txt"); // dse.txt or ese.txt
+  readSentences(X, T, "dse.txt"); // dse.txt or ese.txt
 
   unordered_map<string, set<uint> > sentenceIds;
   set<string> allDocs; //Store the name of all docs

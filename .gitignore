@@ -3,3 +3,4 @@ datasplit/*
 Eigen/*
 *.tar.gz
 *.txt
+database.mpqa.2.0/*
