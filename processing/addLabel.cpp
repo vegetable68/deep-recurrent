@@ -11,6 +11,7 @@
 
 int tag[10000];
 using namespace std;
+ifstream pos("ans.txt");
 
 vector<string> split(const string &s, char delim) {
   stringstream ss(s);
@@ -22,6 +23,35 @@ vector<string> split(const string &s, char delim) {
   return elems;
 }
 
+vector<string> getPline(){
+	string p;
+	vector<string> em;
+	if (!getline(pos, p)) return em;
+	if (p == ""){
+		cout<<endl;
+		if (!getline(pos, p)) return em;
+	}
+	return split(p, '	');
+}
+
+string getWord(string word){
+	string res;
+	  if (word == "-LRB-")
+		res = "(";
+	  else if (word == "-RRB-")
+		res = ")";
+	  else if (word == "-LSB-")
+		res = "[";
+	  else if (word == "-RSB-")
+		res = "]";
+	  else if (word == "-LCB-")
+		res = "{";
+	  else if (word == "-RCB-")
+		res = "}";
+	if (word == "``") res = "\"";
+	if (word == "''") res = "\"";
+	return res;
+}
 
 int main(){
 	string lab = "OBI";
@@ -42,22 +72,25 @@ int main(){
 	  }
   }
   int tot = 0;
+vector<string> as = getPline(); 
   while (getline(ori, line)){
+	  if (line == "") {tot ++; continue;}
+	  if (as.empty()) continue;
 	  int L = line.length();
 	  string cur = "";
 	  string outtag = "";
-	  for (int i = 0; i < L; i ++){
-		  if ((line[i] >= 'a' && line[i] <= 'z') || (line[i] >= 'A' && line[i] <= 'Z') 
-				  || (line[i] >= '0' && line[i] <= '9')){ 
-			  if (cur == "") outtag = lab[tag[tot]];
-			  cur += line[i];
-		  }else{
-			  if (cur != "") cout<<cur<<" "<<outtag<<endl;
-			  cur = "";
-		      if (line[i] != ' ' && line[i] != '	') cout<<line[i]<<" "<<lab[tag[tot]]<<endl;
-		  }
-		  tot ++;
+	  string word = getWord(as[0]);
+	  int position = line.find(word);
+	  int nxt = position;
+	  while (position != string::npos){
+		  cout<<as[0]<<" "<<as[1]<<" "<<lab[tag[tot + position]]<<endl;
+		  as = getPline(); 
+	  if (as.empty()) break;
+		
+		  word = getWord(as[0]);
+		  position = line.find(word, nxt); nxt = position;
 	  }
+	  tot += line.length();
 	  tot ++;
   }
 }

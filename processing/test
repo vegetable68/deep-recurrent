@@ -1,2032 +1,1224 @@
-On O,On	IN	O
-On	IN	O
-Monday O,Monday	NNP	O
-Monday	NNP	O
-28 O,28	CD	O
-28	CD	O
-January O,January	NNP	O
-January	NNP	O
-, O,,	,	O
-,	,	O
-the O,the	DT	O
-the	DT	O
-US O,US	NNP	O
-US	NNP	O
-National O,National	NNP	O
-National	NNP	O
-Security O,Security	NNP	O
-Security	NNP	O
-Council O,Council	NNP	O
-Council	NNP	O
-convened O,convened	VBD	O
-convened	VBD	O
-for O,for	IN	O
-for	IN	O
-an O,an	DT	O
-an	DT	O
-uncomfortable O,uncomfortable	JJ	O
-uncomfortable	JJ	O
-meeting O,meeting	NN	O
-meeting	NN	O
-; O,;	:	O
-;	:	O
-the O,the	DT	O
-the	DT	O
-main O,main	JJ	O
-main	JJ	O
-issue O,issue	NN	O
-issue	NN	O
-to O,to	TO	B
-to	TO	O
-be O,be	VB	I
-be	VB	O
-debated O,debated	VBN	I
-debated	VBN	O
-was O,was	VBD	B
-was	VBD	O
-known O,known	VBN	I
-known	VBN	O
-as O,as	RB	O
-as	RB	O
-early O,early	RB	O
-early	RB	O
-as O,as	IN	O
-as	IN	O
-the O,the	DT	O
-the	DT	O
-week O,week	NN	O
-week	NN	O
-before O,before	RB	O
-before	RB	O
-, O,,	,	O
-,	,	O
-following O,following	VBG	O
-following	VBG	O
-an O,an	DT	O
-an	DT	O
-unprecedented O,unprecedented	JJ	O
-unprecedented	JJ	O
-split O,split	NN	O
-split	NN	O
-that O,that	WDT	O
-that	WDT	O
-had O,had	VBD	O
-had	VBD	O
-emerged O,emerged	VBN	O
-emerged	VBN	O
-in O,in	IN	O
-in	IN	O
-the O,the	DT	O
-the	DT	O
-US O,US	NNP	O
-US	NNP	O
-Administration O,Administration	NNP	O
-Administration	NNP	O
-. O,.	.	O
-.	.	O
+On IN O
+Monday NNP O
+28 CD O
+January NNP O
+, , O
+the DT O
+US NNP O
+National NNP O
+Security NNP O
+Council NNP O
+convened VBD O
+for IN O
+an DT O
+uncomfortable JJ O
+meeting NN O
+; : O
+the DT O
+main JJ O
+issue NN O
+to TO O
+be VB O
+debated VBN O
+was VBD O
+known VBN O
+as RB O
+early RB O
+as IN O
+the DT O
+week NN O
+before RB O
+, , O
+following VBG O
+an DT O
+unprecedented JJ O
+split NN O
+that WDT O
+had VBD O
+emerged VBN O
+in IN O
+the DT O
+US NNP O
+Administration NNP O
+. . O
 
-These O,These	DT	O
-These	DT	O
-were O,were	VBD	O
-were	VBD	O
-some O,some	DT	O
-some	DT	O
-of O,of	IN	O
-of	IN	O
-the B,the	DT	O
-the	DT	B
-leaders I,leaders	NNS	O
-leaders	NNS	I
-called O,called	VBN	O
-called	VBN	O
-to O,to	TO	B
-to	TO	O
-express O,express	VB	I
-express	VB	O
-their O,their	PRP$	I
-their	PRP$	O
-opinions O,opinions	NNS	I
-opinions	NNS	O
-: O,:	:	O
-:	:	O
-Secretary O,Secretary	NNP	O
-Secretary	NNP	O
-of O,of	IN	O
-of	IN	O
-Defense O,Defense	NNP	O
-Defense	NNP	O
-Donald O,Donald	NNP	O
-Donald	NNP	O
-Rumsfeld O,Rumsfeld	NNP	O
-Rumsfeld	NNP	O
-, O,,	,	O
-,	,	O
-Vice O,Vice	NNP	O
-Vice	NNP	O
-President O,President	NNP	O
-President	NNP	O
-Dick O,Dick	NNP	O
-Dick	NNP	O
-Cheney O,Cheney	NNP	O
-Cheney	NNP	O
-, O,,	,	O
-,	,	O
-John O,John	NNP	O
-John	NNP	O
-Ashcroft O,Ashcroft	NNP	O
-Ashcroft	NNP	O
-( O,-LRB-	-LRB-	O
--LRB-	-LRB-	O
-general O,general	JJ	O
-general	JJ	O
-prosecutor O,prosecutor	NN	O
-prosecutor	NN	O
-and O,and	CC	O
-and	CC	O
-chief O,chief	NN	O
-chief	NN	O
-of O,of	IN	O
-of	IN	O
-the O,the	DT	O
-the	DT	O
-Justice O,Justice	NNP	O
-Justice	NNP	O
-Department O,Department	NNP	O
-Department	NNP	O
-) O,-RRB-	-RRB-	O
--RRB-	-RRB-	O
-, O,,	,	O
-,	,	O
-CIA O,CIA	NNP	O
-CIA	NNP	O
-Director O,Director	NNP	O
-Director	NNP	O
-George O,George	NNP	O
-George	NNP	O
-Tenet O,Tenet	NNP	O
-Tenet	NNP	O
-, O,,	,	O
-,	,	O
-General O,General	NNP	O
-General	NNP	O
-Richard O,Richard	NNP	O
-Richard	NNP	O
-B O,B.	NNP	O
-B.	NNP	O
-Myers O,Myers	NNP	O
-Myers	NNP	O
-, O,,	,	O
-,	,	O
-chairman O,chairman	NN	O
-chairman	NN	O
-of O,of	IN	O
-of	IN	O
-the O,the	DT	O
-the	DT	O
-Joint O,Joint	NNP	O
-Joint	NNP	O
-Chiefs O,Chiefs	NNPS	O
-Chiefs	NNPS	O
-of O,of	IN	O
-of	IN	O
-Staff O,Staff	NNP	O
-Staff	NNP	O
-, O,,	,	O
-,	,	O
-and O,and	CC	O
-and	CC	O
-others O,others	NNS	O
-others	NNS	O
-. O,.	.	O
-.	.	O
+These DT O
+were VBD O
+some DT O
+of IN O
+the DT O
+leaders NNS O
+called VBN O
+to TO O
+express VB O
+their PRP$ O
+opinions NNS O
+: : O
+Secretary NNP O
+of IN O
+Defense NNP O
+Donald NNP O
+Rumsfeld NNP O
+, , O
+Vice NNP O
+President NNP O
+Dick NNP O
+Cheney NNP O
+, , O
+John NNP O
+Ashcroft NNP O
+-LRB- -LRB- O
+general JJ O
+prosecutor NN O
+and CC O
+chief NN O
+of IN O
+the DT O
+Justice NNP O
+Department NNP O
+-RRB- -RRB- O
+, , O
+CIA NNP O
+Director NNP O
+George NNP O
+Tenet NNP O
+, , O
+General NNP O
+Richard NNP O
+B. NNP O
+Myers NNP O
+, , O
+chairman NN O
+of IN O
+the DT O
+Joint NNP O
+Chiefs NNPS O
+of IN O
+Staff NNP O
+, , O
+and CC O
+others NNS O
+. . O
 
-President O,President	NNP	O
-President	NNP	O
-George O,George	NNP	O
-George	NNP	O
-W O,W.	NNP	O
-W.	NNP	O
-Bush O,Bush	NNP	O
-Bush	NNP	O
-and O,and	CC	O
-and	CC	O
-Secretary O,Secretary	NNP	O
-Secretary	NNP	O
-of O,of	IN	O
-of	IN	O
-State O,State	NNP	O
-State	NNP	O
-Colin O,Colin	NNP	O
-Colin	NNP	O
-Powell O,Powell	NNP	O
-Powell	NNP	O
-also O,also	RB	O
-also	RB	O
-participated O,participated	VBD	O
-participated	VBD	O
-in O,in	IN	O
-in	IN	O
-this O,this	DT	O
-this	DT	O
-business O,business	NN	O
-business	NN	O
-. O,.	.	O
-.	.	O
+President NNP O
+George NNP O
+W. NNP O
+Bush NNP O
+and CC O
+Secretary NNP O
+of IN O
+State NNP O
+Colin NNP O
+Powell NNP O
+also RB O
+participated VBD O
+in IN O
+this DT O
+business NN O
+. . O
 
-The O,The	DT	O
-The	DT	O
-issue O,issue	NN	O
-issue	NN	O
-at O,at	IN	O
-at	IN	O
-stake O,stake	NN	O
-stake	NN	O
-was O,was	VBD	O
-was	VBD	O
-apparently O,apparently	RB	O
-apparently	RB	O
-simple O,simple	JJ	O
-simple	JJ	O
-: O,:	:	O
-:	:	O
-the O,the	DT	O
-the	DT	O
-status O,status	NN	O
-status	NN	O
-of O,of	IN	O
-of	IN	O
-the O,the	DT	O
-the	DT	O
-detainees O,detainees	NNS	O
-detainees	NNS	O
-, O,,	,	O
-,	,	O
-members O,members	NNS	O
-members	NNS	O
-of O,of	IN	O
-of	IN	O
-al O,al-Qa	JJ	O
-al-Qa	JJ	O
-' O,`	``	O
-`	``	O
-ida O,ida	NN	O
-ida	NN	O
-and O,and	CC	O
-and	CC	O
-Taliban O,Taliban	NNP	O
-Taliban	NNP	O
-fighters O,fighters	NNS	O
-fighters	NNS	O
-captured O,captured	VBN	O
-captured	VBN	O
-by O,by	IN	O
-by	IN	O
-US O,US	NNP	O
-US	NNP	O
-troops O,troops	NNS	O
-troops	NNS	O
-in O,in	IN	O
-in	IN	O
-Afghanistan O,Afghanistan	NNP	O
-Afghanistan	NNP	O
-in O,in	IN	O
-in	IN	O
-recent O,recent	JJ	O
-recent	JJ	O
-months O,months	NNS	O
-months	NNS	O
-and O,and	CC	O
-and	CC	O
-recently O,recently	RB	O
-recently	RB	O
-transferred O,transferred	VBN	O
-transferred	VBN	O
-to O,to	TO	O
-to	TO	O
-a O,a	DT	O
-a	DT	O
-detention O,detention	NN	O
-detention	NN	O
-base O,base	NN	O
-base	NN	O
-at O,at	IN	O
-at	IN	O
-Guantanamo O,Guantanamo	NNP	O
-Guantanamo	NNP	O
-Bay O,Bay	NNP	O
-Bay	NNP	O
-. O,.	.	O
-.	.	O
+The DT O
+issue NN O
+at IN O
+stake NN O
+was VBD O
+apparently RB O
+simple JJ O
+: : O
+the DT O
+status NN O
+of IN O
+the DT O
+detainees NNS O
+, , O
+members NNS O
+of IN O
+al-Qa JJ O
+` `` O
+ida NN O
+and CC O
+Taliban NNP O
+fighters NNS O
+captured VBN O
+by IN O
+US NNP O
+troops NNS O
+in IN O
+Afghanistan NNP O
+in IN O
+recent JJ O
+months NNS O
+and CC O
+recently RB O
+transferred VBN O
+to TO O
+a DT O
+detention NN O
+base NN O
+at IN O
+Guantanamo NNP O
+Bay NNP O
+. . O
 
-Eventually O,Eventually	RB	O
-Eventually	RB	O
-, O,,	,	O
-,	,	O
-President B,President	NNP	O
-President	NNP	B
-Bush I,Bush	NNP	O
-Bush	NNP	I
-agreed O,agreed	VBD	B
-agreed	VBD	O
-to O,to	TO	B
-to	TO	O
-reconsider O,reconsider	VB	I
-reconsider	VB	O
-some O,some	DT	O
-some	DT	O
-of O,of	IN	O
-of	IN	O
-the O,the	DT	O
-the	DT	O
-decisions O,decisions	NNS	B
-decisions	NNS	O
-he B,he	PRP	O
-he	PRP	B
-had O,had	VBD	O
-had	VBD	O
-announced O,announced	VBN	O
-announced	VBN	O
-a O,a	DT	O
-a	DT	O
-short O,short	JJ	O
-short	JJ	O
-time O,time	NN	O
-time	NN	O
-previously O,previously	RB	O
-previously	RB	O
-. O,.	.	O
-.	.	O
+Eventually RB O
+, , O
+President NNP O
+Bush NNP O
+agreed VBD O
+to TO O
+reconsider VB O
+some DT O
+of IN O
+the DT O
+decisions NNS O
+he PRP O
+had VBD O
+announced VBN O
+a DT O
+short JJ O
+time NN O
+previously RB O
+. . O
 
-In O,In	IN	O
-In	IN	O
-other O,other	JJ	O
-other	JJ	O
-words O,words	NNS	O
-words	NNS	O
-, O,,	,	O
-,	,	O
-he B,he	PRP	O
-he	PRP	B
-admitted O,admitted	VBD	B
-admitted	VBD	O
-he O,he	PRP	O
-he	PRP	O
-had O,had	VBD	O
-had	VBD	O
-been O,been	VBN	O
-been	VBN	O
-wrong O,wrong	JJ	O
-wrong	JJ	O
-- O,--	:	O
---	:	O
-and O,and	CC	O
-and	CC	O
-that O,that	IN	O
-that	IN	O
-at O,at	IN	O
-at	IN	O
-time O,time	NN	O
-time	NN	O
-when O,when	WRB	O
-when	WRB	O
-opinion B,opinion	NN	O
-opinion	NN	B
-polls I,polls	NNS	O
-polls	NNS	I
-in O,in	IN	O
-in	IN	O
-the O,the	DT	O
-the	DT	O
-United O,United	NNP	O
-United	NNP	O
-States O,States	NNPS	O
-States	NNPS	O
-are O,are	VBP	B
-are	VBP	O
-, O,,	,	I
-,	,	O
-without O,without	IN	I
-without	IN	O
-exception O,exception	NN	I
-exception	NN	O
-, O,,	,	I
-,	,	O
-very O,very	RB	I
-very	RB	O
-favorable O,favorable	JJ	I
-favorable	JJ	O
-to O,to	TO	O
-to	TO	O
-him O,him	PRP	O
-him	PRP	O
-. O,.	.	O
-.	.	O
+In IN O
+other JJ O
+words NNS O
+, , O
+he PRP O
+admitted VBD O
+he PRP O
+had VBD O
+been VBN O
+wrong JJ O
+-- : O
+and CC O
+that IN O
+at IN O
+time NN O
+when WRB O
+opinion NN O
+polls NNS O
+in IN O
+the DT O
+United NNP O
+States NNPS O
+are VBP O
+, , O
+without IN O
+exception NN O
+, , O
+very RB O
+favorable JJ O
+to TO O
+him PRP O
+. . O
 
-This O,This	DT	O
-This	DT	O
-is O,is	VBZ	O
-is	VBZ	O
-about O,about	IN	O
-about	IN	O
-the O,the	DT	O
-the	DT	O
-following O,following	NN	O
-following	NN	O
-: O,:	:	O
-:	:	O
-on O,on	IN	O
-on	IN	O
-18 O,18	CD	O
-18	CD	O
-January O,January	NNP	O
-January	NNP	O
-2002 O,2002	CD	O
-2002	CD	O
-, O,,	,	O
-,	,	O
-President B,President	NNP	O
-President	NNP	B
-Bush I,Bush	NNP	O
-Bush	NNP	I
-publicly O,publicly	RB	O
-publicly	RB	O
-announced O,announced	VBD	O
-announced	VBD	O
-two O,two	CD	O
-two	CD	O
-decisions O,decisions	NNS	B
-decisions	NNS	O
-, O,,	,	O
-,	,	O
-which O,which	WDT	O
-which	WDT	O
-, O,,	,	O
-,	,	O
-owing O,owing	JJ	O
-owing	JJ	O
-to O,to	TO	O
-to	TO	O
-the O,the	DT	O
-the	DT	O
-President O,President	NNP	O
-President	NNP	O
-' O,'s	POS	O
-'s	POS	O
-firmness O,firmness	NN	O
-firmness	NN	O
-in O,in	IN	O
-in	IN	O
-announcing O,announcing	VBG	O
-announcing	VBG	O
-them O,them	PRP	O
-them	PRP	O
-, O,,	,	O
-,	,	O
-seemed O,seemed	VBD	O
-seemed	VBD	O
-unyielding O,unyielding	VBG	O
-unyielding	VBG	O
-: O,:	:	O
-:	:	O
-first O,first	RB	O
-first	RB	O
-, O,,	,	O
-,	,	O
-the B,the	DT	O
-the	DT	B
-President I,President	NNP	O
-President	NNP	I
-said O,said	VBD	O
-said	VBD	O
-the O,the	DT	O
-the	DT	O
-158 O,158	CD	O
-158	CD	O
-pro O,pro-Taliban	JJ	O
-pro-Taliban	JJ	O
-fighters O,fighters	NNS	O
-fighters	NNS	O
-brought O,brought	VBN	O
-brought	VBN	O
-to O,to	TO	O
-to	TO	O
-Guantanamo O,Guantanamo	NNP	O
-Guantanamo	NNP	O
-Bay O,Bay	NNP	O
-Bay	NNP	O
-were O,were	VBD	O
-were	VBD	O
-not O,not	RB	O
-not	RB	O
-defined O,defined	VBN	O
-defined	VBN	O
-by O,by	IN	O
-by	IN	O
-US O,US	NNP	O
-US	NNP	O
-courts O,courts	NNS	O
-courts	NNS	O
-as O,as	IN	O
-as	IN	O
-prisoners O,prisoners	NNS	O
-prisoners	NNS	O
-of O,of	IN	O
-of	IN	O
-war O,war	NN	O
-war	NN	O
-; O,;	:	O
-;	:	O
-therefore O,therefore	RB	O
-therefore	RB	O
-, O,,	,	O
-,	,	O
-the B,the	DT	O
-the	DT	B
-United I,United	NNP	O
-United	NNP	I
-States I,States	NNPS	O
-States	NNPS	I
-does O,does	VBZ	B
-does	VBZ	O
-not O,not	RB	I
-not	RB	O
-believe O,believe	VB	I
-believe	VB	O
-it O,it	PRP	O
-it	PRP	O
-is O,is	VBZ	O
-is	VBZ	O
-its O,its	PRP$	O
-its	PRP$	O
-duty O,duty	NN	O
-duty	NN	O
-to O,to	TO	O
-to	TO	O
-grant O,grant	VB	O
-grant	VB	O
-them O,them	PRP	O
-them	PRP	O
-prisoner O,prisoner-of-war	JJ	O
-prisoner-of-war	JJ	O
-rights O,rights	NNS	O
-rights	NNS	O
-under O,under	IN	O
-under	IN	O
-the O,the	DT	O
-the	DT	O
-Geneva O,Geneva	NNP	O
-Geneva	NNP	O
-Convention O,Convention	NNP	O
-Convention	NNP	O
-, O,,	,	O
-,	,	O
-which O,which	WDT	O
-which	WDT	O
-regulates O,regulates	VBZ	O
-regulates	VBZ	O
-( O,-LRB-	-LRB-	O
--LRB-	-LRB-	O
-since O,since	IN	O
-since	IN	O
-1949 O,1949	CD	O
-1949	CD	O
-) O,-RRB-	-RRB-	O
--RRB-	-RRB-	O
-the O,the	DT	O
-the	DT	O
-status O,status	NN	O
-status	NN	O
-of O,of	IN	O
-of	IN	O
-this O,this	DT	O
-this	DT	O
-category O,category	NN	O
-category	NN	O
-of O,of	IN	O
-of	IN	O
-detained O,detained	VBG	O
-detained	VBG	O
-combatants O,combatants	NNS	O
-combatants	NNS	O
-. O,.	.	O
-.	.	O
+This DT O
+is VBZ O
+about IN O
+the DT O
+following NN O
+: : O
+on IN O
+18 CD O
+January NNP O
+2002 CD O
+, , O
+President NNP O
+Bush NNP O
+publicly RB O
+announced VBD O
+two CD O
+decisions NNS O
+, , O
+which WDT O
+, , O
+owing JJ O
+to TO O
+the DT O
+President NNP O
+'s POS O
+firmness NN O
+in IN O
+announcing VBG O
+them PRP O
+, , O
+seemed VBD O
+unyielding VBG O
+: : O
+first RB O
+, , O
+the DT O
+President NNP O
+said VBD O
+the DT O
+158 CD O
+pro-Taliban JJ O
+fighters NNS O
+brought VBN O
+to TO O
+Guantanamo NNP O
+Bay NNP O
+were VBD O
+not RB O
+defined VBN O
+by IN O
+US NNP O
+courts NNS O
+as IN O
+prisoners NNS O
+of IN O
+war NN O
+; : O
+therefore RB O
+, , O
+the DT O
+United NNP O
+States NNPS O
+does VBZ O
+not RB O
+believe VB O
+it PRP O
+is VBZ O
+its PRP$ O
+duty NN O
+to TO O
+grant VB O
+them PRP O
+prisoner-of-war JJ O
+rights NNS O
+under IN O
+the DT O
+Geneva NNP O
+Convention NNP O
+, , O
+which WDT O
+regulates VBZ O
+-LRB- -LRB- O
+since IN O
+1949 CD O
+-RRB- -RRB- O
+the DT O
+status NN O
+of IN O
+this DT O
+category NN O
+of IN O
+detained VBG O
+combatants NNS O
+. . O
 
-In O,In	IN	O
-In	IN	O
-the O,the	DT	O
-the	DT	O
-actual O,actual	JJ	O
-actual	JJ	O
-situation O,situation	NN	O
-situation	NN	O
-we B,we	PRP	O
-we	PRP	B
-are O,are	VBP	O
-are	VBP	O
-discussing O,discussing	VBG	O
-discussing	VBG	O
-, O,,	,	O
-,	,	O
-the O,the	DT	O
-the	DT	O
-issue O,issue	NN	O
-issue	NN	O
-is O,is	VBZ	O
-is	VBZ	O
-the O,the	DT	O
-the	DT	O
-privileges O,privileges	NNS	O
-privileges	NNS	O
-ensured O,ensured	VBN	O
-ensured	VBN	O
-by O,by	IN	O
-by	IN	O
-the O,the	DT	O
-the	DT	O
-Convention O,Convention	NN	O
-Convention	NN	O
-: O,:	:	O
-:	:	O
-according O,according	VBG	O
-according	VBG	O
-to O,to	TO	O
-to	TO	O
-that B,that	DT	O
-that	DT	B
-act I,act	NN	O
-act	NN	I
-, O,,	,	O
-,	,	O
-no O,no	DT	O
-no	DT	O
-detained O,detained	JJ	O
-detained	JJ	O
-combatant O,combatant	NN	O
-combatant	NN	O
-can O,can	MD	O
-can	MD	O
-be O,be	VB	O
-be	VB	O
-forced O,forced	VBN	O
-forced	VBN	O
-to O,to	TO	O
-to	TO	O
-reveal O,reveal	VB	O
-reveal	VB	O
-to O,to	TO	O
-to	TO	O
-the O,the	DT	O
-the	DT	O
-interrogator O,interrogator	NN	O
-interrogator	NN	O
-anything O,anything	NN	O
-anything	NN	O
-other O,other	JJ	O
-other	JJ	O
-than O,than	IN	O
-than	IN	O
-his O,his	PRP$	O
-his	PRP$	O
-name O,name	NN	O
-name	NN	O
-, O,,	,	O
-,	,	O
-rank O,rank	NN	O
-rank	NN	O
-, O,,	,	O
-,	,	O
-military O,military	JJ	O
-military	JJ	O
-serial O,serial	JJ	O
-serial	JJ	O
-number O,number	NN	O
-number	NN	O
-, O,,	,	O
-,	,	O
-and O,and	CC	O
-and	CC	O
-birth O,birth	NN	O
-birth	NN	O
-date O,date	NN	O
-date	NN	O
-. O,.	.	O
-.	.	O
+In IN O
+the DT O
+actual JJ O
+situation NN O
+we PRP O
+are VBP O
+discussing VBG O
+, , O
+the DT O
+issue NN O
+is VBZ O
+the DT O
+privileges NNS O
+ensured VBN O
+by IN O
+the DT O
+Convention NN O
+: : O
+according VBG O
+to TO O
+that DT O
+act NN O
+, , O
+no DT O
+detained JJ O
+combatant NN O
+can MD O
+be VB O
+forced VBN O
+to TO O
+reveal VB O
+to TO O
+the DT O
+interrogator NN O
+anything NN O
+other JJ O
+than IN O
+his PRP$ O
+name NN O
+, , O
+rank NN O
+, , O
+military JJ O
+serial JJ O
+number NN O
+, , O
+and CC O
+birth NN O
+date NN O
+. . O
 
-And O,And	CC	O
-And	CC	O
-, O,,	,	O
-,	,	O
-most O,most	RBS	O
-most	RBS	O
-of O,of	IN	O
-of	IN	O
-all O,all	DT	O
-all	DT	O
-- O,--	:	O
---	:	O
-this O,this	DT	O
-this	DT	O
-is O,is	VBZ	O
-is	VBZ	O
-a O,a	DT	O
-a	DT	O
-very O,very	RB	O
-very	RB	O
-important O,important	JJ	O
-important	JJ	O
-detail O,detail	NN	O
-detail	NN	O
-in O,in	IN	O
-in	IN	O
-this O,this	DT	O
-this	DT	O
-case O,case	NN	O
-case	NN	O
-- O,--	:	O
---	:	O
-the O,the	DT	O
-the	DT	O
-Convention O,Convention	NN	O
-Convention	NN	O
-forces O,forces	VBZ	O
-forces	VBZ	O
-the O,the	DT	O
-the	DT	O
-country O,country	NN	O
-country	NN	O
-that O,that	WDT	O
-that	WDT	O
-holds O,holds	VBZ	O
-holds	VBZ	O
-prisoners O,prisoners	NNS	O
-prisoners	NNS	O
-of O,of	IN	O
-of	IN	O
-war O,war	NN	O
-war	NN	O
-to O,to	TO	O
-to	TO	O
-release O,release	VB	O
-release	VB	O
-them O,them	PRP	O
-them	PRP	O
-immediately O,immediately	RB	O
-immediately	RB	O
-when O,when	WRB	O
-when	WRB	O
-the O,the	DT	O
-the	DT	O
-conflict O,conflict	NN	O
-conflict	NN	O
-is O,is	VBZ	O
-is	VBZ	O
-over O,over	RP	O
-over	RP	O
-. O,.	.	O
-.	.	O
+And CC O
+, , O
+most RBS O
+of IN O
+all DT O
+-- : O
+this DT O
+is VBZ O
+a DT O
+very RB O
+important JJ O
+detail NN O
+in IN O
+this DT O
+case NN O
+-- : O
+the DT O
+Convention NN O
+forces VBZ O
+the DT O
+country NN O
+that WDT O
+holds VBZ O
+prisoners NNS O
+of IN O
+war NN O
+to TO O
+release VB O
+them PRP O
+immediately RB O
+when WRB O
+the DT O
+conflict NN O
+is VBZ O
+over RP O
+. . O
 
-In O,In	IN	O
-In	IN	O
-all O,all	DT	O
-all	DT	O
-likelihood O,likelihood	NN	O
-likelihood	NN	O
-, O,,	,	O
-,	,	O
-President B,President	NNP	O
-President	NNP	B
-Bush I,Bush	NNP	O
-Bush	NNP	I
-made O,made	VBD	O
-made	VBD	O
-that O,that	DT	O
-that	DT	O
-statement O,statement	NN	O
-statement	NN	O
-on O,on	IN	O
-on	IN	O
-18 O,18	CD	O
-18	CD	O
-January O,January	NNP	O
-January	NNP	O
-following O,following	VBG	O
-following	VBG	O
-a O,a	DT	O
-a	DT	O
-consultation O,consultation	NN	O
-consultation	NN	O
-- O,--	:	O
---	:	O
-which O,which	WDT	O
-which	WDT	O
-was O,was	VBD	O
-was	VBD	O
-" O,``	``	O
-``	``	O
-rather O,rather	RB	O
-rather	RB	O
-brief O,brief	JJ	O
-brief	JJ	O
-, O,,	,	O
-,	,	O
-" O,''	''	O
-''	''	O
-some B,some	DT	O
-some	DT	B
-US I,US	NNP	O
-US	NNP	I
-observers I,observers	NNS	O
-observers	NNS	I
-believe O,believe	VBP	B
-believe	VBP	O
-- O,--	:	O
---	:	O
-with O,with	IN	O
-with	IN	O
-Ashcroft O,Ashcroft	NNP	O
-Ashcroft	NNP	O
-, O,,	,	O
-,	,	O
-who O,who	WP	O
-who	WP	O
-was O,was	VBD	B
-was	VBD	O
-strongly O,strongly	RB	I
-strongly	RB	O
-supported O,supported	VBN	I
-supported	VBN	O
-by O,by	IN	O
-by	IN	O
-Cheney B,Cheney	NNP	O
-Cheney	NNP	B
-. O,.	.	O
-.	.	O
+In IN O
+all DT O
+likelihood NN O
+, , O
+President NNP O
+Bush NNP O
+made VBD O
+that DT O
+statement NN O
+on IN O
+18 CD O
+January NNP O
+following VBG O
+a DT O
+consultation NN O
+-- : O
+which WDT O
+was VBD O
+`` `` O
+rather RB O
+brief JJ O
+, , O
+'' '' O
+some DT O
+US NNP O
+observers NNS O
+believe VBP O
+-- : O
+with IN O
+Ashcroft NNP O
+, , O
+who WP O
+was VBD O
+strongly RB O
+supported VBN O
+by IN O
+Cheney NNP O
+. . O
 
-Obviously O,Obviously	RB	O
-Obviously	RB	O
-, O,,	,	O
-,	,	O
-this O,this	DT	B
-this	DT	O
-decision O,decision	NN	I
-decision	NN	O
-simplified O,simplified	VBZ	O
-simplified	VBZ	O
-things O,things	NNS	O
-things	NNS	O
-, O,,	,	O
-,	,	O
-and O,and	CC	O
-and	CC	O
-it O,it	PRP	O
-it	PRP	O
-allowed O,allowed	VBD	O
-allowed	VBD	O
-the O,the	DT	O
-the	DT	O
-US O,US	NNP	O
-US	NNP	O
-judiciary O,judiciary	NN	O
-judiciary	NN	O
-to O,to	TO	O
-to	TO	O
-conduct O,conduct	VB	O
-conduct	VB	O
-the O,the	DT	O
-the	DT	O
-investigation O,investigation	NN	O
-investigation	NN	O
-of O,of	IN	O
-of	IN	O
-the O,the	DT	O
-the	DT	O
-158 O,158	CD	O
-158	CD	O
-detainees O,detainees	NNS	O
-detainees	NNS	O
-as O,as	IN	O
-as	IN	O
-it O,it	PRP	O
-it	PRP	O
-sees O,sees	VBZ	O
-sees	VBZ	O
-fit O,fit	JJ	O
-fit	JJ	O
-. O,.	.	O
-.	.	O
+Obviously RB O
+, , O
+this DT O
+decision NN O
+simplified VBZ O
+things NNS O
+, , O
+and CC O
+it PRP O
+allowed VBD O
+the DT O
+US NNP O
+judiciary NN O
+to TO O
+conduct VB O
+the DT O
+investigation NN O
+of IN O
+the DT O
+158 CD O
+detainees NNS O
+as IN O
+it PRP O
+sees VBZ O
+fit JJ O
+. . O
 
-The B,The	DT	O
-The	DT	B
-United I,United	NNP	O
-United	NNP	I
-States I,States	NNPS	O
-States	NNPS	I
-wanted O,wanted	VBD	B
-wanted	VBD	O
-this O,this	DT	I
-this	DT	O
-very O,very	RB	I
-very	RB	O
-much O,much	RB	I
-much	RB	O
-, O,,	,	O
-,	,	O
-because O,because	IN	O
-because	IN	O
-so O,so	RB	O
-so	RB	O
-far O,far	RB	O
-far	RB	O
-the O,the	DT	O
-the	DT	O
-identity O,identity	NN	O
-identity	NN	O
-and O,and	CC	O
-and	CC	O
-citizenship O,citizenship	NN	O
-citizenship	NN	O
-of O,of	IN	O
-of	IN	O
-those O,those	DT	O
-those	DT	O
-they B,they	PRP	O
-they	PRP	B
-call O,call	VBP	B
-call	VBP	O
-" O,``	``	O
-``	``	O
-terrorists O,terrorists	NNS	O
-terrorists	NNS	O
-" O,''	''	O
-''	''	O
-( O,-LRB-	-LRB-	O
--LRB-	-LRB-	O
-or O,or	CC	O
-or	CC	O
-" O,``	``	O
-``	``	O
-killers O,killers	NNS	O
-killers	NNS	O
-" O,''	''	O
-''	''	O
-in O,in	IN	B
-in	IN	O
-Bush B,Bush	NNP	O
-Bush	NNP	B
-' O,'s	POS	O
-'s	POS	O
-languages O,languages	NNS	O
-languages	NNS	O
-without O,without	IN	O
-without	IN	O
-nuances O,nuances	NNS	O
-nuances	NNS	O
-) O,-RRB-	-RRB-	O
--RRB-	-RRB-	O
-rather O,rather	RB	O
-rather	RB	O
-than O,than	IN	O
-than	IN	O
-prisoners O,prisoners	NNS	O
-prisoners	NNS	O
-in O,in	IN	O
-in	IN	O
-a O,a	DT	O
-a	DT	O
-conventional O,conventional	JJ	O
-conventional	JJ	O
-war O,war	NN	O
-war	NN	O
-have O,have	VBP	O
-have	VBP	O
-not O,not	RB	O
-not	RB	O
-been O,been	VBN	O
-been	VBN	O
-published O,published	VBN	O
-published	VBN	O
-for O,for	IN	O
-for	IN	O
-reasons O,reasons	NNS	O
-reasons	NNS	O
-that O,that	WDT	O
-that	WDT	O
-are O,are	VBP	O
-are	VBP	O
-easy O,easy	JJ	O
-easy	JJ	O
-to O,to	TO	O
-to	TO	O
-understand O,understand	VB	O
-understand	VB	O
-. O,.	.	O
-.	.	O
+The DT O
+United NNP O
+States NNPS O
+wanted VBD O
+this DT O
+very RB O
+much RB O
+, , O
+because IN O
+so RB O
+far RB O
+the DT O
+identity NN O
+and CC O
+citizenship NN O
+of IN O
+those DT O
+they PRP O
+call VBP O
+`` `` O
+terrorists NNS O
+'' '' O
+-LRB- -LRB- O
+or CC O
+`` `` O
+killers NNS O
+'' '' O
+in IN O
+Bush NNP O
+'s POS O
+languages NNS O
+without IN O
+nuances NNS O
+-RRB- -RRB- O
+rather RB O
+than IN O
+prisoners NNS O
+in IN O
+a DT O
+conventional JJ O
+war NN O
+have VBP O
+not RB O
+been VBN O
+published VBN O
+for IN O
+reasons NNS O
+that WDT O
+are VBP O
+easy JJ O
+to TO O
+understand VB O
+. . O
 
-According O,According	VBG	O
-According	VBG	O
-to O,to	TO	O
-to	TO	O
-information B,information	NN	O
-information	NN	B
-circulated I,circulated	VBN	O
-circulated	VBN	I
-by I,by	IN	O
-by	IN	I
-the I,the	DT	O
-the	DT	I
-main I,main	JJ	O
-main	JJ	I
-US I,US	NNP	O
-US	NNP	I
-newspapers I,newspapers	NNS	O
-newspapers	NNS	I
-, O,,	,	O
-,	,	O
-the O,the	DT	O
-the	DT	O
-detainees O,detainees	NNS	O
-detainees	NNS	O
-are O,are	VBP	O
-are	VBP	O
-citizens O,citizens	NNS	O
-citizens	NNS	O
-of O,of	IN	O
-of	IN	O
-25 O,25	CD	O
-25	CD	O
-countries O,countries	NNS	O
-countries	NNS	O
-, O,,	,	O
-,	,	O
-including O,including	VBG	O
-including	VBG	O
-England O,England	NNP	O
-England	NNP	O
-, O,,	,	O
-,	,	O
-France O,France	NNP	O
-France	NNP	O
-, O,,	,	O
-,	,	O
-Australia O,Australia	NNP	O
-Australia	NNP	O
-, O,,	,	O
-,	,	O
-Yemen O,Yemen	NNP	O
-Yemen	NNP	O
-, O,,	,	O
-,	,	O
-Algeria O,Algeria	NNP	O
-Algeria	NNP	O
-, O,,	,	O
-,	,	O
-and O,and	CC	O
-and	CC	O
-even O,even	RB	O
-even	RB	O
-Sweden O,Sweden	NNP	O
-Sweden	NNP	O
-( O,-LRB-	-LRB-	O
--LRB-	-LRB-	O
-! O,!	NNP	O
-!	NNP	O
-) O,-RRB-	-RRB-	O
--RRB-	-RRB-	O
-. O,.	.	O
-.	.	O
+According VBG O
+to TO O
+information NN O
+circulated VBN O
+by IN O
+the DT O
+main JJ O
+US NNP O
+newspapers NNS O
+, , O
+the DT O
+detainees NNS O
+are VBP O
+citizens NNS O
+of IN O
+25 CD O
+countries NNS O
+, , O
+including VBG O
+England NNP O
+, , O
+France NNP O
+, , O
+Australia NNP O
+, , O
+Yemen NNP O
+, , O
+Algeria NNP O
+, , O
+and CC O
+even RB O
+Sweden NNP O
+-LRB- -LRB- O
+! NNP O
+-RRB- -RRB- O
+. . O
 
-Saudi B,Saudi	NNP	O
-Saudi	NNP	B
-Arabia I,Arabia	NNP	O
-Arabia	NNP	I
-alone O,alone	RB	O
-alone	RB	O
-says O,says	VBZ	O
-says	VBZ	O
-" O,``	``	O
-``	``	O
-more O,more	JJR	O
-more	JJR	O
-than O,than	IN	O
-than	IN	O
-100 O,100	CD	O
-100	CD	O
-" O,''	''	O
-''	''	O
-of O,of	IN	O
-of	IN	O
-the O,the	DT	O
-the	DT	O
-158 O,158	CD	O
-158	CD	O
-are O,are	VBP	O
-are	VBP	O
-Saudi O,Saudi	JJ	O
-Saudi	JJ	O
-citizens O,citizens	NNS	O
-citizens	NNS	O
-( O,-LRB-	-LRB-	O
--LRB-	-LRB-	O
-a O,a	DT	O
-a	DT	O
-figure O,figure	NN	O
-figure	NN	O
-the B,the	DT	O
-the	DT	B
-Americans I,Americans	NNPS	O
-Americans	NNPS	I
-see O,see	VBP	B
-see	VBP	O
-as O,as	RB	O
-as	RB	O
-exaggerated O,exaggerated	JJ	O
-exaggerated	JJ	O
-) O,-RRB-	-RRB-	O
--RRB-	-RRB-	O
-, O,,	,	O
-,	,	O
-and O,and	CC	O
-and	CC	O
-Saudi B,Saudi	NNP	O
-Saudi	NNP	B
-Interior I,Interior	NNP	O
-Interior	NNP	I
-Minister I,Minister	NNP	O
-Minister	NNP	I
-Prince I,Prince	NNP	O
-Prince	NNP	I
-Saud I,Saud	NNP	O
-Saud	NNP	I
-Nayif I,Nayif	NNP	O
-Nayif	NNP	I
-recently O,recently	RB	O
-recently	RB	O
-said O,said	VBD	O
-said	VBD	O
-that O,that	IN	O
-that	IN	O
-his B,his	PRP$	O
-his	PRP$	B
-country I,country	NN	O
-country	NN	I
-would O,would	MD	B
-would	MD	O
-like O,like	VB	I
-like	VB	O
-to O,to	TO	O
-to	TO	O
-have O,have	VB	O
-have	VB	O
-them O,them	PRP	O
-them	PRP	O
-repatriated O,repatriated	VBD	O
-repatriated	VBD	O
-, O,,	,	O
-,	,	O
-to O,to	TO	O
-to	TO	O
-be O,be	VB	O
-be	VB	O
-tried O,tried	VBN	O
-tried	VBN	O
-at O,at	IN	O
-at	IN	O
-home O,home	NN	O
-home	NN	O
-. O,.	.	O
-.	.	O
+Saudi NNP O
+Arabia NNP O
+alone RB O
+says VBZ O
+`` `` O
+more JJR O
+than IN O
+100 CD O
+'' '' O
+of IN O
+the DT O
+158 CD O
+are VBP O
+Saudi JJ O
+citizens NNS O
+-LRB- -LRB- O
+a DT O
+figure NN O
+the DT O
+Americans NNPS O
+see VBP O
+as RB O
+exaggerated JJ O
+-RRB- -RRB- O
+, , O
+and CC O
+Saudi NNP O
+Interior NNP O
+Minister NNP O
+Prince NNP O
+Saud NNP O
+Nayif NNP O
+recently RB O
+said VBD O
+that IN O
+his PRP$ O
+country NN O
+would MD O
+like VB O
+to TO O
+have VB O
+them PRP O
+repatriated VBD O
+, , O
+to TO O
+be VB O
+tried VBN O
+at IN O
+home NN O
+. . O
 
-The O,The	DT	B
-The	DT	O
-surprise O,surprise	NN	I
-surprise	NN	O
-- O,--	:	O
---	:	O
-for O,for	IN	O
-for	IN	O
-the B,the	DT	O
-the	DT	B
-US I,US	NNP	O
-US	NNP	I
-administration I,administration	NN	O
-administration	NN	I
-and I,and	CC	O
-and	CC	I
-the I,the	DT	O
-the	DT	I
-US I,US	NNP	O
-US	NNP	I
-media I,media	NNS	O
-media	NNS	I
-- O,--	:	O
---	:	O
-came O,came	VBD	O
-came	VBD	O
-with O,with	IN	O
-with	IN	O
-a O,a	DT	O
-a	DT	O
-statement O,statement	NN	O
-statement	NN	O
-made O,made	VBN	O
-made	VBN	O
-by O,by	IN	O
-by	IN	O
-Powell B,Powell	NNP	O
-Powell	NNP	B
-. O,.	.	O
-.	.	O
+The DT O
+surprise NN O
+-- : O
+for IN O
+the DT O
+US NNP O
+administration NN O
+and CC O
+the DT O
+US NNP O
+media NNS O
+-- : O
+came VBD O
+with IN O
+a DT O
+statement NN O
+made VBN O
+by IN O
+Powell NNP O
+. . O
 
-Following O,Following	VBG	O
-Following	VBG	O
-his O,his	PRP$	O
-his	PRP$	O
-recent O,recent	JJ	O
-recent	JJ	O
-world O,world	NN	O
-world	NN	O
-tours O,tours	NNS	O
-tours	NNS	O
-, O,,	,	O
-,	,	O
-Powell B,Powell	NNP	O
-Powell	NNP	B
-suggested O,suggested	VBD	B
-suggested	VBD	O
-that O,that	IN	O
-that	IN	O
-the B,the	DT	O
-the	DT	B
-President I,President	NNP	O
-President	NNP	I
-accept O,accept	VBP	O
-accept	VBP	O
-the O,the	DT	O
-the	DT	O
-validity O,validity	NN	O
-validity	NN	O
-of O,of	IN	O
-of	IN	O
-the O,the	DT	O
-the	DT	O
-Geneva O,Geneva	NNP	O
-Geneva	NNP	O
-Convention O,Convention	NNP	O
-Convention	NNP	O
-for O,for	IN	O
-for	IN	O
-the O,the	DT	O
-the	DT	O
-pro O,pro-Taliban	JJ	O
-pro-Taliban	JJ	O
-detainees O,detainees	NNS	O
-detainees	NNS	O
-. O,.	.	O
-.	.	O
+Following VBG O
+his PRP$ O
+recent JJ O
+world NN O
+tours NNS O
+, , O
+Powell NNP O
+suggested VBD O
+that IN O
+the DT O
+President NNP O
+accept VBP O
+the DT O
+validity NN O
+of IN O
+the DT O
+Geneva NNP O
+Convention NNP O
+for IN O
+the DT O
+pro-Taliban JJ O
+detainees NNS O
+. . O
 
-According O,According	VBG	B
-According	VBG	O
-to O,to	TO	I
-to	TO	O
-his B,his	PRP$	I
-his	PRP$	B
-own O,own	JJ	I
-own	JJ	O
-assertions O,assertions	NNS	I
-assertions	NNS	O
-, O,,	,	O
-,	,	O
-the O,the	DT	O
-the	DT	O
-obvious O,obvious	JJ	B
-obvious	JJ	O
-concern O,concern	NN	I
-concern	NN	O
-of O,of	IN	O
-of	IN	O
-some B,some	DT	O
-some	DT	B
-Western I,Western	JJ	O
-Western	JJ	I
-European I,European	JJ	O
-European	JJ	I
-leaders I,leaders	NNS	O
-leaders	NNS	I
-- I,--	:	O
---	:	I
-US I,US	NNP	O
-US	NNP	I
-allies I,allies	NNS	O
-allies	NNS	I
-- I,--	:	O
---	:	I
-and I,and	CC	O
-and	CC	I
-of I,of	IN	O
-of	IN	I
-some I,some	DT	O
-some	DT	I
-important I,important	JJ	O
-important	JJ	I
-European I,European	NNP	O
-European	NNP	I
-governmental I,governmental	JJ	O
-governmental	JJ	I
-and I,and	CC	O
-and	CC	I
-non I,non-governmental	JJ	O
-non-governmental	JJ	I
-institutions I,institutions	NNS	O
-institutions	NNS	I
-about O,about	IN	O
-about	IN	O
-the O,the	DT	O
-the	DT	O
-treatment O,treatment	NN	O
-treatment	NN	O
-the O,the	DT	O
-the	DT	O
-detainees O,detainees	NNS	O
-detainees	NNS	O
-are O,are	VBP	O
-are	VBP	O
-being O,being	VBG	O
-being	VBG	O
-subjected O,subjected	VBN	O
-subjected	VBN	O
-to O,to	TO	O
-to	TO	O
-, O,,	,	O
-,	,	O
-especially O,especially	RB	O
-especially	RB	O
-following O,following	VBG	O
-following	VBG	O
-the O,the	DT	O
-the	DT	O
-publication O,publication	NN	O
-publication	NN	O
-of O,of	IN	O
-of	IN	O
-certain O,certain	JJ	O
-certain	JJ	O
-images O,images	NNS	O
-images	NNS	O
-of O,of	IN	O
-of	IN	O
-the O,the	DT	O
-the	DT	O
-Guantanamo O,Guantanamo	NNP	O
-Guantanamo	NNP	O
-Bay O,Bay	NNP	O
-Bay	NNP	O
-camp O,camp	NN	O
-camp	NN	O
-that O,that	WDT	O
-that	WDT	O
-could O,could	MD	O
-could	MD	O
-be O,be	VB	O
-be	VB	O
-interpreted O,interpreted	VBN	O
-interpreted	VBN	O
-in O,in	IN	O
-in	IN	O
-various O,various	JJ	O
-various	JJ	O
-ways O,ways	NNS	O
-ways	NNS	O
-, O,,	,	O
-,	,	O
-played O,played	VBD	O
-played	VBD	O
-a O,a	DT	O
-a	DT	O
-key O,key	JJ	O
-key	JJ	O
-role O,role	NN	O
-role	NN	O
-in O,in	IN	O
-in	IN	O
-this O,this	DT	B
-this	DT	O
-position O,position	NN	I
-position	NN	O
-. O,.	.	O
-.	.	O
+According VBG O
+to TO O
+his PRP$ O
+own JJ O
+assertions NNS O
+, , O
+the DT O
+obvious JJ O
+concern NN O
+of IN O
+some DT O
+Western JJ O
+European JJ O
+leaders NNS O
+-- : O
+US NNP O
+allies NNS O
+-- : O
+and CC O
+of IN O
+some DT O
+important JJ O
+European NNP O
+governmental JJ O
+and CC O
+non-governmental JJ O
+institutions NNS O
+about IN O
+the DT O
+treatment NN O
+the DT O
+detainees NNS O
+are VBP O
+being VBG O
+subjected VBN O
+to TO O
+, , O
+especially RB O
+following VBG O
+the DT O
+publication NN O
+of IN O
+certain JJ O
+images NNS O
+of IN O
+the DT O
+Guantanamo NNP O
+Bay NNP O
+camp NN O
+that WDT O
+could MD O
+be VB O
+interpreted VBN O
+in IN O
+various JJ O
+ways NNS O
+, , O
+played VBD O
+a DT O
+key JJ O
+role NN O
+in IN O
+this DT O
+position NN O
+. . O
 
-Sometimes O,Sometimes	RB	O
-Sometimes	RB	O
-the O,the	DT	B
-the	DT	O
-criticism O,criticism	NN	I
-criticism	NN	O
-was O,was	VBD	O
-was	VBD	O
-unexpectedly O,unexpectedly	RB	O
-unexpectedly	RB	O
-tough O,tough	JJ	O
-tough	JJ	O
-: O,:	:	O
-:	:	O
-Kenneth B,Kenneth	NNP	O
-Kenneth	NNP	B
-Roth I,Roth	NNP	O
-Roth	NNP	I
-, I,,	,	O
-,	,	I
-executive I,executive	JJ	O
-executive	JJ	I
-director I,director	NN	O
-director	NN	I
-of I,of	IN	O
-of	IN	I
-Human I,Human	NNP	O
-Human	NNP	I
-Rights I,Rights	NNPS	O
-Rights	NNPS	I
-Watch I,Watch	NNP	O
-Watch	NNP	I
-, O,,	,	O
-,	,	O
-said O,said	VBD	B
-said	VBD	O
-" O,``	``	O
-``	``	O
-the B,the	DT	O
-the	DT	B
-US I,US	NNP	O
-US	NNP	I
-Government I,Government	NNP	O
-Government	NNP	I
-cannot O,can	MD	O
-can	MD	O
-choose O,not	RB	O
-not	RB	O
-to O,choose	VB	O
-choose	VB	O
-war O,to	TO	O
-to	TO	O
-in O,wage	NN	O
-wage	NN	O
-with O,war	NN	O
-war	NN	O
-guns O,in	IN	O
-in	IN	O
-, O,Afghanistan	NNP	O
-Afghanistan	NNP	O
-, O,with	IN	O
-with	IN	O
-then O,guns	NNS	O
-guns	NNS	O
-assert O,,	,	O
-,	,	O
-the O,bombs	NNS	O
-bombs	NNS	O
-of O,and	CC	O
-and	CC	O
-do O,soldiers	NNS	O
-soldiers	NNS	O
-. O,,	,	O
-,	,	O
-" O,and	CC	O
-and	CC	O
-Therefore O,then	RB	O
-then	RB	O
-, O,assert	VBP	B
-assert	VBP	O
-Powell B,the	DT	O
-the	DT	B
-agrees O,laws	NNS	O
-laws	NNS	O
-with O,of	IN	O
-of	IN	O
-the O,war	NN	O
-war	NN	O
-refusal O,do	VBP	O
-do	VBP	O
-to O,not	RB	O
-not	RB	O
-prisoner O,apply	VB	O
-apply	VB	O
-- O,.	.	O
-.	.	O
-of O,''	''	O
-''	''	O
+Sometimes RB O
+the DT O
+criticism NN O
+was VBD O
+unexpectedly RB O
+tough JJ O
+: : O
+Kenneth NNP O
+Roth NNP O
+, , O
+executive JJ O
+director NN O
+of IN O
+Human NNP O
+Rights NNPS O
+Watch NNP O
+, , O
+said VBD O
+`` `` O
+the DT O
+US NNP O
+Government NNP O
+can MD O
+not RB O
+choose VB O
+to TO O
+wage NN O
+war NN O
+in IN O
+Afghanistan NNP O
+with IN O
+guns NNS O
+, , O
+bombs NNS O
+and CC O
+soldiers NNS O
+, , O
+and CC O
+then RB O
+assert VBP O
+the DT O
+laws NNS O
+of IN O
+war NN O
+do VBP O
+not RB O
+apply VB O
+. . O
+'' '' O
 
-- O,Therefore	RB	O
-Therefore	RB	O
-to O,,	,	O
-,	,	O
-the O,even	RB	O
-even	RB	O
-captives O,if	IN	O
-if	IN	O
-, O,Powell	NNP	O
-Powell	NNP	O
-that O,agrees	VBZ	B
-agrees	VBZ	O
-US I,with	IN	O
-with	IN	I
-to O,the	DT	B
-the	DT	O
-the O,refusal	NN	I
-refusal	NN	O
-under O,to	TO	I
-to	TO	O
-the O,grant	VB	I
-grant	VB	O
-Convention O,prisoner-of-war	JJ	O
-prisoner-of-war	JJ	O
-set O,status	NN	O
-status	NN	O
-that O,to	TO	O
-to	TO	O
-could O,the	DT	O
-the	DT	O
-affect O,158	CD	O
-158	CD	O
-the O,captives	NNS	O
-captives	NNS	O
-US O,,	,	O
-,	,	O
-soldiers O,he	PRP	O
-he	PRP	O
-sent O,believe	VBP	B
-believe	VBP	O
-to O,that	IN	O
-that	IN	O
-areas O,the	DT	O
-the	DT	O
-of O,US	NNP	O
-US	NNP	O
-this O,refusal	NN	B
-refusal	NN	O
-. O,to	TO	O
-to	TO	O
-a O,cover	VB	O
-cover	VB	O
-phase O,the	DT	O
-the	DT	O
-, O,captives	NNS	O
-captives	NNS	O
-of I,under	IN	O
-under	IN	I
-administration I,the	DT	O
-the	DT	I
-was O,Geneva	NNP	O
-Geneva	NNP	O
-by O,Convention	NNP	O
-Convention	NNP	O
-opinion O,would	MD	O
-would	MD	O
-, O,set	VB	O
-set	VB	O
-shortly O,a	DT	O
-a	DT	O
-afterward O,precedent	NN	O
-precedent	NN	O
-Rumsfeld B,that	WDT	O
-that	WDT	B
-sided O,could	MD	O
-could	MD	O
-with O,affect	VB	O
-affect	VB	O
-, O,the	DT	O
-the	DT	O
-his B,fate	NN	O
-fate	NN	B
-in O,of	IN	O
-of	IN	O
-front O,US	NNP	O
-US	NNP	O
-of O,soldiers	NNS	O
-soldiers	NNS	O
-. O,sent	VBN	O
-sent	VBN	O
-to O,out	RP	O
-out	RP	O
-on O,to	TO	O
-to	TO	O
-which O,risky	JJ	O
-risky	JJ	O
-the B,areas	NNS	O
-areas	NNS	B
-in I,of	IN	O
-of	IN	I
-question I,this	DT	O
-this	DT	I
-refused O,planet	NN	O
-planet	NN	O
-to O,.	.	O
-.	.	O
+Therefore RB O
+, , O
+even RB O
+if IN O
+Powell NNP O
+agrees VBZ O
+with IN O
+the DT O
+refusal NN O
+to TO O
+grant VB O
+prisoner-of-war JJ O
+status NN O
+to TO O
+the DT O
+158 CD O
+captives NNS O
+, , O
+he PRP O
+believe VBP O
+that IN O
+the DT O
+US NNP O
+refusal NN O
+to TO O
+cover VB O
+the DT O
+captives NNS O
+under IN O
+the DT O
+Geneva NNP O
+Convention NNP O
+would MD O
+set VB O
+a DT O
+precedent NN O
+that WDT O
+could MD O
+affect VB O
+the DT O
+fate NN O
+of IN O
+US NNP O
+soldiers NNS O
+sent VBN O
+out RP O
+to TO O
+risky JJ O
+areas NNS O
+of IN O
+this DT O
+planet NN O
+. . O
 
-comment O,In	IN	O
-In	IN	O
-, O,a	DT	O
-a	DT	O
-Condoleezza B,first	JJ	O
-first	JJ	B
-Rice I,phase	NN	O
-phase	NN	I
-the O,,	,	O
-,	,	O
-US O,the	DT	O
-the	DT	O
-' O,rest	NN	O
-rest	NN	O
-security O,of	IN	O
-of	IN	O
-adviser O,the	DT	O
-the	DT	O
-, O,administration	NN	O
-administration	NN	O
-role O,was	VBD	B
-was	VBD	O
-in O,baffled	VBN	I
-baffled	VBN	O
-Powell B,by	IN	O
-by	IN	B
-' O,Powell	NNP	O
-Powell	NNP	O
-. O,'s	POS	O
-'s	POS	O
-, O,opinion	NN	O
-opinion	NN	O
-of O,,	,	O
-,	,	O
-opinions O,but	CC	O
-but	CC	O
-in O,shortly	RB	O
-shortly	RB	O
-became O,afterward	RB	O
-afterward	RB	O
-in O,Rumsfeld	NNP	O
-Rumsfeld	NNP	O
-democracy O,sided	VBD	B
-sided	VBD	O
-. O,with	IN	O
-with	IN	O
-, O,him	PRP	O
-him	PRP	O
-a O,,	,	O
-,	,	O
-sum O,supporting	VBG	B
-supporting	VBG	O
-offered O,his	PRP$	O
-his	PRP$	O
-by O,proposal	NN	O
-proposal	NN	O
-advisers I,in	IN	O
-in	IN	I
-, O,front	NN	O
-front	NN	O
-Bush I,of	IN	O
-of	IN	I
-admitted O,the	DT	O
-the	DT	O
-on O,President	NNP	O
-President	NNP	O
-following O,.	.	O
-.	.	O
+In IN O
+a DT O
+first JJ O
+phase NN O
+, , O
+the DT O
+rest NN O
+of IN O
+the DT O
+administration NN O
+was VBD O
+baffled VBN O
+by IN O
+Powell NNP O
+'s POS O
+opinion NN O
+, , O
+but CC O
+shortly RB O
+afterward RB O
+Rumsfeld NNP O
+sided VBD O
+with IN O
+him PRP O
+, , O
+supporting VBG O
+his PRP$ O
+proposal NN O
+in IN O
+front NN O
+of IN O
+the DT O
+President NNP O
+. . O
 
-the O,According	VBG	B
-According	VBG	O
-Security O,to	TO	I
-to	TO	O
-Council O,interpretations	NNS	I
-interpretations	NNS	O
-that O,on	IN	O
-on	IN	O
-the O,which	WDT	O
-which	WDT	O
-at O,the	DT	O
-the	DT	O
-Bay O,individual	NN	O
-individual	NN	O
-under O,in	IN	O
-in	IN	O
-the O,question	NN	O
-question	NN	O
-of O,refused	VBD	B
-refused	VBD	O
-Convention O,to	TO	O
-to	TO	O
-, O,comment	VB	O
-comment	VB	O
-their O,,	,	O
-,	,	O
-special O,Condoleezza	NNP	O
-Condoleezza	NNP	O
-comes O,Rice	NNP	O
-Rice	NNP	O
-from O,,	,	O
-,	,	O
-the O,the	DT	O
-the	DT	O
-fact O,US	NNP	O
-US	NNP	O
-that O,President	NNP	O
-President	NNP	O
-continue O,'s	POS	O
-'s	POS	O
-to O,national	JJ	O
-national	JJ	O
-terrorists O,security	NN	O
-security	NN	O
-, O,adviser	NN	O
-adviser	NN	O
-than O,,	,	O
-,	,	O
-prisoners O,played	VBD	O
-played	VBD	O
-of O,an	DT	O
-an	DT	O
-war O,important	JJ	O
-important	JJ	O
-their O,role	NN	O
-role	NN	O
-possible O,in	IN	O
-in	IN	O
-repatriation O,supporting	VBG	B
-supporting	VBG	O
-, O,Powell	NNP	O
-Powell	NNP	O
-be O,'s	POS	O
-'s	POS	O
-taken O,opinion	NN	O
-opinion	NN	O
-consideration O,.	.	O
-.	.	O
+According VBG O
+to TO O
+interpretations NNS O
+on IN O
+which WDT O
+the DT O
+individual NN O
+in IN O
+question NN O
+refused VBD O
+to TO O
+comment VB O
+, , O
+Condoleezza NNP O
+Rice NNP O
+, , O
+the DT O
+US NNP O
+President NNP O
+'s POS O
+national JJ O
+security NN O
+adviser NN O
+, , O
+played VBD O
+an DT O
+important JJ O
+role NN O
+in IN O
+supporting VBG O
+Powell NNP O
+'s POS O
+opinion NN O
+. . O
 
-, O,Therefore	RB	O
-Therefore	RB	O
-the O,,	,	O
-,	,	O
-war O,the	DT	B
-the	DT	O
-against O,dispute	NN	I
-dispute	NN	O
-terrorism O,of	IN	I
-of	IN	O
-is O,opinions	NNS	I
-opinions	NNS	O
-over O,in	IN	O
-in	IN	O
-. O,the	DT	O
-the	DT	O
-fact O,administration	NN	O
-administration	NN	O
-reconsidered O,became	VBD	O
-became	VBD	O
-his B,a	DT	O
-a	DT	B
-own O,lesson	NN	O
-lesson	NN	O
-of O,in	IN	O
-in	IN	O
-18 O,applied	JJ	O
-applied	JJ	O
-led O,democracy	NN	O
-democracy	NN	O
-reactions O,.	.	O
-.	.	O
+Therefore RB O
+, , O
+the DT O
+dispute NN O
+of IN O
+opinions NNS O
+in IN O
+the DT O
+administration NN O
+became VBD O
+a DT O
+lesson NN O
+in IN O
+applied JJ O
+democracy NN O
+. . O
 
-. O,Eventually	RB	O
-Eventually	RB	O
-- O,,	,	O
-,	,	O
-- O,making	VBG	O
-making	VBG	O
-from O,a	DT	O
-a	DT	O
-the O,sum	NN	O
-sum	NN	O
-sober O,of	IN	O
-of	IN	O
-The B,the	DT	O
-the	DT	B
-New I,proposals	NNS	B
-proposals	NNS	I
-, O,offered	VBN	I
-offered	VBN	O
-in O,by	IN	O
-by	IN	O
-its O,his	PRP$	O
-his	PRP$	O
-Tuesday O,main	JJ	O
-main	JJ	O
-issue O,advisers	NNS	O
-advisers	NNS	O
-in O,,	,	O
-,	,	O
-his B,President	NNP	O
-President	NNP	B
-speech O,Bush	NNP	O
-Bush	NNP	O
-the B,admitted	VBD	B
-admitted	VBD	B
-" O,on	RP	O
-on	RP	O
-twice O,Monday	NNP	O
-Monday	NNP	O
-the O,,	,	O
-,	,	O
-158 O,following	VBG	O
-following	VBG	O
-fighters O,the	DT	O
-the	DT	O
-' O,National	NNP	O
-National	NNP	O
-, O,Security	NNP	O
-Security	NNP	O
-himself O,Council	NNP	O
-Council	NNP	O
-, O,meeting	NN	O
-meeting	NN	O
-the O,,	,	O
-,	,	O
-word O,that	IN	O
-that	IN	O
-' O,the	DT	O
-the	DT	O
-. O,captives	NNS	O
-captives	NNS	O
-sight O,at	IN	O
-at	IN	O
-, O,Guantanamo	NNP	O
-Guantanamo	NNP	O
-to O,Bay	NNP	O
-Bay	NNP	O
-nothing O,will	MD	O
-will	MD	O
-more O,be	VB	O
-be	VB	O
-than O,covered	VBN	O
-covered	VBN	O
-issue O,under	IN	O
-under	IN	O
-. O,the	DT	O
-the	DT	O
-, O,``	``	O
-``	``	O
-believe O,spirit	NN	O
-spirit	NN	O
-it O,of	IN	O
-of	IN	O
-is O,the	DT	O
-the	DT	O
-than O,Geneva	NNP	O
-Geneva	NNP	O
-. O,Convention	NNP	O
-Convention	NNP	O
-about O,,	,	O
-,	,	O
-details O,''	''	O
-''	''	O
-- O,even	RB	O
-even	RB	O
-cold O,if	IN	O
-if	IN	O
-- O,their	PRP$	O
-their	PRP$	O
-accomplices O,special	JJ	O
-special	JJ	O
-to O,status	NN	O
-status	NN	O
-, O,comes	VBZ	O
-comes	VBZ	O
-that O,from	IN	O
-from	IN	O
-is O,the	DT	O
-the	DT	O
-these O,fact	NN	O
-fact	NN	O
-al O,that	IN	O
-that	IN	O
-' O,they	PRP	O
-they	PRP	O
-disciples O,will	MD	O
-will	MD	O
-at O,continue	VB	O
-continue	VB	O
-Bay O,to	TO	O
-to	TO	O
-are O,be	VB	O
-be	VB	O
-- O,designated	VBN	O
-designated	VBN	O
-proves O,terrorists	NNS	O
-terrorists	NNS	O
-capable O,,	,	O
-,	,	O
-of O,rather	RB	O
-rather	RB	O
-it O,than	IN	O
-than	IN	O
-not O,prisoners	NNS	O
-prisoners	NNS	O
-, O,of	IN	O
-of	IN	O
-is O,war	NN	O
-war	NN	O
-equivalent O,.	.	O
-.	.	O
+Eventually RB O
+, , O
+making VBG O
+a DT O
+sum NN O
+of IN O
+the DT O
+proposals NNS O
+offered VBN O
+by IN O
+his PRP$ O
+main JJ O
+advisers NNS O
+, , O
+President NNP O
+Bush NNP O
+admitted VBD O
+on RP O
+Monday NNP O
+, , O
+following VBG O
+the DT O
+National NNP O
+Security NNP O
+Council NNP O
+meeting NN O
+, , O
+that IN O
+the DT O
+captives NNS O
+at IN O
+Guantanamo NNP O
+Bay NNP O
+will MD O
+be VB O
+covered VBN O
+under IN O
+the DT O
+`` `` O
+spirit NN O
+of IN O
+the DT O
+Geneva NNP O
+Convention NNP O
+, , O
+'' '' O
+even RB O
+if IN O
+their PRP$ O
+special JJ O
+status NN O
+comes VBZ O
+from IN O
+the DT O
+fact NN O
+that IN O
+they PRP O
+will MD O
+continue VB O
+to TO O
+be VB O
+designated VBN O
+terrorists NNS O
+, , O
+rather RB O
+than IN O
+prisoners NNS O
+of IN O
+war NN O
+. . O
 
-of O,As	IN	O
-As	IN	O
-respect O,for	IN	O
-for	IN	O
-for O,their	PRP$	O
-their	PRP$	O
-. O,possible	JJ	O
-possible	JJ	O
-last O,repatriation	NN	O
-repatriation	NN	O
-us O,,	,	O
-,	,	O
-remember O,it	PRP	B
-it	PRP	O
-that O,can	MD	O
-can	MD	O
-, O,not	RB	O
-not	RB	O
-everywhere O,be	VB	O
-be	VB	O
-by O,taken	VBN	O
-taken	VBN	O
-and O,into	IN	O
-into	IN	O
-, O,consideration	NN	O
-consideration	NN	O
-thought O,,	,	O
-,	,	O
-of O,as	RB	O
-as	RB	O
-finding O,long	RB	O
-long	RB	O
-" O,as	IN	O
-as	IN	O
-monkeys O,the	DT	O
-the	DT	O
-" O,war	NN	O
-war	NN	O
-[ O,against	IN	O
-against	IN	O
-to O,terrorism	NN	O
-terrorism	NN	O
-made O,is	VBZ	O
-is	VBZ	O
-by O,far	RB	O
-far	RB	O
-Prime I,from	IN	O
-from	IN	I
-Minister I,over	RB	O
-over	RB	I
-Adrian I,.	.	O
-.	.	I
+As IN O
+for IN O
+their PRP$ O
+possible JJ O
+repatriation NN O
+, , O
+it PRP O
+can MD O
+not RB O
+be VB O
+taken VBN O
+into IN O
+consideration NN O
+, , O
+as RB O
+long RB O
+as IN O
+the DT O
+war NN O
+against IN O
+terrorism NN O
+is VBZ O
+far RB O
+from IN O
+over RB O
+. . O
 
-Nastase I,The	DT	O
-The	DT	I
-] O,fact	NN	O
-fact	NN	O
-media O,that	IN	O
-that	IN	O
-workers O,the	DT	O
-the	DT	O
-or O,President	NNP	O
-President	NNP	O
-among O,reconsidered	VBN	B
-reconsidered	VBN	O
-who O,his	PRP$	O
-his	PRP$	O
-use O,own	JJ	O
-own	JJ	O
-hundreds O,statement	NN	O
-statement	NN	O
-websites O,of	IN	O
-of	IN	O
-to O,18	CD	O
-18	CD	O
-call O,January	NNP	O
-January	NNP	O
-administration O,led	VBD	O
-led	VBD	O
-to O,to	TO	O
-to	TO	O
-stop O,diverse	JJ	B
-diverse	JJ	O
-the O,reactions	NNS	I
-reactions	NNS	O
-to O,.	.	O
-.	.	O
+The DT O
+fact NN O
+that IN O
+the DT O
+President NNP O
+reconsidered VBN O
+his PRP$ O
+own JJ O
+statement NN O
+of IN O
+18 CD O
+January NNP O
+led VBD O
+to TO O
+diverse JJ O
+reactions NNS O
+. . O
 
-exterminate O,There	EX	O
-There	EX	O
-the O,is	VBZ	O
-is	VBZ	O
-Arabs O,irony	NN	O
-irony	NN	O
-. O,--	:	O
---	:	O
-,including	VBG	O
+There EX O
+is VBZ O
+irony NN O
+-- : O
+including VBG O
+from IN O
+the DT O
+sober NN O
+The DT O
+New NNP O
+York NNP O
+Times NNP O
+, , O
+which WDT O
+wrote VBD O
+in IN O
+its PRP$ O
+Tuesday NNP O
+issue NN O
+that IN O
+in IN O
+his PRP$ O
+Monday NNP O
+speech NN O
+the DT O
+President NNP O
+`` `` O
+twice RB O
+called VBD O
+the DT O
+158 CD O
+pro-Taliban JJ O
+fighters NNS O
+` `` O
+prisoners NNS O
+, , O
+' '' O
+then RB O
+stopped VBD O
+himself PRP O
+, , O
+and CC O
+used VBD O
+the DT O
+word NN O
+` `` O
+detainees JJ O
+. . O
+' '' O
+'' '' O
+
+At IN O
+first JJ O
+sight NN O
+, , O
+this DT O
+seems VBZ O
+to TO O
+be VB O
+nothing NN O
+more JJR O
+than IN O
+a DT O
+terminology JJ O
+issue NN O
+. . O
+
+However RB O
+, , O
+I PRP O
+believe VBP O
+it PRP O
+is VBZ O
+more JJR O
+than IN O
+that DT O
+. . O
+
+In IN O
+this DT O
+concern NN O
+about IN O
+details NNS O
+-- : O
+about IN O
+cold-blood JJ O
+accomplices NNS O
+to TO O
+murder NN O
+, , O
+because IN O
+that DT O
+is VBZ O
+what WP O
+these DT O
+al-Qa JJ O
+` `` O
+ida NN O
+disciples NNS O
+at IN O
+Guantanamo NNP O
+Bay NNP O
+are VBP O
+-- : O
+the DT O
+US NNP O
+Administration NNP O
+proves VBZ O
+it PRP O
+is VBZ O
+capable JJ O
+of IN O
+admitting VBG O
+it PRP O
+is VBZ O
+not RB O
+infallible JJ O
+, , O
+which WDT O
+is VBZ O
+the DT O
+equivalent NN O
+of IN O
+respect NN O
+for IN O
+democracy NN O
+. . O
+
+And CC O
+, , O
+as IN O
+a DT O
+last JJ O
+detail NN O
+, , O
+let VB O
+us PRP O
+remember VB O
+that DT O
+, , O
+harassed VBD O
+everywhere RB O
+by IN O
+journalists NNS O
+and CC O
+commentators NNS O
+, , O
+no DT O
+US NNP O
+leader NN O
+ever RB O
+thought VBD O
+of IN O
+finding VBG O
+`` `` O
+monkeys JJ O
+'' '' O
+-LSB- JJ O
+reference NN O
+to TO O
+a DT O
+statement NN O
+made VBN O
+by IN O
+Romanian NNP O
+Prime NNP O
+Minister NNP O
+Adrian NNP O
+Nastase NNP O
+-RSB- NNP O
+among IN O
+media NN O
+workers NNS O
+or CC O
+scapegoats NNS O
+among IN O
+the DT O
+weirdoes NNS O
+who WP O
+use VBP O
+hundreds NNS O
+of IN O
+websites NNS O
+to TO O
+call VB O
+on IN O
+the DT O
+administration NN O
+to TO O
+stop VB O
+supporting VBG O
+the DT O
+Jews NNPS O
+or CC O
+to TO O
+exterminate VB O
+the DT O
+Arabs NNPS O
+. . O
+
