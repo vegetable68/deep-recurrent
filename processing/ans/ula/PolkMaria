@@ -1,0 +1,687 @@
+Welcome	VB	O
+back	RP	O
+to	TO	O
+our	PRP$	O
+show	NN	O
+!	.	O
+
+OK	UH	O
+.	.	O
+
+This	DT	O
+is	VBZ	O
+Maria	NNP	O
+,	,	O
+and	CC	O
+I	PRP	O
+do	VBP	B
+n't	RB	I
+know	VB	I
+your	PRP$	O
+last	JJ	O
+name	NN	O
+.	.	O
+
+Polk	FW	O
+.	.	O
+
+Oh	RB	O
+that	DT	O
+'s	VBZ	O
+good	JJ	O
+.	.	O
+
+From	IN	O
+Polkton	NNP	O
+,	,	O
+Maria	NNP	O
+Polk	VBZ	O
+.	.	O
+
+OK	UH	O
+.	.	O
+
+And	CC	O
+where	WRB	O
+did	VBD	O
+you	PRP	O
+grow	VB	O
+up	RP	O
+?	.	O
+
+Were	VBD	O
+you	PRP	O
+born	VBN	O
+in	IN	O
+this	DT	O
+area	NN	O
+here	RB	O
+?	.	O
+
+I	PRP	O
+was	VBD	O
+born	VBN	O
+in	IN	O
+Cottonville	NNP	O
+.	.	O
+
+Right	RB	O
+outside	JJ	O
+of	IN	O
+Norwood	NNP	O
+in	IN	O
+Stanley	NNP	O
+County	NNP	O
+.	.	O
+
+Oh	UH	O
+,	,	O
+OK	UH	O
+.	.	O
+
+When	WRB	O
+you	PRP	O
+were	VBD	O
+little	JJ	O
+,	,	O
+did	VBD	O
+your	PRP$	O
+mom	NN	O
+read	VB	O
+you	PRP	O
+books	NNS	O
+,	,	O
+or	CC	O
+did	VBD	O
+somebody	NN	O
+read	VB	O
+you	PRP	O
+books	NNS	O
+in	IN	O
+your	PRP$	O
+house	NN	O
+?	.	O
+
+My	PRP$	O
+mama	NN	O
+read	VBP	O
+to	TO	O
+me	PRP	O
+and	CC	O
+my	PRP$	O
+sister	NN	O
+.	.	O
+
+Uh-huh	VB	O
+.	.	O
+
+What	WDT	O
+kind	NN	O
+of	IN	O
+books	NNS	O
+were	VBD	O
+your	PRP$	O
+favorites	NNS	B
+?	.	O
+
+Do	VBP	O
+you	PRP	O
+remember	VB	B
+any	DT	O
+that	WDT	O
+were	VBD	O
+maybe	RB	O
+a	DT	B
+real	JJ	I
+favorite	NN	I
+of	IN	O
+yours	NNP	O
+?	.	O
+
+Mm	RB	O
+,	,	O
+I	PRP	O
+kind	NN	B
+of	IN	I
+liked	VBD	I
+them	PRP	O
+all	DT	O
+.	.	O
+
+Um	RB	O
+,	,	O
+I	PRP	O
+did	VBD	B
+n't	RB	I
+really	RB	I
+have	VB	I
+a	DT	I
+favorite	NN	I
+.	.	O
+
+No	UH	O
+?	.	O
+
+Any	DT	O
+particular	JJ	O
+types	NNS	O
+,	,	O
+like	JJ	O
+ones	NNS	O
+with	IN	O
+pictures	NNS	O
+or	CC	O
+.	.	O
+
+Can	MD	O
+you	PRP	O
+think	VB	B
+of	IN	O
+a	DT	O
+story	NN	O
+that	IN	O
+they	PRP	O
+told	VBD	O
+you	PRP	O
+that	IN	O
+you	PRP	O
+liked	VBD	B
+for	IN	O
+them	PRP	O
+to	TO	O
+read	VB	O
+over	RP	O
+and	CC	O
+over	RP	O
+?	.	O
+
+Um	RB	O
+,	,	O
+I	PRP	O
+think	VBP	B
+my	PRP$	O
+favorite	NN	O
+was	VBD	O
+like	JJ	O
+,	,	O
+``	``	O
+Little	NNP	O
+Red	NNP	O
+Riding	NNP	O
+Hood	NNP	O
+;	:	O
+''	''	O
+I	PRP	O
+loved	VBD	B
+that	DT	O
+book	NN	O
+.	.	O
+
+Little	NNP	O
+Red	NNP	O
+Riding	NNP	O
+Hood	NNP	O
+''	''	O
+?	.	O
+
+So	RB	O
+when	WRB	O
+you	PRP	O
+read	VB	O
+to	TO	O
+yourself	PRP	O
+did	VBD	O
+you	PRP	O
+read	VB	O
+different	JJ	O
+stories	NNS	O
+than	IN	O
+the	DT	O
+ones	NNS	O
+they	PRP	O
+would	MD	O
+read	VB	O
+to	TO	O
+you	PRP	O
+?	.	O
+
+Mmm	NNP	O
+,	,	O
+basically	RB	O
+,	,	O
+something	NN	O
+different	JJ	O
+.	.	O
+
+Did	VBD	O
+you	PRP	O
+get	VB	O
+to	TO	O
+go	VB	O
+to	TO	O
+the	DT	O
+library	NN	O
+when	WRB	O
+you	PRP	O
+were	VBD	O
+little	JJ	O
+?	.	O
+
+Uh-huh	NNP	O
+,	,	O
+all	PDT	O
+the	DT	O
+time	NN	O
+.	.	O
+
+Yeah	UH	O
+.	.	O
+
+So	RB	O
+,	,	O
+you	PRP	O
+would	MD	O
+check	VB	O
+books	NNS	O
+out	RP	O
+?	.	O
+
+Uh-huh	VB	O
+.	.	O
+
+Mostly	RB	O
+,	,	O
+I	PRP	O
+liked	VBD	B
+to	TO	O
+spend	VB	O
+time	NN	O
+reading	NN	O
+encyclopedias	NNS	O
+--	:	O
+
+Oh	UH	O
+,	,	O
+really	RB	O
+?	.	O
+
+when	WRB	O
+I	PRP	O
+was	VBD	O
+little	JJ	O
+.	.	O
+
+You	PRP	O
+like	VBP	B
+to	TO	O
+read	VB	O
+encyclopedias	NNS	O
+.	.	O
+
+In	IN	O
+your	PRP$	O
+family	NN	O
+,	,	O
+do	VBP	O
+you	PRP	O
+remember	VB	B
+if	IN	O
+there	EX	O
+was	VBD	O
+any	DT	O
+storyteller	NN	O
+?	.	O
+
+Well	UH	O
+,	,	O
+my	PRP$	O
+uncle	NN	O
+was	VBD	O
+always	RB	O
+telling	VBG	O
+stories	NNS	O
+and	CC	O
+,	,	O
+uh	UH	O
+,	,	O
+we	PRP	O
+had	VBD	O
+this	DT	O
+house	NN	O
+across	IN	O
+the	DT	O
+street	NN	O
+from	IN	O
+where	WRB	O
+I	PRP	O
+grew	VBD	O
+up	RP	O
+that	IN	O
+was	VBD	O
+old	JJ	O
+and	CC	O
+he	PRP	O
+ever	RB	O
+finished	VBD	O
+it	PRP	O
+.	.	O
+
+He	PRP	O
+started	VBD	O
+it	PRP	O
+and	CC	O
+he	PRP	O
+told	VBD	O
+stories	NNS	O
+that	WDT	O
+,	,	O
+um	RB	O
+,	,	O
+um	VBP	O
+,	,	O
+men	NNS	O
+being	VBG	O
+in	IN	O
+it	PRP	O
+that	IN	O
+house	VB	O
+at	IN	O
+night	NN	O
+and	CC	O
+stuff	NN	O
+and	CC	O
+for	IN	O
+us	PRP	O
+not	RB	O
+to	TO	O
+go	VB	O
+outside	RB	O
+at	IN	O
+night	NN	O
+.	.	O
+
+Would	MD	O
+he	PRP	O
+scare	VB	B
+you	PRP	O
+?	.	O
+
+Yeah	UH	O
+.	.	O
+
+So	IN	O
+we	PRP	O
+,	,	O
+at	IN	O
+a	DT	O
+certain	JJ	O
+time	NN	O
+,	,	O
+we	PRP	O
+were	VBD	O
+scared	JJ	B
+to	TO	O
+go	VB	O
+over	RP	O
+there	RB	O
+because	IN	O
+we	PRP	O
+'d	MD	O
+always	RB	O
+go	VB	O
+outside	RB	O
+and	CC	O
+look	VB	O
+at	IN	O
+the	DT	O
+house	NN	O
+across	IN	O
+the	DT	O
+street	NN	O
+.	.	O
+
+Um	RB	O
+,	,	O
+did	VBD	O
+he	PRP	O
+tell	VB	O
+stories	NNS	O
+to	TO	O
+big	JJ	O
+groups	NNS	O
+of	IN	O
+people	NNS	O
+,	,	O
+or	CC	O
+just	RB	O
+one-on-one	CD	O
+?	.	O
+
+Just	RB	O
+to	TO	O
+our	PRP$	O
+cousins	NNS	O
+and	CC	O
+all	DT	O
+of	IN	O
+us	PRP	O
+that	DT	O
+hung	VBD	O
+around	IN	O
+each	DT	O
+other	JJ	O
+all	PDT	O
+the	DT	O
+time	NN	O
+.	.	O
+
+Uh-huh	VB	O
+.	.	O
+
+Now	RB	O
+,	,	O
+do	VB	O
+you	PRP	O
+have	VBP	O
+kids	NNS	O
+at	IN	O
+your	PRP$	O
+house	NN	O
+?	.	O
+
+No	UH	O
+.	.	O
+
+Only	RB	O
+,	,	O
+only	RB	O
+on	IN	O
+Sunday	NNP	O
+:	:	O
+my	PRP$	O
+niece	NN	O
+and	CC	O
+nephew	NN	O
+and	CC	O
+my	PRP$	O
+cousins	NNS	O
+.	.	O
+
+Uh-huh	VB	O
+.	.	O
+
+Do	VBP	O
+you	PRP	O
+like	VB	B
+to	TO	O
+read	VB	O
+to	TO	O
+them	PRP	O
+?	.	O
+
+Do	VBP	O
+they	PRP	O
+bring	VB	O
+their	PRP$	O
+books	NNS	O
+over	RP	O
+?	.	O
+
+I	PRP	O
+read	VBP	O
+to	TO	O
+my	PRP$	O
+niece	NN	O
+.	.	O
+
+She	PRP	O
+likes	VBZ	B
+the	DT	O
+pop-out	JJ	O
+books	NNS	O
+.	.	O
+
+Uh-huh	VB	O
+.	.	O
+
+How	WRB	O
+old	JJ	O
+is	VBZ	O
+she	PRP	O
+?	.	O
+
+She	PRP	O
+'s	VBZ	O
+,	,	O
+ah	CD	O
+six	CD	O
+.	.	O
+
+She	PRP	O
+likes	VBZ	B
+the	DT	O
+pictures	NNS	O
+that	WDT	O
+pop	VBP	O
+out	RP	O
+at	IN	O
+you	PRP	O
+.	.	O
+
+She	PRP	O
+likes	VBZ	B
+for	IN	O
+me	PRP	O
+to	TO	O
+read	VB	O
+them	PRP	O
+to	TO	O
+her	PRP	O
+.	.	O
+
+Can	MD	O
+she	PRP	O
+read	VB	O
+to	TO	O
+herself	PRP	O
+yet	RB	O
+?	.	O
+
+Not	RB	O
+yet	RB	O
+,	,	O
+but	CC	O
+she	PRP	O
+tries	VBZ	O
+to	TO	O
+.	.	O
+
+Mostly	RB	O
+,	,	O
+she	PRP	O
+just	RB	O
+looks	VBZ	O
+at	IN	O
+the	DT	O
+pictures	NNS	O
+.	.	O
+
+Is	VBZ	O
+she	PRP	O
+,	,	O
+what	WDT	O
+grade	NN	O
+is	VBZ	O
+she	PRP	O
+in	IN	O
+?	.	O
+
+Do	VBP	O
+you	PRP	O
+know	VB	B
+?	.	O
+
+She	PRP	O
+'s	VBZ	O
+in	IN	O
+kindergarten	NN	O
+.	.	O
+
+She	PRP	O
+'s	VBZ	O
+in	IN	O
+kindergarten	NN	O
+?	.	O
+
+OK	UH	O
+.	.	O
+
+That	DT	O
+'s	VBZ	O
+pretty	RB	O
+much	RB	O
+all	DT	O
+I	PRP	O
+need	VBP	B
+to	TO	I
+know	VB	I
+,	,	O
+about	IN	O
+how	WRB	O
+you	PRP	O
+liked	VBD	B
+reading	NN	O
+and	CC	O
+things	NNS	O
+when	WRB	O
+you	PRP	O
+were	VBD	O
+little	JJ	O
+.	.	O
+
+Is	VBZ	O
+there	EX	O
+anything	NN	O
+else	RB	O
+you	PRP	O
+'d	MD	O
+like	VB	B
+to	TO	O
+say	VB	O
+about	IN	O
+this	DT	O
+,	,	O
+that	WDT	O
+comes	VBZ	B
+to	TO	I
+your	PRP$	I
+mind	NN	I
+?	.	O
+
+No	UH	O
+,	,	O
+not	RB	O
+so	RB	O
+much	RB	O
+.	.	O
+

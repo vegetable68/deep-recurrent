@@ -1,0 +1,50 @@
+START	NNP	O
+
+Pacific	NNP	O
+First	NNP	O
+Financial	NNP	O
+Corp.	NNP	O
+.	.	O
+
+said	VBD	O
+shareholders	NNS	O
+approved	VBD	B
+its	PRP$	O
+acquisition	NN	O
+by	IN	O
+Royal	NNP	O
+Trustco	NNP	O
+Ltd.	NNP	O
+of	IN	O
+Toronto	NNP	O
+for	IN	O
+$	$	O
+27	CD	O
+a	DT	O
+share	NN	O
+,	,	O
+or	CC	O
+$	$	O
+212	CD	O
+million	CD	O
+.	.	O
+
+The	DT	O
+thrift	NN	O
+holding	VBG	O
+company	NN	O
+said	VBD	O
+it	PRP	O
+expects	VBZ	B
+to	TO	O
+obtain	VB	O
+regulatory	JJ	O
+approval	NN	B
+and	CC	O
+complete	VB	O
+the	DT	O
+transaction	NN	O
+by	IN	O
+year-end	NN	O
+.	.	O
+
