@@ -17,6 +17,8 @@ ofstream out("holder.txt");
 string file;
 
 string fuzzy(string word){
+	if (word == "Labor") return "Labour";
+
 	if (word == "honor") return "honour";
 	if (word == "HIV\\/AIDS") return "HIV/AIDS";
 	if (word == "400\\/year") return "400/year";
