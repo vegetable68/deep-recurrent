@@ -26,6 +26,7 @@
 
 #define MR 0.7
 uint fold = -1;
+typedef vector< vector<string> > VVS;
 
 using namespace Eigen;
 using namespace std;  
@@ -815,6 +816,23 @@ void readSentences(vector<vector<string > > &X,
   }
 }
 
+void datasplit(VVS X, VVS T, VVS& trainX, VVS& trainL, VVS& validX, VVS& validL, VVS& testX, VVS& testL, 
+		double pTrain, double pValid, double pTest){
+	vector<int> idx;
+	for (uint i = 0; i < X.size(); i ++) idx.push_back(i);
+	shuffle(idx);
+	uint j = 0;
+	for (uint i = 0; i < pTrain * idx.size(); i ++, j++){
+		trainX.push_back(X[idx[j]]); trainL.push_back(T[idx[j]]);
+	}
+	for (uint i = 0; i < pValid * idx.size(); i ++, j++){
+		validX.push_back(X[idx[j]]); validL.push_back(T[idx[j]]);
+	}
+	for (; j < idx.size(); j++){
+		testX.push_back(X[idx[j]]); testL.push_back(T[idx[j]]);
+	}
+}
+
 int main(int argc, char **argv) {
 
  fold = atoi(argv[1]); // between 0-9
@@ -828,61 +846,10 @@ int main(int argc, char **argv) {
   vector<vector<string> > T;
   readSentences(X, T, "target.txt"); // dse.txt or ese.txt
 
-  unordered_map<string, set<uint> > sentenceIds;
-  set<string> allDocs; //Store the name of all docs
-  ifstream in("sentenceid.txt");
-  string line;
-  uint numericId = 0;
-
-  //map the numeric Id to the file locations
-  while(getline(in, line)) {
-    vector<string> s = split(line, ' ');
-//	cout<<numericId<<endl;
-    assert(s.size() == 3);
-    string strId = s[2];
-
-    if (sentenceIds.find(strId) != sentenceIds.end()) {
-      sentenceIds[strId].insert(numericId);
-    } else {
-      sentenceIds[strId] = set<uint>();
-      sentenceIds[strId].insert(numericId);
-    }
-    numericId++;
-  }
-
   vector<vector<string> > trainX, validX, testX;
   vector<vector<string> > trainL, validL, testL;
-  vector<bool> isUsed(X.size(), false);
 
-  ifstream in4("datasplit/doclist.mpqaOriginalSubset");
-  while(getline(in4, line))
-    allDocs.insert(line);
-
-  ifstream in2("datasplit/filelist_train"+to_string(fold));
-  //10 fold
-  while(getline(in2, line)) {
-    for (const auto &id : sentenceIds[line]) {
-      trainX.push_back(X[id]);
-      trainL.push_back(T[id]);
-    }
-    allDocs.erase(line);
-  }
-  ifstream in3("datasplit/filelist_test"+to_string(fold));
-  while(getline(in3, line)) {
-    for (const auto &id : sentenceIds[line]) {
-      testX.push_back(X[id]);
-      testL.push_back(T[id]);
-    }
-    allDocs.erase(line);
-  }
-
-  uint validSize = 0;
-  for (const auto &doc : allDocs) {
-    for (const auto &id : sentenceIds[doc]) {
-      validX.push_back(X[id]);
-      validL.push_back(T[id]);
-    }
-  }
+  datasplit(X, T, trainX, trainL, validX, validL, testX, testL, 0.8, 0.1, 0.1);
 
   cout << X.size() << " " << trainX.size() << " " << testX.size() << endl;
   cout << "Valid size: " << validX.size() << endl;
