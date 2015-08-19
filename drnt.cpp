@@ -653,6 +653,7 @@ Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents,
   uint nExprTrue = 0;
   double precNumerProp = 0, precNumerBin = 0;
   double recallNumerProp = 0, recallNumerBin = 0;
+  int tot = 0;
   for (uint i=0; i<sents.size(); i++) { // per sentence
     vector<string> labelsPredicted;
     forward(sents[i]);
@@ -677,6 +678,7 @@ Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents,
     if (labels[i].size() != labelsPredicted.size())
       cout << labels[i].size() << " " << labelsPredicted.size() << endl;
     for (uint j=0; j<labels[i].size(); j++) { // per token in a sentence
+		tot ++;
       t = labels[i][j];
       y = labelsPredicted[j];
 
@@ -814,7 +816,8 @@ void readSentences(vector<vector<string > > &X,
 }
 
 int main(int argc, char **argv) {
-  fold = atoi(argv[1]); // between 0-9
+
+ fold = atoi(argv[1]); // between 0-9
   srand(135);
   cout << setprecision(6);
 
@@ -823,7 +826,7 @@ int main(int argc, char **argv) {
   LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
   vector<vector<string> > X;
   vector<vector<string> > T;
-  readSentences(X, T, "dse.txt"); // dse.txt or ese.txt
+  readSentences(X, T, "target.txt"); // dse.txt or ese.txt
 
   unordered_map<string, set<uint> > sentenceIds;
   set<string> allDocs; //Store the name of all docs
@@ -834,6 +837,7 @@ int main(int argc, char **argv) {
   //map the numeric Id to the file locations
   while(getline(in, line)) {
     vector<string> s = split(line, ' ');
+//	cout<<numericId<<endl;
     assert(s.size() == 3);
     string strId = s[2];
 

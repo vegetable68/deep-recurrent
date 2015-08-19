@@ -1,0 +1,19 @@
+#define DROPOUT
+#define ETA 0.001
+#define NORMALIZE false // keeping this false throughout my own experiments
+#define OCLASS_WEIGHT 0.5 
+#define layers 2 // number of EXTRA (not all) hidden layers
+
+#define MR 0.7
+double LAMBDA = 1e-4;  // L2 regularizer on weights
+double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
+
+MAXEPOCH 200
+MINIBATCH 80
+
+RNN brnn(25,25,25,3,LT);
+
+the original parameters
+
+runtime : avg 16m47s
+

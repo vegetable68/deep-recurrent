@@ -1,0 +1,7 @@
+Layer: 2
+Dropout: 0
+			Proportional Overlapping	Binary Overlapping 
+Procesion 0.574689						0.608292
+Recall    0.581344						0.657658
+F1        0.577998						0.632012
+
