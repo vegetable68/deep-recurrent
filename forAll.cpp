@@ -806,8 +806,9 @@ RNN::train(vector<vector<string> > &sents,
 		for (int i=0; i<sents.size(); i++) {
 			forward(sents[perm[i]], perm[i]);
 			backward(labels[perm[i]]);
-			if ((i+1) % MINIBATCH == 0 || i == sents.size()-1)
+			if ((i+1) % MINIBATCH == 0 || i == sents.size()-1){
 				update();
+			}
 		}
 		if (epoch % 5 == 0) {  
 			Results resVal, resTest, resVal2, resTest2; 
@@ -841,6 +842,7 @@ RNN::train(vector<vector<string> > &sents,
 			}
 		}
 	}
+	cerr<<"train ends"<<endl;
 	//results = bestVal;
 	return bestVal;
 }
@@ -974,7 +976,7 @@ int main(int argc, char **argv) {
 			best = results;
 			bestDrop = DROP;
 		}
-		brnn.save("model.txt");
+		brnn.save("output/model.txt");
 	}
 	cout << "Best: " << endl;
 	cout << "Drop: " << bestDrop << endl;

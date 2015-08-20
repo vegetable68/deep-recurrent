@@ -1,0 +1,66 @@
+14492 7507 734
+Valid size: 2870
+Epoch 0
+DSE:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+Target:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+Agent:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+
+DSE:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+Target:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+Agent:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+
+DSE:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+Target:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+Agent:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+:
+P, R, F1: 
+   1    1
+-nan -nan
+-nan -nan
+

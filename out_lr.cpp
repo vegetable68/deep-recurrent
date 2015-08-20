@@ -21,7 +21,7 @@
 #define DROPOUT
 #define ETA 0.001
 #define NORMALIZE false // keeping this false throughout my own experiments
-#define OCLASS_WEIGHT 0.5 
+#define OCLASS_WEIGHT 0.09 
 #define layers 2 // number of EXTRA (not all) hidden layers
 
 #define MR 0.7
@@ -33,10 +33,10 @@ using namespace std;
 double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
 double DROP;
-ofstream dhhfout("dhhf.out");
-ofstream dhhbout("dhhb.out");
-ofstream vWWffout("vWWff.out");
-ofstream vWWfbout("vWWfb.out");
+ofstream dhhfout("output/dhhf.out");
+ofstream dhhbout("output/dhhb.out");
+ofstream vWWffout("output/vWWff.out");
+ofstream vWWfbout("output/vWWfb.out");
 
 #ifdef DROPOUT
 Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
@@ -855,7 +855,7 @@ int main(int argc, char **argv) {
   LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
   vector<vector<string> > X;
   vector<vector<string> > T;
-  readSentences(X, T, "dse.txt"); // dse.txt or ese.txt
+  readSentences(X, T, "target.txt"); // dse.txt or ese.txt
 
   unordered_map<string, set<uint> > sentenceIds;
   set<string> allDocs; //Store the name of all docs
@@ -925,7 +925,7 @@ int main(int argc, char **argv) {
       best = results;
       bestDrop = DROP;
     }
-    brnn.save("model.txt");
+    brnn.save("output/model.txt");
   }
   cout << "Best: " << endl;
   cout << "Drop: " << bestDrop << endl;
