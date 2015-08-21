@@ -38,6 +38,21 @@ double DROP;
 Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
 #endif
 
+class Results{
+	public:
+		Results();
+		Results& operator=(const Results& res1);
+		friend ostream& operator<<(ostream& out, const Results& res);
+		friend bool operator<(const Results& res1, const Results& res2);
+		Matrix<double, 3, 2> res[4];
+	private:
+
+};
+const string outputLabel[4] = {"DSE", "Target", "Agent"};
+const string TAG[3][2] = {"B_DSE", "I_DSE", "B_TRGT", "I_TRGT", "B_AGNT", "I_AGNT"};
+
+
+
 class RNN {
 	public:
 		RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT);
@@ -61,13 +76,13 @@ class RNN {
 		MatrixXd (*f)(const MatrixXd& x);
 		MatrixXd (*fp)(const MatrixXd& x);
 
-		MatrixXd x,y,hf,hb, hhf[layers],hhb[layers];
+		MatrixXd x,y[3],hf,hb, hhf[layers],hhb[layers];
 		vector<string> s;
 
 		// recurrent network params
 		MatrixXd Wo, Wfo, Wbo, 
-				 WWfoy, WWboy;
-		VectorXd bo;
+				 WWfoy[3], WWboy[3];
+		VectorXd bo[3];
 		MatrixXd Wf, Vf, Wb, Vb;
 		VectorXd bhf, bhb;
 
@@ -76,8 +91,8 @@ class RNN {
 		VectorXd bbhf[layers], bbhb[layers];
 
 		MatrixXd gWo, gWfo, gWbo, 
-				 gWWfoy, gWWboy;
-		VectorXd gbo;
+				 gWWfoy[3], gWWboy[3];
+		VectorXd gbo[3];
 		MatrixXd gWf, gVf, gWb, gVb;
 		VectorXd gbhf, gbhb;
 
@@ -86,8 +101,8 @@ class RNN {
 		VectorXd gbbhf[layers], gbbhb[layers];
 
 		MatrixXd vWo, vWfo, vWbo, 
-				 vWWfoy, vWWboy;
-		VectorXd vbo;
+				 vWWfoy[3], vWWboy[3];
+		VectorXd vbo[3];
 		MatrixXd vWf, vVf, vWb, vVb;
 		VectorXd vbhf, vbhb;
 
@@ -180,8 +195,9 @@ void RNN::forward(const vector<string> & s, int index) {
 	// output layer uses the last hidden layer
 	// you can experiment with the other version by changing this
 	// (backward pass needs to change as well of course)
-	y = softmax(bo*RowVectorXd::Ones(T) + WWfoy*hhf[layers-1] + 
-			WWboy*hhb[layers-1]);
+	for (uint k = 0; k < 3; k ++)
+		y[k] = softmax(bo[k] *RowVectorXd::Ones(T) + WWfoy[k] *hhf[layers-1] + 
+			WWboy[k] *hhb[layers-1]);
 }
 
 void RNN::backward(const vector<string> &labels) {
@@ -196,17 +212,25 @@ void RNN::backward(const vector<string> &labels) {
 		dhhb[l] = MatrixXd::Zero(nhb, T);
 	}
 
-	MatrixXd yi(3,T);
+	MatrixXd yi[3](3,T);
 	for (uint i=0; i<T; i++) {
-		if (labels[i] == "O")
-			yi.col(i) << 1,0,0;
-		else if (labels[i] == "B")
-			yi.col(i) << 0,1,0;
-		else
-			yi.col(i) << 0,0,1;
+		for (uint k = 0; k < 3; k ++)
+			yi[k].col(i) << 1, 0, 0;
+		if (labels[i] == "B_DSE")
+			yi[0].col(i) << 0,1,0;
+		else if (labels[i] == "I_DSE")
+			yi[0].col(i) << 0,0,1;
+		if (labels[i] == "B_TRGT")
+			yi[1].col(i) << 0,1,0;
+		else if (labels[i] == "I_TRGT")
+			yi[1].col(i) << 0,0,1;
+		if (labels[i] == "B_AGNT")
+			yi[2].col(i) << 0,1,0;
+		else if (labels[i] == "I_AGNT")
+			yi[2].col(i) << 0,0,1;
 	}
 
-	MatrixXd gpyd = smaxentp(y,yi);
+	MatrixXd gpyd[3] = smaxentp(y,yi);
 	for (uint i=0; i<T; i++)
 		if (labels[i] == "O")
 			gpyd.col(i) *= OCLASS_WEIGHT;
@@ -217,6 +241,10 @@ void RNN::backward(const vector<string> &labels) {
 
 	dhf.noalias() += Wfo.transpose() * gpyd;
 	dhb.noalias() += Wbo.transpose() * gpyd;
+	for (uint l=0; l<layers - 1; l++) {
+		dhhf[l].noalias() += WWfo[l].transpose() * gpyd;
+		dhhb[l].noalias() += WWbo[l].transpose() * gpyd;
+	}
 	dhhf[layers - 1].noalias() += WWfoy.transpose() * gpyd; 
 	dhhb[layers - 1].noalias() += WWboy.transpose() * gpyd;
 
@@ -324,6 +352,10 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 
 	Wfo = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
 	Wbo = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
+	for (uint l=0; l<layers - 1; l++) {
+		WWfo[l] = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
+		WWbo[l] = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
+	}
 	WWfoy = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
 	WWboy = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
 
@@ -353,6 +385,10 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 
 	gWfo = MatrixXd::Zero(ny,nhf);
 	gWbo = MatrixXd::Zero(ny,nhb);
+	for (uint l=0; l<layers - 1; l++) {
+		gWWfo[l] = MatrixXd::Zero(ny,nhf);
+		gWWbo[l] = MatrixXd::Zero(ny,nhb);
+	}
 
 	gWWfoy = MatrixXd::Zero(ny,nhf);
 	gWWboy = MatrixXd::Zero(ny,nhb);
@@ -383,6 +419,10 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 
 	vWfo = MatrixXd::Zero(ny,nhf);
 	vWbo = MatrixXd::Zero(ny,nhb);
+	for (uint l=0; l<layers - 1; l++) {
+		vWWfo[l] = MatrixXd::Zero(ny,nhf);
+		vWWbo[l] = MatrixXd::Zero(ny,nhb);
+	}
 	vWWfoy = MatrixXd::Zero(ny,nhf);
 	vWWboy = MatrixXd::Zero(ny,nhb);
 
@@ -402,6 +442,8 @@ void RNN::update() {
 	gWWboy.noalias() += (lambda)*WWboy;
 
 	norm += 0.1* (gWo.squaredNorm() + gbo.squaredNorm());
+	for (uint l=0; l<layers - 1; l++)
+		norm+= 0.1*(gWWfo[l].squaredNorm() + gWWbo[l].squaredNorm()); 
 	norm+= 0.1*(gWWfoy.squaredNorm() + gWWboy.squaredNorm()); 
 
 	gWf.noalias() += lambda*Wf;
@@ -524,6 +566,8 @@ void RNN::load(string fname) {
 	}
 
 	in >> Wfo >> Wbo;
+	for (uint l=0; l<layers - 1; l++)
+		in >> WWfo[l] >> WWbo[l];
 	in >> WWfoy >> WWboy;
 	in >> Wo >> bo;
 }
@@ -555,6 +599,10 @@ void RNN::save(string fname) {
 
 	out << Wfo << endl;
 	out << Wbo << endl;
+	for (uint l=0; l<layers -1; l++) {
+		out << WWfo[l] << endl;
+		out << WWbo[l] << endl;
+	}
 	out << WWfoy << endl;
 	out << WWboy << endl;
 
