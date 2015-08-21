@@ -49,7 +49,7 @@ class Results{
 	private:
 
 };
-const string outputLabel[4] = {"DSE", "Target", "Agent"};
+const string outputLabel[4] = {"DSE", "Target", "Agent", "All"};
 const string TAG[3][2] = {"B_DSE", "I_DSE", "B_TRGT", "I_TRGT", "B_AGNT", "I_AGNT"};
 
 
