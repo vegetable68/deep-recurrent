@@ -1,66 +1,69 @@
 14492 7507 734
 Valid size: 2870
 Epoch 0
+Train
 DSE:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
+1 1
+0 0
+0 0
 Target:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
+0.0825375  0.275343
+        1         1
+ 0.152489  0.431794
 Agent:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
-:
+1 1
+0 0
+0 0
+All:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
+0.0825375  0.275343
+ 0.192698  0.192698
+ 0.115572  0.226724
 
+Val
 DSE:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
+1 1
+0 0
+0 0
 Target:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
+ 0.15158 0.508711
+       1        1
+0.263256 0.674365
 Agent:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
-:
+1 1
+0 0
+0 0
+All:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
+ 0.15158 0.508711
+0.318188 0.318188
+0.205339 0.391501
 
+Test
 DSE:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
+1 1
+0 0
+0 0
 Target:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
+0.0814006  0.230245
+        1         1
+ 0.150547  0.374308
 Agent:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
-:
+1 1
+0 0
+0 0
+All:
 P, R, F1: 
-   1    1
--nan -nan
--nan -nan
+0.0814006  0.230245
+ 0.160959  0.160959
+ 0.108122  0.189466
 

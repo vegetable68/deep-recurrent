@@ -22,7 +22,7 @@
 #define ETA 0.001
 #define TAGNO 7
 #define NORMALIZE false // keeping this false throughout my own experiments
-#define OCLASS_WEIGHT 0.5 
+#define OCLASS_WEIGHT 0.09 
 #define layers 2 // number of EXTRA (not all) hidden layers
 
 #define MR 0.7
@@ -50,7 +50,7 @@ class Results{
 
 };
 const string outputLabel[4] = {"DSE", "Target", "Agent", "All"};
-const string TAG[3][2] = {"B_DSE", "I_DSE", "B_TRGT", "I_TRGT", "B_AGNT", "I_AGNT"};
+const string TAG[3][2] = {"B_D", "I_D", "B_T", "I_T", "B_A", "I_A"};
 
 
 class RNN {
@@ -287,7 +287,7 @@ ostream& operator<<(ostream& out, const Results& res){
 }
 
 bool operator<(const Results& res1, const Results& res2){
-	return res1.res[3](0,2) < res2.res[3](0,2);
+	return res1.res[3](2, 0) < res2.res[3](2, 0);
 }
 
 void RNN::forward(const vector<string> & s, int index) {
@@ -388,20 +388,22 @@ void RNN::backward(const vector<string> &labels) {
 	MatrixXd yi(TAGNO,T);
 	for (uint i=0; i<T; i++) {
 		//Tag here
+//		if (labels[i] != "O") cerr<<'\"'<<labels[i]<<'\"'<<endl;
 		if (labels[i] == "O")
 			yi.col(i) << 1,0,0,0,0,0,0;
-		else if (labels[i] == "B_DSE")
+		else if (labels[i] == "B_D")
 			yi.col(i) << 0,1,0,0,0,0,0;
-		else if (labels[i] == "I_DSE")
+		else if (labels[i] == "I_D")
 			yi.col(i) << 0,0,1,0,0,0,0;
-		else if (labels[i] == "B_TRGT")
+		else if (labels[i] == "B_T")
 			yi.col(i) << 0,0,0,1,0,0,0;
-		else if (labels[i] == "I_TRGT")
+		else if (labels[i] == "I_T")
 			yi.col(i) << 0,0,0,0,1,0,0;
-		else if (labels[i] == "B_AGNT")
+		else if (labels[i] == "B_A")
 			yi.col(i) << 0,0,0,0,0,1,0;
-		else if (labels[i] == "I_AGNT")
+		else if (labels[i] == "I_A"){
 			yi.col(i) << 0,0,0,0,0,0,1;
+		}
 	}
 
 	MatrixXd gpyd = smaxentp(y,yi);
@@ -801,6 +803,7 @@ RNN::train(vector<vector<string> > &sents,
 	Results bestVal = Results(), bestTest = Results();
 
 	for (epoch=0; epoch<MAXEPOCH; epoch++) {
+		//cerr<<"epoch "<<epoch<<endl;
 		shuffle(perm);
 		//Q: Why shuffle here? What's 'update' for?
 		for (int i=0; i<sents.size(); i++) {
@@ -810,6 +813,7 @@ RNN::train(vector<vector<string> > &sents,
 				update();
 			}
 		}
+		//cerr <<"training ends"<<endl;
 		if (epoch % 5 == 0) {  
 			Results resVal, resTest, resVal2, resTest2; 
 			cout << "Epoch " << epoch << endl;
@@ -827,14 +831,19 @@ RNN::train(vector<vector<string> > &sents,
 				   }
 				   */
 			Results res = testSequential(sents, labels);
+			cout<<"Train"<<endl;
 			cout<<res<<endl;
 		//	cout << "P, R, F1:\n" << testSequential(sents, labels) << endl;
 			resVal = testSequential(validX, validL); 
 			resTest = testSequential(testX, testL);
-			cout<<resVal<<endl; cout<<resTest<<endl;
+			cout<<"Val"<<endl;
+			cout<<resVal<<endl; 
+			cout<<"Test"<<endl;
+			cout<<resTest<<endl;
 //			cout << "P, R, F1:\n" << resVal << endl;
 //			cout << "P, R, F1" << endl;
 //			cout << resTest  << endl<< endl;
+			//cerr<<"cmp"<<endl;
 			if (bestVal < resVal) {
 				bestVal = resVal;
 				bestTest = resTest;
@@ -842,7 +851,7 @@ RNN::train(vector<vector<string> > &sents,
 			}
 		}
 	}
-	cerr<<"train ends"<<endl;
+	//cerr<<"train ends"<<endl;
 	//results = bestVal;
 	return bestVal;
 }
@@ -867,6 +876,7 @@ void readSentences(vector<vector<string > > &X,
 	vector<string> x;
 	vector<string> t; // individual sentences and labels
 	while(std::getline(in, line)) {
+		
 		if (isWhitespace(line)) {
 			if (x.size() != 0) {
 				X.push_back(x);
@@ -875,6 +885,7 @@ void readSentences(vector<vector<string > > &X,
 				t.clear();
 			}
 		} else {
+			line = line.substr(0, line.size() - 2);
 			string token, part, label;
 			uint i = line.find_first_of('\t');
 			token = line.substr(0, i);
@@ -906,7 +917,7 @@ int main(int argc, char **argv) {
 	LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
 	vector<vector<string> > X;
 	vector<vector<string> > T;
-	readSentences(X, T, "target.txt"); // dse.txt or ese.txt
+	readSentences(X, T, "all_tad.txt"); // dse.txt or ese.txt
 
 	unordered_map<string, set<uint> > sentenceIds;
 	set<string> allDocs; //Store the name of all docs
