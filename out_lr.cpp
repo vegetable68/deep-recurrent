@@ -722,8 +722,10 @@ Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents,
         if (l1 != -1)
           tru.push_back(make_pair(l1,j));
         l1 = -1;
-      } else
+      } else{
+		  cerr<<t<<"\""<<endl;
         assert(false);
+		}
 
       if ((y == "B") || ((y == "I") && ((py == "") || (py == "O")))) {
         nExprPredicted++;
@@ -824,6 +826,7 @@ void readSentences(vector<vector<string > > &X,
         t.clear();
       }
     } else {
+		line = line.substr(0, line.size() - 1);
       string token, part, label;
       uint i = line.find_first_of('\t');
       token = line.substr(0, i);

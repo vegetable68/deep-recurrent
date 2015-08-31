@@ -909,7 +909,7 @@ void readSentences(vector<vector<string > > &X,
 int main(int argc, char **argv) {
 
 	fold = atoi(argv[1]); // between 0-9
-	srand(135);
+	srand(time(0));
 	cout << setprecision(6);
 
 	LookupTable LT;
@@ -917,7 +917,7 @@ int main(int argc, char **argv) {
 	LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
 	vector<vector<string> > X;
 	vector<vector<string> > T;
-	readSentences(X, T, "all_tad.txt"); // dse.txt or ese.txt
+	readSentences(X, T, "all_dup.txt"); // dse.txt or ese.txt
 
 	unordered_map<string, set<uint> > sentenceIds;
 	set<string> allDocs; //Store the name of all docs

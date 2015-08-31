@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-with open('dhhb.out', 'r') as f:
+with open('dhhf.out', 'r') as f:
     array = [[],[],[]]
     i = 0
     for line in f:
@@ -13,5 +13,5 @@ for i in range(0, 3):
     plt.plot(array[i])
 plt.legend(("third layer", "second layer", "first layer"))
 #plt.title('Norm of vWWff per update');
-plt.savefig("dhhb.png")
+plt.savefig("dhhf.png")
 

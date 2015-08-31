@@ -1,4 +1,4 @@
 # compile & run
-rm output/*
-g++ forAll.cpp -I ./Eigen/ -std=c++11 -O3 -o all 
-./all 0 > output/res.out 
+rm Alloutput/*
+g++ lrChange.cpp -I ./Eigen/ -std=c++11 -O3 -o lr 
+./lr 0 > Alloutput/res.out 
