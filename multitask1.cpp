@@ -21,10 +21,10 @@
 #define DROPOUT
 #define ETA 0.001
 #define NORMALIZE false // keeping this false throughout my own experiments
-#define OCLASS_WEIGHT 0.12
+#define OCLASS_WEIGHT 0.01
 #define layers 2 // number of EXTRA (not all) hidden layers
 
-#define MR 0.95
+#define MR 0.7
 uint fold = -1;
 
 using namespace Eigen;
@@ -215,6 +215,76 @@ void RNN::backward(const vector<string> &labels) {
 	gWWboy.noalias() += gpyd * hhb[layers - 1].transpose();
 	gbo.noalias() += gpyd*VectorXd::Ones(T);
 
+	dhf.noalias() += Wfo.transpose() * gpyd;
+	dhb.noalias() += Wbo.transpose() * gpyd;
+	dhhf[layers - 1].noalias() += WWfoy.transpose() * gpyd; 
+	dhhb[layers - 1].noalias() += WWboy.transpose() * gpyd;
+
+	// activation regularize
+	dhf.noalias() += LAMBDAH*hf;
+	dhb.noalias() += LAMBDAH*hb;
+	for (uint l=0; l<layers; l++) {
+		dhhf[l].noalias() += LAMBDAH*hhf[l];
+		dhhb[l].noalias() += LAMBDAH*hhb[l];
+	}
+
+	for (uint l=layers-1; l != (uint)(-1); l--) {
+		MatrixXd *dxf, *dxb, *xf, *xb;
+		dxf = (l == 0) ? &dhf : &(dhhf[l-1]);
+		dxb = (l == 0) ? &dhb : &(dhhb[l-1]);
+		xf = (l == 0) ? &hf : &(hhf[l-1]);
+		xb = (l == 0) ? &hb : &(hhb[l-1]);
+
+		MatrixXd fphdh = MatrixXd::Zero(nhf,T);
+		for (uint i=T-1; i != (uint)(-1); i--) {
+			fphdh.col(i) = fp(hhf[l].col(i)).cwiseProduct(dhhf[l].col(i));
+			if (i > 0) {
+				gVVf[l].noalias() += fphdh.col(i) * hhf[l].col(i-1).transpose();
+				dhhf[l].col(i-1).noalias() += VVf[l].transpose() * fphdh.col(i);
+			}
+		}
+		gWWff[l].noalias() += fphdh * xf->transpose();
+		gWWfb[l].noalias() += fphdh * xb->transpose();
+		gbbhf[l].noalias() += fphdh * VectorXd::Ones(T);
+		dxf->noalias() += WWff[l].transpose() * fphdh;
+		dxb->noalias() += WWfb[l].transpose() * fphdh;
+
+		fphdh = MatrixXd::Zero(nhb,T);
+		for (uint i=0; i < T; i++) {
+			fphdh.col(i) = fp(hhb[l].col(i)).cwiseProduct(dhhb[l].col(i));
+			if (i < T-1) {
+				dhhb[l].col(i+1).noalias() += VVb[l].transpose() * fphdh.col(i);
+				gVVb[l].noalias() += fphdh.col(i) * hhb[l].col(i+1).transpose();
+			}
+		}
+		gWWbb[l].noalias() += fphdh * xb->transpose();
+		gWWbf[l].noalias() += fphdh * xf->transpose();
+		gbbhb[l].noalias() += fphdh * VectorXd::Ones(T);
+		dxf->noalias() += WWbf[l].transpose() * fphdh;
+		dxb->noalias() += WWbb[l].transpose() * fphdh;
+	}
+
+	for (uint i=T-1; i != 0; i--) {
+		VectorXd fphdh = fp(hf.col(i)).cwiseProduct(dhf.col(i));
+		gWf.noalias() += fphdh * x.col(i).transpose();
+		gVf.noalias() += fphdh * hf.col(i-1).transpose();
+		gbhf.noalias() += fphdh;
+		dhf.col(i-1).noalias() += Vf.transpose() * fphdh;
+	}
+	VectorXd fphdh = fp(hf.col(0)).cwiseProduct(dhf.col(0));
+	gWf.noalias() += fphdh * x.col(0).transpose();
+	gbhf.noalias() += fphdh;
+
+	for (uint i=0; i < T-1; i++) {
+		VectorXd fphdh = fp(hb.col(i)).cwiseProduct(dhb.col(i));
+		gWb.noalias() += fphdh * x.col(i).transpose();
+		gVb.noalias() += fphdh * hb.col(i+1).transpose();
+		gbhb.noalias() += fphdh;
+		dhb.col(i+1).noalias() += Vb.transpose() * fphdh;
+	}
+	fphdh = fp(hb.col(T-1)).cwiseProduct(dhb.col(T-1));
+	gWb.noalias() += fphdh * x.col(T-1).transpose();
+	gbhb.noalias() += fphdh;
 }
 
 
@@ -331,30 +401,110 @@ void RNN::update() {
 	gWWfoy.noalias() += (lambda)*WWfoy;
 	gWWboy.noalias() += (lambda)*WWboy;
 
-//	norm += 0.1* (gWo.squaredNorm() + gbo.squaredNorm());
-//	norm+= 0.1*(gWWfoy.squaredNorm() + gWWboy.squaredNorm()); 
+	norm += 0.1* (gWo.squaredNorm() + gbo.squaredNorm());
+	norm+= 0.1*(gWWfoy.squaredNorm() + gWWboy.squaredNorm()); 
+
+	gWf.noalias() += lambda*Wf;
+	gVf.noalias() += lambda*Vf;
+	gWb.noalias() += lambda*Wb;
+	gVb.noalias() += lambda*Vb;
+	gbhf.noalias() += lambda*bhf;
+	gbhb.noalias() += lambda*bhb;
+
+	norm += gWf.squaredNorm() + gVf.squaredNorm()
+		+ gWb.squaredNorm() + gWf.squaredNorm()
+		+ gbhf.squaredNorm() + gbhb.squaredNorm(); 
+
+	for (uint l=0; l<layers; l++) {
+		gWWff[l].noalias() += lambda*WWff[l];
+		gWWfb[l].noalias() += lambda*WWfb[l];
+		gWWbf[l].noalias() += lambda*WWbf[l];
+		gWWbb[l].noalias() += lambda*WWbb[l];
+		gVVf[l].noalias() += lambda*VVf[l];
+		gVVb[l].noalias() += lambda*VVb[l];
+		gbbhf[l].noalias() += lambda*bbhf[l];
+		gbbhb[l].noalias() += lambda*bbhb[l];
+
+		norm += gWWff[l].squaredNorm() + gWWfb[l].squaredNorm()
+			+ gWWbf[l].squaredNorm() + gWWbb[l].squaredNorm()
+			+ gVVf[l].squaredNorm() + gVVb[l].squaredNorm()
+			+ gbbhf[l].squaredNorm() + gbbhb[l].squaredNorm();
+
+	}
 
 	// update velocities
 	vbo = 0.1*lr*gbo + mr*vbo;
 	vWWfoy = 0.1*lr*gWWfoy + mr*vWWfoy;
 	vWWboy = 0.1*lr*gWWboy + mr*vWWboy;
 
-/*
 	if (NORMALIZE)
 		norm = (norm > 25) ? sqrt(norm/25) : 1;
 	else
 		norm = 1;
-*/
+
+	vWf = lr*gWf/norm + mr*vWf;
+	vVf = lr*gVf/norm + mr*vVf;
+	vWb = lr*gWb/norm + mr*vWb;
+	vVb = lr*gVb/norm + mr*vVb;
+	vbhf = lr*gbhf/norm + mr*vbhf;
+	vbhb = lr*gbhb/norm + mr*vbhb;
+
+	for (uint l=1; l<layers; l++) { 
+		vWWff[l] = lr*gWWff[l]/norm + mr*vWWff[l];
+		vWWfb[l] = lr*gWWfb[l]/norm + mr*vWWfb[l];
+		vVVf[l] = lr*gVVf[l]/norm + mr*vVVf[l];
+		vWWbb[l] = lr*gWWbb[l]/norm + mr*vWWbb[l];
+		vWWbf[l] = lr*gWWbf[l]/norm + mr*vWWbf[l];
+		vVVb[l] = lr*gVVb[l]/norm + mr*vVVb[l];
+		vbbhf[l] = lr*gbbhf[l]/norm + mr*vbbhf[l];
+		vbbhb[l] = lr*gbbhb[l]/norm + mr*vbbhb[l];
+	}
 
 	// update params
 	bo.noalias() -= vbo;
 	WWfoy.noalias() -= vWWfoy;
 	WWboy.noalias() -= vWWboy;
 
+	Wf.noalias() -= vWf;
+	Vf.noalias() -= vVf;
+	Wb.noalias() -= vWb;
+	Vb.noalias() -= vVb;
+	bhf.noalias() -= vbhf;
+	bhb.noalias() -= vbhb;
+
+	for (uint l=1; l<layers; l++) {
+		WWff[l].noalias() -= vWWff[l];
+		WWfb[l].noalias() -= vWWfb[l];
+		VVf[l].noalias() -= vVVf[l];
+		WWbb[l].noalias() -= vWWbb[l];
+		WWbf[l].noalias() -= vWWbf[l];
+		VVb[l].noalias() -= vVVb[l];
+		bbhf[l].noalias() -= vbbhf[l];
+		bbhb[l].noalias() -= vbbhb[l];
+	}
+
 	// reset gradients
 	gbo.setZero();
 	gWWfoy.setZero(); 
 	gWWboy.setZero(); 
+
+	gWf.setZero(); 
+	gVf.setZero(); 
+	gWb.setZero(); 
+	gVb.setZero(); 
+	gbhf.setZero();
+	gbhb.setZero();
+
+	for (uint l=0; l<layers; l++) {
+		gWWff[l].setZero(); 
+		gWWfb[l].setZero(); 
+		gVVf[l].setZero(); 
+		gWWbb[l].setZero(); 
+		gWWbf[l].setZero(); 
+		gVVb[l].setZero(); 
+		gbbhf[l].setZero();
+		gbbhb[l].setZero();
+	}
 
 	lr *= 0.999;
 	//cout << Wuo << endl;
@@ -374,8 +524,8 @@ void RNN::load(string fname) {
 	}
 
 	in >> Wfo >> Wbo;
-//	in >> WWfoy >> WWboy;
-//	in >> Wo >> bo;
+	in >> WWfoy >> WWboy;
+	in >> Wo >> bo;
 }
 
 void RNN::save(string fname) {
@@ -734,7 +884,7 @@ int main(int argc, char **argv) {
 			best = results;
 			bestDrop = DROP;
 		}
-		brnn.save("output/model_target.txt");
+		brnn.save("output/model_target1.txt");
 	}
 	cout << "Best: " << endl;
 	cout << "Drop: " << bestDrop << endl;

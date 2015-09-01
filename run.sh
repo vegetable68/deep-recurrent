@@ -1,4 +1,3 @@
 # compile & run
-rm output/*
-g++ drnt.cpp -I ./Eigen/ -std=c++11 -O3 -o drnt 
-./drnt 0 > output/res.out 
+g++ multitask.cpp -I ./Eigen/ -std=c++11 -O3 -o multi 
+./multi 0 > output/res_target.txt
