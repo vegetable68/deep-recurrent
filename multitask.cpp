@@ -20,7 +20,7 @@
 
 #define DROPOUT
 #define ETA 0.001
-#define NORMALIZE false // keeping this false throughout my own experiments
+#define NORMALIZE true// keeping this false throughout my own experiments
 #define OCLASS_WEIGHT 0.12
 #define layers 2 // number of EXTRA (not all) hidden layers
 
