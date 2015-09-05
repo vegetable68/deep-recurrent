@@ -34,7 +34,7 @@ double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
 double DROP;
 string NAME[3] = {"Target", "Agent", "DSE"};
-const double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.5};
+double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.3};
 
 #ifdef DROPOUT
 Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
@@ -230,14 +230,14 @@ void RNN::backward(const vector<vector<string> > &labels) {
 
 	//  cout<<"tag2"<<endl;
 	for (uint k = 0; k < 3; k ++){
-		dhf.noalias() += Wfo.transpose() * gpyd[k];
-		dhb.noalias() += Wbo.transpose() * gpyd[k];
+		dhf.noalias() += Wfo.transpose() * gpyd[k] / OCLASS_WEIGHT[k];
+		dhb.noalias() += Wbo.transpose() * gpyd[k] / OCLASS_WEIGHT[k];
 		for (uint l=0; l<layers - 1; l++) {
-			dhhf[l].noalias() += WWfo[l].transpose() * gpyd[k];
-			dhhb[l].noalias() += WWbo[l].transpose() * gpyd[k];
+			dhhf[l].noalias() += WWfo[l].transpose() * gpyd[k] / OCLASS_WEIGHT[k];
+			dhhb[l].noalias() += WWbo[l].transpose() * gpyd[k] / OCLASS_WEIGHT[k];
 		}
-		dhhf[layers - 1].noalias() += WWfoy[k].transpose() * gpyd[k]; 
-		dhhb[layers - 1].noalias() += WWboy[k].transpose() * gpyd[k];
+		dhhf[layers - 1].noalias() += WWfoy[k].transpose() * gpyd[k] / OCLASS_WEIGHT[k];
+		dhhb[layers - 1].noalias() += WWboy[k].transpose() * gpyd[k] / OCLASS_WEIGHT[k];
 	}
 
 	//  cout<<"tag3"<<endl;
@@ -687,19 +687,19 @@ RNN::train(vector<vector<string> > &sents,
 			for (uint k = 0; k < 3; k ++) cout<<WWfoy[k].norm()<<" "<<WWboy[k].norm()<<bo[k].norm()<<endl;*/
 			vector<Matrix<double, 3, 2>> res;
 			res = testSequential(sents, labels);
-			cout << "P, R, F1:\n";
+			cout << "Train:\n";
 			for (int k = 0; k < 3; k ++)
 				cout<<NAME[k]<<":\n"<<res[k]<<endl;
 
-			cout << "P, R, F1:\n";
 			resVal = testSequential(validX, validL);
+			cout << "Val:\n";
 			for (int k = 0; k < 3; k ++)
 				cout<<NAME[k]<<":\n"<<resVal[k]<<endl;
 
-			cout << "P, R, F1:\n";
 			resTest = testSequential(testX, testL);
+/*			cout << "Test:\n";
 			for (int k = 0; k < 3; k ++)
-				cout<<NAME[k]<<":\n"<<resTest[k]<<endl;
+				cout<<NAME[k]<<":\n"<<resTest[k]<<endl;*/
 
 			if (bestVal[0](2,0) < resVal[0](2,0)) {
 				bestVal = resVal;
@@ -707,7 +707,11 @@ RNN::train(vector<vector<string> > &sents,
 				save(fname);
 			}
 		}
+//		cout<<epoch<<endl;
 	}
+//	cout<<"epoch ends"<<endl;
+	for (int i = 0; i < 3; i ++) bestVal.push_back(bestTest[i]);
+//	cout<<"ready to return"<<endl;
 	return bestVal;
 }
 
@@ -988,21 +992,31 @@ int main(int argc, char **argv) {
 	cout << "Valid size: " << validX.size() << endl;
 
 	vector<Matrix<double, 3, 2>> best;
-	for (int k = 0; k < 3; k ++) best.push_back(MatrixXd::Zero(3, 2));
+	for (int k = 0; k < 6; k ++) best.push_back(MatrixXd::Zero(3, 2));
 	double bestDrop;
-	for (DROP=0; DROP<0.1; DROP+=0.2) { // can use this loop for CV
+//	for (int tot = 0; tot < 10; tot ++) { // can use this loop for CV
+//		OCLASS_WEIGHT[0] = fRand(0.05,0.2);
 		RNN brnn(25,25,25,3,LT);
+//		cout<<"OCLASS_WEIGHT "<<OCLASS_WEIGHT[0]<<":"<<endl;
 		brnn.load("dse_para/model.txt");
 		auto results = brnn.train(trainX, trainL, validX, validL, testX, testL);
+		//cout<<"tag1"<<endl;
 		if (best[0](2,0) < results[0](2,0)) { // propF1 on val set
 			best = results;
-			bestDrop = DROP;
+			bestDrop = OCLASS_WEIGHT[0]; 
+			brnn.save("model.txt");
+
 		}
-		brnn.save("model.txt");
-	}
+//		cout<<"Validation:"<<endl;
+//		for (uint k = 0; k < 3;k ++) cout << NAME[k]<<"\n"<< results[k] << endl;
+		//cout<<"tag2"<<endl;
+//	}
 	cout << "Best: " << endl;
-	cout << "Drop: " << bestDrop << endl;
+	cout << "OCLASS_WEIGHT_TARGET: " << bestDrop << endl;
+	cout<<"Validation:"<<endl;
 	for (uint k = 0; k < 3;k ++) cout << NAME[k]<<"\n"<< best[k] << endl;
+	cout<<"Test:"<<endl;
+	for (uint k = 3; k < 6;k ++) cout << NAME[k - 3]<<"\n"<< best[k] << endl;
 
 	return 0;
 }
