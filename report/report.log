@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.5)  5 SEP 2015 18:36
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.5)  6 SEP 2015 16:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -535,6 +535,9 @@ Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 (/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage.sty
 Package: lastpage 2013/01/28 v1.2l Refers to last page's name (HMM; JPG)
 )
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+\bigstrutjot=\dimen139
+)
 (/usr/share/texmf/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
@@ -557,16 +560,16 @@ File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
 Package scrkbase Info: You've told me to extend the font selection of the
 (scrkbase)             element `pagehead' that is an alias of element
-(scrkbase)             `pageheadfoot' on input line 86.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 95.
+(scrkbase)             `pageheadfoot' on input line 87.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 96.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <42.67912> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 95.
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <22.76228> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 96.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <22.76228> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 97.
 
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrpage2.sty
 Package: scrpage2 2013/12/19 v3.12 KOMA-Script package (page head and foot)
@@ -626,7 +629,7 @@ Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
-\@linkdim=\dimen139
+\@linkdim=\dimen140
 \Hy@linkcounter=\count119
 \Hy@pagecounter=\count120
 
@@ -669,10 +672,10 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5041.
-\XeTeXLinkMargin=\dimen140
+\XeTeXLinkMargin=\dimen141
 \Fld@menulength=\count123
-\Field@Width=\dimen141
-\Fld@charsize=\dimen142
+\Field@Width=\dimen142
+\Fld@charsize=\dimen143
 Package hyperref Info: Hyper figures OFF on input line 6295.
 Package hyperref Info: Link nesting OFF on input line 6300.
 Package hyperref Info: Hyper index ON on input line 6303.
@@ -700,7 +703,7 @@ Package: microtype 2013/05/23 v2.5a Micro-typographical refinements (RS)
 \MT@toks=\toks26
 \MT@count=\count129
 LaTeX Info: Redefining \textls on input line 766.
-\MT@outer@kern=\dimen143
+\MT@outer@kern=\dimen144
 LaTeX Info: Redefining \textmicrotypecontext on input line 1285.
 \MT@listname@count=\count130
 
@@ -716,24 +719,28 @@ Package microtype Info: Loading configuration file microtype.cfg.
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg
 File: microtype.cfg 2013/05/23 v2.5a microtype main configuration file (RS)
 ))
-(./report.aux)
+(./report.aux
+
+LaTeX Warning: Label `tab:original_results' multiply defined.
+
+)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Try loading font information for T1+pplj on input line 165.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 166.
+LaTeX Font Info:    ... okay on input line 166.
+LaTeX Font Info:    Try loading font information for T1+pplj on input line 166.
 
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pplj.fd
 File: t1pplj.fd 2004/09/06 font definitions for T1/pplj.
@@ -775,13 +782,13 @@ File: t1pplj.fd 2004/09/06 font definitions for T1/pplj.
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count131
-\scratchdimen=\dimen144
+\scratchdimen=\dimen145
 \scratchbox=\box29
 \nofMPsegments=\count132
 \nofMParguments=\count133
 \everyMPshowfont=\toks27
 \MPscratchCnt=\count134
-\MPscratchDim=\dimen145
+\MPscratchDim=\dimen146
 \MPnumerator=\count135
 \makeMPintoPDFobject=\count136
 \everyMPtoPDFconversion=\toks28
@@ -806,9 +813,9 @@ Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             or
 (lastpage)             http://www.ctan.org/tex-archive/ 
 (lastpage)             install/macros/latex/contrib/pageslts.tds.zip
-(lastpage)             ! on input line 165.
+(lastpage)             ! on input line 166.
 \AtBeginShipoutBox=\box30
-Package hyperref Info: Link coloring ON on input line 165.
+Package hyperref Info: Link coloring ON on input line 166.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -818,15 +825,15 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count137
 )
-LaTeX Info: Redefining \ref on input line 165.
-LaTeX Info: Redefining \pageref on input line 165.
-LaTeX Info: Redefining \nameref on input line 165.
+LaTeX Info: Redefining \ref on input line 166.
+LaTeX Info: Redefining \pageref on input line 166.
+LaTeX Info: Redefining \nameref on input line 166.
 
 (./report.out) (./report.out)
 \@outlinefile=\write4
 \openout4 = `report.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 165.
+LaTeX Info: Redefining \microtypecontext on input line 166.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -841,48 +848,62 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
 )
 No file report.ind.
-LaTeX Font Info:    Try loading font information for T1+fvs on input line 167.
+LaTeX Font Info:    Try loading font information for T1+fvs on input line 180.
 (/usr/share/texlive/texmf-dist/tex/latex/bera/t1fvs.fd
 File: t1fvs.fd 2004/09/07 scalable font definitions for T1/fvs.
 )
 LaTeX Font Info:    Font shape `T1/fvs/m/n' will be
-(Font)              scaled to size 9.41699pt on input line 167.
+(Font)              scaled to size 9.41699pt on input line 180.
 Package microtype Info: Loading generic settings for font family
 (microtype)             `fvs' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/fvs/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/fvs/b/n' tried instead on input line 167.
+(Font)              Font shape `T1/fvs/b/n' tried instead on input line 180.
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
-(Font)              scaled to size 9.41699pt on input line 167.
+(Font)              scaled to size 9.41699pt on input line 180.
 LaTeX Font Info:    Font shape `T1/fvs/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/fvs/b/n' tried instead on input line 167.
+(Font)              Font shape `T1/fvs/b/n' tried instead on input line 180.
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
-(Font)              scaled to size 17.83641pt on input line 167.
-Package tocbasic Info: character protrusion at toc deactivated on input line 16
-7.
- (./report.toc
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 4.
+(Font)              scaled to size 17.83641pt on input line 180.
+LaTeX Font Info:    Try loading font information for OMS+pplj on input line 182
+.
+LaTeX Font Info:    No file OMSpplj.fd. on input line 182.
+
+
+LaTeX Font Warning: Font shape `OMS/pplj/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbullet' on input line 182.
+
+LaTeX Font Info:    Font shape `T1/fvs/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/fvs/b/n' tried instead on input line 202.
+LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
+(Font)              scaled to size 12.384pt on input line 202.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 207.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 4.
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 207
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 4.
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 207
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 4.
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 207
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 4.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 207
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
@@ -891,44 +912,37 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             `zplm' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-)
-\tf@toc=\write5
-\openout5 = `report.toc'.
+LaTeX Font Info:    Font shape `T1/pplj/bx/n' in size <9> not available
+(Font)              Font shape `T1/pplj/b/n' tried instead on input line 218.
+
+Overfull \hbox (6.6172pt too wide) in paragraph at lines 203--222
+\T1/pplj/m/n/10.95 (-10) All the pa-ram-e-ter set-tings and the out-put for-mat
+ are in README.
+ []
+
+
+Overfull \hbox (12.04478pt too wide) in paragraph at lines 203--222
+\T1/pplj/m/n/10.95 (-10) Also the full re-sults when Oclass weight is high are 
+in oclassHIGH-
+ []
 
 LaTeX Font Info:    Font shape `T1/pplj/m/sl' in size <10.95> not available
-(Font)              Font shape `T1/pplj/m/it' tried instead on input line 168.
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-
+(Font)              Font shape `T1/pplj/m/it' tried instead on input line 222.
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+pplj on input line 181
-.
-LaTeX Font Info:    No file OMSpplj.fd. on input line 181.
-
-
-LaTeX Font Warning: Font shape `OMS/pplj/m/n' undefined
-(Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 181.
-
-LaTeX Font Info:    Font shape `T1/fvs/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/fvs/b/n' tried instead on input line 191.
-LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
-(Font)              scaled to size 12.384pt on input line 191.
-<multitaskRNN.png, id=63, 687.56876pt x 661.47125pt>
+<multitaskRNN.png, id=54, 687.56876pt x 661.47125pt>
 File: multitaskRNN.png Graphic file (type png)
  <use multitaskRNN.png>
-Package pdftex.def Info: multitaskRNN.png used on input line 214.
+Package pdftex.def Info: multitaskRNN.png used on input line 233.
 (pdftex.def)             Requested size: 343.78354pt x 330.73482pt.
-LaTeX Font Info:    Font shape `T1/pplj/bx/n' in size <9> not available
-(Font)              Font shape `T1/pplj/b/n' tried instead on input line 215.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 (./report.brf)
-\tf@brf=\write6
-\openout6 = `report.brf'.
+\tf@brf=\write5
+\openout5 = `report.brf'.
 
  [2] [3 <./multitaskRNN.png>] [4
 
@@ -937,28 +951,31 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 AED: lastpage setting LastPage
 [5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 248.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 248.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 283.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 283.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 248.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 248.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 283.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 283.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 8A4705967CBC4E4B7020C5E7CBD9F97B;462.
+(rerunfilecheck)             Checksum: 35574A6B44EB40BBB7A4607D8A06F1DF;348.
 Package rerunfilecheck Info: File `report.brf' has not changed.
-(rerunfilecheck)             Checksum: 01C9904B3ED4577A0D176A79B384D3F0;84.
+(rerunfilecheck)             Checksum: E22EBC1D3A812D5B7059523B3D134E87;168.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 12095 strings out of 495028
- 181918 string characters out of 6181498
- 452718 words of memory out of 5000000
- 14986 multiletter control sequences out of 15000+600000
- 47331 words of font info for 99 fonts, out of 8000000 for 9000
+ 12105 strings out of 495028
+ 182038 string characters out of 6181498
+ 456002 words of memory out of 5000000
+ 14984 multiletter control sequences out of 15000+600000
+ 46618 words of font info for 109 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 45i,10n,52p,845b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 45i,10n,52p,845b,508s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/fpl/fplbj8a.pfb></usr/share/texlive/texmf-dist/fonts/
@@ -967,10 +984,10 @@ bera/fvsb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/bera/fvsr8a.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on report.pdf (5 pages, 110764 bytes).
+Output written on report.pdf (5 pages, 117553 bytes).
 PDF statistics:
- 133 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 35918 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 118 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
+ 23 named destinations out of 1000 (max. 500000)
+ 35902 words of extra memory for PDF output out of 42996 (max. 10000000)
 

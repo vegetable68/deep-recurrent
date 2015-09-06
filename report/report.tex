@@ -75,6 +75,7 @@
 \usepackage{etoolbox}
 \usepackage[norule]{footmisc} % Removes the horizontal rule from footnotes
 \usepackage{lastpage} % Counts the number of pages of the document
+\usepackage{multirow}
 
 \usepackage[dvipsnames]{xcolor}  % Allows the definition of hex colors
 \definecolor{titleblue}{rgb}{0.16,0.24,0.64} % Custom color for the title on the title page
@@ -164,8 +165,8 @@
 
 \begin{document}
 \printindex
-\tableofcontents % Table of contents
-\newpage % Start lab look on a new page
+%\tableofcontents % Table of contents
+%\newpage % Start lab look on a new page
 
 \begin{addmargin}[4cm]{0cm} % Makes the text width much shorter for a compact look
 
@@ -187,36 +188,70 @@
 %-----------------------------------------
 
 \labday{DSE}
-
-\experiment{hyper}
-\experiment{wordvec}
-
+We've tried OCLASS weight, drop out and used different word vector settings and we have similar(slightly better?) results than that in \cite{ozanRNN}.
 
 %-----------------------------------------
 
 \labday{Agent}
-
-
+The agent extraction is great! We have better results on agent extraction than that in \cite{bishanJoint}.
 
 %-----------------------------------------
 
 \labday{Target}
 
 \experiment{original}
-We can get the best results from training with the original RNN by tuning the OCLASS weight fairly low, but in this case, the results on validation set can be better than the training set.
+We can get the best results from training with the original RNN by tuning the OCLASS weight fairly low, but in this case, the results on validation set can be better than the training set.\\
+\begin{table}
+\label{tab:original_results}
+\raggedleft
+\begin{tabular}{c|c|c|c|c|}
+\toprule
+&\multicolumn{2}{|c|}{OCLASS WEIGHT = 0.09} & \multicolumn{2}{|c|}{OCLASS WEIGHT = 0.25}\\
+\hline
+  & Prop     & Bin     & Prop     & Bin\\
+\hline
+P & 0.274956 &0.324164 & 0.375136 & 0.411554 \\
+R & 0.702289 &0.808863 & 0.324453 & 0.467323\\
+F1&  0.39519 &0.462838 & 0.347958 & 0.437669\\
+\bottomrule
+\end{tabular}
+\caption{Target Extraction using RNN}
+\end{table}
+Example sentence when Oclass weight is low shows that the mistake usually happens when the RNN thinks a whole span is a target but actually none of the part is included in the target. Sometimes the span do seem look like a named entity. The original results are in oclassLOWres.out. \\ 
+All the parameter settings and the output format are in README. Also the full results when Oclass weight is high are in oclassHIGHres.out. 
+
 \experiment{duplicate}
+
+We tried to combine all the labels into one 7-dimensional vector. So the original output is the 3-dimensional vector indicating the probability of the label of a word being B, I or O. Now is the 7-dimensional vector indicating the probability being None, Begining of target/agent/dse or part of them.\\
+Since there are overlapping of the tags in the MPQA database, we tried two different ways to generate the input we want. These and the results can be seen in Louis's report. But in general, the target extration is worse than the simpler way we tried above.
+
 \experiment{multitask}
 
-
-
+We also tried to do multitasking. The network structure is shown below. But the result is very bad. The good thing about this multitasking network is that we can assign different oclass weight to the three labels, but once these weights are assigned. My guess is there should be some extra tuning with the loss function regarding different label classes but every settings I tried just make things worse. 
 \begin{figure}[h!]
 \raggedleft
 \includegraphics[scale=0.5,keepaspectratio=true]{multitaskRNN.png}
 \caption{Multitask RNN}
 \label{fig:multi}
 \end{figure}
+Here's an example of the multitasking results. And the original one is in multi.out
+\begin{table}
+\label{tab:original_results}
+\raggedleft
+\begin{tabular}{c|c|c|c|c|c|c}
+\toprule
+&\multicolumn{2}{|c|}{Target Extraction} & \multicolumn{2}{|c|}{Agent Extraction} & \multicolumn{2}{|c|}{DSE Extraction} \\
+\hline
+& Prop     & Bin     & Prop     & Bin & Prop & Bin\\
+\hline
+P & 0.242472 &0.242902 & 0.538143 & 0.54434 &  0.552941  & 0.552941\\
+R & 0.311916 &0.727395 & 0.424234 & 0.535906 & 0.0304725 & 0.0342566\\
+F1& 0.272845 &0.364189 & 0.474447 & 0.54009 & 0.0577618 & 0.0645161 \\
+\bottomrule
+\end{tabular}
+\caption{Multitasking Results}
+\end{table}
 
- 
 \end{addmargin}
 
 %----------------------------------------------------------------------------------------

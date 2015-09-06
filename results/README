@@ -1,4 +1,4 @@
-res1.out : pure RNN used in Target mining
+oclassLOWres.out : pure RNN used in Target mining
 
 parameters: 
 dropout = 0
@@ -15,9 +15,9 @@ first line: original sentence
 second line: labels by the RNN
 third line: input labels
 
-res2.out : all the same as res1.out, except OCLASS_WEIGHT = 0.25
+oclassHIGHres.out : all the same as res1.out, except OCLASS_WEIGHT = 0.25
 
-res.out : using multitasking
+multi.out : using multitasking
 #define ETA 0.001
 #define NORMALIZE true// keeping this false throughout my own experiments
 #define layers 2 // number of EXTRA (not all) hidden layers
@@ -26,6 +26,6 @@ res.out : using multitasking
 #define MR 0.7
 string NAME[3] = {"Target", "Agent", "DSE"};
 double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.3};
-didnt' manipulate with weight later
+didnt' manipulate with loss function 
 
 
