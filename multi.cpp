@@ -28,7 +28,7 @@
 uint fold = -1;
 
 using namespace Eigen;
-using namespace std;  
+using namespace std;
 
 double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
@@ -43,14 +43,14 @@ Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
 class RNN {
 	public:
 		RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT);
-		vector<Matrix<double, 3, 2>> train(vector<vector<string> > &sents, 
+		vector<Matrix<double, 3, 2>> train(vector<vector<string> > &sents,
 				vector<vector<vector<string> > > &labels,
-				vector<vector<string> > &validX, 
+				vector<vector<string> > &validX,
 				vector<vector<vector<string> > > &validL,
-				vector<vector<string> > &testX, 
+				vector<vector<string> > &testX,
 				vector<vector<vector<string> > > &testL);
 		void update();
-		vector<Matrix<double, 3, 2>> testSequential(vector<vector<string> > &sents, 
+		vector<Matrix<double, 3, 2>> testSequential(vector<vector<string> > &sents,
 				vector<vector<vector<string> > > &labels);
 		LookupTable *LT;
 		void save(string fname);
@@ -97,7 +97,7 @@ class RNN {
 		uint nx, nhf, nhb, ny;
 		uint epoch;
 
-		double lr;
+		double lr, ylr;
 };
 
 void RNN::forward(const vector<string> & s, int index) {
@@ -180,7 +180,7 @@ void RNN::forward(const vector<string> & s, int index) {
 	// you can experiment with the other version by changing this
 	// (backward pass needs to change as well of course)
 	for (int k = 0; k < 3; k ++)
-		y[k] = softmax(bo[k]*RowVectorXd::Ones(T) + WWfoy[k] *hhf[layers-1] + 
+		y[k] = softmax(bo[k]*RowVectorXd::Ones(T) + WWfoy[k] *hhf[layers-1] +
 				WWboy[k] *hhb[layers-1]);
 	//cout<<bo[0].norm()<<" "<<WWfoy[0].norm()<<WWboy[0].norm()<<endl;
 }
@@ -191,7 +191,7 @@ void RNN::backward(const vector<vector<string> > &labels) {
 	MatrixXd dhb = MatrixXd::Zero(nhb, T);
 	MatrixXd dhf = MatrixXd::Zero(nhf, T);
 
-	MatrixXd dhhf[layers], dhhb[layers]; 
+	MatrixXd dhhf[layers], dhhb[layers];
 	for (uint l=0; l<layers; l++) {
 		dhhf[l] = MatrixXd::Zero(nhf, T);
 		dhhb[l] = MatrixXd::Zero(nhb, T);
@@ -312,6 +312,7 @@ void RNN::backward(const vector<vector<string> > &labels) {
 
 RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 	lr = ETA;
+	ylr = ETA;
 
 	this->LT = &LT;
 
@@ -365,7 +366,7 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 	gVb = MatrixXd::Zero(nhb,nhb);
 	gbhb = VectorXd::Zero(nhb);
 
-	for (uint l=0; l<layers; l++) { 
+	for (uint l=0; l<layers; l++) {
 		gWWff[l] = MatrixXd::Zero(nhf,nhf);
 		gWWfb[l] = MatrixXd::Zero(nhf,nhb);
 		gVVf[l] = MatrixXd::Zero(nhf,nhf);
@@ -432,8 +433,8 @@ void RNN::update() {
 	double mr = MR;
 	double norm = 0;
 
-	// regularize 
-	for (uint k = 0; k < 3; k ++){ 
+	// regularize
+	for (uint k = 0; k < 3; k ++){
 		gbo[k].noalias() += lambda*bo[k];
 		gWWfoy[k].noalias() += (lambda)*WWfoy[k];
 		gWWboy[k].noalias() += (lambda)*WWboy[k];
@@ -443,7 +444,7 @@ void RNN::update() {
 	for (uint k = 0; k < 3; k ++)
 		norm += 0.1 *(gWWfoy[k].squaredNorm() + gWWboy[k].squaredNorm() + gbo[k].squaredNorm());
 	for (uint l=0; l<layers - 1; l++)
-		norm+= 0.1*(gWWfo[l].squaredNorm() + gWWbo[l].squaredNorm()); 
+		norm+= 0.1*(gWWfo[l].squaredNorm() + gWWbo[l].squaredNorm());
 
 	gWf.noalias() += lambda*Wf;
 	gVf.noalias() += lambda*Vf;
@@ -454,7 +455,7 @@ void RNN::update() {
 
 	norm += gWf.squaredNorm() + gVf.squaredNorm()
 		+ gWb.squaredNorm() + gWf.squaredNorm()
-		+ gbhf.squaredNorm() + gbhb.squaredNorm(); 
+		+ gbhf.squaredNorm() + gbhb.squaredNorm();
 
 	for (uint l=0; l<layers; l++) {
 		gWWff[l].noalias() += lambda*WWff[l];
@@ -475,9 +476,9 @@ void RNN::update() {
 
 	// update velocities
 	for (uint k = 0; k < 3; k ++){
-		vbo[k] = 0.1*lr*gbo[k] + mr*vbo[k];
-		vWWfoy[k] = 0.1*lr*gWWfoy[k] + mr*vWWfoy[k];
-		vWWboy[k] = 0.1*lr*gWWboy[k] + mr*vWWboy[k];
+		vbo[k] = 0.1*ylr*gbo[k] + mr*vbo[k];
+		vWWfoy[k] = 0.1*ylr*gWWfoy[k] + mr*vWWfoy[k];
+		vWWboy[k] = 0.1*ylr*gWWboy[k] + mr*vWWboy[k];
 	}
 
 	//cout<<"update:"<<gWf<<" norm:"<<norm<<endl;
@@ -494,7 +495,7 @@ void RNN::update() {
 	vbhf = lr*gbhf/norm + mr*vbhf;
 	vbhb = lr*gbhb/norm + mr*vbhb;
 
-	for (uint l=0; l<layers; l++) { 
+	for (uint l=0; l<layers; l++) {
 		vWWff[l] = lr*gWWff[l]/norm + mr*vWWff[l];
 		vWWfb[l] = lr*gWWfb[l]/norm + mr*vWWfb[l];
 		vVVf[l] = lr*gVVf[l]/norm + mr*vVVf[l];
@@ -533,24 +534,24 @@ void RNN::update() {
 	// reset gradients
 	for (uint k = 0; k < 3; k ++){
 		gbo[k].setZero();
-		gWWfoy[k].setZero(); 
-		gWWboy[k].setZero(); 
+		gWWfoy[k].setZero();
+		gWWboy[k].setZero();
 	}
 
-	gWf.setZero(); 
-	gVf.setZero(); 
-	gWb.setZero(); 
-	gVb.setZero(); 
+	gWf.setZero();
+	gVf.setZero();
+	gWb.setZero();
+	gVb.setZero();
 	gbhf.setZero();
 	gbhb.setZero();
 
 	for (uint l=0; l<layers; l++) {
-		gWWff[l].setZero(); 
-		gWWfb[l].setZero(); 
-		gVVf[l].setZero(); 
-		gWWbb[l].setZero(); 
-		gWWbf[l].setZero(); 
-		gVVb[l].setZero(); 
+		gWWff[l].setZero();
+		gWWfb[l].setZero();
+		gVVf[l].setZero();
+		gWWbb[l].setZero();
+		gWWbf[l].setZero();
+		gVVb[l].setZero();
 		gbbhf[l].setZero();
 		gbbhb[l].setZero();
 	}
@@ -633,11 +634,11 @@ void RNN::save(string fname) {
 
 
 vector<Matrix<double, 3, 2>>
-RNN::train(vector<vector<string> > &sents, 
+RNN::train(vector<vector<string> > &sents,
 		vector<vector<vector<string> > > &labels,
-		vector<vector<string> > &validX, 
+		vector<vector<string> > &validX,
 		vector<vector<vector<string> > > &validL,
-		vector<vector<string> > &testX, 
+		vector<vector<string> > &testX,
 		vector< vector<vector<string> > > &testL) {
 	uint MAXEPOCH = 200;
 	uint MINIBATCH = 80;
@@ -669,8 +670,8 @@ RNN::train(vector<vector<string> > &sents,
 			if ((i+1) % MINIBATCH == 0 || i == sents.size()-1)
 				update();
 		}
-		if (epoch % 5 == 0) {  
-			vector<Matrix<double, 3, 2>> resVal, resTest, resVal2, resTest2; 
+		if (epoch % 5 == 0) {
+			vector<Matrix<double, 3, 2>> resVal, resTest, resVal2, resTest2;
 			cout << "Epoch " << epoch << endl;
 
 			// diagnostic
@@ -717,7 +718,7 @@ RNN::train(vector<vector<string> > &sents,
 
 // returns soft (precision, recall, F1) per expression
 // counts proportional overlap & binary overlap
-vector<Matrix<double, 3, 2>> RNN::testSequential(vector<vector<string> > &sents, 
+vector<Matrix<double, 3, 2>> RNN::testSequential(vector<vector<string> > &sents,
 		vector<vector<vector<string> > > &labels) {
 
 	vector<Matrix<double, 3, 2>> results;
@@ -783,7 +784,7 @@ vector<Matrix<double, 3, 2>> RNN::testSequential(vector<vector<string> > &sents,
 					if (l2 != -1)
 						pred.push_back(make_pair(l2,j));
 					l2 = -1;
-				} else { 
+				} else {
 					cout << y << endl;
 					assert(false);
 				}
@@ -839,8 +840,8 @@ vector<Matrix<double, 3, 2>> RNN::testSequential(vector<vector<string> > &sents,
 		double precisionBin = (nExprPredicted==0) ? 1 : precNumerBin/nExprPredicted;
 		double recallBin = recallNumerBin/nExprTrue;
 		double f1Bin = (2*precisionBin*recallBin)/(precisionBin+recallBin);
-		tmp << precisionProp, precisionBin, 
-			recallProp, recallBin, 
+		tmp << precisionProp, precisionBin,
+			recallProp, recallBin,
 			f1Prop, f1Bin;
 		results.push_back(tmp);
 	}
@@ -857,10 +858,10 @@ Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p) {
 }
 #endif
 
-void readSentences(vector<vector<string > > &X, 
-		vector<vector<string> > &TT, 
-		vector<vector<string> > &AT, 
-		vector<vector<string> > &DT, 
+void readSentences(vector<vector<string > > &X,
+		vector<vector<string> > &TT,
+		vector<vector<string> > &AT,
+		vector<vector<string> > &DT,
 		string fname) {
 	ifstream in(fname.c_str());
 	string line;
@@ -875,7 +876,7 @@ void readSentences(vector<vector<string > > &X,
 				DT.push_back(dt);
 				x.clear();
 				tt.clear();
-				at.clear(); 
+				at.clear();
 				dt.clear();
 			}
 		} else {
@@ -905,7 +906,7 @@ void readSentences(vector<vector<string > > &X,
 		DT.push_back(dt);
 		x.clear();
 		tt.clear();
-		at.clear(); 
+		at.clear();
 		dt.clear();
 	}
 }
@@ -1003,7 +1004,7 @@ int main(int argc, char **argv) {
 		//cout<<"tag1"<<endl;
 		if (best[0](2,0) < results[0](2,0)) { // propF1 on val set
 			best = results;
-			bestDrop = OCLASS_WEIGHT[0]; 
+			bestDrop = OCLASS_WEIGHT[0];
 			brnn.save("model.txt");
 
 		}
