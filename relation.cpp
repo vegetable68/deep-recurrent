@@ -35,7 +35,7 @@ double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
 double DROP;
 string NAME[3] = {"Target", "Agent", "DSE"};
 double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.3};
-double ENTITY_WEIGHT[3] = {0.3, 0.5, 0.3};
+double ENTITY_WEIGHT[3] = {3, 1, 2};
 
 #ifdef DROPOUT
 Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
@@ -66,6 +66,9 @@ class RNN {
 
 		MatrixXd x,y[3],hf,hb, hhf[layers],hhb[layers];
 		vector<string> s;
+		//logistic regression params
+		MatrixXd betaArg, betaDSE;
+		double beta0;
 
 		// recurrent network params
 		MatrixXd Wo, Wfo, Wbo, WWfo[layers - 1], WWbo[layers - 1], WWfoy[3], WWboy[3];
@@ -324,6 +327,10 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 
 	f = &relu;
 	fp = &relup;
+
+	beta0 = rand();
+	betaArg = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
+	betaDSE = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
 
 	// init randomly
 	Wf = MatrixXd(nhf,nx).unaryExpr(ptr_fun(urand));
