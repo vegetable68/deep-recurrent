@@ -1,0 +1,652 @@
+14492 7507 734
+Valid size: 2870
+Epoch 0
+P, R, F1:
+1 1
+0 0
+0 0
+P, R, F1:
+1 1
+0 0
+0 0
+P, R, F1
+1 1
+0 0
+0 0
+
+Epoch 5
+P, R, F1:
+0.107047 0.127966
+ 0.66661 0.814186
+0.184471  0.22117
+P, R, F1:
+0.205305 0.247078
+0.671347 0.819606
+0.314448 0.379693
+P, R, F1
+0.106695 0.122842
+0.711409 0.868085
+ 0.18556 0.215228
+
+Epoch 10
+P, R, F1:
+0.156557 0.179067
+0.521032 0.693307
+0.240769 0.284621
+P, R, F1:
+0.290597 0.331172
+0.533291  0.70949
+0.376199 0.451565
+P, R, F1
+0.148709 0.162852
+0.570921 0.761702
+0.235957 0.268334
+
+Epoch 15
+P, R, F1:
+0.124828 0.161137
+0.751493 0.847153
+0.214093 0.270771
+P, R, F1:
+0.234929 0.306531
+0.742109 0.843778
+0.356881 0.449695
+P, R, F1
+ 0.10986 0.137493
+0.785055 0.897872
+0.192747 0.238468
+
+Epoch 20
+P, R, F1:
+0.127043 0.165051
+0.760709  0.85015
+0.217724 0.276434
+P, R, F1:
+0.239511 0.313934
+ 0.75201 0.847359
+ 0.36331 0.458135
+P, R, F1
+0.115379 0.143803
+0.780111 0.902128
+0.201026 0.248063
+
+Epoch 25
+P, R, F1:
+0.169472 0.191639
+0.608242 0.748585
+0.265084 0.305158
+P, R, F1:
+0.297124 0.339028
+0.596651 0.739033
+0.396698 0.464821
+P, R, F1
+0.139993 0.155911
+0.618701      0.8
+0.228323 0.260963
+
+Epoch 30
+P, R, F1:
+0.137155 0.173328
+0.770631  0.85015
+0.232866 0.287949
+P, R, F1:
+0.255162 0.326179
+0.750527 0.834825
+0.380845 0.469081
+P, R, F1
+0.121959 0.146783
+0.781067 0.893617
+0.210975 0.252149
+
+Epoch 35
+P, R, F1:
+0.154949 0.188209
+0.710602 0.800533
+0.254421 0.304766
+P, R, F1:
+0.276671 0.340211
+0.694998  0.78872
+0.395784 0.475373
+P, R, F1
+0.125023 0.147616
+0.715167 0.838298
+0.212839 0.251028
+
+Epoch 40
+P, R, F1:
+0.139883 0.173837
+ 0.78284 0.860806
+0.237354  0.28926
+P, R, F1:
+0.255069 0.322429
+0.754286 0.837959
+0.381224 0.465676
+P, R, F1
+0.117604 0.140736
+0.774958 0.897872
+0.204217 0.243332
+
+Epoch 45
+P, R, F1:
+0.139098 0.175711
+0.781999 0.857476
+0.236184 0.291657
+P, R, F1:
+0.252535 0.323602
+0.750035 0.828111
+0.377849 0.465356
+P, R, F1
+0.119381 0.143916
+0.770056 0.893617
+0.206716 0.247907
+
+Epoch 50
+P, R, F1:
+0.154454 0.186566
+0.723004 0.816517
+0.254532 0.303732
+P, R, F1:
+0.276875 0.339962
+0.694902 0.789167
+0.395978  0.47521
+P, R, F1
+0.127185 0.147389
+0.717518 0.842553
+ 0.21607  0.25089
+
+Epoch 55
+P, R, F1:
+0.153635 0.188098
+0.723319 0.813187
+0.253439 0.305525
+P, R, F1:
+0.275815 0.342478
+0.695784 0.786034
+0.395035 0.477087
+P, R, F1
+ 0.12926  0.15102
+ 0.71844 0.842553
+  0.2191 0.256131
+
+Epoch 60
+P, R, F1:
+0.154635 0.187575
+0.723397 0.813853
+0.254803 0.304881
+P, R, F1:
+0.275016 0.339563
+0.695427 0.789615
+0.394157 0.474902
+P, R, F1
+0.128542 0.148893
+0.717897 0.842553
+0.218042 0.253066
+
+Epoch 65
+P, R, F1:
+0.150167  0.18466
+0.740699 0.828838
+0.249709  0.30203
+P, R, F1:
+0.270069 0.337131
+0.709565 0.799463
+0.391231 0.474266
+P, R, F1
+ 0.12576 0.147541
+0.731303 0.851064
+0.214613 0.251484
+
+Epoch 70
+P, R, F1:
+0.149459 0.184063
+0.743176 0.829837
+0.248868 0.301297
+P, R, F1:
+0.268924 0.336663
+0.711279 0.800358
+0.390287 0.473959
+P, R, F1
+0.124444 0.146422
+0.734299 0.851064
+0.212821 0.249856
+
+Epoch 75
+P, R, F1:
+0.151386  0.18535
+0.737242 0.827173
+0.251192  0.30284
+P, R, F1:
+ 0.26987 0.336565
+ 0.70646 0.797225
+0.390549 0.473312
+P, R, F1
+0.127201 0.148541
+0.724649 0.846809
+0.216414 0.252747
+
+Epoch 80
+P, R, F1:
+0.150994 0.185172
+0.740328 0.828505
+ 0.25083 0.302692
+P, R, F1:
+0.270052 0.337131
+0.709626  0.79991
+0.391222 0.474344
+P, R, F1
+0.127356 0.148586
+ 0.73099 0.851064
+0.216919 0.253002
+
+Epoch 85
+P, R, F1:
+0.151317 0.185702
+0.740247 0.828505
+0.251271   0.3034
+P, R, F1:
+0.270577 0.338121
+0.709145 0.799015
+  0.3917 0.475165
+P, R, F1
+0.127478  0.14881
+0.730075 0.851064
+0.217055 0.253325
+
+Epoch 90
+P, R, F1:
+0.151505 0.185749
+0.739332 0.828172
+0.251476  0.30344
+P, R, F1:
+0.270072 0.337316
+0.708809 0.799015
+0.391119  0.47437
+P, R, F1
+0.126453 0.147757
+0.729463 0.851064
+0.215542 0.251799
+
+Epoch 95
+P, R, F1:
+0.151629 0.185692
+0.738235 0.827839
+0.251584 0.303342
+P, R, F1:
+0.270229 0.337258
+0.707529  0.79812
+0.391088 0.474154
+P, R, F1
+0.126871 0.148246
+ 0.72428 0.846809
+ 0.21592  0.25232
+
+Epoch 100
+P, R, F1:
+0.151435 0.185636
+0.738802 0.827839
+ 0.25135 0.303267
+P, R, F1:
+0.270261 0.337316
+0.708418 0.799015
+0.391257  0.47437
+P, R, F1
+0.126704  0.14805
+0.724498 0.846809
+0.215687 0.252036
+
+Epoch 105
+P, R, F1:
+0.151373  0.18552
+0.738741 0.827839
+0.251261 0.303112
+P, R, F1:
+0.270238 0.337258
+0.708418 0.799015
+0.391234 0.474312
+P, R, F1
+0.126871 0.148246
+0.724498 0.846809
+ 0.21593  0.25232
+
+Epoch 110
+P, R, F1:
+0.151398 0.185558
+0.738699 0.827839
+0.251293 0.303163
+P, R, F1:
+0.270281 0.337258
+0.708418 0.799015
+0.391279 0.474312
+P, R, F1
+0.126787 0.148148
+0.724498 0.846809
+0.215808 0.252178
+
+Epoch 115
+P, R, F1:
+0.151412 0.185571
+0.738644 0.827839
+0.251309 0.303181
+P, R, F1:
+0.270188 0.337141
+0.708393 0.799015
+0.391177 0.474197
+P, R, F1
+0.126787 0.148148
+0.724365 0.846809
+0.215802 0.252178
+
+Epoch 120
+P, R, F1:
+0.151401 0.185558
+0.738533 0.827839
+0.251288 0.303163
+P, R, F1:
+0.270361 0.337314
+0.708344 0.799015
+0.391351 0.474368
+P, R, F1
+0.126787 0.148148
+0.724365 0.846809
+0.215802 0.252178
+
+Epoch 125
+P, R, F1:
+0.151401 0.185558
+0.738509 0.827839
+0.251286 0.303163
+P, R, F1:
+0.270314 0.337256
+0.708344 0.799015
+0.391302  0.47431
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 130
+P, R, F1:
+0.151412 0.185571
+ 0.73862 0.827839
+0.251307 0.303181
+P, R, F1:
+0.270314 0.337256
+0.708344 0.799015
+0.391302  0.47431
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 135
+P, R, F1:
+0.151422 0.185584
+0.738509 0.827839
+0.251315 0.303198
+P, R, F1:
+0.270267 0.337197
+0.708344 0.799015
+0.391253 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 140
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270267 0.337197
+0.708344 0.799015
+0.391253 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 145
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 150
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 155
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 160
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 165
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 170
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 175
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 180
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 185
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 190
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Epoch 195
+P, R, F1:
+0.151412 0.185571
+0.738509 0.827839
+0.251301 0.303181
+P, R, F1:
+0.270268 0.337197
+0.708344 0.799015
+0.391254 0.474252
+P, R, F1
+0.126704  0.14805
+0.724365 0.846809
+0.215681 0.252036
+
+Validation sample:
+            The        Foreign       Ministry           said           that            the          State     Department  pronouncement             on       Chechnya      reflected            the        efforts             of             ``        certain        circles             ''             in            the         United         States           that         object             to            the            new   U.S.-Russian    partnership        against  international      terrorism              .
+              O              O              O              O              O              B              I              I              I              I              I              O              B              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              O
+              O              O              O              O              O              B              I              I              I              I              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              B              I              I              I              I              I              I              O
+
+     Autonomous          tests             of              a        booster            are          under            way             at             an       assembly            and        testing         hangar             at       Baykonur              ,            and            the     spacecraft             is simultaneously          being         loaded           with           fuel     components              ,            the          press        service             of            the        Russian          Space         Forces       reported              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              I              O              O              O              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+      According             to          Steve         Sawyer              ,            one             of     Greenpeace  International             's        climate        experts              ,            the           plan             ``           will           have           very         little         effect             on      emissions              ,       assuming             it            has            any              .             ''
+              O              O              O              O              O              O              O              O              I              I              I              O              O              B              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              B              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+          Hours         before            the          ferry       incident              ,              a           navy           fast         attack          craft    encountered             anexplosive-laden           boat          which           blew             up             in             an       apparent          Tamil          Tiger        suicide        mission              ,    Karunaratne           said              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+          -LSB-      Sentences            are             as      published          -RSB-            The           most      important             of            the          three    conferences              ,          which   subsequently         gained           even           more     prominence              ,            was            the     conference             in         Genova              ;        perhaps           even           more             so            for            the        results             ``            not       obtained             ''             at            the     conference              ,            and          which            led             to            the     subsequent        intensedissatisfaction            and    frustration             of            the        leading     industrial         states      attending            the        meeting              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              I              I              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              B              I              I              I              O              O              O              O              O              O              B              I              I              I              I              I              I              I              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+      Evidently              ,         during              a          phone   conversation             on         Friday         Chavez           told            his       daughter           that             he            was         forced             to         resign            and         accept            the           army             's non-negotiable     conditions              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              B              O              O              O              B              I              I              I              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              B              I              I              I              I              O
+
+         OTTAWA              -            The         plight             of      prisoners            and    politicians            has           been       weighing        heavily             on            the          minds             of      editorial        writers            and        pundits             in            and         around            the         nation             's        capital              .
+              O              O              B              I              I              I              I              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              B              I              I              I              I              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+         Sunday              :         Chavez         leaves        Orchila         Island         aboard              a     helicopter            and          heads             to        Caracas              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+         During              a        private         dinner           held        Tuesday          -LSB-             16        October          -RSB-             at        Moncloa         Palace              ,            the           seat             of            the        Spanish     presidency              ,            the        leaders       examined      Argentina             's       economic       problems            and            the      electoral        setback       suffered             by            the      governing       Alliance             in            the      elections           held         Sunday          -LSB-             14        October          -RSB-             in      Argentina              ,      according             to        sources         within            the        Spanish        foreign       ministry              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              B              I              I              I              I              O              I              I              O              O              O              I              O              I              I              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             US      officials         denied      Wolfowitz             's        remarks      reflected              a         change             in             US         policy             on         Taiwan              .
+              O              O              O              B              O              O              O              B              I              I              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+Training sample:
+        Colombo         called            him             up              ,            but           only             to           tell            him           that             it            had            all           been             in           vain              .
+              O              O              O              O              O              O              O              O              O              B              O              B              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+         Craner              :            You            'll           have             to          judge             by            the        outcome              .
+              O              O              B              O              O              I              I              I              I              I              O
+              O              O              B              O              O              O              O              O              O              O              O
+
+     Washington             is        already          under           fire           from          human         rights         groups            for            its      treatment             of      prisoners       captured             in    Afghanistan            and           held             at     Guantanamo            Bay              .
+              B              O              O              O              O              O              O              O              O              O              O              O              O              I              O              I              I              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+              `              I            ...      therefore        declare         Robert         Mugabe            the         winner            for            the         office             of            the     presidency             of       Zimbabwe              ,              '         Mudede           said              .
+              O              O              O              B              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+        However              ,             he          added           that           Soto          would        receive         advice           from              a       military       attorney            and            two       civilian        lawyers         before           whom             he          would           have             to           make              a     deposition          about            his       critical       opinions             on         Chavez             's         regime              .
+              O              O              O              O              O              B              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              B              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+        BEIJING              ,          March              5          -LRB-            AFP          -RRB-             --        Beijing      condemned        Tuesday             as             ``   unreasonable             ''             an         annual             US          State     Department         report           that     criticised          China             's          human         rights         record            for         abuses      including        torture            and            the     repression             of      religious            and         ethnic     minorities              .
+              O              O              O              O              O              O              O              O              O              O              B              I              O              O              O              O              I              I              I              I              I              O              O              B              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             ``             We            ask           that            the     Venezuelan       civilian        society     understand           that             in            our        country          there             is             no     militarism             as           such              ,           only            the    appointment             of        retired       officers           that           have      recovered          their       civilian         rights            and          under             no        context      represent            the          Armed         Forces              .
+              O              O              O              O              B              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              O              I              I              I              I              I              I              I              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             In            the           past         decade              ,        despite            its     stagnating        economy              ,          Japan            has          still            put          space    exploration             as              a            top       priority           item             in            its          space        program              .
+              O              O              O              O              O              O              B              O              O              O              B              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             ``            The   presidential      elections            are           over              ,             ''            the    information       minister           said              .
+              O              B              I              I              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+           This       accounts            for        roughly             40              %             of           Iraq             's          total            oil        exports              ,             he           said              .
+              O              O              O              O              I              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+Best: 
+Drop: 0
+0.297124 0.339028
+0.596651 0.739033
+0.396698 0.464821
+0.139993 0.155911
+0.618701      0.8
+0.228323 0.260963

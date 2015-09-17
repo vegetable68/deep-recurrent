@@ -20,9 +20,9 @@
 
 #define DROPOUT
 #define ETA 0.001
-#define NORMALIZE false // keeping this false throughout my own experiments
-#define OCLASS_WEIGHT 0.09
-#define layers 3 // number of EXTRA (not all) hidden layers
+#define NORMALIZE false// keeping this false throughout my own experiments
+#define OCLASS_WEIGHT 0.25
+#define layers 2 // number of EXTRA (not all) hidden layers
 
 #define MR 0.7
 uint fold = -1;
@@ -33,6 +33,8 @@ using namespace std;
 double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
 double DROP;
+int TOTAL_NO = 1;
+map<string, int> MAP;
 
 #ifdef DROPOUT
 Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
@@ -42,22 +44,26 @@ class RNN {
   public:
     RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT);
     Matrix<double, 6, 2> train(vector<vector<string> > &sents,
+vector<vector<string> > &pos,
+
                                 vector<vector<string> > &labels,
                                 vector<vector<string> > &validX,
+vector<vector<string> > &validP,
+
                                 vector<vector<string> > &validL,
                                 vector<vector<string> > &testX,
+vector<vector<string> > &testP,
                                 vector<vector<string> > &testL);
     void update();
-	void present(vector<vector<string> > &sents,
-                vector<vector<string> > &labels);
     Matrix<double, 3, 2> testSequential(vector<vector<string> > &sents,
+vector<vector<string> > &pos,
                                     vector<vector<string> > &labels);
     LookupTable *LT;
     void save(string fname);
     void load(string fname);
 
   private:
-    void forward(const vector<string> &, int index=-1);
+    void forward(const vector<string> &, const vector<string> &, int index=-1);
     void backward(const vector<string> &);
 
     MatrixXd (*f)(const MatrixXd& x);
@@ -100,40 +106,18 @@ class RNN {
     double lr;
 };
 
-void RNN::present(vector<vector<string> > &sents,
-                vector<vector<string> > &labels){
-
-   for (uint z=0; z<10; z++) { // per sentence
-	   uint i =  rand() % sents.size();
-    forward(sents[i]);
-    vector<string> labelsPredicted;
-    for (uint j=0; j<sents[i].size(); j++) {
-      uint maxi = argmax(y.col(j));
-      if (maxi == 0)
-        labelsPredicted.push_back("O");
-      else if (maxi == 1)
-        labelsPredicted.push_back("B");
-      else
-        labelsPredicted.push_back("I");
-    }
-    assert(labelsPredicted.size() == y.cols());
-	for (int j = 0; j < sents[i].size(); j++) cout<<setw(15)<<sents[i][j];
-	cout<<endl;
-	for (int j = 0; j < sents[i].size(); j++) cout<<setw(15)<<labelsPredicted[j];
-	cout<<endl;
-	for (int j = 0; j < sents[i].size(); j++) cout<<setw(15)<<labels[i][j];
-	cout<<endl;
-	cout<<endl;
-  }
-}
-
-void RNN::forward(const vector<string> & s, int index) {
+void RNN::forward(const vector<string> & s, const vector<string> & pos, int index) {
   VectorXd dropper;
   uint T = s.size();
   this->s = s;
   x = MatrixXd(nx, T);
-  for (uint i=0; i<T; i++)
-    x.col(i) = (*LT)[s[i]];
+  //cout<<nx<<endl;
+  for (uint i=0; i<T; i++){
+//	  cout<<pos[i]<<" "<<MAP[pos[i]]<<endl;
+//	  cout<<(*LT)[s[i]].rows()<<endl;
+//	  cout<<x.rows()<<" "<<nx<<endl;
+    x.col(i).head(nx) <<(*LT)[s[i]], MAP[pos[i]];
+}
 
   hf = MatrixXd::Zero(nhf, T);
   hb = MatrixXd::Zero(nhb, T);
@@ -364,6 +348,7 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
   gWf = MatrixXd::Zero(nhf,nx);
   gVf = MatrixXd::Zero(nhf,nhf);
   gbhf = VectorXd::Zero(nhf);
+  //cout<<this->nx<<endl;
 
   gWb = MatrixXd::Zero(nhb,nx);
   gVb = MatrixXd::Zero(nhb,nhb);
@@ -420,6 +405,7 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
   }
   vWo = MatrixXd::Zero(ny,nx);
   vbo = VectorXd::Zero(ny);
+  //cout<<this->nx<<endl;
 }
 
 void RNN::update() {
@@ -608,13 +594,17 @@ void RNN::save(string fname) {
 
 Matrix<double, 6, 2>
 RNN::train(vector<vector<string> > &sents,
+				vector<vector<string> > &pos,
                 vector<vector<string> > &labels,
                 vector<vector<string> > &validX,
+				vector<vector<string> > &validP,
                 vector<vector<string> > &validL,
                 vector<vector<string> > &testX,
+				vector<vector<string> > &testP,
                 vector<vector<string> > &testL) {
   uint MAXEPOCH = 200;
   uint MINIBATCH = 80;
+  //cout<<"train"<<this->nx<<endl;
 
   ostringstream strS;
   strS << "models/drnt_" << layers << "_" << nhf << "_"
@@ -632,8 +622,9 @@ RNN::train(vector<vector<string> > &sents,
 
   for (epoch=0; epoch<MAXEPOCH; epoch++) {
     shuffle(perm);
+	cout<<epoch<<endl;
     for (int i=0; i<sents.size(); i++) {
-      forward(sents[perm[i]], perm[i]);
+      forward(sents[perm[i]], pos[perm[i]], perm[i]);
       backward(labels[perm[i]]);
       if ((i+1) % MINIBATCH == 0 || i == sents.size()-1)
         update();
@@ -643,7 +634,6 @@ RNN::train(vector<vector<string> > &sents,
       cout << "Epoch " << epoch << endl;
 
       // diagnostic
-      /*
         cout << Wf.norm() << " " << Wb.norm() << " "
              << Vf.norm() << " " << Vb.norm() << " "
              << Wfo.norm() << " " << Wbo.norm() << endl;
@@ -653,10 +643,10 @@ RNN::train(vector<vector<string> > &sents,
                << VVf[l].norm() << " " << VVb[l].norm() << " "
                << WWfo[l].norm() << " " << WWbo[l].norm() << endl;
         }
-      */
-      cout << "P, R, F1:\n" << testSequential(sents, labels) << endl;
-      resVal = testSequential(validX, validL);
-      resTest = testSequential(testX, testL);
+
+      cout << "P, R, F1:\n" << testSequential(sents, pos, labels) << endl;
+      resVal = testSequential(validX, validP, validL);
+      resTest = testSequential(testX, testP, testL);
       cout << "P, R, F1:\n" << resVal << endl;
       cout << "P, R, F1" << endl;
       cout << resTest  << endl<< endl;
@@ -675,6 +665,7 @@ RNN::train(vector<vector<string> > &sents,
 // returns soft (precision, recall, F1) per expression
 // counts proportional overlap & binary overlap
 Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents,
+vector<vector<string> > &pos,
                                          vector<vector<string> > &labels) {
   uint nExprPredicted = 0;
   double nExprPredictedCorrectly = 0;
@@ -684,7 +675,7 @@ Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents,
   int tot = 0;
   for (uint i=0; i<sents.size(); i++) { // per sentence
     vector<string> labelsPredicted;
-    forward(sents[i]);
+    forward(sents[i], pos[i]);
 
     for (uint j=0; j<sents[i].size(); j++) {
       uint maxi = argmax(y.col(j));
@@ -809,38 +800,48 @@ Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p) {
 #endif
 
 void readSentences(vector<vector<string > > &X,
-                   vector<vector<string> > &T, string fname) {
+                   vector<vector<string> > &T,
+					vector<vector<string> > &P,
+				   string fname) {
   ifstream in(fname.c_str());
   string line;
   vector<string> x;
-  vector<string> t; // individual sentences and labels
+  vector<string> t, p; // individual sentences and labels
+//  cout<<"start reading..."<<endl;
   while(std::getline(in, line)) {
     if (isWhitespace(line)) {
       if (x.size() != 0) {
         X.push_back(x);
         T.push_back(t);
+		P.push_back(p);
         x.clear();
         t.clear();
+		p.clear();
       }
     } else {
-		line = line.substr(0, line.size() - 1);
+	//	line = line.substr(0, line.size() - 1);
       string token, part, label;
       uint i = line.find_first_of('\t');
       token = line.substr(0, i);
       uint j = line.find_first_of('\t', i+1);
       part = line.substr(i+1,j-i-1);
+//	  cout<<"tag"<<endl;
       //cout << part << endl;
       i = line.find_last_of('\t');
       label = line.substr(i+1, line.size()-i-1);
       x.push_back(token);
       t.push_back(label);
+	  p.push_back(part);
+	  if (MAP.find(part) == MAP.end()) MAP[part] = TOTAL_NO ++;
     }
   }
   if (x.size() != 0) {
     X.push_back(x);
     T.push_back(t);
+	P.push_back(p);
     x.clear();
     t.clear();
+	p.clear();
   }
 }
 
@@ -855,7 +856,9 @@ int main(int argc, char **argv) {
   LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
   vector<vector<string> > X;
   vector<vector<string> > T;
-  readSentences(X, T, "target.txt"); // dse.txt or ese.txt
+  vector<vector<string> > P;
+  readSentences(X, T, P, "target1.txt"); // dse.txt or ese.txt
+  //cout<<"reading"<<endl;
 
   unordered_map<string, set<uint> > sentenceIds;
   set<string> allDocs; //Store the name of all docs
@@ -881,6 +884,7 @@ int main(int argc, char **argv) {
 
   vector<vector<string> > trainX, validX, testX;
   vector<vector<string> > trainL, validL, testL;
+  vector<vector<string> > trainP, validP, testP;
   vector<bool> isUsed(X.size(), false);
 
   ifstream in4("datasplit/doclist.mpqaOriginalSubset");
@@ -893,6 +897,7 @@ int main(int argc, char **argv) {
     for (const auto &id : sentenceIds[line]) {
       trainX.push_back(X[id]);
       trainL.push_back(T[id]);
+	  trainP.push_back(P[id]);
     }
     allDocs.erase(line);
   }
@@ -901,6 +906,7 @@ int main(int argc, char **argv) {
     for (const auto &id : sentenceIds[line]) {
       testX.push_back(X[id]);
       testL.push_back(T[id]);
+	  testP.push_back(P[id]);
     }
     allDocs.erase(line);
   }
@@ -910,6 +916,7 @@ int main(int argc, char **argv) {
     for (const auto &id : sentenceIds[doc]) {
       validX.push_back(X[id]);
       validL.push_back(T[id]);
+	  validP.push_back(P[id]);
     }
   }
 
@@ -919,17 +926,13 @@ int main(int argc, char **argv) {
   Matrix<double, 6, 2> best = Matrix<double, 6, 2>::Zero();
   double bestDrop;
   for (DROP=0; DROP<0.1; DROP+=0.2) { // can use this loop for CV
-    RNN brnn(25,25,25,3,LT);
+    RNN brnn(26,25,25,3,LT);
 //	brnn.load("dse_para/model.txt");
-    auto results = brnn.train(trainX, trainL, validX, validL, testX, testL);
+    auto results = brnn.train(trainX, trainP, trainL, validX, validP, validL, testX, testP, testL);
     if (best(2,0) < results(2,0)) { // propF1 on val set
       best = results;
       bestDrop = DROP;
     }
-	cout<<"Validation sample:"<<endl;
-	brnn.present(validX, validL);
-	cout<<"Training sample:"<<endl;
-	brnn.present(trainX, trainL);
     brnn.save("model.txt");
   }
   cout << "Best: " << endl;

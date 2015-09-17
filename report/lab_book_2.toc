@@ -1,0 +1,14 @@
+\select@language {english}
+\contentsline {chapter}{\nonumberline Friday, 1 June 2012}{4}{chapter*.2}
+\contentsline {experiment}{\numberline {1}Example experiment}{4}{experiment.1.1}
+\contentsline {subexperiment}{\numberline {1.1}Example sub-experiment}{4}{subexperiment.1.1.1}
+\contentsline {subexperiment}{\numberline {1.2}Example sub-experiment 3}{5}{subexperiment.1.1.2}
+\contentsline {experiment}{\numberline {2}Example experiment 2}{5}{experiment.1.2}
+\contentsline {subexperiment}{\numberline {2.1}Example sub-experiment}{6}{subexperiment.1.2.1}
+\contentsline {experiment}{\numberline {3}Example experiment 3}{6}{experiment.1.3}
+\contentsline {subexperiment}{\numberline {3.1}Example sub-experiment}{6}{subexperiment.1.3.1}
+\contentsline {chapter}{\nonumberline Saturday, 2 June 2012}{7}{chapter*.3}
+\contentsline {experiment}{\numberline {1}Example experiment}{7}{experiment.2.1}
+\contentsline {subexperiment}{\numberline {1.1}Example sub-experiment}{7}{subexperiment.2.1.1}
+\contentsline {experiment}{\numberline {2}Example experiment 2}{8}{experiment.2.2}
+\contentsline {subexperiment}{\numberline {2.1}Example sub-experiment}{8}{subexperiment.2.2.1}

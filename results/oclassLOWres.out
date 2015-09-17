@@ -1,0 +1,652 @@
+14492 7507 734
+Valid size: 2870
+Epoch 0
+P, R, F1:
+1 1
+0 0
+0 0
+P, R, F1:
+1 1
+0 0
+0 0
+P, R, F1
+1 1
+0 0
+0 0
+
+Epoch 5
+P, R, F1:
+0.0982047  0.121211
+ 0.775116  0.905761
+ 0.174323   0.21381
+P, R, F1:
+  0.1889  0.23602
+0.794359 0.921665
+0.305218 0.375804
+P, R, F1
+0.0921753  0.110731
+ 0.817547  0.953191
+ 0.165672  0.198413
+
+Epoch 10
+P, R, F1:
+  0.1336 0.165889
+0.732333 0.846154
+0.225975 0.277394
+P, R, F1:
+0.250496 0.311759
+0.732895 0.853626
+0.373376 0.456718
+P, R, F1
+0.117282 0.137209
+0.728913 0.880851
+0.202054 0.237434
+
+Epoch 15
+P, R, F1:
+0.139123 0.166814
+0.743072 0.849817
+0.234366 0.278885
+P, R, F1:
+0.256008 0.307809
+0.733486 0.848254
+0.379544 0.451706
+P, R, F1
+0.122966   0.1392
+0.763491 0.889362
+0.211817 0.240723
+
+Epoch 20
+P, R, F1:
+0.140813  0.16474
+0.759287 0.869464
+0.237568 0.276996
+P, R, F1:
+0.258572 0.304072
+0.748557 0.862578
+0.384372 0.449639
+P, R, F1
+0.129617 0.143939
+0.766659 0.910638
+0.221744 0.248586
+
+Epoch 25
+P, R, F1:
+0.150893 0.175892
+ 0.73275 0.834832
+0.250252 0.290564
+P, R, F1:
+0.271501 0.319227
+0.718839 0.825873
+0.394138 0.460468
+P, R, F1
+0.127281 0.142622
+0.739956 0.885106
+  0.2172  0.24566
+
+Epoch 30
+P, R, F1:
+0.137057 0.169207
+0.769184  0.86014
+0.232658 0.282784
+P, R, F1:
+0.255738 0.316967
+0.748017 0.851835
+0.381162 0.462018
+P, R, F1
+0.122513 0.142382
+0.769984 0.914894
+0.211391 0.246416
+
+Epoch 35
+P, R, F1:
+0.145937 0.173571
+0.775675 0.866134
+0.245656 0.289189
+P, R, F1:
+ 0.26228 0.316307
+0.747412 0.847807
+0.388299 0.460724
+P, R, F1
+0.124726 0.143564
+0.759641 0.889362
+ 0.21427 0.247221
+
+Epoch 40
+P, R, F1:
+0.146082 0.173835
+ 0.78416 0.871129
+0.246283 0.289833
+P, R, F1:
+0.262769 0.315827
+0.753129 0.851835
+0.389604 0.460806
+P, R, F1
+0.127255 0.145626
+0.757224 0.889362
+0.217892 0.250271
+
+Epoch 45
+P, R, F1:
+0.143182  0.17338
+0.808009 0.886447
+0.243258 0.290032
+P, R, F1:
+  0.2525 0.309702
+ 0.76392 0.857654
+0.379547 0.455075
+P, R, F1
+0.121006 0.140909
+0.768836 0.893617
+0.209102 0.243433
+
+Epoch 50
+P, R, F1:
+0.159162 0.185007
+0.746236 0.847819
+0.262365 0.303734
+P, R, F1:
+0.274956 0.324164
+0.702289 0.808863
+ 0.39519 0.462838
+P, R, F1
+0.130769  0.14864
+0.705321 0.855319
+0.220632 0.253267
+
+Epoch 55
+P, R, F1:
+0.143489 0.173231
+0.802863 0.880786
+0.243465  0.28952
+P, R, F1:
+0.256388 0.313528
+0.756675 0.854521
+0.383002 0.458741
+P, R, F1
+ 0.12371  0.14327
+0.757928 0.889362
+0.212702 0.246784
+
+Epoch 60
+P, R, F1:
+0.156936  0.18554
+0.761442 0.852148
+0.260237 0.304731
+P, R, F1:
+0.269064 0.323468
+0.710336 0.812444
+0.390291 0.462712
+P, R, F1
+0.132412 0.151915
+0.716004 0.859574
+0.223493 0.258197
+
+Epoch 65
+P, R, F1:
+0.155539 0.184433
+0.768906  0.85681
+0.258739  0.30353
+P, R, F1:
+0.267289 0.322622
+0.716559 0.816025
+0.389345 0.462422
+P, R, F1
+0.128977 0.148674
+0.720376 0.859574
+0.218783 0.253501
+
+Epoch 70
+P, R, F1:
+0.152701 0.182867
+0.774282 0.858808
+0.255093 0.301529
+P, R, F1:
+0.266227 0.323374
+0.726457 0.821844
+0.389655 0.464127
+P, R, F1
+0.130343 0.150651
+0.726649 0.868085
+0.221038 0.256745
+
+Epoch 75
+P, R, F1:
+0.157631 0.186894
+0.757218 0.845821
+0.260942 0.306142
+P, R, F1:
+0.271021 0.326275
+0.706582 0.806625
+0.391772 0.464615
+P, R, F1
+0.132163 0.152608
+0.706958 0.842553
+0.222694 0.258411
+
+Epoch 80
+P, R, F1:
+0.155378 0.185052
+0.766794  0.85348
+0.258397 0.304156
+P, R, F1:
+0.269216 0.325476
+0.716606 0.814682
+0.391393 0.465128
+P, R, F1
+0.129938 0.150789
+0.711702 0.846809
+0.219755 0.255993
+
+Epoch 85
+P, R, F1:
+0.156049 0.185458
+0.764735 0.851815
+0.259206 0.304599
+P, R, F1:
+ 0.26905 0.325141
+0.714082 0.812444
+ 0.39084 0.464421
+P, R, F1
+0.129716 0.150633
+0.710979 0.842553
+0.219403 0.255574
+
+Epoch 90
+P, R, F1:
+0.155553 0.185217
+ 0.76751 0.854479
+0.258678 0.304443
+P, R, F1:
+0.268824 0.325311
+0.717489  0.81513
+ 0.39111 0.465032
+P, R, F1
+0.130267  0.15117
+0.712553 0.846809
+0.220265 0.256543
+
+Epoch 95
+P, R, F1:
+0.155888 0.185373
+0.764958 0.851482
+0.258996 0.304462
+P, R, F1:
+0.268787  0.32528
+0.715231 0.812444
+0.390734 0.464562
+P, R, F1
+0.130045 0.151015
+0.711452 0.842553
+0.219896 0.256124
+
+Epoch 100
+P, R, F1:
+0.156257 0.185772
+0.764508 0.851149
+0.259479 0.304979
+P, R, F1:
+0.269448  0.32554
+0.713271 0.810654
+0.391139 0.464534
+P, R, F1
+0.129411 0.150381
+0.711294 0.842553
+0.218981 0.255211
+
+Epoch 105
+P, R, F1:
+ 0.15602 0.185532
+0.764917 0.851482
+0.259176 0.304677
+P, R, F1:
+0.269053 0.325438
+ 0.71458 0.811996
+0.390917  0.46465
+P, R, F1
+0.130211 0.151207
+0.711452 0.842553
+0.220132   0.2564
+
+Epoch 110
+P, R, F1:
+ 0.15603 0.185544
+0.764806 0.851482
+0.259184 0.304693
+P, R, F1:
+0.268982  0.32543
+0.714636 0.811996
+0.390851 0.464642
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 115
+P, R, F1:
+0.156072 0.185593
+0.764806 0.851482
+0.259241 0.304759
+P, R, F1:
+0.269025 0.325483
+0.714636 0.811996
+0.390897 0.464696
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 120
+P, R, F1:
+0.156102  0.18563
+0.764806 0.851482
+0.259283 0.304808
+P, R, F1:
+0.269368 0.325812
+0.714416 0.811996
+0.391226 0.465031
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 125
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 130
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269012 0.325483
+0.714457 0.811549
+0.390857 0.464623
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 135
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 140
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 145
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 150
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 155
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 160
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 165
+P, R, F1:
+0.156139 0.185654
+0.764806 0.851482
+0.259334 0.304841
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 170
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 175
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 180
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 185
+P, R, F1:
+0.156119  0.18563
+0.764806 0.851482
+0.259306 0.304808
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 190
+P, R, F1:
+0.156129 0.185642
+0.764806 0.851482
+ 0.25932 0.304825
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Epoch 195
+P, R, F1:
+0.156129 0.185642
+0.764806 0.851482
+ 0.25932 0.304825
+P, R, F1:
+0.269131 0.325593
+0.714441 0.811549
+ 0.39098 0.464734
+P, R, F1
+0.130128 0.151111
+0.711452 0.842553
+0.220014 0.256262
+
+Validation sample:
+             He           told    journalists          after        casting            his         ballot           that             he            was           more           than      confident             of        winning            the       election              .
+              O              O              O              O              O              O              O              O              B              O              O              O              O              O              B              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              B              I              I              O
+
+          Prior             to            the        Natanya       massacre     Washington            had        imposed              a         number             of    limitations             on         Sharon              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             ``             No    withholding             on            oil        exports              :             In     conclusion              ,            the     government            has        decided             to        reverse         itself             on            the             20        percent            tax           that             it            was       planning             to           levy             on          these        exports              .
+              O              O              O              O              O              O              O              O              O              O              B              I              O              O              O              B              I              I              I              I              I              I              O              B              O              O              O              O              I              O              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             In            the           Gaza          Strip          1,051         donums           were        annexed             to       existing    settlements              ,             32            new        housing          units           were          built              ,            and           work             on            190     additional          units            was        started              .
+              O              O              O              O              O              O              O              O              O              B              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+    Furthermore              ,             as         anyone            who            has           been      following            the     Zimbabwean          Press            can        testify              ,           many             of            the        Meikles          farms         around            the        country           have           been       acquired             by            the          State             as           part             of            the           land         reform      programme              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              I              I              O              O              I              O              O              O              O              O              O              O              O              I              I              I              I              O              O
+              O              O              O              B              I              I              I              I              I              I              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             It             is         likely           that             at        present         Sharon             is   entertaining        similar       thoughts            and          wants             to         create           step             by           step              a      situation           that           will           make             it       possible            for            him             to            rid        himself             of            his          enemy              .
+              O              O              O              O              O              I              I              O              O              O              O              O              O              O              B              I              I              I              I              I              I              I              I              I              I              I              B              I              I              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+         During           that   conversation              ,           Bush            and          Aznar           also          spoke          about            the      situation             in      Argentina              ,            the        Spanish      president           told             De             la            Rua              .
+              O              O              O              O              O              O              O              O              O              O              B              I              O              I              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             He      explained           that             an        Israeli          court       recently      sentenced              a    Palestinian         member             of              a          group        accused             of        opening           fire             in          which             no            one            was           hurt             to          seven          years   imprisonment              .
+              O              O              O              B              I              I              I              O              O              I              I              I              I              I              O              O              B              I              I              I              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+            The        session             of            the         United        Nations      Framework     Convention            for        Climate         Change           held           this           time            was             to          reach             on             an         actual      agreement      regarding     regulatory       problems           that           have             to             be         solved             to            put            the             ``          Kyoto       Protocol             ''        adopted             in           1997           into          force              ,             so           that            the          world            may         reduce            the     greenhouse         effect            and     ecological         damage              ,          which            are       becoming           more        serious           with           each        passing            day              ,        protect          human          lives            and         health              ,            and        provide      favorable     conditions            for            the      promotion             of          human   civilization              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              B              I              I              I              B              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              O              O              O              B              I              I              I              I              I              I              I              I              I              O              O              O              O              O              O              O              B              I              I              O              I              I              I              I              I              O              O              O              I              O              O              O              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              B              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              O              O              O              O              O              O              O              B              I              I              I              I              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+            The          forum             of           Arab        council          heads             is             to           meet       tomorrow             to           draw             up             an         action       campaign          aimed             at      thwarting            the           plan              ,           part             of              a        package             ofrecommendations            put        forward             by            the       Treasury            for              a            NIS             13        million            cut             in     government       spending              .
+              O              I              I              I              I              I              O              O              O              B              I              I              I              I              I              I              O              O              B              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              B              I              I              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+Training sample:
+          Weeks            ago         George             W.           Bush              ,            who        appears     determined             to        install              a            new     government             in        Baghdad              ,       declared            the       creation             of              a    Palestinian          state             as           good             as        decided              .
+              O              O              O              O              O              O              O              O              O              O              B              I              I              I              I              I              O              O              B              I              I              I              I              I              I              I              I              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             He      initiated              a     successful        Caracas           OPEC         summit             in      September           2000              ,            the         second             in            the        40-year      existence             of            the   Organization             of      Petroleum      Exporting      Countries              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+           Such        demands     constitute            the         strong           base            for       bringing          about           calm            and      stability              ,        putting              a          final            end             to       violence            and      terrorism              ,            and        turning              a            new           leaf         toward       fruitful   negotiations        leading             to              a           just          peace     acceptable             by            all          sides              .
+              B              O              O              O              I              I              I              I              I              I              I              I              O              O              I              I              I              I              I              I              I              O              O              O              O              O              O              O              O              O              O              I              I              I              I              O              I              O              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             In            all              ,          since            the          first         launch             of         Proton             in           1965              ,      according             to       Medvedev              ,            284       launches             of           this         rocket           have           been           made              ,            all           from            the       Baykonur     cosmodrome             in     Kazakhstan              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              B              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+            The           same      countries            had           also       violated  international            law             by       invading            the            DRC              .
+              B              I              I              O              O              O              B              O              O              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+          Large        numbers             of         People             's     Liberation           Army         troops           have           also           been           seen             on            the           move             in            theMuslim-majority         region             of       Xinjiang              ,             to            the            far           west             of          China              ,           they           said              .
+              B              I              I              I              I              I              I              I              I              I              I              O              O              B              I              I              I              I              I              I              I              I              I              I              I              I              I              I              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             It             is             an         urgent         matter            for         Israel             to       withdraw     completely           from            the       occupied           land             of      Palestine              .
+              O              O              O              O              O              O              B              I              I              I              I              I              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+             InJanuary-September           2001              ,      subsidies           were      disbursed             to      2,730,800       families             to     compensate           them            for            the          costs             of        housing            and      municipal       services            and            the           cost             of       electric          power              .
+              O              O              O              O              O              O              O              O              O              O              O              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              I              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+        However        despite       previous    discussions             ``              I           have            n't            had             as           much       progress             on     individual          cases             as              I           have         wished             to              ,             ''            she          added              .
+              O              O              O              O              O              O              O              O              O              O              O              O              O              I              I              I              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              B              I              I              I              O              O              O              O              O              O              O              O              O              O
+
+             At            the            Bay             of           Pigs              ,              a    CIA-trained          force             of          about          1,500         exiles        invaded             in             an         effort             to      overthrow         Castro             's     government              ,          which            had         seized          power             28         months         before              .
+              O              O              O              O              O              O              O              I              O              O              O              O              O              O              O              O              I              O              O              B              I              I              O              O              O              O              O              O              O              O              O
+              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O              O
+
+Best: 
+Drop: 0
+0.274956 0.324164
+0.702289 0.808863
+ 0.39519 0.462838
+0.130769  0.14864
+0.705321 0.855319
+0.220632 0.253267

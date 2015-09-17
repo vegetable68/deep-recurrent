@@ -45,6 +45,12 @@ MatrixXd relu(const MatrixXd &x) {
   return x.array().max(0);
 }
 
+double fRand(double fMin, double fMax)
+{
+	    double f = (double)rand() / RAND_MAX;
+		    return fMin + f * (fMax - fMin);
+}
+
 MatrixXd relup(const MatrixXd &x) { 
   return (x.array() > 0).cast<double>();
 }
