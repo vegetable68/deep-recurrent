@@ -18,9 +18,6 @@
 
 #define uint unsigned int
 
-#define MAX_ITER 4000
-#define ALPHA 0.01
-#define L2 0.0
 #define DROPOUT
 #define ETA 0.001
 #define NORMALIZE false// keeping this false throughout my own experiments
@@ -37,7 +34,7 @@ double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
 double DROP;
 string NAME[3] = {"Target", "Agent", "DSE"};
-double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.3};
+double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.5};
 double ENTITY_WEIGHT[3] = {1, 1, 1};
 
 #ifdef DROPOUT
@@ -45,7 +42,6 @@ Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
 #endif
 
 class RNN {
-	friend class Classifier;
 	public:
 		RNN(){}
 		RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT);
@@ -67,6 +63,9 @@ class RNN {
 
 		MatrixXd x,y,hf,hb, hhf[layers],hhb[layers];
 		vector<string> s;
+		//logistic regression params
+		MatrixXd betaArg, betaDSE;
+		double beta0;
 
 		// recurrent network params
 		MatrixXd Wo, Wfo, Wbo, WWfo[layers - 1], WWbo[layers - 1], WWfoy, WWboy;
@@ -101,197 +100,6 @@ class RNN {
 
 		double lr, ylr;
 };
-
-
-class Classifier{
-	public:
-		Classifier(uint nhf);
-		void clear(uint nhf);
-		void train(RNN argnn, RNN dsenn, vector<string> sent, vector<vector<string> > labels, vector<map<int, int> > relation);
-
-	private:
-		MatrixXd betaArg, betaDSE;
-		vector<map<int, int>> relation[3][3];
-		double beta0;
-		MatrixXd gbetaArg, gbetaDSE;
-		double gbeta0;
-
-		int determineID(int INDEX, int start, int end, vector<vector<string> > labels);
-		MatrixXd getSum(vector<MatrixXd> span);
-		double h(vector<MatrixXd> dseSpan, vector<MatrixXd> argSpan);
-		double sigmoid(double x);
-
-};
-Classifier agent_dse(25), target_dse(25);
-
-double Classifier::sigmoid(double x){
-	double e = 2.718281828;
-	if (x >= 10){
-		return 1.0 / (1.0 + pow(e, -10));
-	}else if (x <= -10){
-		return 1.0 / (1.0 + pow(e, 10));
-	}
-	return 1.0 / (1.0 + pow(e, -x));
-}
-
-double Classifier::h(vector<MatrixXd> dseSpan, vector<MatrixXd> argSpan){
-	Matrix<double, 1, 1> y;
-	y << 0.;
-	for (int i = 0; i < dseSpan.size(); i ++)
-		y = y + betaDSE * dseSpan[i];
-	for (int i = 0; i < argSpan.size(); i ++)
-		y = y + betaArg * argSpan[i];
-	y(0, 0) = y(0, 0) + beta0;
-	return sigmoid(y(0, 0));
-}
-
-int Classifier::determineID(int INDEX, int start, int end, vector<vector<string> > labels){
-	vector<int> beginSet, endSet;
-	bool inProcess = false;
-	for (int j = 0; j < labels.size(); j ++){
-		if (labels[INDEX][j] == "O"){
-			if (inProcess) endSet.push_back(j);
-			inProcess = false;
-		}
-		if (labels[INDEX][j] == "B"){
-			if (inProcess) endSet.push_back(j);
-			inProcess = false;
-			beginSet.push_back(j);
-		}
-	}
-	if (inProcess) endSet.push_back(labels.size());
-
-	int overlap = 0, id = -1;
-	for (int k = 0; k < beginSet.size(); k ++){
-		int curLap = min(endSet[k], end) - max(beginSet[k], start);
-		if (curLap > overlap) {overlap = curLap; id = k;}
-	}
-}
-
-MatrixXd Classifier::getSum(vector<MatrixXd> span){
-	MatrixXd res = span[0];
-	for (int i = 1; i < span.size(); i ++)
-		res = res + span[i];
-	return res;
-}
-
-void Classifier::train(RNN argnn, RNN dsenn,
-			vector<string> sent,
-			vector<vector<string> > labels,
-			vector<map<int, int> > relation){
-	//extract the candidates
-	vector<string> argCandidates, dseCandidates;
-	vector<int> argID, dseID;
-	vector<vector<MatrixXd>> argSpan, dseSpan;
-	for (uint j=0; j<sent.size(); j++) {
-		uint maxi = argmax(argnn.y.col(j));
-		if (maxi == 0)
-			argCandidates.push_back("O");
-		else if (maxi == 1)
-			argCandidates.push_back("B");
-		else
-			argCandidates.push_back("I");
-	}
-	assert(argCandidates.size() == argnn.y.cols());
-	for (uint j=0; j<sent.size(); j++) {
-		uint maxi = argmax(dsenn.y.col(j));
-		if (maxi == 0)
-			dseCandidates.push_back("O");
-		else if (maxi == 1)
-			dseCandidates.push_back("B");
-		else
-			dseCandidates.push_back("I");
-	}
-	assert(dseCandidates.size() == dsenn.y.cols());
-	//get Span
-	vector<MatrixXd> curArg, curDse;
-	int start = 0, end = -1;
-	for (int j = 0; j < sent.size(); j ++){
-		if (argCandidates[j] == "O"){
-			if (!curArg.empty()){
-				argID.push_back(determineID(argnn.INDEX, start, j, labels));
-				argSpan.push_back(curArg);
-			}
-			curArg.clear();
-		}
-		if (argCandidates[j] == "B"){
-			if (!curArg.empty()){
-				argID.push_back(determineID(argnn.INDEX, start, j, labels));
-				argSpan.push_back(curArg);
-			}
-			curArg.clear();
-			start = j;
-			curArg.push_back(argnn.hhf[layers - 1].col(j));
-		}
-		if (argCandidates[j] == "I"){
-			if (curArg.empty()) start = j;
-			curArg.push_back(argnn.hhf[layers - 1].col(j));
-		}
-	}
-	if (!curArg.empty()){
-		argID.push_back(determineID(argnn.INDEX, start, sent.size(), labels));
-		argSpan.push_back(curArg);
-	}
-	start = 0;
-	for (int j = 0; j < sent.size(); j ++){
-		if (dseCandidates[j] == "O"){
-			if (!curDse.empty()){
-				dseID.push_back(determineID(dsenn.INDEX, start, j, labels));
-				dseSpan.push_back(curDse);
-			}
-			curDse.clear();
-		}
-		if (dseCandidates[j] == "B"){
-			if (!curDse.empty()){
-				dseID.push_back(determineID(dsenn.INDEX, start, j, labels));
-				dseSpan.push_back(curDse);
-			}
-			curDse.clear();
-			start = j ;
-			curDse.push_back(dsenn.hhf[layers - 1].col(j));
-		}
-		if (dseCandidates[j] == "I"){
-			if (!curDse.empty()) start = j;
-			curDse.push_back(dsenn.hhf[layers - 1].col(j));
-		}
-	}
-	if (!curDse.empty()){
-		dseID.push_back(determineID(dsenn.INDEX, start, sent.size(), labels));
-		dseSpan.push_back(curDse);
-	}
-
-	//train with the candidates
-	double last_mrse;
-	for (int iter = 0; iter < MAX_ITER; iter ++){
-		 //predict
-		 double mrse = 0;
-		 int totIns = dseSpan.size() * argSpan.size();
-		 if (totIns == 0) break;
-		 for(int i = 0; i < dseSpan.size(); ++i) {
-		 	 for (int j = 0; j < argSpan.size(); ++j){
-				double predict = h(dseSpan[i], argSpan[j]);
-				double ans = 0;
-				if (relation[argnn.INDEX].find(dseID[i])
-						!= relation[argnn.INDEX].end())
-					ans =  double(relation[argnn.INDEX][dseID[i]]
-							== argID[j]);
-				else ans = 0;
-				mrse += (ans - predict) * (ans - predict);
-				gbetaDSE += (ans - predict) * getSum(dseSpan[i]).transpose();
-				gbetaArg += (ans - predict) * getSum(argSpan[i]).transpose();
-				gbeta0 += ans - predict;
-			}
-		 }
-		 //cout << "mrse:" << sqrt(mrse/m) << endl;
-		 if (last_mrse - mrse < 0.0001) break;
-		 last_mrse = mrse;
-		 betaDSE -= ALPHA * gbetaDSE/totIns - L2 * betaDSE;
-		 betaArg -= ALPHA * gbetaArg/totIns - L2 * betaArg;
-		 beta0 -= ALPHA * gbeta0/totIns - L2 * beta0;
-	}
-	//backprop the error to hidden layer
-}
-
 
 void RNN::forward(const vector<string> & s, int index) {
 	VectorXd dropper;
@@ -493,20 +301,6 @@ void RNN::backward(const vector<vector<string> > &labels) {
 	gbhb.noalias() += fphdh;
 }
 
-Classifier::Classifier(uint nhf){
-	beta0 = rand();
-	betaArg = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-	betaDSE = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-}
-
-void Classifier::clear(uint nhf){
-	beta0 = rand();
-	betaArg = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-	betaDSE = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-}
-
-
-
 
 RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 	lr = ETA;
@@ -522,6 +316,9 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 	f = &relu;
 	fp = &relup;
 
+	beta0 = rand();
+	betaArg = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
+	betaDSE = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
 
 	// init randomly
 	Wf = MatrixXd(nhf,nx).unaryExpr(ptr_fun(urand));
@@ -631,7 +428,7 @@ void RNN::update() {
 	gWWfoy.noalias() += (lambda)*WWfoy;
 	gWWboy.noalias() += (lambda)*WWboy;
 
-	norm += 0.1* (gWo.squaredNorm());
+	norm += 0.1* (gWo.squaredNorm() + gbo.squaredNorm());
 	norm += 0.1 *(gWWfoy.squaredNorm() + gWWboy.squaredNorm() + gbo.squaredNorm());
 	for (uint l=0; l<layers - 1; l++)
 		norm+= 0.1*(gWWfo[l].squaredNorm() + gWWbo[l].squaredNorm());
@@ -823,15 +620,10 @@ void RNN::output(ostringstream &strS, int MAXEPOCH){
 vector<Matrix<double, 3, 2>>
 train(RNN brnn[3], vector<vector<string> > &sents,
 		vector<vector<vector<string> > > &labels,
-		vector<vector<map<int, int> > > &relation,
-
 		vector<vector<string> > &validX,
 		vector<vector<vector<string> > > &validL,
-		vector<vector<map<int, int> > > &validR,
-
 		vector<vector<string> > &testX,
-		vector< vector<vector<string> > > &testL,
-		vector<vector<map<int, int> > > &testR) {
+		vector< vector<vector<string> > > &testL) {
 	uint MAXEPOCH = 200;
 	uint MINIBATCH = 80;
 	string fname[3];
@@ -843,7 +635,7 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 	}
 
 	vector<uint> perm;
-	for (int j = 0; j < 3; j ++) brnn[j].INDEX = j;
+		for (int j = 0; j < 3; j ++) brnn[j].INDEX = j;
 	for (uint i=0; i<sents.size(); i++)
 		perm.push_back(i);
 
@@ -861,8 +653,6 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 		shuffle(perm);
 		for (int i=0; i<sents.size(); i++) {
 			for (int j = 0; j < 3; j ++) brnn[j].forward(sents[perm[i]], perm[i]);
-			agent_dse.train(brnn[1], brnn[2], sents[perm[i]], labels[perm[i]], relation[perm[i]]);
-			target_dse.train(brnn[0], brnn[2], sents[perm[i]], labels[perm[i]], relation[perm[i]]);
 //			cout<<"fwd"<<endl;
 			for (int j = 0; j < 3; j ++) brnn[j].backward(labels[perm[i]]);
 //			cout<<"bwd"<<endl;
@@ -1115,32 +905,6 @@ void readSentences(vector<vector<string > > &X,
 	}
 }
 
-void getRelation(vector<map<int, int> > &R,
-		string fname) {
-	ifstream in(fname.c_str());
-	string line;
-	map<int, int> r;
-	while(std::getline(in, line)) {
-		if (isWhitespace(line)) {
-			if (r.size() != 0) {
-				R.push_back(r);
-				r.clear();
-			}
-		} else {
-			string dseID, argID;
-			uint i = line.find_first_of('\t');
-			dseID = line.substr(0, i);
-			argID= line.substr(i+1, line.size()-i-1);
-			r[toDigit(dseID)] = toDigit(argID);
-		}
-	}
-	if (r.size() != 0) {
-		R.push_back(r);
-		r.clear();
-	}
-}
-
-
 int main(int argc, char **argv) {
 
 	fold = atoi(argv[1]); // between 0-9
@@ -1152,15 +916,7 @@ int main(int argc, char **argv) {
 	LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
 	vector<vector<string> > X;
 	vector<vector<string> > T[3];
-	vector<map<int, int> >  R[2];
 	readSentences(X, T[0], T[1], T[2], "all.txt"); // dse.txt or ese.txt
-	for (int i = 0; i < 2; i ++){
-		string fname = "relation";
-		fname = fname + char('0' + i);
-		fname = fname + ".txt";
-		getRelation(R[i], fname);
-	}
-	//relation0: dse - target relation1: dse - agent
 
 	unordered_map<string, set<uint> > sentenceIds;
 	set<string> allDocs; //Store the name of all docs
@@ -1185,7 +941,6 @@ int main(int argc, char **argv) {
 	}
 
 	vector<vector<string> > trainX, validX, testX;
-	vector<vector<map<int, int> > > trainR, validR, testR;
 	vector<vector<vector<string> > > trainL, validL, testL;
 	vector<bool> isUsed(X.size(), false);
 
@@ -1198,10 +953,6 @@ int main(int argc, char **argv) {
 	while(getline(in2, line)) {
 		for (const auto &id : sentenceIds[line]) {
 			trainX.push_back(X[id]);
-			vector<map<int, int> > tmp;
-			tmp.clear();
-			for (uint k = 0; k < 2; k ++) tmp.push_back(R[k][id]);
-			trainR.push_back(tmp);
 			vector<vector<string> > nxt;
 			nxt.clear();
 			for (uint k = 0; k < 3; k ++) nxt.push_back(T[k][id]);
@@ -1213,10 +964,6 @@ int main(int argc, char **argv) {
 	while(getline(in3, line)) {
 		for (const auto &id : sentenceIds[line]) {
 			testX.push_back(X[id]);
-			vector<map<int, int> > tmp;
-			tmp.clear();
-			for (uint k = 0; k < 2; k ++) tmp.push_back(R[k][id]);
-			testR.push_back(tmp);
 			vector<vector<string> > nxt;
 			nxt.clear();
 			for (uint k = 0; k < 3; k ++) nxt.push_back(T[k][id]);
@@ -1229,10 +976,6 @@ int main(int argc, char **argv) {
 	for (const auto &doc : allDocs) {
 		for (const auto &id : sentenceIds[doc]) {
 			validX.push_back(X[id]);
-			vector<map<int, int> > tmp;
-			tmp.clear();
-			for (uint k = 0; k < 2; k ++) tmp.push_back(R[k][id]);
-			validR.push_back(tmp);
 			vector<vector<string> > nxt;
 			nxt.clear();
 			for (uint k = 0; k < 3; k ++) nxt.push_back(T[k][id]);
@@ -1250,11 +993,10 @@ int main(int argc, char **argv) {
 	//		OCLASS_WEIGHT[0] = fRand(0.05,0.2);
 	RNN brnn[3];
 	for (int j = 0; j < 3; j ++) brnn[j] = RNN(25,25,25,3,LT);
-	agent_dse.clear(25); target_dse.clear(25);
 	//cout<<"initialization"<<endl;
 	//		cout<<"OCLASS_WEIGHT "<<OCLASS_WEIGHT[0]<<":"<<endl;
 	//		brnn.load("dse_para/model.txt");
-	auto results = train(brnn, trainX, trainL, trainR, validX, validL, validR, testX, testL, testR);
+	auto results = train(brnn, trainX, trainL, validX, validL, testX, testL);
 	//cout<<"tag1"<<endl;
 	for (int j = 0; j < 3; j ++)
 	if (best[j](2,0) < results[j](2,0)) { // propF1 on val set

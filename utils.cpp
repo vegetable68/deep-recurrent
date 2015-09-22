@@ -51,7 +51,7 @@ double fRand(double fMin, double fMax)
 		    return fMin + f * (fMax - fMin);
 }
 
-MatrixXd relup(const MatrixXd &x) { 
+MatrixXd relup(const MatrixXd &x) {
   return (x.array() > 0).cast<double>();
 }
 
@@ -94,7 +94,7 @@ void LookupTable::load(string fname, uint n, uint d, bool noUnknown) {
     std::istream_iterator<std::string> begin(ss), end;
 
     //putting all the tokens in the vector
-    std::vector<std::string> tokens(begin, end); 
+    std::vector<std::string> tokens(begin, end);
     for (uint i=0; i<d; i++)
       data(i,j) = str2double(tokens[i+1]);
     table[tokens[0]] = j;
@@ -102,7 +102,7 @@ void LookupTable::load(string fname, uint n, uint d, bool noUnknown) {
     if (j == n)
       break;
   }
-  
+
   if (noUnknown) {
     VectorXd v = data.rowwise().mean();
     data.col(n-1) = v;
@@ -153,7 +153,7 @@ void LookupTable::gradAdd(string word, VectorXd v) {
     word = "(";
   else if (word == "-RCB-")
     word = ")";
- 
+
   it = table.find(word);
   if (it != table.end()) {// exists
     gdata.col(table[word]) += v;
@@ -167,7 +167,7 @@ void LookupTable::gradAdd(string word, VectorXd v) {
 void LookupTable::update() {
   lr = 0.001;
   for (auto i : modifiedCols) {
-    adata.col(i) = (adata.col(i).cwiseProduct(adata.col(i)) + 
+    adata.col(i) = (adata.col(i).cwiseProduct(adata.col(i)) +
                   gdata.col(i).cwiseProduct(gdata.col(i))).cwiseSqrt();
     data.col(i) -= lr*gdata.col(i).cwiseQuotient(adata.col(i));
     gdata.col(i).setZero();
@@ -235,5 +235,13 @@ vector<string> split(const string &s, char delim) {
     elems.push_back(item);
   }
   return elems;
+}
+
+int toDigit(string s){
+	if (s == "0") return 0;
+	int x = 0;
+	for (int i = 0; i < s.length(); i ++)
+		x = x * 10 + (s[i] - '0');
+	return x;
 }
 
