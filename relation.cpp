@@ -108,6 +108,8 @@ class Classifier{
 		Classifier(uint nhf);
 		void clear(uint nhf);
 		void train(RNN argnn, RNN dsenn, vector<string> sent, vector<vector<string> > labels, vector<map<int, int> > relation);
+		Vector3d test(RNN argnn, RNN dsenn, vector<vector<string> > sent, vector<vector<vector<string> > > labels, vector<vector<map<int, int> > > relation);
+
 
 	private:
 		MatrixXd betaArg, betaDSE;
@@ -291,6 +293,120 @@ void Classifier::train(RNN argnn, RNN dsenn,
 	}
 	//backprop the error to hidden layer
 }
+
+Vector3d Classifier::test(RNN argnn, RNN dsenn,
+			vector<vector<string> > sent,
+			vector<vector<vector<string> > > labels,
+			vector<vector<map<int, int> > > relation){
+	Vector3d res;
+	int trupredict= 0, tru_pos = 0, truset = 0;
+	for (int z = 0; z < sent.size(); z ++){
+		vector<string> argCandidates, dseCandidates;
+		vector<int> argID, dseID;
+		vector<vector<MatrixXd>> argSpan, dseSpan;
+		for (uint j=0; j<sent[z].size(); j++) {
+			uint maxi = argmax(argnn.y.col(j));
+			if (maxi == 0)
+				argCandidates.push_back("O");
+			else if (maxi == 1)
+				argCandidates.push_back("B");
+			else
+				argCandidates.push_back("I");
+		}
+		assert(argCandidates.size() == argnn.y.cols());
+		for (uint j=0; j<sent[z].size(); j++) {
+			uint maxi = argmax(dsenn.y.col(j));
+			if (maxi == 0)
+				dseCandidates.push_back("O");
+			else if (maxi == 1)
+				dseCandidates.push_back("B");
+			else
+				dseCandidates.push_back("I");
+		}
+		assert(dseCandidates.size() == dsenn.y.cols());
+		//get Span
+		vector<MatrixXd> curArg, curDse;
+		int start = 0, end = -1;
+		for (int j = 0; j < sent.size(); j ++){
+			if (argCandidates[j] == "O"){
+				if (!curArg.empty()){
+					argID.push_back(determineID(argnn.INDEX, start, j, labels[z]));
+					argSpan.push_back(curArg);
+				}
+				curArg.clear();
+			}
+			if (argCandidates[j] == "B"){
+				if (!curArg.empty()){
+					argID.push_back(determineID(argnn.INDEX, start, j, labels[z]));
+					argSpan.push_back(curArg);
+				}
+				curArg.clear();
+				start = j;
+				curArg.push_back(argnn.hhf[layers - 1].col(j));
+			}
+			if (argCandidates[j] == "I"){
+				if (curArg.empty()) start = j;
+				curArg.push_back(argnn.hhf[layers - 1].col(j));
+			}
+		}
+		if (!curArg.empty()){
+			argID.push_back(determineID(argnn.INDEX, start, sent.size(), labels[z]));
+			argSpan.push_back(curArg);
+		}
+		start = 0;
+		for (int j = 0; j < sent.size(); j ++){
+			if (dseCandidates[j] == "O"){
+				if (!curDse.empty()){
+					dseID.push_back(determineID(dsenn.INDEX, start, j, labels[z]));
+					dseSpan.push_back(curDse);
+				}
+				curDse.clear();
+			}
+			if (dseCandidates[j] == "B"){
+				if (!curDse.empty()){
+					dseID.push_back(determineID(dsenn.INDEX, start, j, labels[z]));
+					dseSpan.push_back(curDse);
+				}
+				curDse.clear();
+				start = j ;
+				curDse.push_back(dsenn.hhf[layers - 1].col(j));
+			}
+			if (dseCandidates[j] == "I"){
+				if (!curDse.empty()) start = j;
+				curDse.push_back(dsenn.hhf[layers - 1].col(j));
+			}
+		}
+		if (!curDse.empty()){
+			dseID.push_back(determineID(dsenn.INDEX, start, sent.size(), labels[z]));
+			dseSpan.push_back(curDse);
+		}
+
+		//train with the candidates
+		int totIns = dseSpan.size() * argSpan.size();
+		if (totIns == 0) continue;
+		for(int i = 0; i < dseSpan.size(); ++i) {
+			for (int j = 0; j < argSpan.size(); ++j){
+				double predict = h(dseSpan[i], argSpan[j]);
+				int ans = 0;
+				if (relation[z][argnn.INDEX].find(dseID[i])
+						!= relation[z][argnn.INDEX].end())
+					ans =  (relation[z][argnn.INDEX][dseID[i]] == argID[j]);
+				else ans = 0;
+				if (predict > 0.5){
+					trupredict ++;
+					if (ans == 1) tru_pos ++;
+				}
+				if (ans == 1) truset ++;
+			}
+		}
+	}
+	double precision = (trupredict == 0) ? 1 : tru_pos / trupredict,
+		   recall = (truset == 0) ? 1 : tru_pos / truset,
+		   f1 = 2. * (precision * recall) / (precision + recall);
+	res <<precision, recall, f1;
+	return res;
+}
+
 
 
 void RNN::forward(const vector<string> & s, int index) {
@@ -908,6 +1024,15 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 				}
 				//cerr<<NAME[j]<<endl;
 			}
+			cout<<"is from:"<<endl;
+			cout<<"Train:"<<agent_dse.test(brnn[1], brnn[2], sents, labels, relation)<<endl;
+			cout<<"Val:"<<agent_dse.test(brnn[1], brnn[2], validX, validL, validR)<<endl;
+			cout<<"Test:"<<agent_dse.test(brnn[1],brnn[2], testX, testL, testR)<<endl;
+
+			cout<<"is about:"<<endl;
+			cout<<"Train:"<<target_dse.test(brnn[1], brnn[2], sents, labels, relation)<<endl;
+			cout<<"Val:"<<target_dse.test(brnn[1], brnn[2], validX, validL, validR)<<endl;
+			cout<<"Test:"<<target_dse.test(brnn[1], brnn[2], testX, testL, testR)<<endl;
 		}
 		//		cout<<epoch<<endl;
 	}
