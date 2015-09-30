@@ -240,6 +240,7 @@ vector<string> split(const string &s, char delim) {
 int toDigit(string s){
 	if (s == "0") return 0;
 	int x = 0;
+
 	for (int i = 0; i < s.length(); i ++)
 		x = x * 10 + (s[i] - '0');
 	return x;
