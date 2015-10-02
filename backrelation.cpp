@@ -19,7 +19,7 @@
 #define uint unsigned int
 
 #define MAX_ITER 4000
-#define ALPHA_DR 0.99
+#define ALPHA 0.001
 #define L2 0.0
 #define DROPOUT
 #define ETA 0.001
@@ -102,54 +102,36 @@ class RNN {
 		double lr, ylr;
 };
 
-class AnsPair{
-	public:
-		AnsPair(MatrixXd _dseSpanf, MatrixXd _argSpanf, MatrixXd _dseSpanb, MatrixXd _argSpanb, double _ans);
-		MatrixXd dseSpanf, argSpanf, dseSpanb, argSpanb;
-		double ans;
-};
-
-AnsPair::AnsPair(MatrixXd _dseSpanf, MatrixXd _argSpanf, MatrixXd _dseSpanb, MatrixXd _argSpanb, double _ans){
-	dseSpanf = _dseSpanf; argSpanf = _argSpanf;
-	dseSpanb = _dseSpanb; argSpanb = _argSpanb;
-	ans = _ans;
-}
-
 
 class Classifier{
 	public:
-		Classifier(uint _nhf, double _alpha);
-		void clear(uint _nhf, double _alpha);
+		Classifier(uint _nhf);
+		void clear(uint _nhf);
 		void train(RNN argnn, RNN dsenn, vector<vector<string> >sent,
 				vector<vector<vector<string> > > labels,
 				vector<vector<map<int, vector<int> > > > relation);
 		RowVector3d test(RNN argnn, RNN dsenn, vector<vector<string> > sent, vector<vector<vector<string> > > labels, vector<vector<map<int, vector<int> > > > relation, vector<vector<int> > cnt);
 		void diag();
-		double ALPHA;
 
 
 	private:
-		double alpha;
 		int nhf;
-		MatrixXd betaArgf, betaDSEf, betaArgb, betaDSEb;
+		MatrixXd betaArg, betaDSE;
 		double beta0;
-		MatrixXd gbetaArgf, gbetaDSEf, gbetaArgb, gbetaDSEb;
+		MatrixXd gbetaArg, gbetaDSE;
 		double gbeta0;
 
 		int determineID(int INDEX, int start, int end, vector<vector<string> > labels);
 		MatrixXd getSum(vector<MatrixXd> span);
-		double h(vector<MatrixXd> dseSpanf, vector<MatrixXd> argSpanf, vector<MatrixXd> dseSpanb, vector<MatrixXd> argSpanb);
-		double trainh(AnsPair cur);
+		double h(vector<MatrixXd> dseSpan, vector<MatrixXd> argSpan);
 		double sigmoid(double x);
 
 };
-Classifier agent_dse(25, 0.1), target_dse(25, 0.01);
+Classifier agent_dse(25), target_dse(25);
 
 void Classifier::diag(){
-	cout<<"betaDSEf:"; cout<<betaDSEf<<endl;
-	cout<<"betaARGf:"; cout<<betaArgf<<endl;
-	cout<<"betaDSEb:"; cout<<betaDSEb<<endl;
-	cout<<"betaARGb:"; cout<<betaArgb<<endl;
+	cout<<"betaDSE:"; cout<<betaDSE<<endl;
+	cout<<"betaARG:"; cout<<betaArg<<endl;
 	cout<<"beta0:"; cout<<beta0<<endl;
 	cout<<endl;
 }
@@ -165,26 +147,15 @@ double Classifier::sigmoid(double x){
 	return 1.0 / (1.0 + pow(e, -x));
 }
 
-double Classifier::h(vector<MatrixXd> dseSpanf, vector<MatrixXd> argSpanf, vector<MatrixXd> dseSpanb, vector<MatrixXd> argSpanb){
+double Classifier::h(vector<MatrixXd> dseSpan, vector<MatrixXd> argSpan){
 	Matrix<double, 1, 1> y;
 	y << 0.;
-	assert(dseSpanf.size() == dseSpanb.size());
-	for (int i = 0; i < dseSpanf.size(); i ++)
-		y = y + betaDSEf * dseSpanf[i] + betaDSEb * dseSpanb[i];
-	assert(argSpanf.size() == argSpanb.size());
-	for (int i = 0; i < argSpanf.size(); i ++)
-		y = y + betaArgf * argSpanf[i] + betaArgb * argSpanb[i];
+	for (int i = 0; i < dseSpan.size(); i ++)
+		y = y + betaDSE * dseSpan[i];
+	for (int i = 0; i < argSpan.size(); i ++)
+		y = y + betaArg * argSpan[i];
 	y(0, 0) = y(0, 0) + beta0;
 //	cerr<<"h() "<<y(0,0)<<endl;
-	return sigmoid(y(0, 0));
-}
-
-double Classifier::trainh(AnsPair cur){
-	Matrix<double, 1, 1> y;
-	y << 0.;
-	y = y + betaDSEf * cur.dseSpanf + betaDSEb * cur.dseSpanb;
-	y = y + betaArgf * cur.argSpanf + betaArgb * cur.argSpanb;
-	y(0, 0) = y(0, 0) + beta0;
 	return sigmoid(y(0, 0));
 }
 
@@ -235,90 +206,91 @@ void Classifier::train(RNN argnn, RNN dsenn,
 			vector<vector<map<int, vector<int> > > > relation){
 	//extract the candidates
 	vector<vector<int> > argID, dseID;
-	vector<vector<vector<MatrixXd> > > argSpanf, dseSpanf;
-	vector<vector<vector<MatrixXd> > > argSpanb, dseSpanb;
-	vector<AnsPair> trainingQ;
+	vector<vector<vector<MatrixXd> > > argSpan, dseSpan;
+	vector<vector<vector<int> > > argSpanID, dseSpanID;
 	//cerr<<"classifier"<<endl;
 	for (uint z = 0; z < sent.size(); z ++){
 		vector<int> curArgID, curDseID;
-		vector<vector<MatrixXd> >  curArgSpanf, curDseSpanf;
-		vector<vector<MatrixXd> >  curArgSpanb, curDseSpanb;
+		vector<vector<MatrixXd> >  curArgSpan, curDseSpan;
+		vector<vector<int> > curArgSpanID, curDseSpanID;
 		argnn.forward(sent[z]);
 		dsenn.forward(sent[z]);
 		//get Span
+		vector<MatrixXd> curArg, curDse;
+		vector<int> curArgID, curDseID;
 		int start = 0, end = -1;
-		vector<MatrixXd> curArgf, curDsef;
-		vector<MatrixXd> curArgb, curDseb;
 		for (int j = 0; j < sent[z].size(); j ++){
 			uint maxi = argmax(argnn.y.col(j));
 			if (maxi == 0){
-				if (!curArgf.empty()){
+				if (!curArg.empty()){
 					curArgID.push_back(determineID(argnn.INDEX, start, j, labels[z]));
-					curArgSpanf.push_back(curArgf);
-					curArgSpanb.push_back(curArgb);
+					curArgSpan.push_back(curArg);
+					curArgSpanID.push_back(curArgID);
 				}
-				curArgf.clear();
-				curArgb.clear();
+				curArg.clear();
+				curArgID.clear();
 			}
 			if (maxi == 1){
-				if (!curArgf.empty()){
+				if (!curArg.empty()){
 					curArgID.push_back(determineID(argnn.INDEX, start, j, labels[z]));
-					curArgSpanf.push_back(curArgf);
-					curArgSpanb.push_back(curArgb);
+					curArgSpan.push_back(curArg);
+					curArgSpanID.push_back(curArgID);
 				}
-				curArgf.clear(); curArgb.clear();
+				curArg.clear();
+				curArgID.clear();
 				start = j;
-				curArgf.push_back(argnn.hhf[layers - 1].col(j));
-				curArgb.push_back(argnn.hhb[layers - 1].col(j));
+				curArg.push_back(argnn.hhf[layers - 1].col(j));
+				curArgID.push_back(j);
 			}
 			if (maxi == 2){
-				if (curArgf.empty()) start = j;
-				curArgf.push_back(argnn.hhf[layers - 1].col(j));
-				curArgb.push_back(argnn.hhb[layers - 1].col(j));
+				if (curArg.empty()) start = j;
+				curArg.push_back(argnn.hhf[layers - 1].col(j));
+				curArgID.push_back(j);
 			}
 		}
-		if (!curArgf.empty()){
+		if (!curArg.empty()){
 			curArgID.push_back(determineID(argnn.INDEX, start, sent[z].size(), labels[z]));
-			curArgSpanf.push_back(curArgf);
-			curArgSpanb.push_back(curArgb);
+			curArgSpan.push_back(curArg);
+			curArgSpanID.push_back(curArgID);
 		}
 		start = 0;
 		for (int j = 0; j < sent[z].size(); j ++){
 			uint maxi = argmax(dsenn.y.col(j));
 			if (maxi == 0){
-				if (!curDsef.empty()){
+				if (!curDse.empty()){
 					curDseID.push_back(determineID(dsenn.INDEX, start, j, labels[z]));
-					curDseSpanf.push_back(curDsef);
-					curDseSpanb.push_back(curDseb);
+					curDseSpan.push_back(curDse);
+					curDseSpanID.push_back(curDseID);
 				}
-				curDsef.clear();
-				curDseb.clear();
+				curDse.clear();
+				curDseID.clear();
 			}
 			if (maxi == 1){
-				if (!curDsef.empty()){
+				if (!curDse.empty()){
 					curDseID.push_back(determineID(dsenn.INDEX, start, j, labels[z]));
-					curDseSpanf.push_back(curDsef);
-					curDseSpanb.push_back(curDseb);
+					curDseSpan.push_back(curDse);
+					curDseSpanID.push_back(curDseID);
 				}
-				curDsef.clear(); curDseb.clear();
+				curDse.clear();
+				curDseID.clear();
 				start = j ;
-				curDsef.push_back(dsenn.hhf[layers - 1].col(j));
-				curDseb.push_back(dsenn.hhb[layers - 1].col(j));
+				curDse.push_back(dsenn.hhf[layers - 1].col(j));
+				curDseID.push_back(j);
 			}
 			if (maxi == 2){
-				if (!curDsef.empty()) start = j;
-				curDsef.push_back(dsenn.hhf[layers - 1].col(j));
-				curDseb.push_back(dsenn.hhb[layers - 1].col(j));
+				if (!curDse.empty()) start = j;
+				curDse.push_back(dsenn.hhf[layers - 1].col(j));
+				curDseID.push_back(j);
 			}
 		}
-		if (!curDsef.empty()){
+		if (!curDse.empty()){
 			curDseID.push_back(determineID(dsenn.INDEX, start, sent[z].size(), labels[z]));
-			curDseSpanf.push_back(curDsef);
-			curDseSpanb.push_back(curDseb);
+			curDseSpan.push_back(curDse);
+			curDseSpanID.push_back(curDseID);
 		}
 		argID.push_back(curArgID);dseID.push_back(curDseID);
-		argSpanf.push_back(curArgSpanf); dseSpanf.push_back(curDseSpanf);
-		argSpanb.push_back(curArgSpanb); dseSpanb.push_back(curDseSpanb);
+		argSpan.push_back(curArgSpan); dseSpan.push_back(curDseSpan);
+		argSpanID.push_back(curArgSpanID); dseSpanID.push_back(curDseSpanID);
 	}
 	//cerr<<"get span"<<endl;
 
@@ -327,12 +299,70 @@ void Classifier::train(RNN argnn, RNN dsenn,
 	int xx;
 	int validPairs = 0;
 	int tmp;
-	alpha = ALPHA;
+	for (int iter = 0; iter < MAX_ITER; iter ++){
+		 //predict
+		 double mrse = 0;
+		 int totIns = 0;
+		 gbetaDSE = RowVectorXd::Zero(nhf);
+		 gbetaArg = RowVectorXd::Zero(nhf);
+		 gbeta0 = 0;
+		 xx = 0;
+		 validPairs = 0;
+		 tmp = 0;
+		 for (int z = 0; z < sent.size(); z ++){
+			 for(int i = 0; i < dseSpan[z].size(); ++i) {
+			 	 if (dseID[z][i] == -1) continue;
+				 for (int j = 0; j < argSpan[z].size(); ++j){
+				 	 if (argID[z][j] == -1) continue;
+				 	 validPairs ++;
+				 	 totIns ++;
+					 double predict = h(dseSpan[z][i], argSpan[z][j]);
+					 int ans = 0;
+					 if (relation[z][argnn.INDEX].find(dseID[z][i])
+							 != relation[z][argnn.INDEX].end()){
+						 assert(dseID[z][i] != -1);
+						 ans = 0;
+						 vector<int> v = relation[z][argnn.INDEX][dseID[z][i]];
+						 tmp++;
+				//		 if (v.size() != 0) cerr<<"tag"<<endl; else cerr<<"impossible"<<endl;
+						 for (int k = 0; k < v.size(); k ++)
+							 ans |= (v[k] == argID[z][j]);
+						 //cerr<<v[0]<<","<<argID[z][j]<<endl;
+					 }
+					 else ans = 0;
+
+					 //if (dseID[i] != -1 && argID[j] != -1) cerr<<dseID[i]<<","<<argID[j]<<endl;
+					 xx += ans;
+					 //cerr<<"gradient"<<endl;
+					 mrse += double(ans - predict) * double(ans - predict);
+				//	 cerr <<predict<<","<<ans<<endl;
+					 gbetaDSE += double(predict - ans) * getSum(dseSpan[z][i]).transpose();
+					 gbetaArg += double(predict - ans) * getSum(argSpan[z][j]).transpose();
+					 gbeta0 += predict - double(ans) ;
+					 //cerr<<"after this"<<endl;
+				 }
+				 //			cerr<<"xx:"<<xx<<endl;
+			 }
+		 }
+//		 cerr<<iter<<" "<<"training:"<<xx<<","<<totIns<<","<<mrse<<endl;
+		// cerr <<betaDSE<<endl;
+		// cerr <<gbetaDSE<<endl;
+		 if (totIns == 0) break;
+//		 cout<<beta0<<","<<gbeta0<<endl;
+		 //cout << "mrse:" << sqrt(mrse/m) << endl;
+		 if (abs(last_mrse - mrse) < 0.0001) break;
+		 last_mrse = mrse;
+		 betaDSE -= ALPHA * gbetaDSE/totIns - L2 * betaDSE;
+		 betaArg -= ALPHA * gbetaArg/totIns - L2 * betaArg;
+		 beta0 -= ALPHA * gbeta0/totIns - L2 * beta0;
+	}
+	cout<<"trained "<<xx<<" correct pairs in training set"<<endl;
+	cout<<"trained "<<validPairs<<" valid pairs in total"<<endl;
+//	cout<<tmp<<" expressions have an argument."<<endl;
 	for (int z = 0; z < sent.size(); z ++){
-		for(int i = 0; i < dseSpanf[z].size(); ++i) {
-			if (dseID[z][i] == -1) continue;
-			for (int j = 0; j < argSpanf[z].size(); ++j){
-				if (argID[z][j] == -1) continue;
+		for(int i = 0; i < dseSpan[z].size(); ++i) {
+			for (int j = 0; j < argSpan[z].size(); ++j){
+				double predict = h(dseSpan[z][i], argSpan[z][j]);
 				int ans = 0;
 				if (relation[z][argnn.INDEX].find(dseID[z][i])
 						!= relation[z][argnn.INDEX].end()){
@@ -340,48 +370,30 @@ void Classifier::train(RNN argnn, RNN dsenn,
 					ans = 0;
 					vector<int> v = relation[z][argnn.INDEX][dseID[z][i]];
 					tmp++;
-					for (int k = 0; k < v.size(); k ++)
-						ans |= (v[k] == argID[z][j]);
+					for (int k = 0; k < v.size(); k ++) ans |= (v[k] == argID[z][j]);
 				}
 				else ans = 0;
-				trainingQ.push_back(AnsPair(getSum(dseSpanf[z][i]), getSum(argSpanf[z][j]), getSum(dseSpanb[z][i]), getSum(argSpanb[z][j]), ans));
+
+				//if (dseID[i] != -1 && argID[j] != -1) cerr<<dseID[i]<<","<<argID[j]<<endl;
+				xx += ans;
+				//cerr<<"gradient"<<endl;
+				mrse += double(ans - predict) * double(ans - predict);
+				//	 cerr <<predict<<","<<ans<<endl;
+				for (int k = 0; k < dseSpan[z][i].size(); k ++){
+					argnn.dseSpanID[z][i][k]
+				}
+				gbetaDSE += double(predict - ans) * getSum(dseSpan[z][i]).transpose();
+				gbetaArg += double(predict - ans) * getSum(argSpan[z][j]).transpose();
+				gbeta0 += predict - double(ans) ;
+				//cerr<<"after this"<<endl;
 			}
+			//			cerr<<"xx:"<<xx<<endl;
 		}
 	}
-	for (int iter = 0; iter < MAX_ITER; iter ++){
-		 double mrse = 0;
-		 int totIns = trainingQ.size();
-		 gbetaDSEf = RowVectorXd::Zero(nhf);
-		 gbetaArgf = RowVectorXd::Zero(nhf);
-		 gbetaDSEb = RowVectorXd::Zero(nhf);
-		 gbetaArgb = RowVectorXd::Zero(nhf);
-		 gbeta0 = 0;
-		 xx = 0;
-		 validPairs = 0;
-		 tmp = 0;
-		 for (int tot = 0; tot < trainingQ.size(); tot++){
-		 	 double predict = trainh(trainingQ[tot]);
-		 	 double ans = trainingQ[tot].ans;
-			 mrse += double(ans - predict) * double(ans - predict);
-			 gbetaArgf += double(predict - ans) * trainingQ[tot].argSpanf.transpose();
-			 gbetaArgb += double(predict - ans) * trainingQ[tot].argSpanb.transpose();
-			 gbetaDSEf += double(predict - ans) * trainingQ[tot].dseSpanf.transpose();
-			 gbetaDSEb += double(predict - ans) * trainingQ[tot].dseSpanb.transpose();
-			 gbeta0 += predict - double(ans) ;
-		 }
-		 if (totIns == 0) break;
-		 cout << iter<<" "<<"mrse:" << sqrt(mrse/totIns) << endl;
-		 if (abs(last_mrse - mrse) < 0.0001) break;
-		 last_mrse = mrse;
-		 betaDSEf -= alpha * gbetaDSEf/totIns - L2 * betaDSEf;
-		 betaArgf -= alpha * gbetaArgf/totIns - L2 * betaArgf;
-		 betaDSEb -= alpha * gbetaDSEb/totIns - L2 * betaDSEb;
-		 betaArgb -= alpha * gbetaArgb/totIns - L2 * betaArgb;
-		 beta0 -= alpha * gbeta0/totIns - L2 * beta0;
-		 alpha *= ALPHA_DR;
-	}
-//	cout<<"trained "<<xx<<" correct pairs in training set"<<endl;
-//	cout<<"trained "<<validPairs<<" valid pairs in total"<<endl;
+
+//	cerr<<"classifier finished"<<endl;
+	//cerr<<"finish"<<endl;
+	//backprop the error to hidden layer
 }
 
 RowVector3d Classifier::test(RNN argnn, RNN dsenn,
@@ -394,80 +406,73 @@ RowVector3d Classifier::test(RNN argnn, RNN dsenn,
 	for (int z = 0; z < sent.size(); z ++){
 		truset += cnt[z][argnn.INDEX];
 		vector<int> argID, dseID;
-		vector<vector<MatrixXd>> argSpanf, dseSpanf;
-		vector<vector<MatrixXd>> argSpanb, dseSpanb;
+		vector<vector<MatrixXd>> argSpan, dseSpan;
 		argnn.forward(sent[z]); dsenn.forward(sent[z]);
 		//get Span
-		vector<MatrixXd> curArgf, curDsef;
-		vector<MatrixXd> curArgb, curDseb;
+		vector<MatrixXd> curArg, curDse;
 		int start = 0, end = -1;
 		for (int j = 0; j < sent[z].size(); j ++){
 			uint maxi = argmax(argnn.y.col(j));
 			if (maxi == 0){
-				if (!curArgf.empty()){
+				if (!curArg.empty()){
 					argID.push_back(determineID(argnn.INDEX, start, j, labels[z]));
-					argSpanf.push_back(curArgf); argSpanb.push_back(curArgb);
+					argSpan.push_back(curArg);
 				}
-				curArgf.clear(); curArgb.clear();
+				curArg.clear();
 			}
 			if (maxi == 1){
-				if (!curArgf.empty()){
+				if (!curArg.empty()){
 					argID.push_back(determineID(argnn.INDEX, start, j, labels[z]));
-					argSpanf.push_back(curArgf);
-					argSpanb.push_back(curArgb);
+					argSpan.push_back(curArg);
 				}
-				curArgf.clear(); curArgb.clear();
+				curArg.clear();
 				start = j;
-				curArgf.push_back(argnn.hhf[layers - 1].col(j));
-				curArgb.push_back(argnn.hhb[layers - 1].col(j));
+				curArg.push_back(argnn.hhf[layers - 1].col(j));
 			}
 			if (maxi == 2){
-				if (curArgf.empty()) start = j;
-				curArgf.push_back(argnn.hhf[layers - 1].col(j));
-				curArgb.push_back(argnn.hhb[layers - 1].col(j));
+				if (curArg.empty()) start = j;
+				curArg.push_back(argnn.hhf[layers - 1].col(j));
 			}
 		}
-		if (!curArgf.empty()){
+		if (!curArg.empty()){
 			argID.push_back(determineID(argnn.INDEX, start, sent.size(), labels[z]));
-			argSpanf.push_back(curArgf); argSpanb.push_back(curArgb);
+			argSpan.push_back(curArg);
 		}
 		start = 0;
 		for (int j = 0; j < sent[z].size(); j ++){
 			uint maxi = argmax(dsenn.y.col(j));
 			if (maxi == 0){
-				if (!curDsef.empty()){
+				if (!curDse.empty()){
 					dseID.push_back(determineID(dsenn.INDEX, start, j, labels[z]));
-					dseSpanf.push_back(curDsef); dseSpanb.push_back(curDseb);
+					dseSpan.push_back(curDse);
 				}
-				curDsef.clear(); curDseb.clear();
+				curDse.clear();
 			}
 			if (maxi == 1){
-				if (!curDsef.empty()){
+				if (!curDse.empty()){
 					dseID.push_back(determineID(dsenn.INDEX, start, j, labels[z]));
-					dseSpanf.push_back(curDsef); dseSpanb.push_back(curDseb);
+					dseSpan.push_back(curDse);
 				}
-				curDsef.clear(); curDseb.clear();
+				curDse.clear();
 				start = j ;
-				curDsef.push_back(dsenn.hhf[layers - 1].col(j));
-				curDseb.push_back(dsenn.hhb[layers - 1].col(j));
+				curDse.push_back(dsenn.hhf[layers - 1].col(j));
 			}
 			if (maxi == 2){
-				if (!curDsef.empty()) start = j;
-				curDsef.push_back(dsenn.hhf[layers - 1].col(j));
-				curDseb.push_back(dsenn.hhb[layers - 1].col(j));
+				if (!curDse.empty()) start = j;
+				curDse.push_back(dsenn.hhf[layers - 1].col(j));
+			}
 		}
-		}
-		if (!curDsef.empty()){
+		if (!curDse.empty()){
 			dseID.push_back(determineID(dsenn.INDEX, start, sent.size(), labels[z]));
-			dseSpanf.push_back(curDsef); dseSpanb.push_back(curDseb);
+			dseSpan.push_back(curDse);
 		}
 
 		//train with the candidates
-		int totIns = dseSpanf.size() * argSpanf.size();
+		int totIns = dseSpan.size() * argSpan.size();
 		if (totIns == 0) continue;
-		for(int i = 0; i < dseSpanf.size(); ++i) {
-			for (int j = 0; j < argSpanf.size(); ++j){
-				double predict = h(dseSpanf[i], argSpanf[j], dseSpanb[i], argSpanb[j]);
+		for(int i = 0; i < dseSpan.size(); ++i) {
+			for (int j = 0; j < argSpan.size(); ++j){
+				double predict = h(dseSpan[i], argSpan[j]);
 				int ans = 0;
 				if (relation[z][argnn.INDEX].find(dseID[i])
 						!= relation[z][argnn.INDEX].end()){
@@ -694,27 +699,20 @@ void RNN::backward(const vector<vector<string> > &labels) {
 	gbhb.noalias() += fphdh;
 }
 
-Classifier::Classifier(uint _nhf, double _alpha){
+Classifier::Classifier(uint _nhf){
 	nhf = _nhf;
 	beta0 = (double) rand() / RAND_MAX;
-	ALPHA = _alpha;
 
 	//cerr<<beta0<<endl;
-	betaArgf = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-	betaDSEf = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-	betaArgb = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-	betaDSEb = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-
+	betaArg = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
+	betaDSE = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
 }
 
-void Classifier::clear(uint _nhf, double _alpha){
-	ALPHA = _alpha;
+void Classifier::clear(uint _nhf){
 	nhf = _nhf;
 	beta0 = double(rand()) / RAND_MAX;
-	betaArgf = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-	betaDSEf = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-	betaArgb = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
-	betaDSEb = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
+	betaArg = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
+	betaDSE = RowVectorXd(nhf).unaryExpr(ptr_fun(urand));
 }
 
 RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
@@ -1082,7 +1080,7 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 
 		if (epoch % 5 == 0) {
 		agent_dse.train(brnn[1], brnn[2], sents, labels, relation);
-	 	target_dse.train(brnn[0], brnn[2], sents, labels, relation);
+		target_dse.train(brnn[0], brnn[2], sents, labels, relation);
 
 			Matrix<double, 3, 2> resVal, resTest, resVal2, resTest2;
 			cout << "Epoch " << epoch << endl;
@@ -1407,7 +1405,6 @@ int main(int argc, char **argv) {
 	ifstream in("sentenceid.txt");
 	string line;
 	uint numericId = 0;
-	cerr<<"tag"<<endl;
 
 	//map the numeric Id to the file locations
 	while(getline(in, line)) {
@@ -1432,11 +1429,11 @@ int main(int argc, char **argv) {
 	vector<bool> isUsed(X.size(), false);
 
 
-	ifstream in4("datasplit_bishan/doclist");
+	ifstream in4("datasplit/doclist.mpqaOriginalSubset");
 	while(getline(in4, line))
 		allDocs.insert(line);
 
-	ifstream in2("datasplit_bishan/filelist_train"+to_string(fold));
+	ifstream in2("datasplit/filelist_train"+to_string(fold));
 	//10 fold
 	while(getline(in2, line)) {
 		for (const auto &id : sentenceIds[line]) {
@@ -1455,8 +1452,8 @@ int main(int argc, char **argv) {
 		}
 		allDocs.erase(line);
 	}
-	cerr<<"train"<<endl;
-	ifstream in3("datasplit_bishan/filelist_test"+to_string(fold));
+	//cerr<<"train"<<endl;
+	ifstream in3("datasplit/filelist_test"+to_string(fold));
 	while(getline(in3, line)) {
 		for (const auto &id : sentenceIds[line]) {
 			testX.push_back(X[id]);
@@ -1503,7 +1500,7 @@ int main(int argc, char **argv) {
 	//		OCLASS_WEIGHT[0] = fRand(0.05,0.2);
 	RNN brnn[3];
 	for (int j = 0; j < 3; j ++) brnn[j] = RNN(25,25,25,3,LT);
-	agent_dse.clear(25, 0.1); target_dse.clear(25, 0.01);
+	agent_dse.clear(25); target_dse.clear(25);
 	//cout<<"initialization"<<endl;
 	//		cout<<"OCLASS_WEIGHT "<<OCLASS_WEIGHT[0]<<":"<<endl;
 	//		brnn.load("dse_para/model.txt");
