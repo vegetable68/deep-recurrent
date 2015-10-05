@@ -34,8 +34,8 @@ double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
 double DROP;
 string NAME[3] = {"Target", "Agent", "DSE"};
-double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.3};
-double ENTITY_WEIGHT[3] = {0.3, 0.5, 0.3};
+double OCLASS_WEIGHT[3] = {0.15, 0.25, 0.3};
+double ENTITY_WEIGHT[3] = {0.1, 0.3, 0.1};
 
 #ifdef DROPOUT
 Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
@@ -231,14 +231,8 @@ void RNN::backward(const vector<vector<string> > &labels) {
 
 	//  cout<<"tag2"<<endl;
 	for (uint k = 0; k < 3; k ++){
-		dhf.noalias() += Wfo.transpose() * gpyd[k] * ENTITY_WEIGHT[k];
-		dhb.noalias() += Wbo.transpose() * gpyd[k] * ENTITY_WEIGHT[k];
-		for (uint l=0; l<layers - 1; l++) {
-			dhhf[l].noalias() += WWfo[l].transpose() * gpyd[k] * ENTITY_WEIGHT[k];
-			dhhb[l].noalias() += WWbo[l].transpose() * gpyd[k] * ENTITY_WEIGHT[k];
-		}
-		dhhf[layers - 1].noalias() += WWfoy[k].transpose() * gpyd[k] * ENTITY_WEIGHT[k];
-		dhhb[layers - 1].noalias() += WWboy[k].transpose() * gpyd[k] * ENTITY_WEIGHT[k];
+		dhhf[layers - 1].noalias() += WWfoy[k].transpose() * gpyd[k] / ENTITY_WEIGHT[k];
+		dhhb[layers - 1].noalias() += WWboy[k].transpose() * gpyd[k] / ENTITY_WEIGHT[k];
 	}
 
 	//  cout<<"tag3"<<endl;
@@ -920,7 +914,7 @@ int main(int argc, char **argv) {
 
 	LookupTable LT;
 	// i used mikolov's word2vec (300d) for my experiments, not CW
-	LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
+	LT.load("glove.6B.300d.txt", 400000, 300, true);
 	vector<vector<string> > X;
 	vector<vector<string> > T[3];
 	readSentences(X, T[0], T[1], T[2], "all.txt"); // dse.txt or ese.txt
@@ -998,7 +992,7 @@ int main(int argc, char **argv) {
 	double bestDrop;
 //	for (int tot = 0; tot < 10; tot ++) { // can use this loop for CV
 //		OCLASS_WEIGHT[0] = fRand(0.05,0.2);
-		RNN brnn(25,25,25,3,LT);
+		RNN brnn(300,100,100,3,LT);
 //		cout<<"OCLASS_WEIGHT "<<OCLASS_WEIGHT[0]<<":"<<endl;
 //		brnn.load("dse_para/model.txt");
 		auto results = brnn.train(trainX, trainL, validX, validL, testX, testL);
@@ -1014,7 +1008,7 @@ int main(int argc, char **argv) {
 		//cout<<"tag2"<<endl;
 //	}
 	cout << "Best: " << endl;
-	cout << "OCLASS_WEIGHT_TARGET: " << bestDrop << endl;
+//	cout << "OCLASS_WEIGHT_TARGET: " << bestDrop << endl;
 	cout<<"Validation:"<<endl;
 	for (uint k = 0; k < 3;k ++) cout << NAME[k]<<"\n"<< best[k] << endl;
 	cout<<"Test:"<<endl;

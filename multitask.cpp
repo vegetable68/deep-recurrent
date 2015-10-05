@@ -28,7 +28,7 @@
 uint fold = -1;
 
 using namespace Eigen;
-using namespace std;  
+using namespace std;
 
 double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
@@ -41,14 +41,14 @@ Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
 class RNN {
 	public:
 		RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT);
-		Matrix<double, 6, 2> train(vector<vector<string> > &sents, 
+		Matrix<double, 6, 2> train(vector<vector<string> > &sents,
 				vector<vector<string> > &labels,
-				vector<vector<string> > &validX, 
+				vector<vector<string> > &validX,
 				vector<vector<string> > &validL,
-				vector<vector<string> > &testX, 
+				vector<vector<string> > &testX,
 				vector<vector<string> > &testL);
 		void update();
-		Matrix<double, 3, 2> testSequential(vector<vector<string> > &sents, 
+		Matrix<double, 3, 2> testSequential(vector<vector<string> > &sents,
 				vector<vector<string> > &labels);
 		LookupTable *LT;
 		void save(string fname);
@@ -65,7 +65,7 @@ class RNN {
 		vector<string> s;
 
 		// recurrent network params
-		MatrixXd Wo, Wfo, Wbo, 
+		MatrixXd Wo, Wfo, Wbo,
 				 WWfoy, WWboy;
 		VectorXd bo;
 		MatrixXd Wf, Vf, Wb, Vb;
@@ -75,7 +75,7 @@ class RNN {
 		MatrixXd VVf[layers], VVb[layers];
 		VectorXd bbhf[layers], bbhb[layers];
 
-		MatrixXd gWo, gWfo, gWbo, 
+		MatrixXd gWo, gWfo, gWbo,
 				 gWWfoy, gWWboy;
 		VectorXd gbo;
 		MatrixXd gWf, gVf, gWb, gVb;
@@ -85,7 +85,7 @@ class RNN {
 		MatrixXd gVVf[layers], gVVb[layers];
 		VectorXd gbbhf[layers], gbbhb[layers];
 
-		MatrixXd vWo, vWfo, vWbo, 
+		MatrixXd vWo, vWfo, vWbo,
 				 vWWfoy, vWWboy;
 		VectorXd vbo;
 		MatrixXd vWf, vVf, vWb, vVb;
@@ -180,7 +180,7 @@ void RNN::forward(const vector<string> & s, int index) {
 	// output layer uses the last hidden layer
 	// you can experiment with the other version by changing this
 	// (backward pass needs to change as well of course)
-	y = softmax(bo*RowVectorXd::Ones(T) + WWfoy*hhf[layers-1] + 
+	y = softmax(bo*RowVectorXd::Ones(T) + WWfoy*hhf[layers-1] +
 			WWboy*hhb[layers-1]);
 }
 
@@ -190,7 +190,7 @@ void RNN::backward(const vector<string> &labels) {
 	MatrixXd dhb = MatrixXd::Zero(nhb, T);
 	MatrixXd dhf = MatrixXd::Zero(nhf, T);
 
-	MatrixXd dhhf[layers], dhhb[layers]; 
+	MatrixXd dhhf[layers], dhhb[layers];
 	for (uint l=0; l<layers; l++) {
 		dhhf[l] = MatrixXd::Zero(nhf, T);
 		dhhb[l] = MatrixXd::Zero(nhb, T);
@@ -268,7 +268,7 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 	gVb = MatrixXd::Zero(nhb,nhb);
 	gbhb = VectorXd::Zero(nhb);
 
-	for (uint l=0; l<layers; l++) { 
+	for (uint l=0; l<layers; l++) {
 		gWWff[l] = MatrixXd::Zero(nhf,nhf);
 		gWWfb[l] = MatrixXd::Zero(nhf,nhb);
 		gVVf[l] = MatrixXd::Zero(nhf,nhf);
@@ -326,13 +326,13 @@ void RNN::update() {
 	double mr = MR;
 	double norm = 0;
 
-	// regularize 
+	// regularize
 	gbo.noalias() += lambda*bo;
 	gWWfoy.noalias() += (lambda)*WWfoy;
 	gWWboy.noalias() += (lambda)*WWboy;
 
 //	norm += 0.1* (gWo.squaredNorm() + gbo.squaredNorm());
-//	norm+= 0.1*(gWWfoy.squaredNorm() + gWWboy.squaredNorm()); 
+//	norm+= 0.1*(gWWfoy.squaredNorm() + gWWboy.squaredNorm());
 
 	// update velocities
 	vbo = 0.1*lr*gbo + mr*vbo;
@@ -353,8 +353,8 @@ void RNN::update() {
 
 	// reset gradients
 	gbo.setZero();
-	gWWfoy.setZero(); 
-	gWWboy.setZero(); 
+	gWWfoy.setZero();
+	gWWboy.setZero();
 
 	lr *= 0.999;
 	//cout << Wuo << endl;
@@ -414,11 +414,11 @@ void RNN::save(string fname) {
 
 
 Matrix<double, 6, 2>
-RNN::train(vector<vector<string> > &sents, 
+RNN::train(vector<vector<string> > &sents,
 		vector<vector<string> > &labels,
-		vector<vector<string> > &validX, 
+		vector<vector<string> > &validX,
 		vector<vector<string> > &validL,
-		vector<vector<string> > &testX, 
+		vector<vector<string> > &testX,
 		vector<vector<string> > &testL) {
 	uint MAXEPOCH = 200;
 	uint MINIBATCH = 80;
@@ -446,12 +446,12 @@ RNN::train(vector<vector<string> > &sents,
 			if ((i+1) % MINIBATCH == 0 || i == sents.size()-1)
 				update();
 		}
-		if (epoch % 5 == 0) {  
-			Matrix<double, 3, 2> resVal, resTest, resVal2, resTest2; 
+		if (epoch % 5 == 0) {
+			Matrix<double, 3, 2> resVal, resTest, resVal2, resTest2;
 			cout << "Epoch " << epoch << endl;
 
 			// diagnostic
-			/*     
+			/*
 				   cout << Wf.norm() << " " << Wb.norm() << " "
 				   << Vf.norm() << " " << Vb.norm() << " "
 				   << Wfo.norm() << " " << Wbo.norm() << endl;
@@ -482,7 +482,7 @@ RNN::train(vector<vector<string> > &sents,
 
 // returns soft (precision, recall, F1) per expression
 // counts proportional overlap & binary overlap
-Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents, 
+Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents,
 		vector<vector<string> > &labels) {
 	uint nExprPredicted = 0;
 	double nExprPredictedCorrectly = 0;
@@ -543,7 +543,7 @@ Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents,
 				if (l2 != -1)
 					pred.push_back(make_pair(l2,j));
 				l2 = -1;
-			} else { 
+			} else {
 				cout << y << endl;
 				assert(false);
 			}
@@ -600,8 +600,8 @@ Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents,
 	double recallBin = recallNumerBin/nExprTrue;
 	double f1Bin = (2*precisionBin*recallBin)/(precisionBin+recallBin);
 	Matrix<double, 3, 2> results;
-	results << precisionProp, precisionBin, 
-			recallProp, recallBin, 
+	results << precisionProp, precisionBin,
+			recallProp, recallBin,
 			f1Prop, f1Bin;
 	return results;
 }
@@ -616,7 +616,7 @@ Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p) {
 }
 #endif
 
-void readSentences(vector<vector<string > > &X, 
+void readSentences(vector<vector<string > > &X,
 		vector<vector<string> > &T, string fname) {
 	ifstream in(fname.c_str());
 	string line;
@@ -660,7 +660,7 @@ int main(int argc, char **argv) {
 
 	LookupTable LT;
 	// i used mikolov's word2vec (300d) for my experiments, not CW
-	LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
+	LT.load("glove.6B.300d.txt", 400000, 300, true);
 	vector<vector<string> > X;
 	vector<vector<string> > T;
 	readSentences(X, T, "target.txt"); // dse.txt or ese.txt
@@ -727,8 +727,8 @@ int main(int argc, char **argv) {
 	Matrix<double, 6, 2> best = Matrix<double, 6, 2>::Zero();
 	double bestDrop;
 	for (DROP=0; DROP<0.1; DROP+=0.2) { // can use this loop for CV
-		RNN brnn(25,25,25,3,LT);
-		brnn.load("dse_para/model.txt");
+		RNN brnn(300,25,25,3,LT);
+//		brnn.load("dse_para/model.txt");
 		auto results = brnn.train(trainX, trainL, validX, validL, testX, testL);
 		if (best(2,0) < results(2,0)) { // propF1 on val set
 			best = results;

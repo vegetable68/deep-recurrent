@@ -1,0 +1,30 @@
+14492 7507 734
+Valid size: 2870
+Epoch 0
+Train:
+Target:
+1 1
+0 0
+0 0
+Agent:
+1 1
+0 0
+0 0
+DSE:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Agent:
+1 1
+0 0
+0 0
+DSE:
+1 1
+0 0
+0 0
+Epoch 5

@@ -58,6 +58,7 @@ class RNN {
 		void load(string fname);
 		void forward(const vector<string> &, int index=-1);
 		void backward(const vector<vector<string> > &);
+		void backprop(MatrixXd dhhf, MatrixXd dhhb);
 		void output(ostringstream &s, int MAXEPOCH);
 
 	private:
@@ -380,6 +381,14 @@ void Classifier::train(RNN argnn, RNN dsenn,
 		 beta0 -= alpha * gbeta0/totIns - L2 * beta0;
 		 alpha *= ALPHA_DR;
 	}
+	for (int z = 0; z < sent.size(); z ++){
+		int T = sent[z].size();
+		MatrixXd argdhhf = MatrixXd::Zero(nhf, T), argdhhb = MatrixXd::Zero(nhf, T);
+		MatrixXd dsedhhf = MatrixXd::Zero(nhf, T), dsedhhb = MatrixXd::Zero(nhf, T);
+		argnn.backprop(argdhhf, argdhhb);
+		dsenn.backprop(dsedhhf, dsedhhb);
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
 //	cout<<"trained "<<xx<<" correct pairs in training set"<<endl;
 //	cout<<"trained "<<validPairs<<" valid pairs in total"<<endl;
 }
@@ -693,6 +702,96 @@ void RNN::backward(const vector<vector<string> > &labels) {
 	gWb.noalias() += fphdh * x.col(T-1).transpose();
 	gbhb.noalias() += fphdh;
 }
+
+void RNN::backprop(MatrixXd dhf, MatrixXd dhb){
+	uint T = dhf.cols();
+
+	MatrixXd dhhf[layers], dhhb[layers];
+	for (uint l=0; l<layers; l++) {
+		dhhf[l] = MatrixXd::Zero(nhf, T);
+		dhhb[l] = MatrixXd::Zero(nhb, T);
+	}
+	dhhf[layers - 1].noalias() += dhf;
+	dhhb[layers - 1].noalias() += dhb;
+	dhf = MatrixXd::Zero(nhf, T);
+	dhb = MatrixXd::Zero(nhb, T);
+
+	/*	dhf.noalias() += Wfo.transpose() * gpyd * ENTITY_WEIGHT[INDEX];
+		dhb.noalias() += Wbo.transpose() * gpyd * ENTITY_WEIGHT[INDEX];
+		for (uint l=0; l<layers - 1; l++) {
+			dhhf[l].noalias() += WWfo[l].transpose() * gpyd * ENTITY_WEIGHT[INDEX];
+			dhhb[l].noalias() += WWbo[l].transpose() * gpyd * ENTITY_WEIGHT[INDEX];
+		}*/
+
+	//  cout<<"tag3"<<endl;
+	// activation regularize
+/*	dhf.noalias() += LAMBDAH*hf;
+	dhb.noalias() += LAMBDAH*hb;
+	for (uint l=0; l<layers; l++) {
+		dhhf[l].noalias() += LAMBDAH*hhf[l];
+		dhhb[l].noalias() += LAMBDAH*hhb[l];
+	}*/
+
+	for (uint l=layers-1; l != (uint)(-1); l--) {
+		MatrixXd *dxf, *dxb, *xf, *xb;
+		dxf = (l == 0) ? &dhf : &(dhhf[l-1]);
+		dxb = (l == 0) ? &dhb : &(dhhb[l-1]);
+		xf = (l == 0) ? &hf : &(hhf[l-1]);
+		xb = (l == 0) ? &hb : &(hhb[l-1]);
+
+		MatrixXd fphdh = MatrixXd::Zero(nhf,T);
+		for (uint i=T-1; i != (uint)(-1); i--) {
+			fphdh.col(i) = fp(hhf[l].col(i)).cwiseProduct(dhhf[l].col(i));
+			if (i > 0) {
+				gVVf[l].noalias() += fphdh.col(i) * hhf[l].col(i-1).transpose();
+				dhhf[l].col(i-1).noalias() += VVf[l].transpose() * fphdh.col(i);
+			}
+		}
+		gWWff[l].noalias() += fphdh * xf->transpose();
+		gWWfb[l].noalias() += fphdh * xb->transpose();
+		gbbhf[l].noalias() += fphdh * VectorXd::Ones(T);
+		dxf->noalias() += WWff[l].transpose() * fphdh;
+		dxb->noalias() += WWfb[l].transpose() * fphdh;
+
+		fphdh = MatrixXd::Zero(nhb,T);
+		for (uint i=0; i < T; i++) {
+			fphdh.col(i) = fp(hhb[l].col(i)).cwiseProduct(dhhb[l].col(i));
+			if (i < T-1) {
+				dhhb[l].col(i+1).noalias() += VVb[l].transpose() * fphdh.col(i);
+				gVVb[l].noalias() += fphdh.col(i) * hhb[l].col(i+1).transpose();
+			}
+		}
+		gWWbb[l].noalias() += fphdh * xb->transpose();
+		gWWbf[l].noalias() += fphdh * xf->transpose();
+		gbbhb[l].noalias() += fphdh * VectorXd::Ones(T);
+		dxf->noalias() += WWbf[l].transpose() * fphdh;
+		dxb->noalias() += WWbb[l].transpose() * fphdh;
+	}
+
+	for (uint i=T-1; i != 0; i--) {
+		VectorXd fphdh = fp(hf.col(i)).cwiseProduct(dhf.col(i));
+		gWf.noalias() += fphdh * x.col(i).transpose();
+		gVf.noalias() += fphdh * hf.col(i-1).transpose();
+		gbhf.noalias() += fphdh;
+		dhf.col(i-1).noalias() += Vf.transpose() * fphdh;
+	}
+	//  cout<<"tag4"<<endl;
+	VectorXd fphdh = fp(hf.col(0)).cwiseProduct(dhf.col(0));
+	gWf.noalias() += fphdh * x.col(0).transpose();
+	gbhf.noalias() += fphdh;
+
+	for (uint i=0; i < T-1; i++) {
+		VectorXd fphdh = fp(hb.col(i)).cwiseProduct(dhb.col(i));
+		gWb.noalias() += fphdh * x.col(i).transpose();
+		gVb.noalias() += fphdh * hb.col(i+1).transpose();
+		gbhb.noalias() += fphdh;
+		dhb.col(i+1).noalias() += Vb.transpose() * fphdh;
+	}
+	fphdh = fp(hb.col(T-1)).cwiseProduct(dhb.col(T-1));
+	gWb.noalias() += fphdh * x.col(T-1).transpose();
+	gbhb.noalias() += fphdh;
+}
+
 
 Classifier::Classifier(uint _nhf, double _alpha){
 	nhf = _nhf;
@@ -1079,6 +1178,8 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 			if ((i+1) % MINIBATCH == 0 || i == sents.size()-1)
 				for (int j = 0; j < 3; j ++) brnn[j].update();
 		}
+		agent_dse.backprop(brnn[1], brnn[2], sents, labels, relation);
+		target_dse.backprop(brnn[0], brnn[2], sents, labels, relation);
 
 		if (epoch % 5 == 0) {
 		agent_dse.train(brnn[1], brnn[2], sents, labels, relation);
