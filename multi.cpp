@@ -34,8 +34,8 @@ double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
 double DROP;
 string NAME[3] = {"Target", "Agent", "DSE"};
-double OCLASS_WEIGHT[3] = {0.15, 0.25, 0.3};
-double ENTITY_WEIGHT[3] = {0.1, 0.3, 0.1};
+double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.5};
+double ENTITY_WEIGHT[3] = {1, 1, 1};
 
 #ifdef DROPOUT
 Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
@@ -56,6 +56,8 @@ class RNN {
 		LookupTable *LT;
 		void save(string fname);
 		void load(string fname);
+		void present(vector<vector<string> > &sents, vector<vector<vector<string> > > &labels);
+
 
 	private:
 		void forward(const vector<string> &, int index=-1);
@@ -186,6 +188,35 @@ void RNN::forward(const vector<string> & s, int index) {
 	//cout<<bo[0].norm()<<" "<<WWfoy[0].norm()<<WWboy[0].norm()<<endl;
 }
 
+void RNN::present(vector<vector<string> > &sents,
+                vector<vector<vector<string> > > &labels){
+
+	for (uint z=0; z<10; z++) { // per sentence
+		uint i =  rand() % sents.size();
+		forward(sents[i]);
+		for (int j = 0; j < sents[i].size(); j++) cout<<setw(15)<<sents[i][j];
+		cout<<endl;
+		for (uint k = 0; k < 3; k ++){
+			vector<string> labelsPredicted;
+			for (uint j=0; j<sents[i].size(); j++) {
+				uint maxi = argmax(y[k].col(j));
+				if (maxi == 0)
+					labelsPredicted.push_back("O");
+				else if (maxi == 1)
+					labelsPredicted.push_back("B");
+				else
+					labelsPredicted.push_back("I");
+			}
+			cout<<NAME[k]<<":"<<endl;
+			for (int j = 0; j < sents[i].size(); j++) cout<<setw(15)<<labelsPredicted[j];
+			cout<<endl;
+			for (int j = 0; j < sents[i].size(); j++) cout<<setw(15)<<labels[i][k][j];
+			cout<<endl;
+			cout<<endl;
+		}
+	}
+}
+
 void RNN::backward(const vector<vector<string> > &labels) {
 	uint T = x.cols();
 
@@ -231,8 +262,15 @@ void RNN::backward(const vector<vector<string> > &labels) {
 
 	//  cout<<"tag2"<<endl;
 	for (uint k = 0; k < 3; k ++){
-		dhhf[layers - 1].noalias() += WWfoy[k].transpose() * gpyd[k] / ENTITY_WEIGHT[k];
-		dhhb[layers - 1].noalias() += WWboy[k].transpose() * gpyd[k] / ENTITY_WEIGHT[k];
+	    dhhf[layers - 1].noalias() += WWfoy[k].transpose() * gpyd[k] * ENTITY_WEIGHT[k];
+		dhhb[layers - 1].noalias() += WWboy[k].transpose() * gpyd[k] * ENTITY_WEIGHT[k];
+	}
+	/*for (uint l = 0; l < layers - 1){
+		for (uint k = 0; k < 3; k ++)
+	}*/
+	for (uint k = 0; k < 3; k ++){
+		dhhf[layers - 1].noalias() += WWfoy[k].transpose() * gpyd[k] * ENTITY_WEIGHT[k];
+		dhhb[layers - 1].noalias() += WWboy[k].transpose() * gpyd[k] * ENTITY_WEIGHT[k];
 	}
 
 	//  cout<<"tag3"<<endl;
@@ -552,6 +590,7 @@ void RNN::update() {
 	}
 
 	lr *= DR;
+	ylr *= DR;
 	//cout << Wuo << endl;
 	/*cout<<"diagonize:"<<endl;
 				cout << Wf.norm() << " " << Wb.norm() << " "
@@ -563,8 +602,7 @@ void RNN::update() {
 					<< VVf[l].norm() << " " << VVb[l].norm() << " "
 					<< WWfo[l].norm() << " " << WWbo[l].norm() << endl;
 			}
-			for (uint k = 0; k < 3; k ++) cout<<WWfoy[k].norm()<<" "<<WWboy[k].norm()<<bo[k].norm()<<endl;
-*/
+	for (uint k = 0; k < 3; k ++) cout<<NAME[k]<<":"<<vWWfoy[k].norm()<<" "<<vWWboy[k].norm()<<" "<<vbo[k].norm()<<endl;*/
 }
 
 void RNN::load(string fname) {
@@ -668,6 +706,7 @@ RNN::train(vector<vector<string> > &sents,
 		if (epoch % 5 == 0) {
 			vector<Matrix<double, 3, 2>> resVal, resTest, resVal2, resTest2;
 			cout << "Epoch " << epoch << endl;
+			present(sents, labels);
 
 			// diagnostic
 /*			cout<<Wf<<endl;
@@ -703,7 +742,7 @@ RNN::train(vector<vector<string> > &sents,
 				save(fname);
 			}
 		}
-//		cout<<epoch<<endl;
+		cout<<epoch<<endl;
 	}
 //	cout<<"epoch ends"<<endl;
 	for (int i = 0; i < 3; i ++) bestVal.push_back(bestTest[i]);
@@ -884,14 +923,17 @@ void readSentences(vector<vector<string > > &X,
 			i = line.find_first_of('\t', j+1);
 			label = line.substr(j + 1, i - j - 1);
 			tt.push_back(label);
+//			cerr<<label<<" ";
 
 			j = line.find_last_of('\t');
 			label = line.substr(i + 1, j - i - 1);
 			at.push_back(label);
+//			cerr<<label<<" ";
 
 			label = line.substr(j+1, line.size()-j-1);
 			x.push_back(token);
 			dt.push_back(label);
+//			cerr<<label<<endl;
 		}
 	}
 	if (x.size() != 0) {
@@ -914,7 +956,9 @@ int main(int argc, char **argv) {
 
 	LookupTable LT;
 	// i used mikolov's word2vec (300d) for my experiments, not CW
-	LT.load("glove.6B.300d.txt", 400000, 300, true);
+//	LT.load("glove.6B.300d.txt", 400000, 300, true);
+  LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
+
 	vector<vector<string> > X;
 	vector<vector<string> > T[3];
 	readSentences(X, T[0], T[1], T[2], "all.txt"); // dse.txt or ese.txt
@@ -945,11 +989,11 @@ int main(int argc, char **argv) {
 	vector<vector<vector<string> > > trainL, validL, testL;
 	vector<bool> isUsed(X.size(), false);
 
-	ifstream in4("datasplit/doclist.mpqaOriginalSubset");
+	ifstream in4("datasplit_bishan/doclist");
 	while(getline(in4, line))
 		allDocs.insert(line);
 
-	ifstream in2("datasplit/filelist_train"+to_string(fold));
+	ifstream in2("datasplit_bishan/filelist_train"+to_string(fold));
 	//10 fold
 	while(getline(in2, line)) {
 		for (const auto &id : sentenceIds[line]) {
@@ -961,7 +1005,7 @@ int main(int argc, char **argv) {
 		}
 		allDocs.erase(line);
 	}
-	ifstream in3("datasplit/filelist_test"+to_string(fold));
+	ifstream in3("datasplit_bishan/filelist_test"+to_string(fold));
 	while(getline(in3, line)) {
 		for (const auto &id : sentenceIds[line]) {
 			testX.push_back(X[id]);
@@ -992,7 +1036,7 @@ int main(int argc, char **argv) {
 	double bestDrop;
 //	for (int tot = 0; tot < 10; tot ++) { // can use this loop for CV
 //		OCLASS_WEIGHT[0] = fRand(0.05,0.2);
-		RNN brnn(300,100,100,3,LT);
+		RNN brnn(25,25,25,3,LT);
 //		cout<<"OCLASS_WEIGHT "<<OCLASS_WEIGHT[0]<<":"<<endl;
 //		brnn.load("dse_para/model.txt");
 		auto results = brnn.train(trainX, trainL, validX, validL, testX, testL);
@@ -1008,7 +1052,7 @@ int main(int argc, char **argv) {
 		//cout<<"tag2"<<endl;
 //	}
 	cout << "Best: " << endl;
-//	cout << "OCLASS_WEIGHT_TARGET: " << bestDrop << endl;
+//	cout << "OCLASS_WEIGHT_TARGET: " << bestDrop << endl;*/
 	cout<<"Validation:"<<endl;
 	for (uint k = 0; k < 3;k ++) cout << NAME[k]<<"\n"<< best[k] << endl;
 	cout<<"Test:"<<endl;

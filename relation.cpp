@@ -37,7 +37,7 @@ double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
 double DROP;
 string NAME[3] = {"Target", "Agent", "DSE"};
-double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.3};
+double OCLASS_WEIGHT[3] = {0.25, 0.8, 0.5};
 double ENTITY_WEIGHT[3] = {1, 1, 1};
 
 #ifdef DROPOUT
@@ -51,14 +51,17 @@ class RNN {
 		RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT);
 		int INDEX;
 		void update();
-		Matrix<double, 3, 2> testSequential(vector<vector<string> > &sents,
-				vector<vector<vector<string> > > &labels);
+		Matrix<double, 3, 2> testSequential(const vector<vector<string> > &sents,
+				const vector<vector<vector<string> > > &labels);
 		LookupTable *LT;
 		void save(string fname);
 		void load(string fname);
 		void forward(const vector<string> &, int index=-1);
 		void backward(const vector<vector<string> > &);
 		void output(ostringstream &s, int MAXEPOCH);
+		void present(const vector<vector<string> > &sents, const vector<vector<vector<string> > > &labels);
+		void diagonize();
+
 
 	private:
 
@@ -370,7 +373,7 @@ void Classifier::train(RNN argnn, RNN dsenn,
 			 gbeta0 += predict - double(ans) ;
 		 }
 		 if (totIns == 0) break;
-		 cout << iter<<" "<<"mrse:" << sqrt(mrse/totIns) << endl;
+//		 cout << iter<<" "<<"mrse:" << sqrt(mrse/totIns) << endl;
 		 if (abs(last_mrse - mrse) < 0.0001) break;
 		 last_mrse = mrse;
 		 betaDSEf -= alpha * gbetaDSEf/totIns - L2 * betaDSEf;
@@ -452,7 +455,7 @@ RowVector3d Classifier::test(RNN argnn, RNN dsenn,
 				curDseb.push_back(dsenn.hhb[layers - 1].col(j));
 			}
 			if (maxi == 2){
-				if (!curDsef.empty()) start = j;
+				if (curDsef.empty()) start = j;
 				curDsef.push_back(dsenn.hhf[layers - 1].col(j));
 				curDseb.push_back(dsenn.hhb[layers - 1].col(j));
 		}
@@ -578,6 +581,34 @@ void RNN::forward(const vector<string> & s, int index) {
 	//cout<<bo[0].norm()<<" "<<WWfoy[0].norm()<<WWboy[0].norm()<<endl;
 }
 
+void RNN::present(const vector<vector<string> > &sents,
+                const vector<vector<vector<string> > > &labels){
+
+	for (uint i=0; i<sents.size(); i++) { // per sentence
+		forward(sents[i]);
+		for (int j = 0; j < sents[i].size(); j++) cout<<setw(15)<<sents[i][j];
+		cout<<endl;
+
+		vector<string> labelsPredicted;
+		for (uint j=0; j<sents[i].size(); j++) {
+			uint maxi = argmax(y.col(j));
+			if (maxi == 0)
+				labelsPredicted.push_back("O");
+			else if (maxi == 1)
+				labelsPredicted.push_back("B");
+			else
+				labelsPredicted.push_back("I");
+		}
+		cout<<NAME[INDEX]<<":"<<endl;
+		for (int j = 0; j < sents[i].size(); j++) cout<<setw(15)<<labelsPredicted[j];
+		cout<<endl;
+		for (int j = 0; j < sents[i].size(); j++) cout<<setw(15)<<labels[i][INDEX][j];
+		cout<<endl;
+		cout<<endl;
+	}
+}
+
+
 void RNN::backward(const vector<vector<string> > &labels) {
 	uint T = x.cols();
 
@@ -616,12 +647,6 @@ void RNN::backward(const vector<vector<string> > &labels) {
 	gbo.noalias() += gpyd*VectorXd::Ones(T);
 
 	//  cout<<"tag2"<<endl;
-	dhf.noalias() += Wfo.transpose() * gpyd * ENTITY_WEIGHT[INDEX];
-	dhb.noalias() += Wbo.transpose() * gpyd * ENTITY_WEIGHT[INDEX];
-	for (uint l=0; l<layers - 1; l++) {
-		dhhf[l].noalias() += WWfo[l].transpose() * gpyd * ENTITY_WEIGHT[INDEX];
-		dhhb[l].noalias() += WWbo[l].transpose() * gpyd * ENTITY_WEIGHT[INDEX];
-	}
 	dhhf[layers - 1].noalias() += WWfoy.transpose() * gpyd * ENTITY_WEIGHT[INDEX];
 	dhhb[layers - 1].noalias() += WWboy.transpose() * gpyd * ENTITY_WEIGHT[INDEX];
 
@@ -950,6 +975,7 @@ void RNN::update() {
 	}
 
 	lr *= DR;
+	ylr *= DR;
 	//cout << Wuo << endl;
 	/*cout<<"diagonize:"<<endl;
 	  cout << Wf.norm() << " " << Wb.norm() << " "
@@ -961,8 +987,7 @@ void RNN::update() {
 	  << VVf[l].norm() << " " << VVb[l].norm() << " "
 	  << WWfo[l].norm() << " " << WWbo[l].norm() << endl;
 	  }
-	  for (uint k = 0; k < 3; k ++) cout<<WWfoy[k].norm()<<" "<<WWboy[k].norm()<<bo[k].norm()<<endl;
-	  */
+	  cout<<NAME[INDEX]<<":"<<vWWfoy.norm()<<" "<<vWWboy.norm()<<bo.norm()<<endl;*/
 }
 
 void RNN::load(string fname) {
@@ -1029,21 +1054,36 @@ void RNN::output(ostringstream &strS, int MAXEPOCH){
 		<< MR << "_" << fold;
 }
 
+void RNN::diagonize(){
+	cout<<Wf<<endl;
+	cout << Wf.norm() << " " << Wb.norm() << " "
+		<< Vf.norm() << " " << Vb.norm() << " "
+		<< Wfo.norm() << " " << Wbo.norm() << endl;
+	for (uint l=0; l<layers; l++) {
+		cout << WWff[l].norm() << " " << WWfb[l].norm() << " "
+			<< WWbb[l].norm() << " " << WWbf[l].norm() << " "
+			<< VVf[l].norm() << " " << VVb[l].norm() << " "
+			<< WWfo[l].norm() << " " << WWbo[l].norm() << endl;
+	}
+	cout<<WWfoy.norm()<<" "<<WWboy.norm()<<" "<<bo.norm()<<endl;
+}
+
 vector<Matrix<double, 3, 2>>
-train(RNN brnn[3], vector<vector<string> > &sents,
-		vector<vector<vector<string> > > &labels,
-		vector<vector<map<int, vector<int> > > > &relation,
-		vector<vector<int> > &cnt,
+train(RNN brnn[3],
+		const vector<vector<string> > &sents,
+		const vector<vector<vector<string> > > &labels,
+		const vector<vector<map<int, vector<int> > > > &relation,
+		const vector<vector<int> > &cnt,
 
-		vector<vector<string> > &validX,
-		vector<vector<vector<string> > > &validL,
-		vector<vector<map<int, vector<int> > > > &validR,
-		vector<vector<int> > &validC,
+		const vector<vector<string> > &validX,
+		const vector<vector<vector<string> > > &validL,
+		const vector<vector<map<int, vector<int> > > > &validR,
+		const vector<vector<int> > &validC,
 
-		vector<vector<string> > &testX,
-		vector< vector<vector<string> > > &testL,
-		vector<vector<map<int, vector<int> > > > &testR,
-		vector<vector<int> > &testC) {
+		const vector<vector<string> > &testX,
+		const vector< vector<vector<string> > > &testL,
+		const vector<vector<map<int, vector<int> > > > &testR,
+		const vector<vector<int> > &testC) {
 	uint MAXEPOCH = 200;
 	uint MINIBATCH = 80;
 	string fname[3];
@@ -1088,17 +1128,20 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 			cout << "Epoch " << epoch << endl;
 
 			// diagnostic
-			/*			cout<<Wf<<endl;
-						cout << Wf.norm() << " " << Wb.norm() << " "
-						<< Vf.norm() << " " << Vb.norm() << " "
-						<< Wfo.norm() << " " << Wbo.norm() << endl;
-						for (uint l=0; l<layers; l++) {
-						cout << WWff[l].norm() << " " << WWfb[l].norm() << " "
-						<< WWbb[l].norm() << " " << WWbf[l].norm() << " "
-						<< VVf[l].norm() << " " << VVb[l].norm() << " "
-						<< WWfo[l].norm() << " " << WWbo[l].norm() << endl;
-						}
-						for (uint k = 0; k < 3; k ++) cout<<WWfoy[k].norm()<<" "<<WWboy[k].norm()<<bo[k].norm()<<endl;*/
+//			brnn[0].diagonize();
+		/*
+		 	cout<<Wf<<endl;
+			cout << Wf.norm() << " " << Wb.norm() << " "
+				<< Vf.norm() << " " << Vb.norm() << " "
+				<< Wfo.norm() << " " << Wbo.norm() << endl;
+			for (uint l=0; l<layers; l++) {
+				cout << WWff[l].norm() << " " << WWfb[l].norm() << " "
+					<< WWbb[l].norm() << " " << WWbf[l].norm() << " "
+					<< VVf[l].norm() << " " << VVb[l].norm() << " "
+					<< WWfo[l].norm() << " " << WWbo[l].norm() << endl;
+			}
+						for (uint k = 0; k < 3; k ++) cout<<WWfoy[k].norm()<<" "<<WWboy[k].norm()<<bo[k].norm()<<endl;
+						*/
 			for (int j = 0; j < 3; j ++){
 				Matrix<double, 3, 2> res;
 				res = brnn[j].testSequential(sents, labels);
@@ -1140,14 +1183,21 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 	}
 	//	cout<<"epoch ends"<<endl;
 	for (int i = 0; i < 3; i ++) bestVal.push_back(bestTest[i]);
+/*	cout<<"Train:"<<endl;
+	for (int j = 0; j < 3; j ++) brnn[j].present(sents, labels);
+	cout<<"Valid:"<<endl;
+	for (int j = 0; j < 3; j ++) brnn[j].present(validX, validL);
+	cout<<"Test:"<<endl;
+	for (int j = 0; j < 3; j ++) brnn[j].present(testX, testL); */
+
 	//	cout<<"ready to return"<<endl;
 	return bestVal;
 }
 
 // returns soft (precision, recall, F1) per expression
 // counts proportional overlap & binary overlap
-Matrix<double, 3, 2> RNN::testSequential(vector<vector<string> > &sents,
-		vector<vector<vector<string> > > &labels) {
+Matrix<double, 3, 2> RNN::testSequential(const vector<vector<string> > &sents,
+		const vector<vector<vector<string> > > &labels) {
 
 	Matrix<double, 3, 2> results;
 	Matrix<double, 3, 2> tmp;
@@ -1320,14 +1370,17 @@ void readSentences(vector<vector<string > > &X,
 			i = line.find_first_of('\t', j+1);
 			label = line.substr(j + 1, i - j - 1);
 			tt.push_back(label);
+			//cerr<<label<<" ";
 
 			j = line.find_last_of('\t');
 			label = line.substr(i + 1, j - i - 1);
 			at.push_back(label);
+			//cerr<<label<<" ";
 
 			label = line.substr(j+1, line.size()-j-1);
 			x.push_back(token);
 			dt.push_back(label);
+			//cerr<<label<<endl;
 		}
 	}
 	if (x.size() != 0) {
@@ -1358,7 +1411,7 @@ void getRelation(vector<map<int, vector<int> > > &R, vector<int> &C,
 //			}
 		} else {
 			string dseID, argID;
-			uint i = line.find_first_of(' ');
+			uint i = line.find_first_of('\t');
 			dseID = line.substr(0, i);
 			argID= line.substr(i+1, line.size()-i-2);
 			cnt ++;
@@ -1496,34 +1549,75 @@ int main(int argc, char **argv) {
 	cout << X.size() << " " << trainX.size() << " " << testX.size() << endl;
 	cout << "Valid size: " << validX.size() << endl;
 
+/*	cout<<"Train"<<endl;
+
+	for (int i = 0; i < trainX.size(); i ++){
+		for (int j = 0; j < trainX[i].size(); j ++){
+			cout<<trainX[i][j];
+			for (int k = 0; k < 3; k ++)
+				cout<<" "<<trainL[i][k][j];
+			cout<<endl;
+		}
+		cout<<endl;
+	}
+
+	cout<<"Valid"<<endl;
+
+	for (int i = 0; i < validX.size(); i ++){
+		for (int j = 0; j < validX[i].size(); j ++){
+			cout<<validX[i][j];
+			for (int k = 0; k < 3; k ++)
+				cout<<" "<<validL[i][k][j];
+			cout<<endl;
+		}
+		cout<<endl;
+	}
+
+	cout<<"Test"<<endl;
+
+	for (int i = 0; i < testX.size(); i ++){
+		for (int j = 0; j < testX[i].size(); j ++){
+			cout<<testX[i][j];
+			for (int k = 0; k < 3; k ++)
+				cout<<" "<<testL[i][k][j];
+			cout<<endl;
+		}
+		cout<<endl;
+	}
+
+
+
+	exit(0); */
+
 	vector<Matrix<double, 3, 2>> best;
 	for (int k = 0; k < 6; k ++) best.push_back(MatrixXd::Zero(3, 2));
-	double bestDrop;
-	//	for (int tot = 0; tot < 10; tot ++) { // can use this loop  for CV
-	//		OCLASS_WEIGHT[0] = fRand(0.05,0.2);
-	RNN brnn[3];
-	for (int j = 0; j < 3; j ++) brnn[j] = RNN(25,25,25,3,LT);
-	agent_dse.clear(25, 0.1); target_dse.clear(25, 0.01);
-	//cout<<"initialization"<<endl;
-	//		cout<<"OCLASS_WEIGHT "<<OCLASS_WEIGHT[0]<<":"<<endl;
-	//		brnn.load("dse_para/model.txt");
-	//cerr<<"start training"<<endl;
-	auto results = train(brnn, trainX, trainL, trainR, trainC,
-			validX, validL, validR, validC,
-			testX, testL, testR, testC);
-	//cout<<"tag1"<<endl;
-	for (int j = 0; j < 3; j ++)
-	if (best[j](2,0) < results[j](2,0)) { // propF1 on val set
-		best = results;
-	//	bestDrop = OCLASS_WEIGHT[0];
-		brnn[j].save("model.txt" + j);
-	}
-	//		cout<<"Validation:"<<endl;
-	//		for (uint k = 0; k < 3;k ++) cout << NAME[k]<<"\n"<< results[k] << endl;
-	//cout<<"tag2"<<endl;
-	//	}
+	double bestDrop[3];
+//	for (double targ = 0; targ < 1.; targ += 0.1) { // can use this loop  for CV
+//		OCLASS_WEIGHT[0] = fRand(targ, targ + 0.1);
+//		for (double ag = 0.; ag < 1.; ag += 0.1){
+//			OCLASS_WEIGHT[1] = fRand(ag, ag + 0.1);
+//			for (double dse = 0.; dse < 1.; dse += 0.1){
+//				OCLASS_WEIGHT[2] = fRand(dse, dse + 0.1);
+				RNN brnn[3];
+				for (int j = 0; j < 3; j ++) brnn[j] = RNN(25,25,25,3,LT);
+				agent_dse.clear(25, 0.1); target_dse.clear(25, 0.01);
+				auto results = train(brnn, trainX, trainL, trainR, trainC,
+						validX, validL, validR, validC,
+						testX, testL, testR, testC);
+				//cout<<"tag1"<<endl;
+				for (int j = 0; j < 3; j ++)
+					if (best[j](2,0) < results[j](2,0)) { // propF1 on val set
+						best[j] = results[j];
+						best[j + 3] = results[j + 3];
+						bestDrop[j] = OCLASS_WEIGHT[j];
+						brnn[j].save("model.txt" + j);
+					}
+//			}
+//		}
+//	}
 	cout << "Best: " << endl;
-	cout << "OCLASS_WEIGHT_TARGET: " << bestDrop << endl;
+	for (int j = 0; j < 3; j ++)
+		cout << "OCLASS_WEIGHT "<<NAME[j]<<":" << bestDrop[j] << endl;
 	cout<<"Validation:"<<endl;
 	for (uint k = 0; k < 3;k ++) cout << NAME[k]<<"\n"<< best[k] << endl;
 	cout<<"Test:"<<endl;

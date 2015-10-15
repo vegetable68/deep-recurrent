@@ -1,0 +1,394 @@
+9471 6281 892
+Valid size: 2298
+trained 0 correct pairs in training set
+trained 0 valid pairs in total
+trained 0 correct pairs in training set
+trained 0 valid pairs in total
+Epoch 0
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+1 1
+0 0
+0 0
+Val:
+Agent:
+1 1
+0 0
+0 0
+Train:
+DSE:
+1 1
+0 0
+0 0
+Val:
+DSE:
+1 1
+0 0
+0 0
+is from:
+0,0,0
+Train:1 0 0
+0,0,0
+Val:1 0 0
+0,0,0
+Test:1 0 0
+is about:
+0,0,0
+Train:1 0 0
+0,0,0
+Val:1 0 0
+0,0,0
+Test:1 0 0
+trained 0 correct pairs in training set
+trained 0 valid pairs in total
+trained 0 correct pairs in training set
+trained 0 valid pairs in total
+Epoch 5
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+1 1
+0 0
+0 0
+Val:
+Agent:
+1 1
+0 0
+0 0
+Train:
+DSE:
+1 1
+0 0
+0 0
+Val:
+DSE:
+1 1
+0 0
+0 0
+is from:
+0,0,0
+Train:1 0 0
+0,0,0
+Val:1 0 0
+0,0,0
+Test:1 0 0
+is about:
+0,0,0
+Train:1 0 0
+0,0,0
+Val:1 0 0
+0,0,0
+Test:1 0 0
+trained 1019 correct pairs in training set
+trained 1490 valid pairs in total
+trained 0 correct pairs in training set
+trained 0 valid pairs in total
+Epoch 10
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.538137 0.547453
+0.451486 0.527637
+0.491018 0.537362
+Val:
+Agent:
+0.496854 0.503561
+0.416293 0.486544
+ 0.45302 0.494906
+Train:
+DSE:
+0.536962 0.536962
+0.287989 0.346939
+0.374905 0.421525
+Val:
+DSE:
+0.526776 0.526776
+0.257798 0.309237
+ 0.34618 0.389704
+is from:
+3242,939,1019
+Train:0.289636 0.299331 0.294404
+1083,299,324
+Val:0.276085 0.254252 0.264719
+350,85,93
+Test:0.242857 0.243553 0.243205
+is about:
+3442,986,1019
+Train:0.286461 0.314313 0.299742
+1135,299,324
+Val:0.263436 0.254252 0.258762
+382,91,93
+Test: 0.23822 0.260745 0.248974
+trained 1198 correct pairs in training set
+trained 1675 valid pairs in total
+trained 530 correct pairs in training set
+trained 909 valid pairs in total
+Epoch 15
+Train:
+Target:
+  0.26396  0.264387
+0.0993704  0.257939
+ 0.144385  0.261123
+Val:
+Target:
+ 0.259837   0.26054
+0.0934833  0.230951
+ 0.137498  0.244854
+Train:
+Agent:
+0.656931 0.661651
+0.422316 0.470227
+0.514122 0.549752
+Val:
+Agent:
+0.618277 0.622222
+ 0.40056 0.446884
+0.486156 0.520175
+Train:
+DSE:
+0.548833 0.561771
+0.424212 0.472449
+0.478542 0.513253
+Val:
+DSE:
+0.528089  0.53723
+0.394925 0.442436
+0.451901 0.485247
+is from:
+2992,1048,1184
+Train:0.350267 0.334077 0.341981
+1065,340,386
+Val:0.319249 0.289116 0.303436
+383,116,128
+Test:0.302872 0.332378  0.31694
+is about:
+2736,969,1184
+Train:0.354167 0.308894 0.329985
+948,303,386
+Val: 0.31962 0.257653 0.285311
+336,104,128
+Test:0.309524 0.297994  0.30365
+trained 1351 correct pairs in training set
+trained 2071 valid pairs in total
+trained 0 correct pairs in training set
+trained 0 valid pairs in total
+Epoch 20
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.653567 0.661154
+0.481825 0.526035
+0.554707 0.585905
+Val:
+Agent:
+  0.6208 0.626691
+0.439568 0.483711
+0.514696 0.545996
+Train:
+DSE:
+0.564311 0.581526
+ 0.48639  0.54949
+0.522461 0.565054
+Val:
+DSE:
+0.544876  0.56194
+0.451512 0.501339
+ 0.49382 0.529912
+is from:
+3141,1008,1332
+Train:0.320917 0.321326 0.321121
+1065,348,437
+Val:0.326761 0.295918 0.310576
+373,100,127
+Test:0.268097 0.286533 0.277008
+is about:
+4174,1332,1332
+Train:0.319118 0.424609 0.364382
+1415,437,437
+Val:0.308834 0.371599 0.337321
+486,127,127
+Test:0.261317 0.363897 0.304192
+trained 1233 correct pairs in training set
+trained 1862 valid pairs in total
+trained 0 correct pairs in training set
+trained 0 valid pairs in total
+Epoch 25
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+ 0.67409 0.679284
+0.465225 0.515888
+0.550513 0.586417
+Val:
+Agent:
+0.635256 0.639423
+0.418964 0.465297
+0.504922 0.538637
+Train:
+DSE:
+0.608559  0.62673
+ 0.44212 0.501786
+0.512157 0.557341
+Val:
+DSE:
+0.590322 0.608656
+0.403325 0.448461
+0.479228  0.51642
+is from:
+2792,990,1201
+Train:0.354585 0.315588 0.333952
+925,332,393
+Val:0.358919 0.282313  0.31604
+335,99,121
+Test:0.295522 0.283668 0.289474
+is about:
+3402,1193,1201
+Train:0.350676   0.3803 0.364888
+1135,388,393
+Val: 0.34185 0.329932 0.335785
+405,120,121
+Test:0.296296  0.34384 0.318302
+trained 1076 correct pairs in training set
+trained 1650 valid pairs in total
+trained 0 correct pairs in training set
+trained 0 valid pairs in total
+Epoch 30
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+ 0.68722  0.69812
+0.488478 0.527904
+0.571051 0.601196
+Val:
+Agent:
+0.631065 0.640596
+0.436635  0.48017
+0.516147 0.548901
+Train:
+DSE:
+0.684024  0.70177
+ 0.35374 0.409694
+0.466323 0.517355
+Val:
+DSE:
+0.650665 0.664093
+0.292911 0.340027
+0.403968 0.449766
+is from:
+2445,993,1062
+Train:0.406135 0.316544 0.355786
+748,276,296
+Val:0.368984 0.234694 0.286902
+247,87,100
+Test:0.352227 0.249284 0.291946
+is about:
+2650,1062,1062
+Train:0.400755  0.33854  0.36703
+837,296,296
+Val:0.353644 0.251701 0.294088
+285,100,100
+Test:0.350877 0.286533 0.315457
+trained 1396 correct pairs in training set
+trained 2218 valid pairs in total
+trained 0 correct pairs in training set
+trained 0 valid pairs in total
+Epoch 35
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.682666 0.692558
+0.503952 0.549533
+0.579851 0.612811
+Val:
+Agent:
+0.608784 0.617958
+0.445258 0.492918
+0.514336 0.548401
+Train:
+DSE:
+0.581388 0.605759
+0.542389 0.601531
+0.561212 0.603638
+Val:
+DSE:
+0.539133 0.564139
+0.479909  0.53012
+  0.5078 0.546601
+is from:
+3127,1083,1398
+Train:0.346338 0.345234 0.345785
+1103,360,437
+Val:0.326383 0.306122 0.315928
+341,105,135
+Test:0.307918  0.30086 0.304348
+is about:
+4239,1398,1398
+Train:0.329795 0.445649 0.379067
+1463,437,437
+Val:0.298701 0.371599 0.331186
+455,135,135
+Test:0.296703 0.386819 0.335821
