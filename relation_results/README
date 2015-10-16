@@ -1,0 +1,17 @@
+same hyperparameter settings:
+
+including : 		 Target  Agent DSE
+			OWEIGHT    0.3    0.8  0.5
+
+learning rate of classifiers: 0.1
+additional layers : 2
+with decay on the output layer
+clear classifier every 5 epochs(and train them)
+
+Testing on Bishan's data and her datasplits
+
+relation -> rel.out (no backprop, add all vectors up and average)
+relation_backprop -> back.out (backprop, add all vectors up and average)
+rel_back2 -> back2.out (the forward and backward node of the last and the first of the span, backprop)
+rel_back3 -> back3.out (backward node of the first and the forward of the last, backprop)
+

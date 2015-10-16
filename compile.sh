@@ -1,4 +1,4 @@
-g++ relation_backprop.cpp -I ./Eigen/ -std=c++11 -O3 -o back
+g++ rel_back3.cpp -I ./Eigen/ -std=c++11 -O3 -o back3 
 
 
 
