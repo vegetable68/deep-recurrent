@@ -1,0 +1,35 @@
+9471 6281 892
+Valid size: 2298
+agent_dse:0.581788
+target_dse:0.554269
+Epoch 0
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+1 1
+0 0
+0 0
+Val:
+Agent:
+1 1
+0 0
+0 0
+Train:
+DSE:
+1 1
+0 0
+0 0
+Val:
+DSE:
+1 1
+0 0
+0 0

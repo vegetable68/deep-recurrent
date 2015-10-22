@@ -47,62 +47,62 @@ Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
 class RNN {
 	friend class Classifier;
 	public:
-		RNN(){}
-		RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT);
-		int INDEX;
-		void update();
-		Matrix<double, 3, 2> testSequential(const vector<vector<string> > &sents,
-				const vector<vector<vector<string> > > &labels);
-		LookupTable *LT;
-		void save(string fname);
-		void load(string fname);
-		void forward(const vector<string> &, int index=-1);
-		void backward(const vector<vector<string> > &);
-		void output(ostringstream &s, int MAXEPOCH);
-		void present(const vector<vector<string> > &sents, const vector<vector<vector<string> > > &labels);
-		void diagonize();
+	RNN(){}
+	RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT);
+	int INDEX;
+	void update();
+	Matrix<double, 3, 2> testSequential(const vector<vector<string> > &sents,
+			const vector<vector<vector<string> > > &labels);
+	LookupTable *LT;
+	void save(string fname);
+	void load(string fname);
+	void forward(const vector<string> &, int index=-1);
+	void backward(const vector<vector<string> > &);
+	void output(ostringstream &s, int MAXEPOCH);
+	void present(const vector<vector<string> > &sents, const vector<vector<vector<string> > > &labels);
+	void diagonize();
 
 
 	private:
 
-		MatrixXd (*f)(const MatrixXd& x);
-		MatrixXd (*fp)(const MatrixXd& x);
+	MatrixXd (*f)(const MatrixXd& x);
+	MatrixXd (*fp)(const MatrixXd& x);
 
-		MatrixXd x,y,hf,hb, hhf[layers],hhb[layers];
-		vector<string> s;
+	MatrixXd x,y,hf,hb, hhf[layers],hhb[layers];
+	vector<string> s;
 
-		// recurrent network params
-		MatrixXd Wo, Wfo, Wbo, WWfo[layers - 1], WWbo[layers - 1], WWfoy, WWboy;
-		VectorXd bo;
-		MatrixXd Wf, Vf, Wb, Vb;
-		VectorXd bhf, bhb;
+	// recurrent network params
+	MatrixXd Wo, Wfo, Wbo, WWfo[layers - 1], WWbo[layers - 1], WWfoy, WWboy;
+	VectorXd bo;
+	MatrixXd Wf, Vf, Wb, Vb;
+	VectorXd bhf, bhb;
 
-		MatrixXd WWff[layers], WWfb[layers], WWbb[layers], WWbf[layers];
-		MatrixXd VVf[layers], VVb[layers];
-		VectorXd bbhf[layers], bbhb[layers];
+	MatrixXd WWff[layers], WWfb[layers], WWbb[layers], WWbf[layers];
+	MatrixXd VVf[layers], VVb[layers];
+	VectorXd bbhf[layers], bbhb[layers];
 
-		MatrixXd gWo, gWfo, gWbo, gWWfo[layers - 1], gWWbo[layers - 1], gWWfoy, gWWboy;
-		VectorXd gbo;
-		MatrixXd gWf, gVf, gWb, gVb;
-		VectorXd gbhf, gbhb;
+	MatrixXd gWo, gWfo, gWbo, gWWfo[layers - 1], gWWbo[layers - 1], gWWfoy, gWWboy;
+	VectorXd gbo;
+	MatrixXd gWf, gVf, gWb, gVb;
+	VectorXd gbhf, gbhb;
 
-		MatrixXd gWWff[layers], gWWfb[layers], gWWbb[layers], gWWbf[layers];
-		MatrixXd gVVf[layers], gVVb[layers];
-		VectorXd gbbhf[layers], gbbhb[layers];
+	MatrixXd gWWff[layers], gWWfb[layers], gWWbb[layers], gWWbf[layers];
+	MatrixXd gVVf[layers], gVVb[layers];
+	VectorXd gbbhf[layers], gbbhb[layers];
 
-		MatrixXd vWo, vWfo, vWbo, vWWfo[layers - 1], vWWbo[layers - 1], vWWfoy, vWWboy;
-		VectorXd vbo;
-		MatrixXd vWf, vVf, vWb, vVb;
-		VectorXd vbhf, vbhb;
+	MatrixXd vWo, vWfo, vWbo, vWWfo[layers - 1], vWWbo[layers - 1], vWWfoy, vWWboy;
+	VectorXd vbo;
+	MatrixXd vWf, vVf, vWb, vVb;
+	VectorXd vbhf, vbhb;
 
-		MatrixXd vWWff[layers], vWWfb[layers], vWWbb[layers], vWWbf[layers];
-		MatrixXd vVVf[layers], vVVb[layers];
-		VectorXd vbbhf[layers], vbbhb[layers];
+	MatrixXd vWWff[layers], vWWfb[layers], vWWbb[layers], vWWbf[layers];
+	MatrixXd vVVf[layers], vVVb[layers];
+	VectorXd vbbhf[layers], vbbhb[layers];
 
-		uint nx, nhf, nhb, ny;
-		uint epoch;
+	uint nx, nhf, nhb, ny;
+	uint epoch;
 
-		double lr, ylr;
+	double lr, ylr;
 };
 
 class AnsPair{
@@ -160,10 +160,10 @@ void Classifier::diag(){
 double Classifier::sigmoid(double x){
 	double e = 2.718281828;
 	/*if (x >= 10){
-		return 1.0 / (1.0 + pow(e, -10));
-	}else if (x <= -10){
-		return 1.0 / (1.0 + pow(e, 10));
-	}*/
+	  return 1.0 / (1.0 + pow(e, -10));
+	  }else if (x <= -10){
+	  return 1.0 / (1.0 + pow(e, 10));
+	  }*/
 
 	return 1.0 / (1.0 + pow(e, -x));
 }
@@ -178,7 +178,7 @@ double Classifier::h(vector<MatrixXd> dseSpanf, vector<MatrixXd> argSpanf, vecto
 	for (int i = 0; i < argSpanf.size(); i ++)
 		y = y + betaArgf * argSpanf[i] + betaArgb * argSpanb[i];
 	y(0, 0) = y(0, 0) + beta0;
-//	cerr<<"h() "<<y(0,0)<<endl;
+	//	cerr<<"h() "<<y(0,0)<<endl;
 	return sigmoid(y(0, 0));
 }
 
@@ -206,7 +206,7 @@ int Classifier::determineID(int INDEX, int start, int end, vector<vector<string>
 			beginSet.push_back(j);
 		}
 		assert(labels[INDEX][j] != "I" || inProcess);
-	//	if (labels[INDEX][j] == "I") inProcess = true;
+		//	if (labels[INDEX][j] == "I") inProcess = true;
 	}
 	if (inProcess) endSet.push_back(labels[INDEX].size());
 	assert(endSet.size() == beginSet.size());
@@ -233,9 +233,9 @@ MatrixXd Classifier::getSum(vector<MatrixXd> span){
 }
 
 void Classifier::train(RNN argnn, RNN dsenn,
-			vector<vector<string> > sent,
-			vector<vector<vector<string> > > labels,
-			vector<vector<map<int, vector<int> > > > relation){
+		vector<vector<string> > sent,
+		vector<vector<vector<string> > > labels,
+		vector<vector<map<int, vector<int> > > > relation){
 	//extract the candidates
 	vector<vector<int> > argID, dseID;
 	vector<vector<vector<MatrixXd> > > argSpanf, dseSpanf;
@@ -352,46 +352,46 @@ void Classifier::train(RNN argnn, RNN dsenn,
 		}
 	}
 	for (int iter = 0; iter < MAX_ITER; iter ++){
-		 double mrse = 0;
-		 int totIns = trainingQ.size();
-		 gbetaDSEf = RowVectorXd::Zero(nhf);
-		 gbetaArgf = RowVectorXd::Zero(nhf);
-		 gbetaDSEb = RowVectorXd::Zero(nhf);
-		 gbetaArgb = RowVectorXd::Zero(nhf);
-		 gbeta0 = 0;
-		 xx = 0;
-		 validPairs = 0;
-		 tmp = 0;
-		 for (int tot = 0; tot < trainingQ.size(); tot++){
-		 	 double predict = trainh(trainingQ[tot]);
-		 	 double ans = trainingQ[tot].ans;
-			 mrse += double(ans - predict) * double(ans - predict);
-			 gbetaArgf += double(predict - ans) * trainingQ[tot].argSpanf.transpose();
-			 gbetaArgb += double(predict - ans) * trainingQ[tot].argSpanb.transpose();
-			 gbetaDSEf += double(predict - ans) * trainingQ[tot].dseSpanf.transpose();
-			 gbetaDSEb += double(predict - ans) * trainingQ[tot].dseSpanb.transpose();
-			 gbeta0 += predict - double(ans) ;
-		 }
-		 if (totIns == 0) break;
-//		 cout << iter<<" "<<"mrse:" << sqrt(mrse/totIns) << endl;
-		 if (abs(last_mrse - mrse) < 0.0001) break;
-		 last_mrse = mrse;
-		 betaDSEf -= alpha * gbetaDSEf/totIns - L2 * betaDSEf;
-		 betaArgf -= alpha * gbetaArgf/totIns - L2 * betaArgf;
-		 betaDSEb -= alpha * gbetaDSEb/totIns - L2 * betaDSEb;
-		 betaArgb -= alpha * gbetaArgb/totIns - L2 * betaArgb;
-		 beta0 -= alpha * gbeta0/totIns - L2 * beta0;
-		 alpha *= ALPHA_DR;
+		double mrse = 0;
+		int totIns = trainingQ.size();
+		gbetaDSEf = RowVectorXd::Zero(nhf);
+		gbetaArgf = RowVectorXd::Zero(nhf);
+		gbetaDSEb = RowVectorXd::Zero(nhf);
+		gbetaArgb = RowVectorXd::Zero(nhf);
+		gbeta0 = 0;
+		xx = 0;
+		validPairs = 0;
+		tmp = 0;
+		for (int tot = 0; tot < trainingQ.size(); tot++){
+			double predict = trainh(trainingQ[tot]);
+			double ans = trainingQ[tot].ans;
+			mrse += double(ans - predict) * double(ans - predict);
+			gbetaArgf += double(predict - ans) * trainingQ[tot].argSpanf.transpose();
+			gbetaArgb += double(predict - ans) * trainingQ[tot].argSpanb.transpose();
+			gbetaDSEf += double(predict - ans) * trainingQ[tot].dseSpanf.transpose();
+			gbetaDSEb += double(predict - ans) * trainingQ[tot].dseSpanb.transpose();
+			gbeta0 += predict - double(ans) ;
+		}
+		if (totIns == 0) break;
+		//		 cout << iter<<" "<<"mrse:" << sqrt(mrse/totIns) << endl;
+		if (abs(last_mrse - mrse) < 0.0001) break;
+		last_mrse = mrse;
+		betaDSEf -= alpha * gbetaDSEf/totIns - L2 * betaDSEf;
+		betaArgf -= alpha * gbetaArgf/totIns - L2 * betaArgf;
+		betaDSEb -= alpha * gbetaDSEb/totIns - L2 * betaDSEb;
+		betaArgb -= alpha * gbetaArgb/totIns - L2 * betaArgb;
+		beta0 -= alpha * gbeta0/totIns - L2 * beta0;
+		alpha *= ALPHA_DR;
 	}
-//	cout<<"trained "<<xx<<" correct pairs in training set"<<endl;
-//	cout<<"trained "<<validPairs<<" valid pairs in total"<<endl;
+	//	cout<<"trained "<<xx<<" correct pairs in training set"<<endl;
+	//	cout<<"trained "<<validPairs<<" valid pairs in total"<<endl;
 }
 
 RowVector3d Classifier::test(RNN argnn, RNN dsenn,
-			vector<vector<string> > sent,
-			vector<vector<vector<string> > > labels,
-			vector<vector<map<int, vector<int> > > > relation,
-			vector<vector<int> > cnt){
+		vector<vector<string> > sent,
+		vector<vector<vector<string> > > labels,
+		vector<vector<map<int, vector<int> > > > relation,
+		vector<vector<int> > cnt){
 	Vector3d res;
 	double trupredict= 0, tru_pos = 0, truset = 0, tt = 0;
 	for (int z = 0; z < sent.size(); z ++){
@@ -458,7 +458,7 @@ RowVector3d Classifier::test(RNN argnn, RNN dsenn,
 				if (curDsef.empty()) start = j;
 				curDsef.push_back(dsenn.hhf[layers - 1].col(j));
 				curDseb.push_back(dsenn.hhb[layers - 1].col(j));
-		}
+			}
 		}
 		if (!curDsef.empty()){
 			dseID.push_back(determineID(dsenn.INDEX, start, sent.size(), labels[z]));
@@ -582,7 +582,7 @@ void RNN::forward(const vector<string> & s, int index) {
 }
 
 void RNN::present(const vector<vector<string> > &sents,
-                const vector<vector<vector<string> > > &labels){
+		const vector<vector<vector<string> > > &labels){
 
 	for (uint i=0; i<sents.size(); i++) { // per sentence
 		forward(sents[i]);
@@ -631,7 +631,7 @@ void RNN::backward(const vector<vector<string> > &labels) {
 		else
 			yi.col(i) << 0,0,1;
 	}
-		//  cout<<"tag0"<<endl;
+	//  cout<<"tag0"<<endl;
 
 	MatrixXd gpyd;
 	gpyd = smaxentp(y,yi);
@@ -1107,15 +1107,15 @@ train(RNN brnn[3],
 	}
 
 	//cout<<Wf.norm()<<endl;
-//	cout<<"Start training"<<endl;
+	//	cout<<"Start training"<<endl;
 	for (uint epoch=0; epoch<MAXEPOCH; epoch++) {
 		shuffle(perm);
 		for (int i=0; i<sents.size(); i++) {
 			//cerr<<i<<endl;
 			for (int j = 0; j < 3; j ++) brnn[j].forward(sents[perm[i]], perm[i]);
-		//		cout<<"fwd"<<endl;
+			//		cout<<"fwd"<<endl;
 			for (int j = 0; j < 3; j ++) brnn[j].backward(labels[perm[i]]);
-	//		cout<<"bwd"<<endl;
+			//		cout<<"bwd"<<endl;
 			if ((i+1) % MINIBATCH == 0 || i == sents.size()-1)
 				for (int j = 0; j < 3; j ++) brnn[j].update();
 		}
@@ -1123,27 +1123,27 @@ train(RNN brnn[3],
 		if (epoch % 5 == 0) {
 			agent_dse.clear(25, 0.1); target_dse.clear(25, 0.1);
 
-		agent_dse.train(brnn[1], brnn[2], sents, labels, relation);
-	 	target_dse.train(brnn[0], brnn[2], sents, labels, relation);
+			agent_dse.train(brnn[1], brnn[2], sents, labels, relation);
+			target_dse.train(brnn[0], brnn[2], sents, labels, relation);
 
 			Matrix<double, 3, 2> resVal, resTest, resVal2, resTest2;
 			cout << "Epoch " << epoch << endl;
 
 			// diagnostic
-//			brnn[0].diagonize();
-		/*
-		 	cout<<Wf<<endl;
-			cout << Wf.norm() << " " << Wb.norm() << " "
-				<< Vf.norm() << " " << Vb.norm() << " "
-				<< Wfo.norm() << " " << Wbo.norm() << endl;
-			for (uint l=0; l<layers; l++) {
-				cout << WWff[l].norm() << " " << WWfb[l].norm() << " "
-					<< WWbb[l].norm() << " " << WWbf[l].norm() << " "
-					<< VVf[l].norm() << " " << VVb[l].norm() << " "
-					<< WWfo[l].norm() << " " << WWbo[l].norm() << endl;
-			}
-						for (uint k = 0; k < 3; k ++) cout<<WWfoy[k].norm()<<" "<<WWboy[k].norm()<<bo[k].norm()<<endl;
-						*/
+			//			brnn[0].diagonize();
+			/*
+			   cout<<Wf<<endl;
+			   cout << Wf.norm() << " " << Wb.norm() << " "
+			   << Vf.norm() << " " << Vb.norm() << " "
+			   << Wfo.norm() << " " << Wbo.norm() << endl;
+			   for (uint l=0; l<layers; l++) {
+			   cout << WWff[l].norm() << " " << WWfb[l].norm() << " "
+			   << WWbb[l].norm() << " " << WWbf[l].norm() << " "
+			   << VVf[l].norm() << " " << VVb[l].norm() << " "
+			   << WWfo[l].norm() << " " << WWbo[l].norm() << endl;
+			   }
+			   for (uint k = 0; k < 3; k ++) cout<<WWfoy[k].norm()<<" "<<WWboy[k].norm()<<bo[k].norm()<<endl;
+			   */
 			for (int j = 0; j < 3; j ++){
 				Matrix<double, 3, 2> res;
 				res = brnn[j].testSequential(sents, labels);
@@ -1177,23 +1177,23 @@ train(RNN brnn[3],
 			cout<<"Val:"<<target_dse.test(brnn[1], brnn[2], validX, validL, validR, validC)<<endl;
 			cout<<"Test:"<<target_dse.test(brnn[1], brnn[2], testX, testL, testR, testC)<<endl;
 
-/*			cout<<"Diagonize:"<<endl;
-			cout<<"is from:"<<endl; agent_dse.diag();
-			cout<<"is about:"<<endl; target_dse.diag(); */
+			/*			cout<<"Diagonize:"<<endl;
+						cout<<"is from:"<<endl; agent_dse.diag();
+						cout<<"is about:"<<endl; target_dse.diag(); */
 		}
 		//		cout<<epoch<<endl;
 	}
 	//	cout<<"epoch ends"<<endl;
 	for (int i = 0; i < 3; i ++) bestVal.push_back(bestTest[i]);
-/*	cout<<"Train:"<<endl;
-	for (int j = 0; j < 3; j ++) brnn[j].present(sents, labels);
-	cout<<"Valid:"<<endl;
-	for (int j = 0; j < 3; j ++) brnn[j].present(validX, validL);
-	cout<<"Test:"<<endl;
-	for (int j = 0; j < 3; j ++) brnn[j].present(testX, testL); */
+	/*	cout<<"Train:"<<endl;
+		for (int j = 0; j < 3; j ++) brnn[j].present(sents, labels);
+		cout<<"Valid:"<<endl;
+		for (int j = 0; j < 3; j ++) brnn[j].present(validX, validL);
+		cout<<"Test:"<<endl;
+		for (int j = 0; j < 3; j ++) brnn[j].present(testX, testL); */
 
-	//	cout<<"ready to return"<<endl;
-	return bestVal;
+		//	cout<<"ready to return"<<endl;
+		return bestVal;
 }
 
 // returns soft (precision, recall, F1) per expression
@@ -1213,9 +1213,9 @@ Matrix<double, 3, 2> RNN::testSequential(const vector<vector<string> > &sents,
 
 	for (uint i=0; i<sents.size(); i++) { // per sentence
 		vector<string> labelsPredicted;
-	//	cerr<<"fwd"<<endl;
+		//	cerr<<"fwd"<<endl;
 		forward(sents[i]);
-	//	cerr<<"fwd fin"<<endl;
+		//	cerr<<"fwd fin"<<endl;
 
 		for (uint j=0; j<sents[i].size(); j++) {
 			uint maxi = argmax(y.col(j));
@@ -1281,8 +1281,8 @@ Matrix<double, 3, 2> RNN::testSequential(const vector<vector<string> > &sents,
 
 		vector<bool> trum = vector<bool>(tru.size(),false);
 		vector<bool> predm = vector<bool>(pred.size(),false);
-	//	cerr<<tru.size()<<endl;
-	//	cerr<<pred.size()<<endl;
+		//	cerr<<tru.size()<<endl;
+		//	cerr<<pred.size()<<endl;
 		for (uint a=0; a<tru.size(); a++) {
 			pair<uint,uint> truSpan = tru[a];
 			nExprTrue++;
@@ -1326,8 +1326,8 @@ Matrix<double, 3, 2> RNN::testSequential(const vector<vector<string> > &sents,
 	double recallBin = recallNumerBin/nExprTrue;
 	double f1Bin = (2*precisionBin*recallBin)/(precisionBin+recallBin);
 	results << precisionProp, precisionBin,
-		recallProp, recallBin,
-		f1Prop, f1Bin;
+			recallProp, recallBin,
+			f1Prop, f1Bin;
 	return results;
 }
 
@@ -1405,12 +1405,12 @@ void getRelation(vector<map<int, vector<int> > > &R, vector<int> &C,
 	map<int, vector<int> > r;
 	while(std::getline(in, line)) {
 		if (isWhitespace(line)) {
-//			if (r.size() != 0) {
-				R.push_back(r);
-				r.clear();
-				C.push_back(cnt);
-					cnt = 0;
-//			}
+			//			if (r.size() != 0) {
+			R.push_back(r);
+			r.clear();
+			C.push_back(cnt);
+			cnt = 0;
+			//			}
 		} else {
 			string dseID, argID;
 			uint i = line.find_first_of('\t');
@@ -1426,10 +1426,10 @@ void getRelation(vector<map<int, vector<int> > > &R, vector<int> &C,
 			}
 		}
 	}
-//	if (r.size() != 0) {
-//		R.push_back(r);
-//		r.clear();
-//	}
+	//	if (r.size() != 0) {
+	//		R.push_back(r);
+	//		r.clear();
+	//	}
 }
 
 
@@ -1451,10 +1451,10 @@ int main(int argc, char **argv) {
 		string fname = "relation";
 		fname = fname + char('0' + i);
 		fname = fname + ".txt";
-//		cerr<<i<<endl;
+		//		cerr<<i<<endl;
 		getRelation(R[i], C[i], fname);
 	}
-//	cerr<<"get relation"<<endl;
+	//	cerr<<"get relation"<<endl;
 	//relation0: dse - target relation1: dse - agent
 
 	unordered_map<string, set<uint> > sentenceIds;
@@ -1551,80 +1551,80 @@ int main(int argc, char **argv) {
 	cout << X.size() << " " << trainX.size() << " " << testX.size() << endl;
 	cout << "Valid size: " << validX.size() << endl;
 
-/*	cout<<"Train"<<endl;
+	/*	cout<<"Train"<<endl;
 
-	for (int i = 0; i < trainX.size(); i ++){
+		for (int i = 0; i < trainX.size(); i ++){
 		for (int j = 0; j < trainX[i].size(); j ++){
-			cout<<trainX[i][j];
-			for (int k = 0; k < 3; k ++)
-				cout<<" "<<trainL[i][k][j];
-			cout<<endl;
+		cout<<trainX[i][j];
+		for (int k = 0; k < 3; k ++)
+		cout<<" "<<trainL[i][k][j];
+		cout<<endl;
 		}
 		cout<<endl;
-	}
+		}
 
-	cout<<"Valid"<<endl;
+		cout<<"Valid"<<endl;
 
-	for (int i = 0; i < validX.size(); i ++){
+		for (int i = 0; i < validX.size(); i ++){
 		for (int j = 0; j < validX[i].size(); j ++){
-			cout<<validX[i][j];
-			for (int k = 0; k < 3; k ++)
-				cout<<" "<<validL[i][k][j];
-			cout<<endl;
+		cout<<validX[i][j];
+		for (int k = 0; k < 3; k ++)
+		cout<<" "<<validL[i][k][j];
+		cout<<endl;
 		}
 		cout<<endl;
-	}
+		}
 
-	cout<<"Test"<<endl;
+		cout<<"Test"<<endl;
 
-	for (int i = 0; i < testX.size(); i ++){
+		for (int i = 0; i < testX.size(); i ++){
 		for (int j = 0; j < testX[i].size(); j ++){
-			cout<<testX[i][j];
-			for (int k = 0; k < 3; k ++)
-				cout<<" "<<testL[i][k][j];
-			cout<<endl;
+		cout<<testX[i][j];
+		for (int k = 0; k < 3; k ++)
+		cout<<" "<<testL[i][k][j];
+		cout<<endl;
 		}
 		cout<<endl;
-	}
+		}
 
 
 
-	exit(0); */
+		exit(0); */
 
-	vector<Matrix<double, 3, 2>> best;
-	for (int k = 0; k < 6; k ++) best.push_back(MatrixXd::Zero(3, 2));
-	double bestDrop[3];
-//	for (double targ = 0; targ < 1.; targ += 0.1) { // can use this loop  for CV
-//		OCLASS_WEIGHT[0] = fRand(targ, targ + 0.1);
-//		for (double ag = 0.; ag < 1.; ag += 0.1){
-//			OCLASS_WEIGHT[1] = fRand(ag, ag + 0.1);
-//			for (double dse = 0.; dse < 1.; dse += 0.1){
-//				OCLASS_WEIGHT[2] = fRand(dse, dse + 0.1);
-				RNN brnn[3];
-				for (int j = 0; j < 3; j ++) brnn[j] = RNN(25,25,25,3,LT);
-				agent_dse.clear(25, 0.1); target_dse.clear(25, 0.1);
-				auto results = train(brnn, trainX, trainL, trainR, trainC,
-						validX, validL, validR, validC,
-						testX, testL, testR, testC);
-				//cout<<"tag1"<<endl;
-				for (int j = 0; j < 3; j ++)
-					if (best[j](2,0) < results[j](2,0)) { // propF1 on val set
-						best[j] = results[j];
-						best[j + 3] = results[j + 3];
-						bestDrop[j] = OCLASS_WEIGHT[j];
-						brnn[j].save("model.txt" + j);
-					}
-//			}
-//		}
-//	}
-	cout << "Best: " << endl;
-	for (int j = 0; j < 3; j ++)
-		cout << "OCLASS_WEIGHT "<<NAME[j]<<":" << bestDrop[j] << endl;
-	cout<<"Validation:"<<endl;
-	for (uint k = 0; k < 3;k ++) cout << NAME[k]<<"\n"<< best[k] << endl;
-	cout<<"Test:"<<endl;
-	for (uint k = 3; k < 6;k ++) cout << NAME[k - 3]<<"\n"<< best[k] << endl;
+			vector<Matrix<double, 3, 2>> best;
+			for (int k = 0; k < 6; k ++) best.push_back(MatrixXd::Zero(3, 2));
+			double bestDrop[3];
+			//	for (double targ = 0; targ < 1.; targ += 0.1) { // can use this loop  for CV
+			//		OCLASS_WEIGHT[0] = fRand(targ, targ + 0.1);
+			//		for (double ag = 0.; ag < 1.; ag += 0.1){
+			//			OCLASS_WEIGHT[1] = fRand(ag, ag + 0.1);
+			//			for (double dse = 0.; dse < 1.; dse += 0.1){
+			//				OCLASS_WEIGHT[2] = fRand(dse, dse + 0.1);
+			RNN brnn[3];
+			for (int j = 0; j < 3; j ++) brnn[j] = RNN(25,25,25,3,LT);
+			agent_dse.clear(25, 0.1); target_dse.clear(25, 0.1);
+			auto results = train(brnn, trainX, trainL, trainR, trainC,
+					validX, validL, validR, validC,
+					testX, testL, testR, testC);
+			//cout<<"tag1"<<endl;
+			for (int j = 0; j < 3; j ++)
+				if (best[j](2,0) < results[j](2,0)) { // propF1 on val set
+					best[j] = results[j];
+					best[j + 3] = results[j + 3];
+					bestDrop[j] = OCLASS_WEIGHT[j];
+					brnn[j].save("model.txt" + j);
+				}
+			//			}
+			//		}
+			//	}
+			cout << "Best: " << endl;
+			for (int j = 0; j < 3; j ++)
+				cout << "OCLASS_WEIGHT "<<NAME[j]<<":" << bestDrop[j] << endl;
+			cout<<"Validation:"<<endl;
+			for (uint k = 0; k < 3;k ++) cout << NAME[k]<<"\n"<< best[k] << endl;
+			cout<<"Test:"<<endl;
+			for (uint k = 3; k < 6;k ++) cout << NAME[k - 3]<<"\n"<< best[k] << endl;
 
-	return 0;
+			return 0;
 }
 

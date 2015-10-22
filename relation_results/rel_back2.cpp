@@ -1342,9 +1342,9 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 			cout<<"Test:"<<agent_dse.test(brnn[1],brnn[2], testX, testL, testR, testC)<<endl;
 
 			cout<<"is about:"<<endl;
-			cout<<"Train:"<<target_dse.test(brnn[1], brnn[2], sents, labels, relation, cnt)<<endl;
-			cout<<"Val:"<<target_dse.test(brnn[1], brnn[2], validX, validL, validR, validC)<<endl;
-			cout<<"Test:"<<target_dse.test(brnn[1], brnn[2], testX, testL, testR, testC)<<endl;
+			cout<<"Train:"<<target_dse.test(brnn[0], brnn[2], sents, labels, relation, cnt)<<endl;
+			cout<<"Val:"<<target_dse.test(brnn[0], brnn[2], validX, validL, validR, validC)<<endl;
+			cout<<"Test:"<<target_dse.test(brnn[0], brnn[2], testX, testL, testR, testC)<<endl;
 
 /*			cout<<"Diagonize:"<<endl;
 			cout<<"is from:"<<endl; agent_dse.diag();

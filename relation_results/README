@@ -12,6 +12,32 @@ Testing on Bishan's data and her datasplits
 
 relation -> rel.out (no backprop, add all vectors up and average)
 relation_backprop -> back.out (backprop, add all vectors up and average)
-rel_back2 -> back2.out (the forward and backward node of the last and the first of the span, backprop)
+back2.out (the forward and backward node of the last and the first of the span, backprop)
 rel_back3 -> back3.out (backward node of the first and the forward of the last, backprop)
+back3.1.out (the forward and backward node of the last and the first of the span, backprop, no decay on the output layer)
+back3.2.out (the forward and backward node of the last and the first of the span, backprop, no clear every training time)
+back3.3.out (the forward and backward node of the last and the first of the span, backprop, no decay on the output layer, train on all the gold-standard pairs)
+back3.4.out (the forward and backward node of the last and the first of the span, backprop, no decay on the output layer and the last layer, train on all the gold-standard pairs)
+back3.5.out (the forward and backward node of the last and the first of the span, backprop, no decay on the last layer, train on all the gold-standard pairs)
+
+all back3 to back3.5 have wrong is-about test answer.
+and back2
+
+back3.6.out (the forward and backward node of the last and the first of the span, backprop, no decay on the output layer, train on all the gold-standard pairs)
+output:	cout<<fal_span<<","<<trupredict<<","<<tru_pos<<","<<tt<<","<<truset<<endl;
+
+back3.6.out (the forward and backward node of the last and the first of the span, backprop, no decay on the output layer, train on all the gold-standard pairs)
+cout<<tot_pair<<","<<fal_span<<","<<trupredict<<","<<tru_pos<<","<<tt<<","<<truset<<endl;
+
+back3.7.out (the forward and backward node of the last and the first of the span, backprop, no decay on the output layer, train on all candidate pairs)
+cout<<tot_pair<<","<<fal_span<<","<<trupredict<<","<<tru_pos<<","<<tt<<","<<truset<<endl;
+
+
+
+
+
+
+
+
+
 
