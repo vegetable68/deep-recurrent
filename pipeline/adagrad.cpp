@@ -40,7 +40,7 @@ double LAMBDA = 1e-4;  // L2 regularizer on weights
 double LAMBDAH = (layers > 2) ? 1e-5 : 1e-4; //L2 regularizer on activations
 double DROP;
 string NAME[3] = {"Target", "Agent", "DSE"};
-double OCLASS_WEIGHT[3] = {0.3, 0.8, 0.5};
+double OCLASS_WEIGHT[3] = {0.5, 0.5, 0.5};
 double ENTITY_WEIGHT[3] = {1, 1, 1};
 double dr[3] = {0.999, 0.999, 0.999};
 
@@ -75,7 +75,7 @@ class RNN {
 		vector<string> s;
 
 		// recurrent network params
-		MatrixXd Wo, Wfo, Wbo, WWfo[layers - 1], WWbo[layers - 1], WWfoy, WWboy;
+		MatrixXd Wo, Wfo, Wbo, WWfoy, WWboy;
 		VectorXd bo;
 		MatrixXd Wf, Vf, Wb, Vb;
 		VectorXd bhf, bhb;
@@ -84,7 +84,7 @@ class RNN {
 		MatrixXd VVf[layers], VVb[layers];
 		VectorXd bbhf[layers], bbhb[layers];
 
-		MatrixXd gWo, gWfo, gWbo, gWWfo[layers - 1], gWWbo[layers - 1], gWWfoy, gWWboy;
+		MatrixXd gWo, gWfo, gWbo, gWWfoy, gWWboy;
 		VectorXd gbo;
 		MatrixXd gWf, gVf, gWb, gVb;
 		VectorXd gbhf, gbhb;
@@ -93,7 +93,7 @@ class RNN {
 		MatrixXd gVVf[layers], gVVb[layers];
 		VectorXd gbbhf[layers], gbbhb[layers];
 
-		MatrixXd GWo, GWfo, GWbo, GWWfo[layers - 1], GWWbo[layers - 1], GWWfoy, GWWboy;
+		MatrixXd GWo, GWfo, GWbo, GWWfoy, GWWboy;
 		VectorXd Gbo;
 		MatrixXd GWf, GVf, GWb, GVb;
 		VectorXd Gbhf, Gbhb;
@@ -103,7 +103,7 @@ class RNN {
 		VectorXd Gbbhf[layers], Gbbhb[layers];
 
 
-		MatrixXd vWo, vWfo, vWbo, vWWfo[layers - 1], vWWbo[layers - 1], vWWfoy, vWWboy;
+		MatrixXd vWo, vWfo, vWbo, vWWfoy, vWWboy;
 		VectorXd vbo;
 		MatrixXd vWf, vVf, vWb, vVb;
 		VectorXd vbhf, vbhb;
@@ -218,7 +218,8 @@ int Classifier::determineID(int INDEX, int start, int end, vector<vector<string>
 	int overlap = 0, id = -1;
 	for (int k = 0; k < beginSet.size(); k ++){
 		int curLap = min(endSet[k], end) - max(beginSet[k], start);
-		if (curLap > overlap && curLap >= 0) {overlap = curLap; id = k;}
+		if (curLap > overlap && curLap >= 0 &&
+				curLap * 2 >= (endSet[k] - beginSet[k])) {overlap = curLap; id = k;}
 	}
 	//cerr<<"end of process"<<endl;
 	return id;
@@ -245,9 +246,7 @@ void Classifier::output(RNN argnn, RNN dsenn,
 		vector<MatrixXd> curArgb, curDseb;
 		int arg_id = 0, dse_id = 0;
 		for (int j = 0; j < sent[z].size(); j ++){
-			uint maxi = argmax(argnn.y.col(j));
 			if (labels[z][argnn.INDEX][j] == "O"){
-//			if (maxi == 0){
 				if (!curArgf.empty()){
 					curArgID.push_back(arg_id ++);
 					curArgSpanf.push_back(curArgf);
@@ -257,7 +256,6 @@ void Classifier::output(RNN argnn, RNN dsenn,
 				curArgb.clear();
 			}
 			if (labels[z][argnn.INDEX][j] == "B"){
-//			if (maxi == 1){
 				if (!curArgf.empty()){
 					curArgID.push_back(arg_id ++);
 					curArgSpanf.push_back(curArgf);
@@ -269,7 +267,6 @@ void Classifier::output(RNN argnn, RNN dsenn,
 				curArgb.push_back(argnn.hhb[layers - 1].col(j));
 			}
 			if (labels[z][argnn.INDEX][j] == "I"){
-//			if (maxi == 2){
 				if (curArgf.empty()) start = j;
 				curArgf.push_back(argnn.hhf[layers - 1].col(j));
 				curArgb.push_back(argnn.hhb[layers - 1].col(j));
@@ -282,9 +279,7 @@ void Classifier::output(RNN argnn, RNN dsenn,
 		}
 		start = 0;
 		for (int j = 0; j < sent[z].size(); j ++){
-			uint maxi = argmax(dsenn.y.col(j));
-		if (labels[z][dsenn.INDEX][j] == "O"){
-//			if (maxi == 0){
+			if (labels[z][dsenn.INDEX][j] == "O"){
 				if (!curDsef.empty()){
 					curDseID.push_back(dse_id ++);
 					curDseSpanf.push_back(curDsef);
@@ -294,7 +289,6 @@ void Classifier::output(RNN argnn, RNN dsenn,
 				curDseb.clear();
 			}
 			if (labels[z][dsenn.INDEX][j] == "B"){
-//			if (maxi == 1){
 				if (!curDsef.empty()){
 					curDseID.push_back(dse_id ++);
 					curDseSpanf.push_back(curDsef);
@@ -306,7 +300,6 @@ void Classifier::output(RNN argnn, RNN dsenn,
 				curDseb.push_back(dsenn.hhb[layers - 1].col(j));
 			}
 			if (labels[z][dsenn.INDEX][j] == "I"){
-//			if (maxi == 2){
 				if (!curDsef.empty()) start = j;
 				curDsef.push_back(dsenn.hhf[layers - 1].col(j));
 				curDseb.push_back(dsenn.hhb[layers - 1].col(j));
@@ -331,9 +324,8 @@ void Classifier::output(RNN argnn, RNN dsenn,
 	alpha = ALPHA;
 	for (int z = 0; z < sent.size(); z ++){
 		for(int i = 0; i < dseSpanf[z].size(); ++i) {
-			if (dseID[z][i] == -1) continue;
+			assert(dseID[z][i] != -1);
 			for (int j = 0; j < argSpanf[z].size(); ++j){
-				if (argID[z][j] == -1) continue;
 				int ans = 0;
 				if (relation[z][argnn.INDEX].find(dseID[z][i])
 						!= relation[z][argnn.INDEX].end()){
@@ -351,7 +343,7 @@ void Classifier::output(RNN argnn, RNN dsenn,
 				for (int k = 0; k < nhf; k ++)
 					outstream<<" "<<(k + nhf + 1)<<":"<<dseSpanf[z][i][dseSpanf[z][i].size() - 1](k, 0);
 				for (int k = 0; k < nhf; k ++)
-					outstream<<" "<<(k + 2 * nhf + 1)<<":"<<argSpanb[z][j][0](k, 0);
+					outstream<<" "<<(k + nhf *2 + 1)<<":"<<argSpanb[z][j][0](k, 0);
 				for (int k = 0; k < nhf; k ++)
 					outstream<<" "<<(k + 3 * nhf + 1)<<":"<<argSpanf[z][j][argSpanf[z][j].size() - 1](k, 0);
 				outstream<<endl;
@@ -893,10 +885,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT, double _DR) {
 
 	Wfo = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
 	Wbo = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
-	for (uint l=0; l<layers - 1; l++) {
-		WWfo[l] = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
-		WWbo[l] = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
-	}
 	bo = VectorXd(ny).unaryExpr(ptr_fun(urand));
 	WWfoy = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
 	WWboy = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
@@ -925,10 +913,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT, double _DR) {
 
 	GWfo = MatrixXd::Zero(ny,nhf);
 	GWbo = MatrixXd::Zero(ny,nhb);
-	for (uint l=0; l<layers - 1; l++) {
-		GWWfo[l] = MatrixXd::Zero(ny,nhf);
-		GWWbo[l] = MatrixXd::Zero(ny,nhb);
-	}
 	GWWfoy = MatrixXd::Zero(ny,nhf);
 	GWWboy = MatrixXd::Zero(ny,nhb);
 	Gbo = VectorXd::Zero(ny);
@@ -958,10 +942,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT, double _DR) {
 
 	gWfo = MatrixXd::Zero(ny,nhf);
 	gWbo = MatrixXd::Zero(ny,nhb);
-	for (uint l=0; l<layers - 1; l++) {
-		gWWfo[l] = MatrixXd::Zero(ny,nhf);
-		gWWbo[l] = MatrixXd::Zero(ny,nhb);
-	}
 	gWWfoy = MatrixXd::Zero(ny,nhf);
 	gWWboy = MatrixXd::Zero(ny,nhb);
 	gbo = VectorXd::Zero(ny);
@@ -990,10 +970,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT, double _DR) {
 
 	vWfo = MatrixXd::Zero(ny,nhf);
 	vWbo = MatrixXd::Zero(ny,nhb);
-	for (uint l=0; l<layers - 1; l++) {
-		vWWfo[l] = MatrixXd::Zero(ny,nhf);
-		vWWbo[l] = MatrixXd::Zero(ny,nhb);
-	}
 	vWWfoy = MatrixXd::Zero(ny,nhf);
 	vWWboy = MatrixXd::Zero(ny,nhb);
 	vbo = VectorXd::Zero(ny);
@@ -1054,8 +1030,6 @@ void RNN::update() {
 
 	norm += 0.1* (gWo.squaredNorm());
 	norm += 0.1 *(gWWfoy.squaredNorm() + gWWboy.squaredNorm() + gbo.squaredNorm());
-	for (uint l=0; l<layers - 1; l++)
-		norm+= 0.1*(gWWfo[l].squaredNorm() + gWWbo[l].squaredNorm());
 
 	gWf.noalias() += lambda*Wf;
 	gVf.noalias() += lambda*Vf;
@@ -1146,7 +1120,7 @@ void RNN::update() {
 			vbbhf[l] = _lr*gbbhf[l] /norm  + mr*vbbhf[l];
 			vbbhb[l] = _lr*gbbhb[l] /norm  + mr*vbbhb[l];
 		}
-	} 
+	}
 
 	// update params
 	bo.noalias() -= vbo;
@@ -1177,13 +1151,12 @@ void RNN::update() {
 	  for (uint l=0; l<layers; l++) {
 	  cout << vWWff[l].norm() << " " << vWWfb[l].norm() << " "
 	  << vWWbb[l].norm() << " " << vWWbf[l].norm() << " "
-	  << vVVf[l].norm() << " " << vVVb[l].norm() << " "
-	  << vWWfo[l].norm() << " " << vWWbo[l].norm() << endl;
+	  << vVVf[l].norm() << " " << vVVb[l].norm() <<endl;
 	  }
 	cout<<vWWfoy.norm()<<" "<<vWWboy.norm()<<" "<<vbo.norm()<<endl;
 
 	//accumulate gradients
-	Gbo.noalias() += gbo.cwiseProduct(gbo);
+/*	Gbo.noalias() += gbo.cwiseProduct(gbo);
 	GWWfoy.noalias() += gWWfoy.cwiseProduct(gWWfoy);
 	GWWboy.noalias() += gWWboy.cwiseProduct(gWWboy);
 
@@ -1203,7 +1176,7 @@ void RNN::update() {
 		Gbbhf[l].noalias() += gbbhf[l].cwiseProduct(gbbhf[l]);
 		Gbbhb[l].noalias() += gbbhb[l].cwiseProduct(gbbhb[l]);
 
-	}
+	}*/
 
 
 
@@ -1270,8 +1243,6 @@ void RNN::load(string fname) {
 	}
 
 	in >> Wfo >> Wbo;
-	for (uint l=0; l<layers; l++)
-		in >> WWfo[l] >> WWbo[l];
 	in>>WWfoy>>WWboy>>bo;
 	in >> Wo;
 
@@ -1284,8 +1255,6 @@ void RNN::load(string fname) {
 	}
 
 	in >> GWfo >> GWbo;
-	for (uint l=0; l<layers; l++)
-		in >> GWWfo[l] >> GWWbo[l];
 	in>>GWWfoy>>GWWboy>>Gbo;
 	in >> GWo;
 
@@ -1318,10 +1287,6 @@ void RNN::save(string fname) {
 
 	out << Wfo << endl;
 	out << Wbo << endl;
-	for (uint l=0; l<layers - 1; l++) {
-		out << WWfo[l] << endl;
-		out << WWbo[l] << endl;
-	}
 	out<<WWfoy<<endl;
 	out<<WWboy<<endl;
 	out<<bo<<endl;
@@ -1349,10 +1314,6 @@ void RNN::save(string fname) {
 
 	out << GWfo << endl;
 	out << GWbo << endl;
-	for (uint l=0; l<layers - 1; l++) {
-		out << GWWfo[l] << endl;
-		out << GWWbo[l] << endl;
-	}
 	out<<GWWfoy<<endl;
 	out<<GWWboy<<endl;
 	out<<Gbo<<endl;
@@ -1433,8 +1394,7 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 						for (uint l=0; l<layers; l++) {
 						cout << WWff[l].norm() << " " << WWfb[l].norm() << " "
 						<< WWbb[l].norm() << " " << WWbf[l].norm() << " "
-						<< VVf[l].norm() << " " << VVb[l].norm() << " "
-						<< WWfo[l].norm() << " " << WWbo[l].norm() << endl;
+						<< VVf[l].norm() << " " << VVb[l].norm() <<endl;
 						}
 						for (uint k = 0; k < 3; k ++) cout<<WWfoy[k].norm()<<" "<<WWboy[k].norm()<<bo[k].norm()<<endl;*/
 			for (int j = 0; j < 3; j ++){

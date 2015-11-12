@@ -72,7 +72,7 @@ class RNN {
 		vector<string> s;
 
 		// recurrent network params
-		MatrixXd Wo, Wfo, Wbo, WWfo[layers - 1], WWbo[layers - 1], WWfoy, WWboy;
+		MatrixXd Wo, Wfo, Wbo, WWfoy, WWboy;
 		VectorXd bo;
 		MatrixXd Wf, Vf, Wb, Vb;
 		VectorXd bhf, bhb;
@@ -81,7 +81,7 @@ class RNN {
 		MatrixXd VVf[layers], VVb[layers];
 		VectorXd bbhf[layers], bbhb[layers];
 
-		MatrixXd gWo, gWfo, gWbo, gWWfo[layers - 1], gWWbo[layers - 1], gWWfoy, gWWboy;
+		MatrixXd gWo, gWfo, gWbo, gWWfoy, gWWboy;
 		VectorXd gbo;
 		MatrixXd gWf, gVf, gWb, gVb;
 		VectorXd gbhf, gbhb;
@@ -90,7 +90,7 @@ class RNN {
 		MatrixXd gVVf[layers], gVVb[layers];
 		VectorXd gbbhf[layers], gbbhb[layers];
 
-		MatrixXd GWo, GWfo, GWbo, GWWfo[layers - 1], GWWbo[layers - 1], GWWfoy, GWWboy;
+		MatrixXd GWo, GWfo, GWbo, GWWfoy, GWWboy;
 		VectorXd Gbo;
 		MatrixXd GWf, GVf, GWb, GVb;
 		VectorXd Gbhf, Gbhb;
@@ -101,7 +101,7 @@ class RNN {
 
 
 
-		MatrixXd vWo, vWfo, vWbo, vWWfo[layers - 1], vWWbo[layers - 1], vWWfoy, vWWboy;
+		MatrixXd vWo, vWfo, vWbo, vWWfoy, vWWboy;
 		VectorXd vbo;
 		MatrixXd vWf, vVf, vWb, vVb;
 		VectorXd vbhf, vbhb;
@@ -885,10 +885,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 
 	Wfo = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
 	Wbo = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
-	for (uint l=0; l<layers - 1; l++) {
-		WWfo[l] = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
-		WWbo[l] = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
-	}
 	bo = VectorXd(ny).unaryExpr(ptr_fun(urand));
 	WWfoy = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
 	WWboy = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
@@ -947,10 +943,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 
 	GWfo = MatrixXd::Zero(ny,nhf);
 	GWbo = MatrixXd::Zero(ny,nhb);
-	for (uint l=0; l<layers - 1; l++) {
-		GWWfo[l] = MatrixXd::Zero(ny,nhf);
-		GWWbo[l] = MatrixXd::Zero(ny,nhb);
-	}
 	GWWfoy = MatrixXd::Zero(ny,nhf);
 	GWWboy = MatrixXd::Zero(ny,nhb);
 	Gbo = VectorXd::Zero(ny);
@@ -981,10 +973,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 
 	gWfo = MatrixXd::Zero(ny,nhf);
 	gWbo = MatrixXd::Zero(ny,nhb);
-	for (uint l=0; l<layers - 1; l++) {
-		gWWfo[l] = MatrixXd::Zero(ny,nhf);
-		gWWbo[l] = MatrixXd::Zero(ny,nhb);
-	}
 	gWWfoy = MatrixXd::Zero(ny,nhf);
 	gWWboy = MatrixXd::Zero(ny,nhb);
 	gbo = VectorXd::Zero(ny);
@@ -1013,10 +1001,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 
 	vWfo = MatrixXd::Zero(ny,nhf);
 	vWbo = MatrixXd::Zero(ny,nhb);
-	for (uint l=0; l<layers - 1; l++) {
-		vWWfo[l] = MatrixXd::Zero(ny,nhf);
-		vWWbo[l] = MatrixXd::Zero(ny,nhb);
-	}
 	vWWfoy = MatrixXd::Zero(ny,nhf);
 	vWWboy = MatrixXd::Zero(ny,nhb);
 	vbo = VectorXd::Zero(ny);
@@ -1075,8 +1059,6 @@ void RNN::update() {
 
 	norm += 0.1* (gWo.squaredNorm());
 	norm += 0.1 *(gWWfoy.squaredNorm() + gWWboy.squaredNorm() + gbo.squaredNorm());
-	for (uint l=0; l<layers - 1; l++)
-		norm+= 0.1*(gWWfo[l].squaredNorm() + gWWbo[l].squaredNorm());
 
 	gWf.noalias() += lambda*Wf;
 	gVf.noalias() += lambda*Vf;
@@ -1226,8 +1208,6 @@ void RNN::load(string fname) {
 	}
 
 	in >> Wfo >> Wbo;
-	for (uint l=0; l<layers; l++)
-		in >> WWfo[l] >> WWbo[l];
 	in>>WWfoy>>WWboy>>bo;
 	in >> Wo;
 }
@@ -1259,16 +1239,12 @@ void RNN::save(string fname) {
 
 	out << Wfo << endl;
 	out << Wbo << endl;
-	for (uint l=0; l<layers - 1; l++) {
-		out << WWfo[l] << endl;
-		out << WWbo[l] << endl;
-	}
 	out<<WWfoy<<endl;
 	out<<WWboy<<endl;
 	out<<bo<<endl;
 	out << Wo << endl;
 
-/*	out << GWf << endl;
+	out << GWf << endl;
 	out << GVf << endl;
 	out << Gbhf << endl;
 
@@ -1290,14 +1266,10 @@ void RNN::save(string fname) {
 
 	out << GWfo << endl;
 	out << GWbo << endl;
-	for (uint l=0; l<layers - 1; l++) {
-		out << GWWfo[l] << endl;
-		out << GWWbo[l] << endl;
-	}
 	out<<GWWfoy<<endl;
 	out<<GWWboy<<endl;
 	out<<Gbo<<endl;
-	out << GWo << endl; */
+	out << GWo << endl;
 
 }
 
