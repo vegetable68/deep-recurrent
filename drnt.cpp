@@ -21,7 +21,7 @@
 #define DROPOUT
 #define ETA 0.001
 #define NORMALIZE false // keeping this false throughout my own experiments
-#define OCLASS_WEIGHT 0.09
+#define OCLASS_WEIGHT 0.5
 #define layers 3 // number of EXTRA (not all) hidden layers
 
 #define MR 0.7
@@ -245,7 +245,7 @@ void RNN::backward(const vector<string> &labels) {
 
   dhf.noalias() += Wfo.transpose() * gpyd;
   dhb.noalias() += Wbo.transpose() * gpyd;
-  for (uint l=0; l<layers; l++) {
+  for (uint l=layers-1; l<layers; l++) {
     dhhf[l].noalias() += WWfo[l].transpose() * gpyd;
     dhhb[l].noalias() += WWbo[l].transpose() * gpyd;
   }
@@ -853,9 +853,10 @@ int main(int argc, char **argv) {
   LookupTable LT;
   // i used mikolov's word2vec (300d) for my experiments, not CW
   LT.load("embeddings-original.EMBEDDING_SIZE=25.txt", 268810, 25, false);
+//  LT.load("glove.6B.300d.txt", 400000, 300, false);
   vector<vector<string> > X;
   vector<vector<string> > T;
-  readSentences(X, T, "target.txt"); // dse.txt or ese.txt
+  readSentences(X, T, "dse.txt"); // dse.txt or ese.txt
 
   unordered_map<string, set<uint> > sentenceIds;
   set<string> allDocs; //Store the name of all docs
@@ -883,11 +884,11 @@ int main(int argc, char **argv) {
   vector<vector<string> > trainL, validL, testL;
   vector<bool> isUsed(X.size(), false);
 
-  ifstream in4("datasplit/doclist.mpqaOriginalSubset");
+  ifstream in4("datasplit_bishan/doclist");
   while(getline(in4, line))
     allDocs.insert(line);
 
-  ifstream in2("datasplit/filelist_train"+to_string(fold));
+  ifstream in2("datasplit_bishan/filelist_train"+to_string(fold));
   //10 fold
   while(getline(in2, line)) {
     for (const auto &id : sentenceIds[line]) {
@@ -896,7 +897,7 @@ int main(int argc, char **argv) {
     }
     allDocs.erase(line);
   }
-  ifstream in3("datasplit/filelist_test"+to_string(fold));
+  ifstream in3("datasplit_bishan/filelist_test"+to_string(fold));
   while(getline(in3, line)) {
     for (const auto &id : sentenceIds[line]) {
       testX.push_back(X[id]);
@@ -926,10 +927,10 @@ int main(int argc, char **argv) {
       best = results;
       bestDrop = DROP;
     }
-	cout<<"Validation sample:"<<endl;
-	brnn.present(validX, validL);
-	cout<<"Training sample:"<<endl;
-	brnn.present(trainX, trainL);
+//	cout<<"Validation sample:"<<endl;
+//	brnn.present(validX, validL);
+//	cout<<"Training sample:"<<endl;
+//	brnn.present(trainX, trainL);
     brnn.save("model.txt");
   }
   cout << "Best: " << endl;

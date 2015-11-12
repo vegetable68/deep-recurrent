@@ -90,6 +90,17 @@ class RNN {
 		MatrixXd gVVf[layers], gVVb[layers];
 		VectorXd gbbhf[layers], gbbhb[layers];
 
+		MatrixXd GWo, GWfo, GWbo, GWWfo[layers - 1], GWWbo[layers - 1], GWWfoy, GWWboy;
+		VectorXd Gbo;
+		MatrixXd GWf, GVf, GWb, GVb;
+		VectorXd Gbhf, Gbhb;
+
+		MatrixXd GWWff[layers], GWWfb[layers], GWWbb[layers], GWWbf[layers];
+		MatrixXd GVVf[layers], GVVb[layers];
+		VectorXd Gbbhf[layers], Gbbhb[layers];
+
+
+
 		MatrixXd vWo, vWfo, vWbo, vWWfo[layers - 1], vWWbo[layers - 1], vWWfoy, vWWboy;
 		VectorXd vbo;
 		MatrixXd vWf, vVf, vWb, vVb;
@@ -882,6 +893,70 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 	WWfoy = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
 	WWboy = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
 	Wo = MatrixXd(ny,nx).unaryExpr(ptr_fun(urand));
+/*	Wf = MatrixXd(nhf,nx).unaryExpr(ptr_fun(urand));
+	Vf = MatrixXd::Identity(nhf,nhf);
+	bhf = VectorXd::Zero(nhf);
+
+	Wb = MatrixXd(nhb,nx).unaryExpr(ptr_fun(urand));
+	Vb = MatrixXd::Identity(nhb,nhb);
+	bhb = VectorXd::Zero(nhb);
+
+	for (uint l=0; l<layers; l++) {
+		WWff[l] = MatrixXd(nhf,nhf).unaryExpr(ptr_fun(urand));
+		WWfb[l] = MatrixXd(nhf,nhb).unaryExpr(ptr_fun(urand));
+		VVf[l] = MatrixXd::Identity(nhf,nhf);
+		bbhf[l] = VectorXd::Zero(nhf);
+
+		WWbb[l] = MatrixXd(nhb,nhb).unaryExpr(ptr_fun(urand));
+		WWbf[l] = MatrixXd(nhb,nhf).unaryExpr(ptr_fun(urand));
+		VVb[l] = MatrixXd::Identity(nhb,nhb);
+		bbhb[l] = VectorXd::Zero(nhb);
+	}
+
+	Wfo = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
+	Wbo = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
+	for (uint l=0; l<layers - 1; l++) {
+		WWfo[l] = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
+		WWbo[l] = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
+	}
+	bo = VectorXd(ny).unaryExpr(ptr_fun(urand));
+	WWfoy = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
+	WWboy = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
+	Wo = MatrixXd(ny,nx).unaryExpr(ptr_fun(urand)); */
+
+	GWf = MatrixXd::Zero(nhf,nx);
+	GVf = MatrixXd::Zero(nhf,nhf);
+	Gbhf = VectorXd::Zero(nhf);
+
+	GWb = MatrixXd::Zero(nhb,nx);
+	GVb = MatrixXd::Zero(nhb,nhb);
+	Gbhb = VectorXd::Zero(nhb);
+
+	for (uint l=0; l<layers; l++) {
+		GWWff[l] = MatrixXd::Zero(nhf,nhf);
+		GWWfb[l] = MatrixXd::Zero(nhf,nhb);
+		GVVf[l] = MatrixXd::Zero(nhf,nhf);
+		Gbbhf[l] = VectorXd::Zero(nhf);
+
+		GWWbb[l] = MatrixXd::Zero(nhb,nhb);
+		GWWbf[l] = MatrixXd::Zero(nhb,nhf);
+		GVVb[l] = MatrixXd::Zero(nhb,nhb);
+		Gbbhb[l] = VectorXd::Zero(nhb);
+	}
+
+
+	GWfo = MatrixXd::Zero(ny,nhf);
+	GWbo = MatrixXd::Zero(ny,nhb);
+	for (uint l=0; l<layers - 1; l++) {
+		GWWfo[l] = MatrixXd::Zero(ny,nhf);
+		GWWbo[l] = MatrixXd::Zero(ny,nhb);
+	}
+	GWWfoy = MatrixXd::Zero(ny,nhf);
+	GWWboy = MatrixXd::Zero(ny,nhb);
+	Gbo = VectorXd::Zero(ny);
+	GWo = MatrixXd::Zero(ny,nx);
+
+
 
 	gWf = MatrixXd::Zero(nhf,nx);
 	gVf = MatrixXd::Zero(nhf,nhf);
@@ -1192,6 +1267,38 @@ void RNN::save(string fname) {
 	out<<WWboy<<endl;
 	out<<bo<<endl;
 	out << Wo << endl;
+
+/*	out << GWf << endl;
+	out << GVf << endl;
+	out << Gbhf << endl;
+
+	out << GWb << endl;
+	out << GVb << endl;
+	out << Gbhb << endl;
+
+	for (uint l=0; l<layers; l++) {
+		out << GWWff[l] << endl;
+		out << GWWfb[l] << endl;
+		out << GVVf[l] << endl;
+		out << Gbbhf[l] << endl;
+
+		out << GWWbb[l] << endl;
+		out << GWWbf[l] << endl;
+		out << GVVb[l]  << endl;
+		out << Gbbhb[l] << endl;
+	}
+
+	out << GWfo << endl;
+	out << GWbo << endl;
+	for (uint l=0; l<layers - 1; l++) {
+		out << GWWfo[l] << endl;
+		out << GWWbo[l] << endl;
+	}
+	out<<GWWfoy<<endl;
+	out<<GWWboy<<endl;
+	out<<Gbo<<endl;
+	out << GWo << endl; */
+
 }
 
 void RNN::output(ostringstream &strS, int MAXEPOCH){

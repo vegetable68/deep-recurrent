@@ -32,7 +32,11 @@ cout<<tot_pair<<","<<fal_span<<","<<trupredict<<","<<tru_pos<<","<<tt<<","<<trus
 back3.7.out (the forward and backward node of the last and the first of the span, backprop, no decay on the output layer, train on all candidate pairs)
 cout<<tot_pair<<","<<fal_span<<","<<trupredict<<","<<tru_pos<<","<<tt<<","<<truset<<endl;
 
-
+the forward and backward node of the last and the first of the span, backprop, no decay on the output layer,train on gold standard
+back4: use sigmoid(arg^T.W.dse + W.(arg, dse) + b)
+back4.2: adjust classifier weight, target:1.3, agent:1.4
+back4.3: entity weight to 0.8
+back4.4: add L2 regularization parameter to 0.2
 
 
 

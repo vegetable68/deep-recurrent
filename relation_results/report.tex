@@ -1,11 +1,14 @@
 \documentclass[a4paper, 12pt]{article}
+\usepackage{amsmath}
 \title{Report on relation extraction}
 \author{Yiqing Hua}
 
 \begin{document}
 \maketitle
 
-\section{General Settings}
+\section{Oct. 20th}
+
+\subsection{General Settings}
 
 The following results are on trained on the same hyperparameter
 settings. Currently they are using the logistic regression without any
@@ -27,7 +30,11 @@ Some settings include:\\
   \item Tested and Trained on Bishan's data and her datasplits.
 \end{itemize}
 
-\section{Experiments}
+\subsection{Experiments}
+
+\begin{align*}
+  prediction = sigmoid(\theta_{arg}V_{arg} + \theta_{dse}V_{dse} + b) 
+\end{align*}
 
 \paragraph{Variant 1}
 The training samples are picked according to the labels predicted. While
@@ -126,7 +133,7 @@ is about & 0.3& 0.378223& 0.334601 \\
 \end{tabular}
 \end{table}
 
- \section{Some Conclusion}
+ \subsection{Some Conclusion}
  \begin{itemize}
 \item
   According to my other experiments, the relation classifier simply predicts most
@@ -150,6 +157,205 @@ is about & 0.3& 0.378223& 0.334601 \\
   epochs with neural network. The accuracy is from $40\%$ to $60\%$. I'm
   training on gold standard pairs, among which around $58\%$ of the agent dse pairs are
   related, and around $55\%$ of the target dse pairs are related.\\
+
+\section{Oct. 27th}
+
+\subsection{Experiments}
+\begin{itemize}
+  \item Tried a bilinear model for classification.
+  \item Tune the weights of the classifier error.
+\end{itemize}
+
+\subsection{Bilinear Model}
+\begin{align*}
+  prediction = sigmoid(V_{arg}^T\theta V_{dse} + b) 
+\end{align*}
+
+\paragraph{Variant 1}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{Target} & \multicolumn{2}{l}{Agent} & \multicolumn{2}{l}{DSE} \\ \hline
+   & Prop.& Bin.& Prop.& Bin.& Prop.& Bin.\\
+ \hline
+P  &0.288455&0.337739 &0.586474 &      0.6 &0.512167 & 0.537002 \\
+R  &0.469011&0.571031 &0.543636 & 0.569124 &0.599119 & 0.650575 \\
+F1 &0.357214& 0.42444 &0.564243 & 0.584155 &0.552241 & 0.588358 \\ \hline
+\end{tabular}
+\end{table}
+
+Slight improvement (1 to 2\%) on target and expression, agent extraction doesn't
+improve.
+
+And the Relation results:
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & P & R & F1    \\\hline
+is from  & 0.320088& 0.415473& 0.361596\\
+is about & 0.218359& 0.464497& 0.297067 \\
+\hline
+\end{tabular}
+\end{table}
+Still have very high recall and predicts almost every pair as true pair.
+
+\paragraph{Variant 2}
++adjusted the weights of the classifier to prevent learning trivial results.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{Target} & \multicolumn{2}{l}{Agent} & \multicolumn{2}{l}{DSE} \\ \hline
+   & Prop.& Bin.& Prop.& Bin.& Prop.& Bin.\\
+ \hline
+P  &0.286985& 0.32967 &0.570199 & 0.581776 &0.498337 &  0.51751 \\
+R  &0.456446&0.579387 & 0.54209 & 0.569124 &0.556379 & 0.609195 \\
+F1 &0.352402& 0.42023 &0.555789 & 0.575381 &0.525761 & 0.559622 \\ \hline
+\end{tabular}
+\end{table}
+
+The extraction results get a little bit worse.
+And the Relation results get even more worse:
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & P & R & F1    \\\hline
+is from  & 0.286842& 0.312321&  0.29904 \\
+is about & 0.163136& 0.227811& 0.190123 \\
+\hline
+\end{tabular}
+\end{table}
+
+\paragraph{Variant 3}
++lower the entity extraction error rate to $0.8$.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{Target} & \multicolumn{2}{l}{Agent} & \multicolumn{2}{l}{DSE} \\ \hline
+   & Prop.& Bin.& Prop.& Bin.& Prop.& Bin.\\
+ \hline
+P  &0.231616&0.267081 &0.579255 & 0.594458 &0.484868 & 0.505415 \\
+R  &0.467996&0.626741 &0.509163 & 0.541475 &0.596111 & 0.641379 \\
+F1 &0.309873& 0.37455 &0.541952 & 0.566731 &0.534765 & 0.565337 \\ \hline
+\end{tabular}
+\end{table}
+
+Recall of the target has been increased.
+And the Relation results don't have many changes.
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & P & R & F1    \\\hline
+is from  & 0.321311& 0.280802& 0.299694 \\
+is about & 0.156364& 0.127219& 0.140294 \\
+\hline
+\end{tabular}
+\end{table}
+
+\paragraph{Variant 4}
++L1 regularization to classifier.\\
+Gradient of the target extraction exploded.\\
+
+\subsection{Explosive Gradient}
+
+When training with liblinear(L1-regularized logistic regression, to
+ensure no  
+bugs in logistic regression).
+By observing the prediction accuracy on training set of the classifier, 
+it goes like (44\%, 55\%, 57\%, 44\%, 55\%, \ldots) on agent-dse relation and
+the similar pattern for target-dse relation. Whenever the accuracy drops, it's
+the sign for that one of the neural network has an explosive gradient
+problem. Usually, the network cannot recover from the explosive gradient, but
+the program actually re-initialize the weights if the explosion
+occurs.(explosion would output the weight as -nan(Not a Number in C++), but when
+reloading, the network would not load something as nan(hence the
+re-initialize))\\
+The upper bound of the accuracy rate ever reached by the
+classifier is similar to the percentage of true span pairs in the training
+set.(But by looking at the output results from the classifier, it's not
+predicting everything as true.)\\
+Gradient clipping would produce worse results.\\
+The explosive gradient happens before in : 
+\begin{itemize} 
+  \item Multitasking RNN.
+  \item Using trained dse RNN to initialize target extraction RNN.
+\end{itemize}
+
+L1-regularized logistic regression + gradient clipping
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{Target} & \multicolumn{2}{l}{Agent} & \multicolumn{2}{l}{DSE} \\ \hline
+   & Prop.& Bin.& Prop.& Bin.& Prop.& Bin.\\
+ \hline
+P  &0.308669&0.380561 &0.639876 & 0.642984 &0.575967 & 0.588792 \\
+R  &0.413031&0.536528 &0.355715 & 0.421388 &0.423227 & 0.491968 \\
+F1 &0.353304&0.445282 &0.457243 & 0.509119 &0.487922 & 0.536043 \\ \hline
+\end{tabular}
+\end{table}
+
+Recall of the target has been increased.
+And the Relation results don't have many changes.
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & P & R & F1    \\\hline
+is from  & 0.357401& 0.283668& 0.316294 \\
+is about & 0.223881& 0.0443787& 0.0740741\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Nov. 6th}
+
+I implemented Adagrad. It may prevent the gradient explosion, however the neural network tends 
+to predict everything as a true label. The training accuracy on relation classification has been improved, can reach 60\% for IS-FROM relation sometimes. The final results get worse, even if 
+I tune the OWEIGHT all to $1$.\\
+Here are the results.
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{Target} & \multicolumn{2}{l}{Agent} & \multicolumn{2}{l}{DSE} \\ \hline
+   & Prop.& Bin.& Prop.& Bin.& Prop.& Bin.\\
+ \hline
+P  &0.0894239&0.396432 &0.0599972 & 0.0599972 &0.0443143 & 0.448651  \\
+R  &        1&       1 &        1 &         1 &        1 &        1  \\
+F1 & 0.164167&0.567778 & 0.113203 &  0.113203 &0.0848678 & 0.619405  \\ \hline
+\end{tabular}
+\end{table}
+
+Recall of the target has been increased.
+And the Relation results don't have many changes.
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & P & R & F1    \\\hline
+is from  & 0.0312094& 0.0687679& 0.0429338\\
+is about & 0.143885& 0.0591716& 0.0838574\\
+\hline
+\end{tabular}
+\end{table}
+
+Sometimes the gradients still explode but not all the time. I've also tried to lower the weights of relation error, the pattern doesn't change much.\\
+
+No backprop from relation -- doesn't work.\\
+Tried adding adagrad switch -> but still no results, should be the same as
+drnt.cpp in pipeline. (see diff.out) \\
+no backprop in diff.out: should have no explosion, however explodes.(see
+current results folder in pipelin.)
 
 
 \end{document}

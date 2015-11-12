@@ -1,0 +1,240 @@
+24a25
+> #define REL_WEIGHT 0.3
+30c31,32
+< 
+---
+> #define EPS 1
+> #define ADAGRAD false
+93a96,105
+> 		MatrixXd GWo, GWfo, GWbo, GWWfo[layers - 1], GWWbo[layers - 1], GWWfoy, GWWboy;
+> 		VectorXd Gbo;
+> 		MatrixXd GWf, GVf, GWb, GVb;
+> 		VectorXd Gbhf, Gbhb;
+> 
+> 		MatrixXd GWWff[layers], GWWfb[layers], GWWbb[layers], GWWbf[layers];
+> 		MatrixXd GVVf[layers], GVVb[layers];
+> 		VectorXd Gbbhf[layers], Gbbhb[layers];
+> 
+> 
+143c155
+< Classifier agent_dse(25, "agent_dse", 1.4), target_dse(25, "target_dse", 1.3);
+---
+> Classifier agent_dse(25, "agent_dse", 0.7), target_dse(25, "target_dse", 0.8);
+419,423c431,435
+< 					if (ans == -1) fac = factor;
+< 					argdhhf.col(argPair[k].second - 1).noalias() += (-ans) * fac * double(1 - predict) * beta.block(3 * nhf, 0, nhf, 1);
+< 					argdhhb.col(argPair[k].first).noalias() += (-ans) * fac * double(1 - predict) * beta.block(2 * nhf, 0, nhf, 1);
+< 					dsedhhf.col(j - 1).noalias() += (-ans) * fac * double(1 - predict) * beta.block(nhf, 0, nhf, 1);
+< 					dsedhhb.col(start).noalias() += (-ans) * fac * double(1 - predict) * beta.block(0, 0, nhf, 1);
+---
+> 					if (ans == 1) fac = factor;
+> 					argdhhf.col(argPair[k].second - 1).noalias() += REL_WEIGHT * (-ans) * fac * double(1 - predict) * beta.block(3 * nhf, 0, nhf, 1);
+> 					argdhhb.col(argPair[k].first).noalias() += REL_WEIGHT * (-ans) * fac * double(1 - predict) * beta.block(2 * nhf, 0, nhf, 1);
+> 					dsedhhf.col(j - 1).noalias() += REL_WEIGHT * (-ans) * fac * double(1 - predict) * beta.block(nhf, 0, nhf, 1);
+> 					dsedhhb.col(start).noalias() += REL_WEIGHT * (-ans) * fac * double(1 - predict) * beta.block(0, 0, nhf, 1);
+892a905,937
+> 	GWf = MatrixXd::Zero(nhf,nx);
+> 	GVf = MatrixXd::Zero(nhf,nhf);
+> 	Gbhf = VectorXd::Zero(nhf);
+> 
+> 	GWb = MatrixXd::Zero(nhb,nx);
+> 	GVb = MatrixXd::Zero(nhb,nhb);
+> 	Gbhb = VectorXd::Zero(nhb);
+> 
+> 	for (uint l=0; l<layers; l++) {
+> 		GWWff[l] = MatrixXd::Zero(nhf,nhf);
+> 		GWWfb[l] = MatrixXd::Zero(nhf,nhb);
+> 		GVVf[l] = MatrixXd::Zero(nhf,nhf);
+> 		Gbbhf[l] = VectorXd::Zero(nhf);
+> 
+> 		GWWbb[l] = MatrixXd::Zero(nhb,nhb);
+> 		GWWbf[l] = MatrixXd::Zero(nhb,nhf);
+> 		GVVb[l] = MatrixXd::Zero(nhb,nhb);
+> 		Gbbhb[l] = VectorXd::Zero(nhb);
+> 	}
+> 
+> 
+> 	GWfo = MatrixXd::Zero(ny,nhf);
+> 	GWbo = MatrixXd::Zero(ny,nhb);
+> 	for (uint l=0; l<layers - 1; l++) {
+> 		GWWfo[l] = MatrixXd::Zero(ny,nhf);
+> 		GWWbo[l] = MatrixXd::Zero(ny,nhb);
+> 	}
+> 	GWWfoy = MatrixXd::Zero(ny,nhf);
+> 	GWWboy = MatrixXd::Zero(ny,nhb);
+> 	Gbo = VectorXd::Zero(ny);
+> 	GWo = MatrixXd::Zero(ny,nx);
+> 
+> 
+1002a1048,1049
+> 
+> 
+1040a1088
+> 
+1042,1044d1089
+< 	vbo = 0.1*lr*gbo + mr*vbo;
+< 	vWWfoy = 0.1*lr*gWWfoy + mr*vWWfoy;
+< 	vWWboy = 0.1*lr*gWWboy + mr*vWWboy;
+1053,1073c1098,1149
+< 
+< 	vWf = lr*gWf/norm + mr*vWf;
+< 	vVf = lr*gVf/norm + mr*vVf;
+< 	vWb = lr*gWb/norm + mr*vWb;
+< 	vVb = lr*gVb/norm + mr*vVb;
+< 	vbhf = lr*gbhf/norm + mr*vbhf;
+< 	vbhb = lr*gbhb/norm + mr*vbhb;
+< 
+< 	for (uint l=0; l<layers; l++) {
+< 		double _lr;
+< //		if (l == layers - 1) _lr = ylr; else _lr = lr;
+< 		_lr = lr;
+< 		vWWff[l] = _lr*gWWff[l]/norm + mr*vWWff[l];
+< 		vWWfb[l] = _lr*gWWfb[l]/norm + mr*vWWfb[l];
+< 		vVVf[l] = _lr*gVVf[l]/norm + mr*vVVf[l];
+< 		vWWbb[l] = _lr*gWWbb[l]/norm + mr*vWWbb[l];
+< 		vWWbf[l] = _lr*gWWbf[l]/norm + mr*vWWbf[l];
+< 		vVVb[l] = _lr*gVVb[l]/norm + mr*vVVb[l];
+< 		vbbhf[l] = _lr*gbbhf[l]/norm + mr*vbbhf[l];
+< 		vbbhb[l] = _lr*gbbhb[l]/norm + mr*vbbhb[l];
+< 	}
+---
+> 	if (ADAGRAD){
+> 		vbo = (0.1*lr*gbo.array() / (EPS + Gbo.array().sqrt())).matrix() + mr*vbo;
+> 		vWWfoy = (0.1*lr*gWWfoy.array() / (EPS + GWWfoy.array().sqrt())).matrix() + mr*vWWfoy;
+> 		vWWboy = (0.1*lr*gWWboy.array() / (EPS + GWWboy.array().sqrt())).matrix() + mr*vWWboy;
+> 
+> 		vWf = (lr*gWf.array() /norm / (EPS + GWf.array().sqrt())).matrix() + mr*vWf;
+> 		vVf = (lr*gVf.array() /norm / (EPS + GVf.array().sqrt())).matrix() + mr*vVf;
+> 		vWb = (lr*gWb.array() /norm / (EPS + GWb.array().sqrt())).matrix() + mr*vWb;
+> 		vVb = (lr*gVb.array() /norm / (EPS + GVb.array().sqrt())).matrix() + mr*vVb;
+> 		vbhf = (lr*gbhf.array() /norm / (EPS + Gbhf.array().sqrt())).matrix() + mr*vbhf;
+> 		vbhb = (lr*gbhb.array() /norm / (EPS + Gbhb.array().sqrt())).matrix() + mr*vbhb;
+> 
+> 		for (uint l=0; l<layers; l++) {
+> 			double _lr;
+> 			//		if (l == layers - 1) _lr = ylr; else _lr = lr;
+> 			_lr = lr;
+> 			vWWff[l] = (_lr*gWWff[l].array() /norm / (EPS + GWWff[l].array().sqrt())).matrix() + mr*vWWff[l];
+> 			vWWfb[l] = (_lr*gWWfb[l].array() /norm / (EPS + GWWfb[l].array().sqrt())).matrix() + mr*vWWfb[l];
+> 			vVVf[l] = (_lr*gVVf[l].array() /norm / (EPS + GVVf[l].array().sqrt())).matrix() + mr*vVVf[l];
+> 			vWWbb[l] = (_lr*gWWbb[l].array() /norm / (EPS + GWWbb[l].array().sqrt())).matrix() + mr*vWWbb[l];
+> 			vWWbf[l] = (_lr*gWWbf[l].array() /norm / (EPS + GWWbf[l].array().sqrt())).matrix() + mr*vWWbf[l];
+> 			vVVb[l] = (_lr*gVVb[l].array() /norm / (EPS + GVVb[l].array().sqrt())).matrix() + mr*vVVb[l];
+> 			vbbhf[l] = (_lr*gbbhf[l].array() /norm / (EPS + Gbbhf[l].array().sqrt())).matrix() + mr*vbbhf[l];
+> 			vbbhb[l] = (_lr*gbbhb[l].array() /norm / (EPS + Gbbhb[l].array().sqrt())).matrix() + mr*vbbhb[l];
+> 		}
+> 	}else{
+> 		vbo = 0.1*lr*gbo + mr*vbo;
+> 		vWWfoy = 0.1*lr*gWWfoy + mr*vWWfoy;
+> 		vWWboy = 0.1*lr*gWWboy + mr*vWWboy;
+> 
+> 
+> 		vWf = lr*gWf/norm + mr*vWf;
+> 		vVf = lr*gVf /norm + mr*vVf;
+> 		vWb = lr*gWb /norm + mr*vWb;
+> 		vVb = lr*gVb /norm + mr*vVb;
+> 		vbhf = lr*gbhf /norm  + mr*vbhf;
+> 		vbhb = lr*gbhb /norm  + mr*vbhb;
+> 
+> 		for (uint l=0; l<layers; l++) {
+> 			double _lr;
+> 			//		if (l == layers - 1) _lr = ylr; else _lr = lr;
+> 			_lr = lr;
+> 			vWWff[l] = _lr*gWWff[l] /norm  + mr*vWWff[l];
+> 			vWWfb[l] = _lr*gWWfb[l] /norm  + mr*vWWfb[l];
+> 			vVVf[l] =  _lr*gVVf[l]  /norm + mr*vVVf[l];
+> 			vWWbb[l] = _lr*gWWbb[l] /norm  + mr*vWWbb[l];
+> 			vWWbf[l] = _lr*gWWbf[l] /norm  + mr*vWWbf[l];
+> 			vVVb[l] =  _lr*gVVb[l]  /norm + mr*vVVb[l];
+> 			vbbhf[l] = _lr*gbbhf[l] /norm  + mr*vbbhf[l];
+> 			vbbhb[l] = _lr*gbbhb[l] /norm  + mr*vbbhb[l];
+> 		}
+> 	} 
+1108a1185,1208
+> 	//accumulate gradients
+> 	Gbo.noalias() += gbo.cwiseProduct(gbo);
+> 	GWWfoy.noalias() += gWWfoy.cwiseProduct(gWWfoy);
+> 	GWWboy.noalias() += gWWboy.cwiseProduct(gWWboy);
+> 
+> 	GWf.noalias() += gWf.cwiseProduct(gWf);
+> 	GVf.noalias() += gVf.cwiseProduct(gVf);
+> 	GWb.noalias() += gWb.cwiseProduct(gWb);
+> 	GVb.noalias() += gVb.cwiseProduct(gVb);
+> 	Gbhf.noalias() += gbhf.cwiseProduct(gbhf);
+> 	Gbhb.noalias() += gbhb.cwiseProduct(gbhb);
+> 	for (uint l=0; l<layers; l++) {
+> 		GWWff[l].noalias() += gWWff[l].cwiseProduct(gWWff[l]);
+> 		GWWfb[l].noalias() += gWWfb[l].cwiseProduct(gWWfb[l]);
+> 		GWWbf[l].noalias() += gWWbf[l].cwiseProduct(gWWbf[l]);
+> 		GWWbb[l].noalias() += gWWbb[l].cwiseProduct(gWWbb[l]);
+> 		GVVf[l].noalias() += gVVf[l].cwiseProduct(gVVf[l]);
+> 		GVVb[l].noalias() += gVVb[l].cwiseProduct(gVVb[l]);
+> 		Gbbhf[l].noalias() += gbbhf[l].cwiseProduct(gbbhf[l]);
+> 		Gbbhb[l].noalias() += gbbhb[l].cwiseProduct(gbbhb[l]);
+> 
+> 	}
+> 
+> 
+1133c1233
+< 	lr *= DR;
+---
+> 	if (!ADAGRAD) lr *= DR;
+1176a1277,1291
+> 
+> 	in >> GWf >> GVf >> Gbhf
+> 		>> GWb >> GVb >> Gbhb;
+> 
+> 	for (uint l=0; l<layers; l++) {
+> 		in >> GWWff[l] >> GWWfb[l] >> GVVf[l] >> Gbbhf[l]
+> 		>> GWWbb[l] >> GWWbf[l] >> GVVb[l] >> Gbbhb[l];
+> 	}
+> 
+> 	in >> GWfo >> GWbo;
+> 	for (uint l=0; l<layers; l++)
+> 		in >> GWWfo[l] >> GWWbo[l];
+> 	in>>GWWfoy>>GWWboy>>Gbo;
+> 	in >> GWo;
+> 
+1213a1329,1360
+> 
+> 	out << GWf << endl;
+> 	out << GVf << endl;
+> 	out << Gbhf << endl;
+> 
+> 	out << GWb << endl;
+> 	out << GVb << endl;
+> 	out << Gbhb << endl;
+> 
+> 	for (uint l=0; l<layers; l++) {
+> 		out << GWWff[l] << endl;
+> 		out << GWWfb[l] << endl;
+> 		out << GVVf[l] << endl;
+> 		out << Gbbhf[l] << endl;
+> 
+> 		out << GWWbb[l] << endl;
+> 		out << GWWbf[l] << endl;
+> 		out << GVVb[l]  << endl;
+> 		out << Gbbhb[l] << endl;
+> 	}
+> 
+> 	out << GWfo << endl;
+> 	out << GWbo << endl;
+> 	for (uint l=0; l<layers - 1; l++) {
+> 		out << GWWfo[l] << endl;
+> 		out << GWWbo[l] << endl;
+> 	}
+> 	out<<GWWfoy<<endl;
+> 	out<<GWWboy<<endl;
+> 	out<<Gbo<<endl;
+> 	out << GWo << endl;
+> 
+1265d1411
+< 		//	cerr<<"fwd"<<endl;
+1267,1269c1413
+< 		//	cerr<<"bwd"<<endl;
+< 	        //		agent_dse.backprop(brnn[1], brnn[2], labels[perm[i]], relation[perm[i]]);
+< 		//	cerr<<"backprop1"<<endl;
+---
+> 	//		agent_dse.backprop(brnn[1], brnn[2], labels[perm[i]], relation[perm[i]]);
+1271d1414
+< 		//	cerr<<"backprop2"<<endl;

@@ -1,0 +1,50 @@
+adagrad.cpp: In member function ‘void RNN::update()’:
+adagrad.cpp:1124:19: error: no match for ‘operator/’ (operand types are ‘const Eigen::CwiseUnaryOp<Eigen::internal::scalar_quotient1_op<double>, const Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, -1, -1> > >’ and ‘const Eigen::CwiseUnaryOp<Eigen::internal::scalar_sqrt_op<double>, const Eigen::ArrayWrapper<Eigen::Matrix<double, -1, -1> > >’)
+  vWf = lr*gWf/norm/GWf.array().sqrt() + mr*vWf;
+                   ^
+adagrad.cpp:1124:19: note: candidates are:
+In file included from ../Eigen/src/Core/MatrixBase.h:136:0,
+                 from ../Eigen/Core:279,
+                 from ../Eigen/Dense:1,
+                 from adagrad.cpp:16:
+../Eigen/src/Core/../plugins/CommonCwiseUnaryOps.h:61:1: note: const Eigen::CwiseUnaryOp<Eigen::internal::scalar_quotient1_op<typename Eigen::internal::traits<T>::Scalar>, const Derived> Eigen::MatrixBase<Derived>::operator/(const Scalar&) const [with Derived = Eigen::CwiseUnaryOp<Eigen::internal::scalar_quotient1_op<double>, const Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, -1, -1> > >; typename Eigen::internal::traits<T>::Scalar = double; Eigen::MatrixBase<Derived>::Scalar = double]
+ operator/(const Scalar& scalar) const
+ ^
+../Eigen/src/Core/../plugins/CommonCwiseUnaryOps.h:61:1: note:   no known conversion for argument 1 from ‘const Eigen::CwiseUnaryOp<Eigen::internal::scalar_sqrt_op<double>, const Eigen::ArrayWrapper<Eigen::Matrix<double, -1, -1> > >’ to ‘const Scalar& {aka const double&}’
+In file included from ../Eigen/Core:28:0,
+                 from ../Eigen/Dense:1,
+                 from adagrad.cpp:16:
+/usr/include/c++/4.8/complex:414:5: note: template<class _Tp> std::complex<_Tp> std::operator/(const std::complex<_Tp>&, const std::complex<_Tp>&)
+     operator/(const complex<_Tp>& __x, const complex<_Tp>& __y)
+     ^
+/usr/include/c++/4.8/complex:414:5: note:   template argument deduction/substitution failed:
+adagrad.cpp:1124:37: note:   ‘const Eigen::CwiseUnaryOp<Eigen::internal::scalar_quotient1_op<double>, const Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, -1, -1> > >’ is not derived from ‘const std::complex<_Tp>’
+  vWf = lr*gWf/norm/GWf.array().sqrt() + mr*vWf;
+                                     ^
+In file included from ../Eigen/Core:28:0,
+                 from ../Eigen/Dense:1,
+                 from adagrad.cpp:16:
+/usr/include/c++/4.8/complex:423:5: note: template<class _Tp> std::complex<_Tp> std::operator/(const std::complex<_Tp>&, const _Tp&)
+     operator/(const complex<_Tp>& __x, const _Tp& __y)
+     ^
+/usr/include/c++/4.8/complex:423:5: note:   template argument deduction/substitution failed:
+adagrad.cpp:1124:37: note:   ‘const Eigen::CwiseUnaryOp<Eigen::internal::scalar_quotient1_op<double>, const Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, -1, -1> > >’ is not derived from ‘const std::complex<_Tp>’
+  vWf = lr*gWf/norm/GWf.array().sqrt() + mr*vWf;
+                                     ^
+In file included from ../Eigen/Core:28:0,
+                 from ../Eigen/Dense:1,
+                 from adagrad.cpp:16:
+/usr/include/c++/4.8/complex:432:5: note: template<class _Tp> std::complex<_Tp> std::operator/(const _Tp&, const std::complex<_Tp>&)
+     operator/(const _Tp& __x, const complex<_Tp>& __y)
+     ^
+/usr/include/c++/4.8/complex:432:5: note:   template argument deduction/substitution failed:
+adagrad.cpp:1124:37: note:   ‘const Eigen::CwiseUnaryOp<Eigen::internal::scalar_sqrt_op<double>, const Eigen::ArrayWrapper<Eigen::Matrix<double, -1, -1> > >’ is not derived from ‘const std::complex<_Tp>’
+  vWf = lr*gWf/norm/GWf.array().sqrt() + mr*vWf;
+                                     ^
+In file included from ../Eigen/Core:368:0,
+                 from ../Eigen/Dense:1,
+                 from adagrad.cpp:16:
+../Eigen/src/Core/GlobalFunctions.h:74:5: note: const Eigen::CwiseUnaryOp<Eigen::internal::scalar_inverse_mult_op<typename Derived::Scalar>, const Derived> Eigen::operator/(const typename Derived::Scalar&, const Eigen::ArrayBase<Derived>&) [with Derived = Eigen::CwiseUnaryOp<Eigen::internal::scalar_sqrt_op<double>, const Eigen::ArrayWrapper<Eigen::Matrix<double, -1, -1> > >; typename Derived::Scalar = double]
+     operator/(const typename Derived::Scalar& s, const Eigen::ArrayBase<Derived>& a)
+     ^
+../Eigen/src/Core/GlobalFunctions.h:74:5: note:   no known conversion for argument 1 from ‘const Eigen::CwiseUnaryOp<Eigen::internal::scalar_quotient1_op<double>, const Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, -1, -1> > >’ to ‘const Scalar& {aka const double&}’

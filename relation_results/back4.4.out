@@ -1,0 +1,2070 @@
+9471 6281 892
+Valid size: 2298
+Epoch 0
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+1 1
+0 0
+0 0
+Val:
+Agent:
+1 1
+0 0
+0 0
+Train:
+DSE:
+1 1
+0 0
+0 0
+Val:
+DSE:
+1 1
+0 0
+0 0
+is from:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3137
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1176
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 349
+Test:1 0 0
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 5
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+1 1
+0 0
+0 0
+Val:
+Agent:
+1 1
+0 0
+0 0
+Train:
+DSE:
+1 1
+0 0
+0 0
+Val:
+DSE:
+1 1
+0 0
+0 0
+is from:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3137
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1176
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 349
+Test:1 0 0
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 10
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+ 0.754527  0.754527
+0.0873196 0.0971963
+ 0.156525  0.172209
+Val:
+Agent:
+ 0.807882  0.807882
+0.0979057  0.109065
+ 0.174646  0.192185
+Train:
+DSE:
+0.467305 0.475351
+0.383744   0.4625
+0.421423 0.468838
+Val:
+DSE:
+0.458542 0.465332
+ 0.35347 0.423025
+0.399208 0.443171
+is from:
+Total Pair: 811,False Span: 26,True Predict: 38
+Ture Postive: 2,True Pairs Extracted: 264,True Pairs: 3137
+Train:  0.0526316 0.000637552  0.00125984
+Total Pair: 324,False Span: 7,True Predict: 14
+Ture Postive: 2,True Pairs Extracted: 112,True Pairs: 1176
+Val:  0.142857 0.00170068 0.00336134
+Total Pair: 91,False Span: 1,True Predict: 2
+Ture Postive: 0,True Pairs Extracted: 29,True Pairs: 349
+Test:   0    0 -nan
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 15
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.632305   0.6346
+0.360591 0.424032
+0.459269 0.508375
+Val:
+Agent:
+0.614961 0.616205
+0.343063 0.399433
+0.440428 0.484686
+Train:
+DSE:
+  0.5823  0.59429
+0.350522 0.399235
+0.437616 0.477615
+Val:
+DSE:
+0.566947 0.578339
+0.316131 0.364123
+ 0.40592 0.446886
+is from:
+Total Pair: 2740,False Span: 897,True Predict: 1791
+Ture Postive: 667,True Pairs Extracted: 941,True Pairs: 3137
+Train:0.372418 0.212624 0.270698
+Total Pair: 974,False Span: 361,True Predict: 683
+Ture Postive: 225,True Pairs Extracted: 302,True Pairs: 1176
+Val:0.329429 0.191327 0.242066
+Total Pair: 364,False Span: 125,True Predict: 226
+Ture Postive: 72,True Pairs Extracted: 103,True Pairs: 349
+Test:0.318584 0.206304 0.250435
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 20
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.531754  0.54453
+0.506685 0.566355
+0.518917 0.555228
+Val:
+Agent:
+0.501196 0.512837
+0.472624 0.533286
+0.486491 0.522862
+Train:
+DSE:
+  0.4708 0.500967
+0.588153 0.659184
+0.522974 0.569287
+Val:
+DSE:
+ 0.46745  0.49892
+0.553313 0.617805
+ 0.50677 0.552034
+is from:
+Total Pair: 6182,False Span: 2398,True Predict: 3672
+Ture Postive: 851,True Pairs Extracted: 1507,True Pairs: 3137
+Train:0.231754 0.271278 0.249963
+Total Pair: 2171,False Span: 895,True Predict: 1302
+Ture Postive: 279,True Pairs Extracted: 490,True Pairs: 1176
+Val:0.214286 0.237245 0.225182
+Total Pair: 671,False Span: 264,True Predict: 366
+Ture Postive: 69,True Pairs Extracted: 149,True Pairs: 349
+Test:0.188525 0.197708 0.193007
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 25
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.661104 0.669184
+0.409102 0.458478
+0.505433 0.544146
+Val:
+Agent:
+0.633842 0.638947
+0.374101 0.422805
+0.470505 0.508876
+Train:
+DSE:
+0.568702 0.592284
+0.485445 0.545663
+0.523786 0.568019
+Val:
+DSE:
+ 0.54932 0.574902
+ 0.44985 0.493307
+0.494634 0.530988
+is from:
+Total Pair: 3438,False Span: 1053,True Predict: 1951
+Ture Postive: 611,True Pairs Extracted: 1123,True Pairs: 3137
+Train:0.313173 0.194772 0.240173
+Total Pair: 1171,False Span: 361,True Predict: 649
+Ture Postive: 195,True Pairs Extracted: 363,True Pairs: 1176
+Val:0.300462 0.165816 0.213699
+Total Pair: 400,False Span: 123,True Predict: 212
+Ture Postive: 62,True Pairs Extracted: 123,True Pairs: 349
+Test:0.292453  0.17765 0.221034
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 30
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.720417  0.72599
+0.378292 0.418692
+0.496088 0.531093
+Val:
+Agent:
+0.686796 0.690123
+0.345503 0.388102
+0.459731 0.496813
+Train:
+DSE:
+0.579902 0.599845
+0.526819 0.589541
+0.552087 0.594648
+Val:
+DSE:
+  0.5502  0.57355
+0.488331 0.538153
+0.517423 0.555288
+is from:
+Total Pair: 3153,False Span: 867,True Predict: 1741
+Ture Postive: 622,True Pairs Extracted: 1135,True Pairs: 3137
+Train:0.357266 0.198279 0.255023
+Total Pair: 1115,False Span: 325,True Predict: 624
+Ture Postive: 205,True Pairs Extracted: 366,True Pairs: 1176
+Val:0.328526  0.17432 0.227778
+Total Pair: 376,False Span: 120,True Predict: 201
+Ture Postive: 58,True Pairs Extracted: 120,True Pairs: 349
+Test:0.288557 0.166189 0.210909
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 35
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.646092 0.657107
+0.495883 0.540988
+0.561108  0.59342
+Val:
+Agent:
+0.611089 0.618966
+0.458966 0.501416
+0.524214 0.554024
+Train:
+DSE:
+0.580294 0.607624
+0.546736 0.609439
+0.563015  0.60853
+Val:
+DSE:
+0.547213 0.580056
+0.503926 0.554886
+0.524678 0.567192
+is from:
+Total Pair: 4316,False Span: 1272,True Predict: 2364
+Ture Postive: 730,True Pairs Extracted: 1379,True Pairs: 3137
+Train:0.308799 0.232706 0.265406
+Total Pair: 1500,False Span: 468,True Predict: 846
+Ture Postive: 260,True Pairs Extracted: 447,True Pairs: 1176
+Val:0.307329 0.221088 0.257171
+Total Pair: 490,False Span: 160,True Predict: 237
+Ture Postive: 55,True Pairs Extracted: 136,True Pairs: 349
+Test:0.232068 0.157593 0.187713
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 40
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.554755 0.571134
+0.607271 0.645928
+0.579826 0.606232
+Val:
+Agent:
+0.516445 0.531115
+0.550761 0.592776
+0.533052 0.560254
+Train:
+DSE:
+0.490202 0.528361
+0.674449 0.734184
+0.567751 0.614495
+Val:
+DSE:
+0.457743 0.499745
+0.601568 0.657965
+0.519892 0.568043
+is from:
+Total Pair: 7221,False Span: 2882,True Predict: 4327
+Ture Postive: 933,True Pairs Extracted: 1799,True Pairs: 3137
+Train:0.215623 0.297418     0.25
+Total Pair: 2532,False Span: 1056,True Predict: 1541
+Ture Postive: 333,True Pairs Extracted: 590,True Pairs: 1176
+Val:0.216093 0.283163 0.245123
+Total Pair: 795,False Span: 309,True Predict: 419
+Ture Postive: 75,True Pairs Extracted: 176,True Pairs: 349
+Test:0.178998   0.2149 0.195312
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 45
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.672306 0.681572
+0.476901 0.520961
+0.557991 0.590541
+Val:
+Agent:
+0.621117 0.627757
+0.435344 0.474504
+0.511897 0.540477
+Train:
+DSE:
+0.558296 0.589213
+0.607337 0.669643
+0.581785 0.626859
+Val:
+DSE:
+ 0.51838  0.55514
+0.545387 0.595716
+0.531541 0.574713
+is from:
+Total Pair: 4466,False Span: 1278,True Predict: 2310
+Ture Postive: 689,True Pairs Extracted: 1423,True Pairs: 3137
+Train:0.298268 0.219637 0.252983
+Total Pair: 1528,False Span: 452,True Predict: 783
+Ture Postive: 231,True Pairs Extracted: 451,True Pairs: 1176
+Val:0.295019 0.196429 0.235835
+Total Pair: 508,False Span: 152,True Predict: 231
+Ture Postive: 57,True Pairs Extracted: 141,True Pairs: 349
+Test:0.246753 0.163324 0.196552
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 50
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.667224 0.677651
+0.495626 0.538585
+0.568764 0.600167
+Val:
+Agent:
+0.615867 0.625222
+0.447301 0.488669
+0.518221 0.548575
+Train:
+DSE:
+0.620757 0.643721
+0.509224 0.569133
+0.559486 0.604133
+Val:
+DSE:
+0.581033 0.610977
+  0.4601 0.504685
+0.513543 0.552768
+is from:
+Total Pair: 3796,False Span: 1014,True Predict: 1992
+Ture Postive: 655,True Pairs Extracted: 1333,True Pairs: 3137
+Train:0.328815 0.208798  0.25541
+Total Pair: 1297,False Span: 383,True Predict: 682
+Ture Postive: 210,True Pairs Extracted: 408,True Pairs: 1176
+Val:0.307918 0.178571  0.22605
+Total Pair: 415,False Span: 111,True Predict: 181
+Ture Postive: 49,True Pairs Extracted: 121,True Pairs: 349
+Test:0.270718 0.140401 0.184906
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 55
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.701823 0.711688
+0.453172 0.497997
+0.550732 0.585969
+Val:
+Agent:
+0.655266 0.664596
+0.403335 0.445467
+0.499323 0.533404
+Train:
+DSE:
+0.605237 0.631398
+0.546246 0.606122
+ 0.57423 0.618502
+Val:
+DSE:
+0.560354 0.592814
+0.483181 0.528112
+0.518914 0.558596
+is from:
+Total Pair: 3676,False Span: 956,True Predict: 1892
+Ture Postive: 643,True Pairs Extracted: 1291,True Pairs: 3137
+Train:0.339852 0.204973 0.255717
+Total Pair: 1236,False Span: 354,True Predict: 661
+Ture Postive: 215,True Pairs Extracted: 394,True Pairs: 1176
+Val:0.325265 0.182823 0.234077
+Total Pair: 408,False Span: 108,True Predict: 179
+Ture Postive: 53,True Pairs Extracted: 123,True Pairs: 349
+Test:0.296089 0.151862 0.200758
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 60
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.644655 0.657263
+0.523313 0.567423
+0.577681 0.609048
+Val:
+Agent:
+0.584478 0.594639
+0.470807 0.509915
+0.521521 0.549027
+Train:
+DSE:
+0.589896 0.617928
+0.579004 0.641327
+0.584399  0.62941
+Val:
+DSE:
+0.545595 0.579491
+0.513677 0.564926
+0.529155 0.572116
+is from:
+Total Pair: 4611,False Span: 1350,True Predict: 2555
+Ture Postive: 815,True Pairs Extracted: 1487,True Pairs: 3137
+Train:0.318982 0.259802 0.286367
+Total Pair: 1575,False Span: 482,True Predict: 860
+Ture Postive: 272,True Pairs Extracted: 458,True Pairs: 1176
+Val:0.316279 0.231293 0.267191
+Total Pair: 519,False Span: 152,True Predict: 247
+Ture Postive: 67,True Pairs Extracted: 140,True Pairs: 349
+Test:0.271255 0.191977 0.224832
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 65
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+ 0.64617 0.660018
+0.521011 0.563952
+ 0.57688 0.608215
+Val:
+Agent:
+ 0.59056 0.603122
+0.467373  0.50779
+0.521795 0.551366
+Train:
+DSE:
+ 0.59814    0.625
+0.564601 0.627551
+0.580887 0.626273
+Val:
+DSE:
+ 0.55393 0.587347
+0.499083 0.548193
+0.525078 0.567095
+is from:
+Total Pair: 4441,False Span: 1268,True Predict: 2331
+Ture Postive: 706,True Pairs Extracted: 1452,True Pairs: 3137
+Train:0.302874 0.225056  0.25823
+Total Pair: 1495,False Span: 457,True Predict: 780
+Ture Postive: 227,True Pairs Extracted: 443,True Pairs: 1176
+Val:0.291026 0.193027 0.232106
+Total Pair: 500,False Span: 163,True Predict: 243
+Ture Postive: 57,True Pairs Extracted: 133,True Pairs: 349
+Test:0.234568 0.163324 0.192568
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 70
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.665713 0.675453
+0.506623 0.550601
+0.575373  0.60667
+Val:
+Agent:
+0.615249 0.625109
+0.457535 0.498584
+0.524799 0.554723
+Train:
+DSE:
+0.576789 0.606739
+0.596714 0.657653
+0.586582 0.631171
+Val:
+DSE:
+ 0.53655  0.57444
+0.534605 0.585007
+0.535576 0.579675
+is from:
+Total Pair: 4565,False Span: 1263,True Predict: 2338
+Ture Postive: 722,True Pairs Extracted: 1480,True Pairs: 3137
+Train:0.308811 0.230156 0.263744
+Total Pair: 1557,False Span: 465,True Predict: 804
+Ture Postive: 238,True Pairs Extracted: 469,True Pairs: 1176
+Val: 0.29602 0.202381 0.240404
+Total Pair: 522,False Span: 155,True Predict: 237
+Ture Postive: 58,True Pairs Extracted: 143,True Pairs: 349
+Test:0.244726 0.166189 0.197952
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 75
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.633012 0.647142
+ 0.55128 0.591989
+0.589326 0.618338
+Val:
+Agent:
+0.577342 0.588735
+0.488735 0.528329
+0.529356 0.556898
+Train:
+DSE:
+0.569753 0.601726
+0.616309 0.677551
+0.592117 0.637391
+Val:
+DSE:
+0.522282 0.561983
+0.543162 0.593039
+0.532517 0.577094
+is from:
+Total Pair: 5207,False Span: 1573,True Predict: 2731
+Ture Postive: 762,True Pairs Extracted: 1602,True Pairs: 3137
+Train:0.279019 0.242907 0.259714
+Total Pair: 1768,False Span: 586,True Predict: 944
+Ture Postive: 254,True Pairs Extracted: 497,True Pairs: 1176
+Val:0.269068 0.215986 0.239623
+Total Pair: 588,False Span: 188,True Predict: 280
+Ture Postive: 64,True Pairs Extracted: 156,True Pairs: 349
+Test:0.228571 0.183381 0.203498
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 80
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.668389 0.679662
+0.498227 0.541255
+0.570898 0.602613
+Val:
+Agent:
+0.612356 0.623342
+0.446152 0.488669
+0.516205  0.54785
+Train:
+DSE:
+0.592022 0.619951
+0.578865 0.640816
+ 0.58537 0.630211
+Val:
+DSE:
+0.547951 0.581944
+0.512004 0.562918
+0.529368 0.572273
+is from:
+Total Pair: 4289,False Span: 1197,True Predict: 2443
+Ture Postive: 884,True Pairs Extracted: 1431,True Pairs: 3137
+Train: 0.36185 0.281798 0.316846
+Total Pair: 1471,False Span: 467,True Predict: 855
+Ture Postive: 278,True Pairs Extracted: 441,True Pairs: 1176
+Val:0.325146 0.236395 0.273757
+Total Pair: 488,False Span: 150,True Predict: 252
+Ture Postive: 73,True Pairs Extracted: 136,True Pairs: 349
+Test:0.289683 0.209169 0.242928
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 85
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.687348 0.697822
+0.469994 0.514019
+0.558261 0.591981
+Val:
+Agent:
+0.626863 0.637236
+0.419925 0.459632
+0.502939 0.534055
+Train:
+DSE:
+0.590601  0.61941
+0.581678 0.642347
+0.586105  0.63067
+Val:
+DSE:
+0.544756 0.580221
+0.514346 0.563588
+0.529114 0.571784
+is from:
+Total Pair: 4002,False Span: 1060,True Predict: 1979
+Ture Postive: 622,True Pairs Extracted: 1364,True Pairs: 3137
+Train:  0.3143 0.198279 0.243159
+Total Pair: 1376,False Span: 400,True Predict: 693
+Ture Postive: 203,True Pairs Extracted: 415,True Pairs: 1176
+Val:0.292929 0.172619 0.217228
+Total Pair: 443,False Span: 127,True Predict: 197
+Ture Postive: 50,True Pairs Extracted: 131,True Pairs: 349
+Test:0.253807 0.143266  0.18315
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 90
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.660498  0.67275
+0.507376 0.551669
+0.573899 0.606223
+Val:
+Agent:
+0.607054 0.617622
+0.459341 0.502125
+0.522967 0.553917
+Train:
+DSE:
+0.592803 0.620809
+0.579203 0.641071
+0.585924 0.630777
+Val:
+DSE:
+0.550589 0.584605
+0.514681 0.565596
+ 0.53203 0.574943
+is from:
+Total Pair: 4373,False Span: 1205,True Predict: 2231
+Ture Postive: 693,True Pairs Extracted: 1463,True Pairs: 3137
+Train:0.310623 0.220912 0.258197
+Total Pair: 1510,False Span: 456,True Predict: 783
+Ture Postive: 228,True Pairs Extracted: 455,True Pairs: 1176
+Val:0.291188 0.193878 0.232772
+Total Pair: 494,False Span: 148,True Predict: 223
+Ture Postive: 52,True Pairs Extracted: 139,True Pairs: 349
+Test:0.233184 0.148997 0.181818
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 95
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.662057  0.67295
+0.507485 0.553004
+0.574556 0.607109
+Val:
+Agent:
+0.611086 0.621552
+0.458711 0.500708
+0.524047 0.554624
+Train:
+DSE:
+0.588547 0.616508
+0.582803 0.645408
+0.585661 0.630627
+Val:
+DSE:
+0.546937 0.580667
+0.520594  0.57162
+ 0.53344 0.576108
+is from:
+Total Pair: 4463,False Span: 1258,True Predict: 2415
+Ture Postive: 801,True Pairs Extracted: 1478,True Pairs: 3137
+Train:0.331677 0.255339 0.288545
+Total Pair: 1536,False Span: 450,True Predict: 820
+Ture Postive: 264,True Pairs Extracted: 460,True Pairs: 1176
+Val:0.321951  0.22449 0.264529
+Total Pair: 508,False Span: 150,True Predict: 250
+Ture Postive: 74,True Pairs Extracted: 142,True Pairs: 349
+Test:   0.296 0.212034 0.247078
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 100
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.652775 0.666362
+0.519683 0.562083
+0.578675 0.609796
+Val:
+Agent:
+0.597946 0.609675
+0.465844  0.50779
+0.523693 0.554088
+Train:
+DSE:
+0.587738 0.615814
+0.584873 0.647194
+0.586302 0.631114
+Val:
+DSE:
+0.543935 0.578411
+0.521151  0.57162
+  0.5323 0.574996
+is from:
+Total Pair: 4600,False Span: 1327,True Predict: 2426
+Ture Postive: 744,True Pairs Extracted: 1503,True Pairs: 3137
+Train:0.306678 0.237169 0.267482
+Total Pair: 1569,False Span: 484,True Predict: 816
+Ture Postive: 236,True Pairs Extracted: 466,True Pairs: 1176
+Val:0.289216  0.20068 0.236948
+Total Pair: 522,False Span: 169,True Predict: 250
+Ture Postive: 57,True Pairs Extracted: 142,True Pairs: 349
+Test:   0.228 0.163324 0.190317
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 105
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.644178 0.657034
+0.535993 0.577837
+0.585127 0.614896
+Val:
+Agent:
+0.591958 0.603213
+ 0.47827 0.520538
+0.529076 0.558834
+Train:
+DSE:
+0.581307 0.610703
+0.596364 0.657398
+0.588739 0.633191
+Val:
+DSE:
+0.537033 0.573227
+0.529953 0.580991
+ 0.53347 0.577083
+is from:
+Total Pair: 4902,False Span: 1440,True Predict: 2641
+Ture Postive: 807,True Pairs Extracted: 1564,True Pairs: 3137
+Train:0.305566 0.257252 0.279335
+Total Pair: 1656,False Span: 535,True Predict: 903
+Ture Postive: 262,True Pairs Extracted: 486,True Pairs: 1176
+Val:0.290144 0.222789 0.252044
+Total Pair: 555,False Span: 176,True Predict: 269
+Ture Postive: 66,True Pairs Extracted: 151,True Pairs: 349
+Test:0.245353 0.189112 0.213592
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 110
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.647989 0.661625
+ 0.53081 0.573298
+0.583575 0.614303
+Val:
+Agent:
+  0.5927 0.604217
+0.474252 0.516289
+0.526901 0.556803
+Train:
+DSE:
+0.591322 0.619118
+0.578274 0.640051
+0.584726 0.629411
+Val:
+DSE:
+0.550818 0.583967
+0.514793 0.566265
+0.532196  0.57498
+is from:
+Total Pair: 4632,False Span: 1332,True Predict: 2444
+Ture Postive: 742,True Pairs Extracted: 1512,True Pairs: 3137
+Train:0.303601 0.236532 0.265902
+Total Pair: 1576,False Span: 495,True Predict: 829
+Ture Postive: 239,True Pairs Extracted: 471,True Pairs: 1176
+Val:0.288299 0.203231 0.238404
+Total Pair: 533,False Span: 173,True Predict: 255
+Ture Postive: 57,True Pairs Extracted: 143,True Pairs: 349
+Test:0.223529 0.163324 0.188742
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 115
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+ 0.66088 0.672915
+0.510378 0.554873
+ 0.57596  0.60822
+Val:
+Agent:
+0.608041  0.61925
+0.461749 0.505666
+0.524893 0.556724
+Train:
+DSE:
+0.586384 0.615181
+ 0.58901 0.650765
+0.587694 0.632473
+Val:
+DSE:
+0.541954 0.577313
+0.523684 0.574297
+0.532662 0.575801
+is from:
+Total Pair: 4483,False Span: 1250,True Predict: 2299
+Ture Postive: 716,True Pairs Extracted: 1483,True Pairs: 3137
+Train: 0.31144 0.228244 0.263429
+Total Pair: 1547,False Span: 462,True Predict: 800
+Ture Postive: 238,True Pairs Extracted: 463,True Pairs: 1176
+Val:  0.2975 0.202381 0.240891
+Total Pair: 510,False Span: 155,True Predict: 237
+Ture Postive: 58,True Pairs Extracted: 141,True Pairs: 349
+Test:0.244726 0.166189 0.197952
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 120
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+ 0.66174 0.673482
+0.507388 0.552737
+0.574375 0.607165
+Val:
+Agent:
+0.608271 0.619416
+0.458788 0.500708
+0.523059 0.553772
+Train:
+DSE:
+0.580525 0.610061
+0.597329 0.657908
+0.588807 0.633082
+Val:
+DSE:
+0.535661 0.572469
+0.529953 0.580991
+0.532792 0.576698
+is from:
+Total Pair: 4546,False Span: 1273,True Predict: 2576
+Ture Postive: 927,True Pairs Extracted: 1492,True Pairs: 3137
+Train: 0.35986 0.295505 0.324523
+Total Pair: 1567,False Span: 476,True Predict: 883
+Ture Postive: 283,True Pairs Extracted: 466,True Pairs: 1176
+Val:0.320498 0.240646 0.274891
+Total Pair: 519,False Span: 153,True Predict: 265
+Ture Postive: 80,True Pairs Extracted: 143,True Pairs: 349
+Test:0.301887 0.229226 0.260586
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 125
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.654164 0.667786
+0.519209 0.561816
+0.578926 0.610235
+Val:
+Agent:
+0.598945 0.610693
+0.466927 0.509207
+ 0.52476 0.555352
+Train:
+DSE:
+0.589276 0.617089
+0.583366 0.645663
+0.586306 0.631053
+Val:
+DSE:
+0.547487 0.581173
+0.520036  0.57095
+0.533409 0.576017
+is from:
+Total Pair: 4572,False Span: 1159,True Predict: 2388
+Ture Postive: 876,True Pairs Extracted: 1505,True Pairs: 3137
+Train:0.366834 0.279248 0.317104
+Total Pair: 1558,False Span: 456,True Predict: 831
+Ture Postive: 273,True Pairs Extracted: 465,True Pairs: 1176
+Val: 0.32852 0.232143 0.272048
+Total Pair: 518,False Span: 134,True Predict: 245
+Ture Postive: 83,True Pairs Extracted: 142,True Pairs: 349
+Test:0.338776 0.237822 0.279461
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 130
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.656408 0.669217
+0.518903 0.562083
+0.579612 0.610989
+Val:
+Agent:
+0.602335 0.613903
+0.466283 0.509207
+0.525648 0.556675
+Train:
+DSE:
+0.593246   0.6211
+ 0.57736 0.638776
+0.585195 0.629814
+Val:
+DSE:
+0.550244 0.584497
+   0.511  0.56158
+0.529896 0.572809
+is from:
+Total Pair: 4511,False Span: 1290,True Predict: 2419
+Ture Postive: 771,True Pairs Extracted: 1500,True Pairs: 3137
+Train:0.318727 0.245776 0.277538
+Total Pair: 1528,False Span: 469,True Predict: 813
+Ture Postive: 245,True Pairs Extracted: 458,True Pairs: 1176
+Val:0.301353 0.208333 0.246355
+Total Pair: 504,False Span: 158,True Predict: 244
+Ture Postive: 63,True Pairs Extracted: 140,True Pairs: 349
+Test:0.258197 0.180516 0.212479
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 135
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.652685 0.666163
+0.523927 0.565821
+0.581261 0.611906
+Val:
+Agent:
+0.597631 0.609272
+0.469389  0.51204
+0.525803  0.55644
+Train:
+DSE:
+0.588966 0.616975
+0.585139 0.646684
+0.587046  0.63148
+Val:
+DSE:
+ 0.54429 0.578697
+0.521096  0.57162
+ 0.53244 0.575137
+is from:
+Total Pair: 4623,False Span: 1335,True Predict: 2555
+Ture Postive: 838,True Pairs Extracted: 1519,True Pairs: 3137
+Train:0.327984 0.267134 0.294448
+Total Pair: 1577,False Span: 502,True Predict: 867
+Ture Postive: 258,True Pairs Extracted: 467,True Pairs: 1176
+Val:0.297578 0.219388  0.25257
+Total Pair: 531,False Span: 170,True Predict: 264
+Ture Postive: 69,True Pairs Extracted: 144,True Pairs: 349
+Test:0.261364 0.197708 0.225122
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 140
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.654367 0.666566
+0.524158 0.568224
+ 0.58207 0.613479
+Val:
+Agent:
+0.601819  0.61309
+ 0.47114 0.514164
+0.528522 0.559287
+Train:
+DSE:
+0.585657 0.614145
+0.589034 0.651276
+0.587341 0.632165
+Val:
+DSE:
+0.542093 0.576819
+ 0.52413 0.574967
+ 0.53296 0.575891
+is from:
+Total Pair: 4674,False Span: 1395,True Predict: 2546
+Ture Postive: 795,True Pairs Extracted: 1533,True Pairs: 3137
+Train:0.312255 0.253427 0.279782
+Total Pair: 1593,False Span: 513,True Predict: 866
+Ture Postive: 249,True Pairs Extracted: 474,True Pairs: 1176
+Val:0.287529 0.211735 0.243879
+Total Pair: 533,False Span: 174,True Predict: 263
+Ture Postive: 64,True Pairs Extracted: 145,True Pairs: 349
+Test:0.243346 0.183381  0.20915
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 145
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+ 0.66991 0.682831
+0.491619 0.536449
+0.567081 0.600853
+Val:
+Agent:
+0.611996  0.62421
+0.436017 0.478754
+0.509232  0.54189
+Train:
+DSE:
+0.589858 0.617468
+0.582711 0.644643
+0.586263 0.630763
+Val:
+DSE:
+0.547747  0.58157
+0.519333  0.57095
+0.533162 0.576211
+is from:
+Total Pair: 4268,False Span: 1288,True Predict: 2555
+Ture Postive: 898,True Pairs Extracted: 1437,True Pairs: 3137
+Train:0.351468 0.286261 0.315531
+Total Pair: 1454,False Span: 492,True Predict: 870
+Ture Postive: 266,True Pairs Extracted: 435,True Pairs: 1176
+Val:0.305747  0.22619  0.26002
+Total Pair: 470,False Span: 151,True Predict: 252
+Ture Postive: 73,True Pairs Extracted: 134,True Pairs: 349
+Test:0.289683 0.209169 0.242928
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 150
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.661054 0.672654
+0.513272 0.558879
+0.577864 0.610511
+Val:
+Agent:
+0.605379 0.616624
+0.461623 0.504249
+0.523816 0.554804
+Train:
+DSE:
+0.582546 0.611321
+0.597892 0.659694
+0.590119 0.634587
+Val:
+DSE:
+0.537412 0.572751
+0.531738  0.58166
+ 0.53456 0.577171
+is from:
+Total Pair: 4624,False Span: 1328,True Predict: 2437
+Ture Postive: 760,True Pairs Extracted: 1521,True Pairs: 3137
+Train:0.311859  0.24227 0.272695
+Total Pair: 1584,False Span: 496,True Predict: 840
+Ture Postive: 241,True Pairs Extracted: 470,True Pairs: 1176
+Val:0.286905 0.204932 0.239087
+Total Pair: 529,False Span: 163,True Predict: 242
+Ture Postive: 56,True Pairs Extracted: 144,True Pairs: 349
+Test:0.231405 0.160458 0.189509
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 155
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.644292 0.658095
+0.536891 0.580507
+0.585709 0.616871
+Val:
+Agent:
+ 0.58731  0.59952
+0.478753 0.520538
+0.527505 0.557245
+Train:
+DSE:
+ 0.58024 0.610146
+0.601923  0.66148
+0.590883 0.634776
+Val:
+DSE:
+ 0.53353 0.570492
+0.533858 0.584337
+0.533694 0.577332
+is from:
+Total Pair: 4858,False Span: 1502,True Predict: 2803
+Ture Postive: 873,True Pairs Extracted: 1542,True Pairs: 3137
+Train:0.311452 0.278291 0.293939
+Total Pair: 1659,False Span: 561,True Predict: 963
+Ture Postive: 283,True Pairs Extracted: 487,True Pairs: 1176
+Val:0.293873 0.240646  0.26461
+Total Pair: 558,False Span: 182,True Predict: 283
+Ture Postive: 72,True Pairs Extracted: 147,True Pairs: 349
+Test:0.254417 0.206304 0.227848
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 160
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.648947 0.662407
+0.529053 0.571963
+0.582899 0.613871
+Val:
+Agent:
+0.592432 0.603896
+0.472434 0.515581
+0.525672 0.556255
+Train:
+DSE:
+0.573586 0.605087
+0.609114 0.668878
+0.590816 0.635385
+Val:
+DSE:
+0.528797 0.567725
+0.538733 0.588353
+0.533719 0.577855
+is from:
+Total Pair: 4867,False Span: 1419,True Predict: 2542
+Ture Postive: 750,True Pairs Extracted: 1549,True Pairs: 3137
+Train:0.295043 0.239082 0.264131
+Total Pair: 1655,False Span: 527,True Predict: 873
+Ture Postive: 246,True Pairs Extracted: 482,True Pairs: 1176
+Val:0.281787 0.209184 0.240117
+Total Pair: 556,False Span: 179,True Predict: 265
+Ture Postive: 62,True Pairs Extracted: 151,True Pairs: 349
+Test:0.233962  0.17765 0.201954
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 165
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+ 0.66165 0.673323
+0.510499 0.556475
+0.576329 0.609348
+Val:
+Agent:
+0.606098 0.617421
+0.459882 0.502833
+0.522962 0.554266
+Train:
+DSE:
+0.590894 0.618814
+0.582118 0.643367
+0.586473 0.630852
+Val:
+DSE:
+0.548844 0.583104
+0.518195 0.568942
+0.533079 0.575936
+is from:
+Total Pair: 4460,False Span: 1317,True Predict: 2569
+Ture Postive: 870,True Pairs Extracted: 1491,True Pairs: 3137
+Train:0.338653 0.277335 0.304942
+Total Pair: 1533,False Span: 517,True Predict: 901
+Ture Postive: 267,True Pairs Extracted: 458,True Pairs: 1176
+Val:0.296337 0.227041 0.257102
+Total Pair: 506,False Span: 152,True Predict: 247
+Ture Postive: 68,True Pairs Extracted: 141,True Pairs: 349
+Test:0.275304 0.194842 0.228188
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 170
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.648059 0.662001
+0.529465 0.572764
+ 0.58279 0.614158
+Val:
+Agent:
+ 0.59166 0.603743
+0.473427 0.516289
+0.525981 0.556602
+Train:
+DSE:
+0.591454 0.619071
+0.580196 0.641327
+0.585771 0.630002
+Val:
+DSE:
+0.549792 0.584083
+0.515016 0.565596
+0.531836 0.574691
+is from:
+Total Pair: 4620,False Span: 1363,True Predict: 2518
+Ture Postive: 780,True Pairs Extracted: 1507,True Pairs: 3137
+Train: 0.30977 0.248645 0.275862
+Total Pair: 1569,False Span: 501,True Predict: 845
+Ture Postive: 244,True Pairs Extracted: 470,True Pairs: 1176
+Val:0.288757 0.207483 0.241465
+Total Pair: 526,False Span: 172,True Predict: 253
+Ture Postive: 59,True Pairs Extracted: 142,True Pairs: 349
+Test:0.233202 0.169054 0.196013
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 175
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.654995  0.66799
+0.518615 0.561282
+0.578881 0.610004
+Val:
+Agent:
+0.597112 0.608841
+0.465723  0.50779
+0.523296 0.553743
+Train:
+DSE:
+0.581151 0.610599
+0.597257 0.657908
+0.589094 0.633371
+Val:
+DSE:
+0.537384 0.574172
+0.531069 0.582329
+0.534208 0.578222
+is from:
+Total Pair: 4670,False Span: 1337,True Predict: 2428
+Ture Postive: 747,True Pairs Extracted: 1523,True Pairs: 3137
+Train:0.307661 0.238126 0.268464
+Total Pair: 1595,False Span: 503,True Predict: 839
+Ture Postive: 239,True Pairs Extracted: 473,True Pairs: 1176
+Val:0.284863 0.203231 0.237221
+Total Pair: 533,False Span: 166,True Predict: 245
+Ture Postive: 56,True Pairs Extracted: 147,True Pairs: 349
+Test:0.228571 0.160458 0.188552
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 180
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.644108  0.65781
+0.537084 0.580507
+0.585748 0.616746
+Val:
+Agent:
+0.589318 0.601281
+0.479683 0.522663
+0.528879 0.559222
+Train:
+DSE:
+0.582766  0.61239
+0.596874 0.657653
+0.589736 0.634215
+Val:
+DSE:
+0.538235  0.57485
+0.529619 0.580321
+0.533892 0.577573
+is from:
+Total Pair: 4823,False Span: 1465,True Predict: 2690
+Ture Postive: 861,True Pairs Extracted: 1538,True Pairs: 3137
+Train:0.320074 0.274466 0.295521
+Total Pair: 1644,False Span: 531,True Predict: 924
+Ture Postive: 287,True Pairs Extracted: 486,True Pairs: 1176
+Val:0.310606 0.244048 0.273333
+Total Pair: 553,False Span: 192,True Predict: 289
+Ture Postive: 69,True Pairs Extracted: 145,True Pairs: 349
+Test:0.238754 0.197708 0.216301
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 185
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.654949 0.668088
+0.520698 0.563151
+0.580158 0.611147
+Val:
+Agent:
+0.597112 0.608841
+0.465723  0.50779
+0.523296 0.553743
+Train:
+DSE:
+ 0.58478 0.613333
+0.594644 0.656378
+0.589671 0.634126
+Val:
+DSE:
+0.540004  0.57505
+ 0.52828 0.578983
+0.534078  0.57701
+is from:
+Total Pair: 4664,False Span: 1389,True Predict: 2578
+Ture Postive: 822,True Pairs Extracted: 1529,True Pairs: 3137
+Train:0.318852 0.262034 0.287664
+Total Pair: 1587,False Span: 511,True Predict: 879
+Ture Postive: 263,True Pairs Extracted: 471,True Pairs: 1176
+Val:0.299204 0.223639 0.255961
+Total Pair: 526,False Span: 168,True Predict: 259
+Ture Postive: 66,True Pairs Extracted: 143,True Pairs: 349
+Test:0.254826 0.189112 0.217105
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 190
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.655585 0.668402
+0.517011 0.560748
+ 0.57811  0.60986
+Val:
+Agent:
+0.601163 0.612741
+0.465044  0.50779
+0.524415 0.555351
+Train:
+DSE:
+0.585045 0.612572
+0.591357 0.653316
+0.588184 0.632288
+Val:
+DSE:
+0.542526 0.576975
+0.527499 0.578313
+0.534907 0.577643
+is from:
+Total Pair: 4634,False Span: 1349,True Predict: 2466
+Ture Postive: 768,True Pairs Extracted: 1519,True Pairs: 3137
+Train:0.311436  0.24482 0.274139
+Total Pair: 1585,False Span: 502,True Predict: 841
+Ture Postive: 243,True Pairs Extracted: 471,True Pairs: 1176
+Val:0.288942 0.206633 0.240952
+Total Pair: 522,False Span: 168,True Predict: 250
+Ture Postive: 59,True Pairs Extracted: 143,True Pairs: 349
+Test:   0.236 0.169054 0.196995
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Epoch 195
+Train:
+Target:
+1 1
+0 0
+0 0
+Val:
+Target:
+1 1
+0 0
+0 0
+Train:
+Agent:
+0.650919 0.664561
+0.524553 0.568224
+0.580943 0.612628
+Val:
+Agent:
+0.593878 0.605588
+0.468165 0.511331
+0.523581 0.554482
+Train:
+DSE:
+0.591594 0.619563
+0.580715 0.642092
+0.586104 0.630626
+Val:
+DSE:
+0.549182 0.583679
+0.516187 0.566265
+0.532173  0.57484
+is from:
+Total Pair: 4588,False Span: 1311,True Predict: 2407
+Ture Postive: 737,True Pairs Extracted: 1505,True Pairs: 3137
+Train: 0.30619 0.234938 0.265873
+Total Pair: 1552,False Span: 481,True Predict: 809
+Ture Postive: 235,True Pairs Extracted: 464,True Pairs: 1176
+Val:0.290482  0.19983 0.236776
+Total Pair: 519,False Span: 166,True Predict: 248
+Ture Postive: 59,True Pairs Extracted: 142,True Pairs: 349
+Test:0.237903 0.169054 0.197655
+is about:
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 3064
+Train:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 1145
+Val:1 0 0
+Total Pair: 0,False Span: 0,True Predict: 0
+Ture Postive: 0,True Pairs Extracted: 0,True Pairs: 338
+Test:1 0 0
+Best: 
+OCLASS_WEIGHT_TARGET: 0
+Validation:
+Target
+0 0
+0 0
+0 0
+Agent
+0.516445 0.531115
+0.550761 0.592776
+0.533052 0.560254
+DSE
+ 0.53655  0.57444
+0.534605 0.585007
+0.535576 0.579675
+Test:
+Target
+0 0
+0 0
+0 0
+Agent
+0.502915 0.518519
+0.540986 0.576037
+0.521256 0.545766
+DSE
+0.508135 0.527778
+0.555153 0.611494
+0.530605  0.56656

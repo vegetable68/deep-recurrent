@@ -27,7 +27,6 @@
 #define ETA 0.001
 #define NORMALIZE false// keeping this false throughout my own experiments
 #define layers 2 // number of EXTRA (not all) hidden layers
-#define DR 0.999
 
 #define MR 0.7
 uint fold = -1;
@@ -41,6 +40,7 @@ double DROP;
 string NAME[3] = {"Target", "Agent", "DSE"};
 double OCLASS_WEIGHT[3] = {0.3, 0.8, 0.5};
 double ENTITY_WEIGHT[3] = {1, 1, 1};
+double dr[3] = {0.999, 0.999, 0.999};
 
 #ifdef DROPOUT
 Matrix<double, -1, 1> dropout(Matrix<double, -1, 1> x, double p=DROP);
@@ -50,7 +50,7 @@ class RNN {
 	friend class Classifier;
 	public:
 		RNN(){}
-		RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT);
+		RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT, double _DR);
 		int INDEX;
 		void update();
 		Matrix<double, 3, 2> testSequential(vector<vector<string> > &sents,
@@ -65,6 +65,7 @@ class RNN {
 
 	private:
 
+		double DR;
 		MatrixXd (*f)(const MatrixXd& x);
 		MatrixXd (*fp)(const MatrixXd& x);
 
@@ -416,10 +417,10 @@ void Classifier::backprop(RNN argnn, RNN dsenn, vector<vector<string> > label,
 
 					double fac = 1;
 					if (ans == -1) fac = factor;
-					argdhhf.col(argPair[k].second - 1).noalias() += fac * double(1 - predict) * beta.block(3 * nhf, 0, nhf, 1);
-					argdhhb.col(argPair[k].first).noalias() += fac * double(1 - predict) * beta.block(2 * nhf, 0, nhf, 1);
-					dsedhhf.col(j - 1).noalias() += fac * double(1 - predict) * beta.block(nhf, 0, nhf, 1);
-					dsedhhb.col(start).noalias() += fac * double(1 - predict) * beta.block(0, 0, nhf, 1);
+					argdhhf.col(argPair[k].second - 1).noalias() += (-ans) * fac * double(1 - predict) * beta.block(3 * nhf, 0, nhf, 1);
+					argdhhb.col(argPair[k].first).noalias() += (-ans) * fac * double(1 - predict) * beta.block(2 * nhf, 0, nhf, 1);
+					dsedhhf.col(j - 1).noalias() += (-ans) * fac * double(1 - predict) * beta.block(nhf, 0, nhf, 1);
+					dsedhhb.col(start).noalias() += (-ans) * fac * double(1 - predict) * beta.block(0, 0, nhf, 1);
 				}
 			}
 			curDsef.clear(); curDseb.clear();
@@ -841,9 +842,10 @@ Classifier::Classifier(uint _nhf, string _fname, double _factor){
 	outstream.open(fname.c_str(), std::ios::out);
 }
 
-RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
+RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT, double _DR) {
 	lr = ETA;
 	ylr = ETA;
+	DR = _DR;
 
 	this->LT = &LT;
 
@@ -1037,11 +1039,12 @@ void RNN::update() {
 	}
 
 	// update velocities
-	vbo = 0.1*ylr*gbo + mr*vbo;
-	vWWfoy = 0.1*ylr*gWWfoy + mr*vWWfoy;
-	vWWboy = 0.1*ylr*gWWboy + mr*vWWboy;
+	vbo = 0.1*lr*gbo + mr*vbo;
+	vWWfoy = 0.1*lr*gWWfoy + mr*vWWfoy;
+	vWWboy = 0.1*lr*gWWboy + mr*vWWboy;
 
 	//cout<<"update:"<<gWf<<" norm:"<<norm<<endl;
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	if (NORMALIZE)
 		norm = (norm > 25) ? sqrt(norm/25) : 1;
 	else
@@ -1091,6 +1094,18 @@ void RNN::update() {
 		bbhf[l].noalias() -= vbbhf[l];
 		bbhb[l].noalias() -= vbbhb[l];
 	}
+	cout<<NAME[INDEX]<<" diagonize:"<<endl;
+	  cout << vWf.norm() << " " << vWb.norm() << " "
+	  << vVf.norm() << " " << vVb.norm() << " "
+	  << vWfo.norm() << " " << vWbo.norm() << endl;
+	  for (uint l=0; l<layers; l++) {
+	  cout << vWWff[l].norm() << " " << vWWfb[l].norm() << " "
+	  << vWWbb[l].norm() << " " << vWWbf[l].norm() << " "
+	  << vVVf[l].norm() << " " << vVVb[l].norm() << " "
+	  << vWWfo[l].norm() << " " << vWWbo[l].norm() << endl;
+	  }
+	cout<<vWWfoy.norm()<<" "<<vWWboy.norm()<<" "<<vbo.norm()<<endl;
+
 
 	// reset gradients
 	gbo.setZero();
@@ -1117,7 +1132,7 @@ void RNN::update() {
 
 	lr *= DR;
 	//cout << Wuo << endl;
-	/*cout<<"diagonize:"<<endl;
+/*	cout<<NAME[INDEX]<<" diagonize:"<<endl;
 	  cout << Wf.norm() << " " << Wb.norm() << " "
 	  << Vf.norm() << " " << Vb.norm() << " "
 	  << Wfo.norm() << " " << Wbo.norm() << endl;
@@ -1127,8 +1142,7 @@ void RNN::update() {
 	  << VVf[l].norm() << " " << VVb[l].norm() << " "
 	  << WWfo[l].norm() << " " << WWbo[l].norm() << endl;
 	  }
-	  for (uint k = 0; k < 3; k ++) cout<<WWfoy[k].norm()<<" "<<WWboy[k].norm()<<bo[k].norm()<<endl;
-	  */
+	cout<<WWfoy.norm()<<" "<<WWboy.norm()<<" "<<bo.norm()<<endl; */
 }
 
 void Classifier::load(string fname) {
@@ -1251,9 +1265,9 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 		//	cerr<<"fwd"<<endl;
 			for (int j = 0; j < 3; j ++) brnn[j].backward(labels[perm[i]]);
 		//	cerr<<"bwd"<<endl;
-			agent_dse.backprop(brnn[1], brnn[2], labels[perm[i]], relation[perm[i]]);
+	        //		agent_dse.backprop(brnn[1], brnn[2], labels[perm[i]], relation[perm[i]]);
 		//	cerr<<"backprop1"<<endl;
-			target_dse.backprop(brnn[0], brnn[2], labels[perm[i]], relation[perm[i]]);
+	//		target_dse.backprop(brnn[0], brnn[2], labels[perm[i]], relation[perm[i]]);
 		//	cerr<<"backprop2"<<endl;
 
 			if ((i+1) % MINIBATCH == 0 || i == sents.size()-1)
@@ -1672,7 +1686,7 @@ int main(int argc, char **argv) {
 	double bestDrop;
 	RNN brnn[3];
 	for (int j = 0; j < 3; j ++){
-		brnn[j] = RNN(25,25,25,3,LT);
+		brnn[j] = RNN(25,25,25,3,LT, dr[j]);
 		char x = j + '0';
 		string ss = "cur_models/model";
 		ss = ss + x;

@@ -1,0 +1,4 @@
+the forward and backward node of the last and the first of the span, 
+backprop, 
+no decay on the output layer
+Train on gold-standard
