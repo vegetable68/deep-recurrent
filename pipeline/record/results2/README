@@ -3,11 +3,14 @@ no tuned entity weights
 tuned classifier weights
 train on gold standard
 
-double OCLASS_WEIGHT[3] = {0.3, 0.8, 0.5};
-double ENTITY_WEIGHT[3] = {0.8, 0.8, 0.8};
+REL_WEIGHT 0.3
+double OCLASS_WEIGHT[3] = {0.09, 0.5, 0.3};
+double ENTITY_WEIGHT[3] = {1, 1, 1};
 
 no gradient clipping
-LAMBDA = 1e-3;  // L2 regularizer on weights
+with adagrad
+relation and backprop
+
 
 
 

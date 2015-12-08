@@ -72,7 +72,7 @@ class RNN {
 		vector<string> s;
 
 		// recurrent network params
-		MatrixXd Wo, Wfo, Wbo, WWfoy, WWboy;
+		MatrixXd Wo, WWfoy, WWboy;
 		VectorXd bo;
 		MatrixXd Wf, Vf, Wb, Vb;
 		VectorXd bhf, bhb;
@@ -81,7 +81,7 @@ class RNN {
 		MatrixXd VVf[layers], VVb[layers];
 		VectorXd bbhf[layers], bbhb[layers];
 
-		MatrixXd gWo, gWfo, gWbo, gWWfoy, gWWboy;
+		MatrixXd gWo, gWWfoy, gWWboy;
 		VectorXd gbo;
 		MatrixXd gWf, gVf, gWb, gVb;
 		VectorXd gbhf, gbhb;
@@ -90,7 +90,7 @@ class RNN {
 		MatrixXd gVVf[layers], gVVb[layers];
 		VectorXd gbbhf[layers], gbbhb[layers];
 
-		MatrixXd GWo, GWfo, GWbo, GWWfoy, GWWboy;
+		MatrixXd GWo, GWWfoy, GWWboy;
 		VectorXd Gbo;
 		MatrixXd GWf, GVf, GWb, GVb;
 		VectorXd Gbhf, Gbhb;
@@ -101,7 +101,7 @@ class RNN {
 
 
 
-		MatrixXd vWo, vWfo, vWbo, vWWfoy, vWWboy;
+		MatrixXd vWo, vWWfoy, vWWboy;
 		VectorXd vbo;
 		MatrixXd vWf, vVf, vWb, vVb;
 		VectorXd vbhf, vbhb;
@@ -883,12 +883,10 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 		bbhb[l] = VectorXd(nhb).unaryExpr(ptr_fun(urand));
 	}
 
-	Wfo = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
-	Wbo = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
-	bo = VectorXd(ny).unaryExpr(ptr_fun(urand));
 	WWfoy = MatrixXd(ny,nhf).unaryExpr(ptr_fun(urand));
 	WWboy = MatrixXd(ny,nhb).unaryExpr(ptr_fun(urand));
 	Wo = MatrixXd(ny,nx).unaryExpr(ptr_fun(urand));
+	bo = VectorXd(ny).unaryExpr(ptr_fun(urand));
 /*	Wf = MatrixXd(nhf,nx).unaryExpr(ptr_fun(urand));
 	Vf = MatrixXd::Identity(nhf,nhf);
 	bhf = VectorXd::Zero(nhf);
@@ -941,8 +939,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 	}
 
 
-	GWfo = MatrixXd::Zero(ny,nhf);
-	GWbo = MatrixXd::Zero(ny,nhb);
 	GWWfoy = MatrixXd::Zero(ny,nhf);
 	GWWboy = MatrixXd::Zero(ny,nhb);
 	Gbo = VectorXd::Zero(ny);
@@ -971,8 +967,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 	}
 
 
-	gWfo = MatrixXd::Zero(ny,nhf);
-	gWbo = MatrixXd::Zero(ny,nhb);
 	gWWfoy = MatrixXd::Zero(ny,nhf);
 	gWWboy = MatrixXd::Zero(ny,nhb);
 	gbo = VectorXd::Zero(ny);
@@ -999,8 +993,6 @@ RNN::RNN(uint nx, uint nhf, uint nhb, uint ny, LookupTable &LT) {
 	}
 
 
-	vWfo = MatrixXd::Zero(ny,nhf);
-	vWbo = MatrixXd::Zero(ny,nhb);
 	vWWfoy = MatrixXd::Zero(ny,nhf);
 	vWWboy = MatrixXd::Zero(ny,nhb);
 	vbo = VectorXd::Zero(ny);
@@ -1207,7 +1199,6 @@ void RNN::load(string fname) {
 		>> WWbb[l] >> WWbf[l] >> VVb[l] >> bbhb[l];
 	}
 
-	in >> Wfo >> Wbo;
 	in>>WWfoy>>WWboy>>bo;
 	in >> Wo;
 }
@@ -1237,8 +1228,6 @@ void RNN::save(string fname) {
 		out << bbhb[l] << endl;
 	}
 
-	out << Wfo << endl;
-	out << Wbo << endl;
 	out<<WWfoy<<endl;
 	out<<WWboy<<endl;
 	out<<bo<<endl;
@@ -1264,8 +1253,6 @@ void RNN::save(string fname) {
 		out << Gbbhb[l] << endl;
 	}
 
-	out << GWfo << endl;
-	out << GWbo << endl;
 	out<<GWWfoy<<endl;
 	out<<GWWboy<<endl;
 	out<<Gbo<<endl;
@@ -1320,12 +1307,12 @@ train(RNN brnn[3], vector<vector<string> > &sents,
 	for (uint epoch=0; epoch<1; epoch++) {
 		shuffle(perm);
 		cerr<<epoch<<endl;
-		for (int i=0; i<sents.size(); i++) {
+/*		for (int i=0; i<sents.size(); i++) {
 			for (int j = 0; j < 3; j ++) brnn[j].forward(sents[perm[i]], perm[i]);
-			for (int j = 0; j < 3; j ++) brnn[j].backward(labels[perm[i]]);
-			if ((i+1) % MINIBATCH == 0 || i == sents.size()-1)
-				for (int j = 0; j < 3; j ++) brnn[j].update();
-		}
+//			for (int j = 0; j < 3; j ++) brnn[j].backward(labels[perm[i]]);
+//			if ((i+1) % MINIBATCH == 0 || i == sents.size()-1)
+//				for (int j = 0; j < 3; j ++) brnn[j].update();
+		}*/
 
 		if (epoch % 5 == 0){
 			agent_dse.output(brnn[1], brnn[2], sents, labels, relation);
@@ -1610,7 +1597,7 @@ void getRelation(vector<map<int, vector<int> > > &R, vector<int> &C,
 
 int main(int argc, char **argv) {
 	fold = atoi(argv[1]); // between 0-9
-	srand(time(0));
+	srand(135);
 	cout << setprecision(6);
 
 	LookupTable LT;
@@ -1734,14 +1721,14 @@ int main(int argc, char **argv) {
 			validX, validL, validR, validC,
 			testX, testL, testR, testC);
 	for (int j = 0; j < 3; j ++){
-		if (best[j](2,0) < results[j](2,0)) { // propF1 on val set
+/*		if (best[j](2,0) < results[j](2,0)) { // propF1 on val set
 			best = results;
 
 			string ss = "best_models/model";
 			char x = j + '0';
 			ss = ss + x;
 			brnn[j].save(ss.c_str());
-		}
+		}*/
 		string ss = "cur_models/model";
 		char x = j + '0';
 

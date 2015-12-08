@@ -3,10 +3,20 @@ no tuned entity weights
 tuned classifier weights
 train on gold standard
 
+REL_WEIGHT 0.3
 double OCLASS_WEIGHT[3] = {0.3, 0.8, 0.5};
-double ENTITY_WEIGHT[3] = {0.8, 0.8, 0.8};
+double ENTITY_WEIGHT[3] = {1, 1, 1};
 
-gradient clipping
+no gradient clipping
+no adagrad
+relation and backprop
+
+there's a drop in res7 and res8 for agent extraction
+dse exploded on res16
+agent starts to go down slowly on res10
+agent explode on res21
+target explode on res22
+
 
 
 

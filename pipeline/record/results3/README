@@ -1,0 +1,22 @@
+Decay on last layer
+no tuned entity weights
+tuned classifier weights
+train on gold standard
+
+REL_WEIGHT 0.3
+double OCLASS_WEIGHT[3] = {0.2, 0.5, 0.4};
+double ENTITY_WEIGHT[3] = {1, 1, 1};
+
+no gradient clipping
+adagrad
+relation and backprop
+
+REL_WEIGHT / 2 on dse backprop
+agent_dse and target_dse paramter = 1.
+(0.7 and 0.8 before)
+
+
+
+
+
+

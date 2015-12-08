@@ -1,4 +1,5 @@
 \documentclass[a4paper, 12pt]{article}
+\usepackage{caption}
 \usepackage{amsmath}
 \title{Report on relation extraction}
 \author{Yiqing Hua}
@@ -355,7 +356,518 @@ No backprop from relation -- doesn't work.\\
 Tried adding adagrad switch -> but still no results, should be the same as
 drnt.cpp in pipeline. (see diff.out) \\
 no backprop in diff.out: should have no explosion, however explodes.(see
-current results folder in pipelin.)
+current results folder in pipeline.)\\
+
+Conclusion after debuging:\\
+Trained with no relation:
+Preventing explosive gradients needs a very carefully tuned initialization
+point. But adagrad can prevent the gradients from explosion. However, the
+result is worse than a good initialization.\\
+random parameter of initialization: 135\\
+Results with Adagrad:\\
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{Target} & \multicolumn{2}{l}{Agent} & \multicolumn{2}{l}{DSE} \\ \hline
+   & Prop.& Bin.& Prop.& Bin.& Prop.& Bin.\\
+ \hline
+P  &0.313894&0.360805 & 0.60151 & 0.605495 &0.520701 & 0.537563  \\
+R  &0.370669&0.489395 &0.324086 & 0.376771 &0.371509 & 0.425703  \\
+F1 &0.339927&0.415376 &0.421222 & 0.464503 &0.433631 & 0.475138  \\ \hline
+\end{tabular}
+\end{table}
+
+Results without Adagrad:\\
+
+Target extraction suffers explosion.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{Target} & \multicolumn{2}{l}{Agent} & \multicolumn{2}{l}{DSE} \\ \hline
+   & Prop.& Bin.& Prop.& Bin.& Prop.& Bin.\\
+ \hline
+P  && & 0.52048  & 0.527163  &0.506992 &  0.526077  \\
+R  && & 0.538566 &  0.592166 &0.476092 &  0.528736  \\
+F1 && & 0.529369 &  0.557777 &0.491056 &  0.527403  \\ \hline
+\end{tabular}
+\end{table}
+
+
+Improvement in relation identification improves the results in entity 
+extraction slightly.\\
+From folder record/results4 and record/results5.
+The parameter tuning of the relation classifier improves the relation
+extraction results a little bit, and so do the entity extraction.\\
+
+results4:\\
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{Target} & \multicolumn{2}{l}{Agent} & \multicolumn{2}{l}{DSE} \\ \hline
+   & Prop.& Bin.& Prop.& Bin.& Prop.& Bin.\\
+ \hline
+P  &0.288143&0.322888& 0.444579 & 0.458763 &0.403597 & 0.425041  \\
+R  &0.404176&0.548747& 0.549625 & 0.585253 &0.513716 & 0.570115  \\
+F1 &0.336436&0.406555& 0.491553 & 0.514346 &0.452047 & 0.487004  \\ \hline
+\end{tabular}
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & P & R & F1    \\\hline
+is from  & 0.666667& 0.00573066&  0.0113636\\
+is about & 1& 0& 0\\
+\hline
+\end{tabular}
+\begin{tabular}{l|l|l}
+\hline
+         & Pairs predicted as true & Pairs selected out of all\\\hline
+is from  & 3/909& 145/349 \\
+is about & 0/1151& 88/338\\
+\hline
+\end{tabular}
+\end{table}
+
+results5:\\
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{Target} & \multicolumn{2}{l}{Agent} & \multicolumn{2}{l}{DSE} \\ \hline
+   & Prop.& Bin.& Prop.& Bin.& Prop.& Bin.\\
+ \hline
+P  &0.283443&0.315722& 0.453226 & 0.466783 &0.405829  & 0.424483  \\
+R  & 0.41631&0.562674& 0.545015 & 0.582949 &0.524138  & 0.581609  \\
+F1 &0.337262&0.404484&   0.4949 & 0.518439 &0.457458  & 0.490777  \\ \hline
+\end{tabular}
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & P & R & F1    \\\hline
+is from  & 0.267913& 0.246418& 0.256716\\
+is about &0.111111& 0.00591716&   0.011236\\
+\hline
+\end{tabular}
+\begin{tabular}{l|l|l}
+\hline
+         & Pairs predicted as true & Pairs selected out of all\\\hline
+is from  & 321/904& 145/349 \\
+is about & 15/1256& 89/338\\
+\hline
+\end{tabular}
+\end{table}
+
+results6:\\
+relation classification training on candidates:\\
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{target} & \multicolumn{2}{l}{agent} & \multicolumn{2}{l}{dse} \\ \hline
+   & prop.& bin.& prop.& bin.& prop.& bin.\\
+ \hline
+p  &0.307961&0.337719& 0.457281 & 0.470483 &0.411651  & 0.429936  \\
+r  &0.396059&0.534819& 0.545007 & 0.585253 &0.533793  & 0.595402  \\
+f1 &0.346498&0.414007& 0.497305 &  0.52163 &0.464832  & 0.499318  \\ \hline
+\end{tabular}
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 1& 0& 0\\
+is about &0.1& 0.00295858& 0.00574713 \\
+\hline
+\end{tabular}
+\begin{tabular}{l|l|l}
+\hline
+         & pairs predicted as true & pairs selected out of all\\\hline
+is from  & 0/890& 148/349 \\
+is about & 9/1189& 86/338\\
+\hline
+\end{tabular}
+\end{table}
+
+However in this setting, backprop seems to worse the extraction
+results on dse. Though in most cases the precision gets slightly higher
+because of backprop. (The relation classification result also gets worse, though it
+maybe the problem caused by the classification parameter).
+results8(same setting, no backprop):\\
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{target} & \multicolumn{2}{l}{agent} & \multicolumn{2}{l}{dse} \\ \hline
+   & prop.& bin.& prop.& bin.& prop.& bin.\\
+ \hline
+p  &0.293498&0.331006& 0.439916 & 0.452736 & 0.41524  & 0.434572  \\
+r  &0.415197& 0.54039&  0.56108 & 0.599078 &0.538774  & 0.597701  \\
+f1 &0.343898&0.410542& 0.493164 & 0.515727 &0.469009  & 0.503247  \\ \hline
+\end{tabular}
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.16129& 0.415473& 0.232372 \\
+is about &0.0678138&  0.198225&  0.101056\\
+\hline
+\end{tabular}
+\begin{tabular}{l|l|l}
+\hline
+         & pairs predicted as true & pairs selected out of all\\\hline
+is from  & 899/948& 153/349 \\
+is about & 988/1178& 94/338\\
+\hline
+\end{tabular}
+\end{table}
+
+Looks like the relation classifier is only performing trivially.
+
+TEST ON RELATION hasn't been updated every 5 epoch. 
+seems like that backprop changes a lot in the relation classification
+space.\\
+
+experiment sets:\\
+\begin{itemize}
+  \item Training set of relation classifier: A. all picked out candidates,
+    B. gold standard, C. A + B.
+   \item Regarding candidates: A. all of them, B. only those having
+     overlapping with gold standard.
+\end{itemize}
+Objective of relation classifier:\\
+\begin{itemize}
+  \item Should not act trivially on precision and recall
+  \item Ideally picking the right pairs out of the wrong ones.
+\end{itemize}
+
+\section{Nov. 19th}
+
+I'm currently playing with the liblinear settings, trying to see if the variants
+bring any differences. I fixed the initialization point by using the random
+seed, and I'm using adagrad in every experiment.
+
+\subsection{Experiment 1}
+experiment on training set of relation classifier:\\
+A. all candidates\\
+B. 10\% of the no overlapping candidates\\
+I retrain the relation classifier every 5 epochs, but don't update them during
+the training of the neural networks. In group A, the results of the relation
+classifier don't change a lot. The results of relation classification I'm
+showing is from epoch 190 to epoch 195.\\
+But the relation classification results differ a lot after 5 epochs of
+training of neural network without tuning in groupB. Say from epoch 190 to epoch 195.\\
+
+
+
+GroupA:\\
+%\begin{table}[h!]
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{Entity Extraction Results}
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{target} & \multicolumn{2}{l}{agent} & \multicolumn{2}{l}{dse} \\ \hline
+   & prop.& bin.& prop.& bin.& prop.& bin.\\
+ \hline
+p  &0.302324&0.327422& 0.415808 & 0.429467 & 0.43753  &  0.45922  \\
+r  &0.397719&0.543175& 0.567095 & 0.610599 &0.505479  & 0.570115  \\
+f1 &0.343522&0.408564& 0.479809 & 0.504261 &0.469056  & 0.508694  \\ \hline
+\end{tabular}
+\end{minipage}
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{Relation classification in epoch 195}
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.231263& 0.309456& 0.264706\\
+is about &0.15873& 0.118343& 0.135593\\
+\hline
+\end{tabular}
+\end{minipage}
+\begin{minipage}{\linewidth}
+  \centering
+  \captionof{table}{Relation classification in epoch 190}
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.22547& 0.309456&  0.26087\\
+is about &0.164062&  0.12426& 0.141414\\
+\hline
+\end{tabular}
+\end{minipage}
+%\end{table}
+
+%So do this happen to other epochs.\\
+
+GroupB:
+\begin{table}[h!]
+\centering
+\captionof{table}{Results of Entity Extraction}
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{target} & \multicolumn{2}{l}{agent} & \multicolumn{2}{l}{dse} \\ \hline
+   & prop.& bin.& prop.& bin.& prop.& bin.\\
+ \hline
+p  &0.305391&0.334734& 0.412603 & 0.426128 &0.431529  & 0.451376  \\
+r  &0.397797&0.537604& 0.562257 & 0.608295 & 0.48636  & 0.547126  \\
+f1 &0.345523&0.412579& 0.475943 & 0.501171 &0.457307  &  0.49466  \\ \hline
+\end{tabular}
+
+\captionof{table}{Results of Relation Classification in Epoch 195}
+\centering
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0&    0& 0\\
+is about &1& 0& 0\\
+\hline
+\end{tabular}
+\centering
+\captionof{table}{Results of Relation Classification in Epoch 190}
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.232184& 0.289398& 0.257653\\
+is about &0.212291& 0.112426& 0.147002\\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Experiment 2}
+continue from expr1, 10\% of the no overlapping candidates\\
+Raise the REL\_WEIGHT\\
+A. from expr1/groupB\\
+B. REL\_WEIGHT = 0.8 \\
+Which means that more error from the classifier are backpropagated to the
+hidden layers.\\
+Results from GroupB:\\
+\begin{table}[h!]
+\centering
+\captionof{table}{Results of Entity Extraction}
+
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{target} & \multicolumn{2}{l}{agent} & \multicolumn{2}{l}{dse} \\ \hline
+   & prop.& bin.& prop.& bin.& prop.& bin.\\
+ \hline
+p  &0.298395&0.329167&  0.41473 &   0.4288 &0.433548  & 0.454044  \\
+r  &0.401019&0.532033& 0.555781 & 0.596774 &0.491418  & 0.556322  \\
+f1 &0.342178&0.406706& 0.475005 & 0.499031 &0.460672  & 0.500006  \\ \hline
+\end{tabular}
+
+\centering
+\captionof{table}{Results of Relation Classification in Epoch 195}
+
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.6& 0.00859599&  0.0169492\\
+is about &1& 0& 0\\
+\hline
+\end{tabular}
+\centering
+\captionof{table}{Results of Relation Classification in Epoch 190}
+
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.231343& 0.266476&  0.24767\\
+is about &0.179641& 0.0887574&  0.118812\\
+\hline
+\end{tabular}
+\end{table}
+
+Some example of the backpropgate errors.(the squared norm of the error
+matrixes from a randomly picked sentence from the same epoch.)\\
+GroupA:\\
+Target gpyd:0.671458\\
+Agent gpyd:0.290214\\
+DSE gpyd:0.29489\\
+Agent backprop err:0.0810047 0.10472\\
+DSE backprop err:0.135083 0.0887444\\
+Target backprop err:0.0110059 0.0161923\\
+DSE backprop err:0.00746071 0.00419274\\
+GourpB:\\
+Target gpyd:0.665647\\
+Agent gpyd:0.308587\\
+DSE gpyd:0.298005\\
+Agent backprop err:0.219774 0.0930358\\
+DSE backprop err:0.357541 0.355972\\
+Target backprop err:0.0145334 0.0272726\\
+DSE backprop err:0.0119703 0.0163344\\
+
+\subsection{Experiment 3}
+continue from expr1\\
+setting same as groupA\\
+Raise the REL\_WEIGHT\\
+A. from expr1/GroupA\\
+B. REL\_WEIGHT = 1\\
+
+Results from GroupB:\\
+\begin{table}[h!]
+\centering
+\captionof{table}{Results of Entity Extraction}
+
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{target} & \multicolumn{2}{l}{agent} & \multicolumn{2}{l}{dse} \\ \hline
+   & prop.& bin.& prop.& bin.& prop.& bin.\\
+ \hline
+p  &0.301173&0.324866& 0.412207 & 0.425697&0.434729  & 0.455497  \\
+r  &0.392476&0.545961&  0.56327 & 0.610599& 0.50931  & 0.574713  \\
+f1 &0.340815&0.407347& 0.476042 & 0.501652&0.469074  & 0.508207  \\ \hline
+\end{tabular}
+
+\centering
+\captionof{table}{Results of Relation Classification in Epoch 195}
+
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.226293&  0.30086& 0.258303\\
+is about &0.148438& 0.112426& 0.127946\\
+\hline
+\end{tabular}
+\centering
+\captionof{table}{Results of Relation Classification in Epoch 190}
+
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.221748& 0.297994& 0.254279\\
+is about &0.146718& 0.112426& 0.127303\\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+Some example of the backpropgate errors.(the squared norm of the error
+matrixes from a randomly picked sentence(same across groups) from the same epoch.)\\
+GroupA:\\
+Target gpyd:0.66459\\
+Agent gpyd:0.302628\\
+DSE gpyd:0.294689\\
+Agent backprop err:0.0490729 0.0326163\\
+DSE backprop err:0.025476 0.0244497\\
+Target backprop err:0.00561583 0.0102002\\
+DSE backprop err:0.00282422 0.00341703\\
+GroupB:\\
+Target gpyd:0.679125\\
+Agent gpyd:0.291735\\
+DSE gpyd:0.299091\\
+Agent backprop err:0.215682 0.134648\\
+DSE backprop err:0.113794 0.110686\\
+Target backprop err:0.0296902 0.0433625\\
+DSE backprop err:0.0105091 0.0112032\\
+
+\subsection{Experiment 4}
+continue from expr2\\
+setting same as groupB\\
+UPDATE for linear regression\\
+A. from expr2/GroupB\\
+B. UPDATE\_RATE = 0.01\\
+
+Results from GroupB:\\
+\begin{table}[h!]
+\centering
+\captionof{table}{Results of Entity Extraction}
+
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{target} & \multicolumn{2}{l}{agent} & \multicolumn{2}{l}{dse} \\ \hline
+   & prop.& bin.& prop.& bin.& prop.& bin.\\
+ \hline
+p  & 0.351626&0.353659& 0.456176 & 0.462389& 0.454545  & 0.455497  \\
+r  &0.0801628&0.203343& 0.381767 &   0.4447&0.0091954  & 0.574713  \\
+f1 & 0.130561&0.258218& 0.415668 & 0.453372&0.0180261  & 0.508207  \\ \hline
+\end{tabular}
+\centering
+\captionof{table}{Results of Relation Classification in Epoch 195}
+
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.125& 0.00286533& 0.00560224\\
+is about &0.0666667& 0.00295858& 0.00566572\\
+\hline
+\end{tabular}
+\centering
+\captionof{table}{Results of Relation Classification in Epoch 190}
+
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.111111& 0.00286533& 0.00558659\\
+is about &0.333333& 0.00295858&  0.0058651\\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Experiment 6}
+continue from expr1\\
+setting same as groupA\\
+UPDATE for linear regression\\
+A. from expr1/GroupA\\
+B. UPDATE RATE = 0.01\\
+
+Results from GroupB:\\
+\begin{table}[h!]
+\centering
+\captionof{table}{Results of Entity Extraction}
+
+\begin{tabular}{l|ll|ll|ll}
+\hline
+   & \multicolumn{2}{l}{target} & \multicolumn{2}{l}{agent} & \multicolumn{2}{l}{dse} \\ \hline
+   & prop.& bin.& prop.& bin.& prop.& bin.\\
+ \hline
+p  &0.302778&0.327022& 0.423244 & 0.430736& 0.445312  & 0.453125  \\
+r  &0.299864&0.445682& 0.370819 & 0.428571&0.0995785  & 0.131034  \\
+f1 &0.301314&0.377241& 0.395301 & 0.429651& 0.162761  & 0.203284  \\ \hline
+\end{tabular}
+
+\centering
+\captionof{table}{Results of Relation Classification in Epoch 195}
+
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 1 & 0 & 0\\
+is about & 1 & 0 & 0 \\
+\hline
+\end{tabular}
+
+
+\captionof{table}{Results of Relation Classification in Epoch 190}
+\begin{tabular}{l|l|l|l}
+\hline
+         & p & r & f1    \\\hline
+is from  & 0.15& 0.0429799& 0.0668151 \\
+is about &0.156863& 0.0236686& 0.0411311\\
+\hline
+\end{tabular}
+
+\end{table}
+I also tried the bilinear model, but it doesn't produce better results on
+relation classification and I haven't found the setting that prevents the
+gradient explosion in 200 epochs.\\
+My problem now is that there are still other possible neural network structures
+can be tried. However, each new structure needs some parameter tuning. And I'm
+not sure if a structure needs more tuning or it simply doesn't work.\\
+I'm now inclined to try a token-level relation classification layer(instead of
+using a separate logistic regression classifier.) That is, feed the hidden
+layer representation into a non-linear layer and then having a tensor layer to
+do token-level relation identification. Ideally, the non-linearity can make sure
+the hidden layer representation coming from different neural networks fall in
+the same space.
+
+
+
+
+
 
 
 \end{document}

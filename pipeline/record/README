@@ -1,6 +1,0 @@
-biased_results: see the run.sh
-results1: possibly not right backprop, NORMALIZE true 
-
-All have no decay on last layer
-
-

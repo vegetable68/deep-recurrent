@@ -1,3 +1,0 @@
-res: RNN + pos tag, OWEIGHT = 0.12
-res1: pure RNN for target, OWEIGHT = 0.09
-rew2: RNN + pos tag, OWEIGHT = 0.25

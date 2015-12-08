@@ -1,0 +1,4 @@
+Testing about bilinear
+
+GroupA: setting as in expr1/GroupA
+GroupB: parameter of logistic regression: -w1 0.3, got initialization point right (srand(135))
