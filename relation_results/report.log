@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.5)  22 NOV 2015 17:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=latex 2015.8.5)  9 DEC 2015 17:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**report.tex
+**report
 (./report.tex
 LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 2 languages loaded.
@@ -131,7 +131,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -231,25 +231,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 811--816
 
  []
 
-[14] [15] (./report.aux) ) 
+[14] [15] (./report.bbl
+Missing character: There is no â in font cmti12!
+Missing character: There is no € in font cmti12!
+Missing character: There is no ™ in font cmti12!
+ [16]) [17] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 1929 strings out of 495028
- 28976 string characters out of 6181498
- 90119 words of memory out of 5000000
- 5183 multiletter control sequences out of 15000+600000
- 9933 words of font info for 36 fonts, out of 8000000 for 9000
+ 1938 strings out of 495029
+ 29103 string characters out of 6181524
+ 90116 words of memory out of 5000000
+ 5189 multiletter control sequences out of 15000+600000
+ 10280 words of font info for 37 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,9n,38p,239b,279s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on report.pdf (15 pages, 100993 bytes).
-PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
- 53 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36i,9n,38p,235b,279s stack positions out of 5000i,500n,10000p,200000b,80000s
 
+Output written on report.dvi (17 pages, 46940 bytes).

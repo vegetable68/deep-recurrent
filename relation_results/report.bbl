@@ -1,0 +1,34 @@
+\begin{thebibliography}{1}
+
+\bibitem{chen2010exploring}
+Yu~Chen, Wenjie Li, Yan Liu, Dequan Zheng, and Tiejun Zhao.
+\newblock Exploring deep belief network for chinese relation extraction.
+\newblock In {\em Proceedings of the Joint Conference on Chinese Language
+  Processing (CLP’10)}, pages 28--29, 2010.
+
+\bibitem{danrothconstrained}
+Kai-WeiChang~RajhansSamdani DanRoth.
+\newblock A constrained latent variable model for coreference resolution.
+
+\bibitem{durrett2013easy}
+Greg Durrett and Dan Klein.
+\newblock Easy victories and uphill battles in coreference resolution.
+\newblock In {\em EMNLP}, pages 1971--1982, 2013.
+
+\bibitem{lee2011stanford}
+Heeyoung Lee, Yves Peirsman, Angel Chang, Nathanael Chambers, Mihai Surdeanu,
+  and Dan Jurafsky.
+\newblock Stanford's multi-pass sieve coreference resolution system at the
+  conll-2011 shared task.
+\newblock In {\em Proceedings of the Fifteenth Conference on Computational
+  Natural Language Learning: Shared Task}, pages 28--34. Association for
+  Computational Linguistics, 2011.
+
+\bibitem{wang2015chinese}
+Zhen Wang, Tingsong Jiang, Baobao Chang, and Zhifang Sui.
+\newblock Chinese semantic role labeling with bidirectional recurrent neural
+  networks.
+\newblock In {\em Proc. of the 2015 Conference on Empirical Methods in Natural
+  Language Processing (EMNLP)}, pages 1626--1631, 2015.
+
+\end{thebibliography}
